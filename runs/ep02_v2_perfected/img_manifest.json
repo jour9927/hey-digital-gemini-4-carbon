@@ -1,0 +1,125 @@
+{
+  "enable_i2v": true,
+  "items": [
+    {
+      "id": "THUMB_HERO",
+      "prompt": "Minimalist dark Apple keynote studio spotlight shot of two sleek aluminum laptops side by side, silver and space black, subtle rim light, dark charcoal background, 8k commercial product photography, no text",
+      "width": 1344,
+      "height": 768,
+      "seed": 8800,
+      "animate_i2v": false
+    },
+    {
+      "id": "L07",
+      "prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
+      "width": 1280,
+      "height": 720,
+      "seed": 5106,
+      "animate_i2v": false
+    },
+    {
+      "id": "L09",
+      "prompt": "MacBook Air and MacBook Pro side by side, showing cooling systems",
+      "width": 1280,
+      "height": 720,
+      "seed": 5108,
+      "animate_i2v": true
+    },
+    {
+      "id": "L14",
+      "prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
+      "width": 1280,
+      "height": 720,
+      "seed": 5113,
+      "animate_i2v": false
+    },
+    {
+      "id": "L15",
+      "prompt": "macbook_pro_outdoor_display",
+      "width": 1280,
+      "height": 720,
+      "seed": 5114,
+      "animate_i2v": true
+    },
+    {
+      "id": "L18",
+      "prompt": "macbook_pro_external_monitor",
+      "width": 1280,
+      "height": 720,
+      "seed": 5117,
+      "animate_i2v": true
+    },
+    {
+      "id": "L21",
+      "prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
+      "width": 1280,
+      "height": 720,
+      "seed": 5120,
+      "animate_i2v": false
+    },
+    {
+      "id": "L23",
+      "prompt": "MacBook Pro 散熱系統特寫",
+      "width": 1280,
+      "height": 720,
+      "seed": 5122,
+      "animate_i2v": false
+    },
+    {
+      "id": "S01",
+      "prompt": "Vertical studio close-up of sleek modern aluminum laptop and glowing silicon chip on walnut desk, warm rim lighting, no text",
+      "width": 720,
+      "height": 1280,
+      "seed": 6100,
+      "animate_i2v": true
+    },
+    {
+      "id": "S02",
+      "prompt": "Vertical studio close-up of sleek modern aluminum laptop and glowing silicon chip on walnut desk, warm rim lighting, no text",
+      "width": 720,
+      "height": 720,
+      "seed": 6101,
+      "animate_i2v": false
+    },
+    {
+      "id": "S03",
+      "prompt": "Vertical studio close-up of sleek modern aluminum laptop and glowing silicon chip on walnut desk, warm rim lighting, no text",
+      "width": 720,
+      "height": 720,
+      "seed": 6102,
+      "animate_i2v": false
+    },
+    {
+      "id": "S04",
+      "prompt": "Vertical studio close-up of sleek modern aluminum laptop and glowing silicon chip on walnut desk, warm rim lighting, no text",
+      "width": 720,
+      "height": 720,
+      "seed": 6103,
+      "animate_i2v": false
+    },
+    {
+      "id": "S05",
+      "prompt": "Vertical studio close-up of sleek modern aluminum laptop and glowing silicon chip on walnut desk, warm rim lighting, no text",
+      "width": 720,
+      "height": 720,
+      "seed": 6104,
+      "animate_i2v": false
+    },
+    {
+      "id": "S06",
+      "prompt": "Vertical studio close-up of sleek modern aluminum laptop and glowing silicon chip on walnut desk, warm rim lighting, no text",
+      "width": 720,
+      "height": 720,
+      "seed": 6105,
+      "animate_i2v": false
+    },
+    {
+      "id": "S07",
+      "prompt": "Vertical studio close-up of sleek modern aluminum laptop and glowing silicon chip on walnut desk, warm rim lighting, no text",
+      "width": 720,
+      "height": 1280,
+      "seed": 6106,
+      "animate_i2v": false
+    }
+  ]
+}

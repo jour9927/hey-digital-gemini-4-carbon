@@ -1,29 +1,32 @@
 #!/usr/bin/env python3
 """
-Hey Digital Gemini 4 Carbon — Unattended End-to-End Video & Shorts Production Agent
-====================================================================================
+Hey Digital Gemini 4 Carbon V2 — Flagship Unattended End-to-End Video & Shorts Production Agent
+================================================================================================
 Master Orchestrator (ALWAYS runs and stores master state locally on `Alan-Hub` first!):
 
-1. [Cluster Check] Probes Colab RTX Pro 6000 HTTPS Bridge + Tailscale SSH nodes (`b850`, `alan-fw`, `alan-mba`).
-2. [Crawler & Topic Agent] Unattended topic discovery from live public tech feeds (or `--topic` override)
-   + crawls multi-source public specs, benchmarks, and news (`[SRC-01]..[SRC-12]`).
-3. [AI Script & Storyboard Agent] Generates Hey Digital Long-Form script + corresponding Traffic-Funnel
-   Short script + visual beat plans + cited YouTube descriptions.
-4. [Heavy GPU Stage on RTX Pro 6000] Uploads master worker script & Alan's reference voice to
-   `/content/heydigital_g4c`, runs PyTorch Demucs/Whisper voice profiling, PyTorch F5-TTS voice cloning,
-   and AI hardware studio image synthesis, pulling all generated WAVs & PNGs immediately back to local disk!
-5. [Local Master Compositor] Renders `1920x1080@30fps` Long-Form MP4, `1080x1920@30fps` Traffic-Funnel
-   Short MP4, `1920x1080` Spotlight Thumbnail PNG, and full Cited Metadata Markdown/JSON!
+1. [Cluster & Ephemeral RAM-Disk Check]
+   Probes Colab RTX Pro 6000 HTTPS Bridge + Tailscale SSH nodes (`b850`, `alan-fw`, `alan-mba`),
+   and mounts `/dev/shm` high-speed workspace on RTX Pro 6000 so concurrent sessions never run low on disk.
+2. [Deep Full-Text Crawler & Real B-Roll Harvester]
+   Unattended topic discovery -> full-text MediaWiki + 9to5Mac/HN/RSS scraping (`[SRC-01]..[SRC-14]`)
+   + `yt-dlp` real 1080p hardware showcase B-roll harvesting (`BROLL_01..BROLL_08`).
+3. [Flagship 32B AI Script & High-Density 3D Storyboard Director]
+   Runs `Qwen2.5-32B-Instruct` on RTX Pro 6000 (`:19465`) with verbatim `@hey_digitall` prose anchors
+   and `cn_verbalizer` 100% Mandarin spoken normalization (`tts_text`).
+4. [Heavy PyTorch GPU Stage on RTX Pro 6000]
+   Releases `:19465` VRAM -> runs sentence-level PyTorch `F5-TTS` voice cloning + PyTorch
+   `whisper-large-v3-turbo` QA & forced caption alignment + `RealVisXL_V4.0` studio stills +
+   `Lightricks/LTX-Video` CUDA Image-to-Video (`I2V`) motion clips!
+   Pulls ALL WAVs, PNGs, MP4s, and JSON manifests back to local `Alan-Hub` disk immediately!
+5. [Local Metal WebGL2 `Three.js` + Rhodes Sidechain Compositor]
+   Renders `1920x1080@30fps` Long-Form MP4, `1080x1920@30fps` Interactive Traffic-Funnel Short MP4,
+   `1920x1080` Spotlight Thumbnail PNG, and full Cited YouTube Metadata!
 """
 from __future__ import annotations
 
 import argparse
 import datetime as dt
 import json
-import os
-import re
-import sys
-import time
 from pathlib import Path
 
 from PIL import Image
@@ -33,9 +36,20 @@ from hey_digital_pipeline.compositor import (
     assemble_short_video,
     render_thumbnail,
 )
-from hey_digital_pipeline.crawler import crawl_topic_dossier, discover_unattended_topics
-from hey_digital_pipeline.remote_worker import ColabBridgeConfig, ColabRTX6000Client, TailscaleClusterInspector
-from hey_digital_pipeline.scriptwriter import formulate_topic_from_candidates, generate_production_plan
+from hey_digital_pipeline.crawler import (
+    crawl_topic_dossier,
+    discover_unattended_topics,
+    harvest_real_broll_clips,
+)
+from hey_digital_pipeline.remote_worker import (
+    ColabBridgeConfig,
+    ColabRTX6000Client,
+    TailscaleClusterInspector,
+)
+from hey_digital_pipeline.scriptwriter import (
+    formulate_topic_from_candidates,
+    generate_production_plan,
+)
 
 REPO_ROOT = Path(__file__).resolve().parent
 
@@ -57,40 +71,72 @@ def format_youtube_descriptions(plan: dict, long_chapters: list[dict]) -> tuple[
     desc_long = (
         f"{plan.get('summary_paragraph', '')}\n\n"
         f"⏱️ 時間軸章節\n{ch_lines}\n\n"
-        f"📚 本期公開爬蟲資訊與實測數據來源\n{src_lines}\n\n"
-        f"🔔 喜歡這類硬核不灌水的科技選購與實測拆解，記得訂閱 Hey Digital 並開啟小鈴铛！\n"
-        f"#HeyDigital #科技評測 #選購指南 #AI硬體"
+        f"📚 本期公開爬蟲資訊、實測數據與畫面參考來源\n{src_lines}\n\n"
+        f"🔔 喜歡這類硬核不灌水的科技選購與底層刀法拆解，記得訂閱 Hey Digital 並開啟小鈴鐺！\n"
+        f"#HeyDigital #科技評測 #選購指南 #Apple #AI硬體"
     )
     short_src_lines = "\n".join(
         f"[{s['source_id']}] {s['publisher']} — {s['title']}\n    {s['url']}"
-        for s in plan.get("cited_sources", [])[:4]
+        for s in plan.get("cited_sources", [])[:5]
     )
     desc_short = (
         f"{plan.get('summary_paragraph', '')[:160]}\n\n"
-        f"👉 完整多維度實測對比與公開數據來源，請點擊下方關聯長片：\n"
+        f"👉 完整多維度實測對比、3D 頻寬拆解與公開數據來源，請點擊下方關聯長片：\n"
         f"《{plan.get('title_long', '')}》\n\n"
         f"📚 核心參考來源：\n{short_src_lines}\n\n"
-        f"#Shorts #HeyDigital #科技避坑"
+        f"#Shorts #HeyDigital #科技避坑 #選購指南"
     )
     return desc_long, desc_short
 
 
-def ensure_remote_deps(client: ColabRTX6000Client):
-    """Bootstrap isolated venv/packages on RTX Pro 6000 if not already installed."""
-    boot_cmd = (
+def prepare_remote_workspace_and_deps(client: ColabRTX6000Client):
+    """
+    Mount `/dev/shm` (87GB RAM disk) for transient jobs & new model weights while symlinking all
+    already-cached models from `/local-scratch/heydigital_g4c/hf_cache` so `/` disk never fills up!
+    """
+    cmd = (
         "set -e; "
-        "python3 -c 'import f5_tts, faster_whisper, diffusers, transformers, accelerate, soundfile' 2>/dev/null || "
-        "pip install -q f5-tts faster-whisper diffusers transformers accelerate safetensors soundfile scipy demucs"
+        "mkdir -p /dev/shm/heydigital_hf/hub; "
+        "for m in /local-scratch/heydigital_g4c/hf_cache/hub/models--*; do "
+        "  [ -e \"$m\" ] && ln -sfn \"$m\" /dev/shm/heydigital_hf/hub/$(basename \"$m\"); "
+        "done; "
+        "if [ -L /local-scratch/heydigital_g4c/jobs ]; then rm -f /local-scratch/heydigital_g4c/jobs; fi; "
+        "mkdir -p /local-scratch/heydigital_g4c/jobs; "
+        "python3 -c 'import f5_tts, diffusers, transformers, accelerate, soundfile, imageio_ffmpeg' 2>/dev/null || "
+        "pip install -q f5-tts diffusers transformers accelerate safetensors soundfile scipy demucs imageio imageio-ffmpeg"
     )
-    jid = client.exec_async(boot_cmd, cwd="repo", job_id="bootstrap_deps")
-    client.wait_job(jid, poll_sec=4.0, max_wait_sec=900.0)
+    jid = client.exec_async(cmd, cwd="repo", job_id="prep_v2_shm")
+    client.wait_job(jid, poll_sec=3.0, max_wait_sec=900.0)
+
+
+def ensure_remote_32b_llm(client: ColabRTX6000Client):
+    """Ensure RTX Pro 6000 `Qwen/Qwen2.5-32B-Instruct` server (`:19465`) is online for Stage 2-3."""
+    client.put_file(REPO_ROOT / "worker" / "rtx6000_llm_server.py", "repo/rtx6000_llm_server.py")
+    cmd = (
+        "if curl -fsS http://127.0.0.1:19465/health 2>/dev/null; then exit 0; fi; "
+        "if ! pgrep -f 'rtx6000_llm_server.py' >/dev/null 2>&1; then "
+        "  nohup python3 -u rtx6000_llm_server.py --port 19465 > ../logs/llm_19465.log 2>&1 & "
+        "fi; "
+        "for i in $(seq 1 200); do "
+        "  if curl -fsS http://127.0.0.1:19465/health 2>/dev/null; then echo; exit 0; fi; "
+        "  sleep 2; "
+        "done; tail -n 25 ../logs/llm_19465.log; exit 1"
+    )
+    jid = client.exec_async(cmd, cwd="repo", job_id="ensure_32b")
+    client.wait_job(jid, poll_sec=3.0, max_wait_sec=450.0)
+
+
+def release_remote_32b_llm(client: ColabRTX6000Client):
+    """Free the ~61 GB of 32B LLM VRAM right before Stage 4 so F5-TTS + Whisper + RealVisXL + LTX-Video run at max speed."""
+    jid = client.exec_async("fuser -k 19465/tcp 2>/dev/null || true; sleep 2; nvidia-smi --query-gpu=memory.free --format=csv,noheader", cwd="repo", job_id="free_32b_vram")
+    client.wait_job(jid, poll_sec=1.5, max_wait_sec=30.0)
 
 
 def run_pipeline(args: argparse.Namespace) -> Path:
     slug_ts = dt.datetime.now().strftime("%Y%m%d_%H%M%S")
-    run_dir = REPO_ROOT / "runs" / (args.run_id or f"ep_{slug_ts}")
+    run_dir = REPO_ROOT / "runs" / (args.run_id or f"ep_v2_{slug_ts}")
     run_dir.mkdir(parents=True, exist_ok=True)
-    print(f"=== Hey Digital Gemini 4 Carbon Pipeline | Run: {run_dir.name} ===")
+    print(f"=== Hey Digital Gemini 4 Carbon V2 Flagship Pipeline | Run: {run_dir.name} ===")
 
     # Step 1: Probe Tailscale SSH Cluster + RTX Pro 6000 Bridge
     inspector = TailscaleClusterInspector(REPO_ROOT)
@@ -101,60 +147,100 @@ def run_pipeline(args: argparse.Namespace) -> Path:
 
     bridge_cfg_file = REPO_ROOT / "config" / "rtx6000_bridge.json"
     bridge_url = args.colab_url or (json.loads(bridge_cfg_file.read_text())["url"] if bridge_cfg_file.exists() else "")
-    bridge_tok = args.colab_token or (json.loads(bridge_cfg_file.read_text()).get("token", "hd_g4c_rtx6000_9f8a7b6c5d4e3f2a1b0c9d8e") if bridge_cfg_file.exists() else "hd_g4c_rtx6000_9f8a7b6c5d4e3f2a1b0c9d8e")
+    bridge_tok = args.colab_token or (json.loads(bridge_cfg_file.read_text()).get("token", "") if bridge_cfg_file.exists() else "")
     if not bridge_url:
         raise RuntimeError("Colab RTX Pro 6000 bridge URL required (--colab-url or config/rtx6000_bridge.json)")
 
     client = ColabRTX6000Client(ColabBridgeConfig(url=bridge_url, token=bridge_tok))
     h = client.health()
-    print(f"  [RTX6000Bridge] Connected! GPU={h.get('gpu')} | CPUs={h.get('cpus')} | FreeDisk={h.get('disk_free_gb')}GB")
+    print(f"  [RTX6000Bridge] Connected! GPU={h.get('gpu')} | CPUs={h.get('cpus')}")
+    prepare_remote_workspace_and_deps(client)
 
-    # Step 2: Unattended Topic Discovery & Public Web Crawling
+    # Step 2 & 3: Unattended Topic Discovery, Deep Full-Text Crawler, Real B-Roll Harvester & 32B Scriptwriting
     plan_file = run_dir / "production_plan.json"
     dossier_file = run_dir / "crawled_dossier.json"
+    broll_dir = run_dir / "broll"
     existing_titles = load_existing_channel_titles()
 
     if plan_file.exists() and not args.force_regen_script:
         print("[Stage 2-3] Reusing existing local master production_plan.json")
         plan = json.loads(plan_file.read_text(encoding="utf-8"))
     else:
-        if args.topic:
-            selected_topic = args.topic
-            queries = args.queries.split(",") if args.queries else [selected_topic, "Apple M4 Pro Mac mini memory bandwidth", "AMD Ryzen AI Max 395 Local LLM"]
-            wiki_terms = queries[:2]
-        else:
-            print("[Stage 2A] Unattended AI Agent scanning live public tech RSS & Hacker News feeds...")
-            cand_report = discover_unattended_topics(existing_titles, top_k=6)
-            (run_dir / "topic_candidates.json").write_text(json.dumps(cand_report, ensure_ascii=False, indent=2), encoding="utf-8")
-            framed = formulate_topic_from_candidates(cand_report, existing_titles, video_type=args.video_type)
-            (run_dir / "selected_topic.json").write_text(json.dumps(framed, ensure_ascii=False, indent=2), encoding="utf-8")
+        ensure_remote_32b_llm(client)
+        sel_file = run_dir / "selected_topic.json"
+        broll_manifest_file = run_dir / "broll_manifest.json"
+        if dossier_file.exists() and sel_file.exists() and broll_manifest_file.exists() and not args.force_regen_script:
+            framed = json.loads(sel_file.read_text(encoding="utf-8"))
             selected_topic = framed["selected_topic"]
-            queries = framed.get("search_queries") or [selected_topic]
-            wiki_terms = framed.get("wiki_terms") or queries[:2]
-            print(f"  -> Unattended Agent Selected Topic: {selected_topic}")
+            dossier = json.loads(dossier_file.read_text(encoding="utf-8"))
+            broll_clips = json.loads(broll_manifest_file.read_text(encoding="utf-8"))
+            print(f"[Stage 2] Reusing cached topic, {dossier['source_count']} crawled sources & {len(broll_clips)} B-roll clips for: {selected_topic}")
+        else:
+            if args.topic:
+                selected_topic = args.topic
+                queries = args.queries.split(",") if args.queries else [
+                    selected_topic,
+                    "MacBook Air vs MacBook Pro memory bandwidth display review",
+                    "Apple Silicon unified memory bandwidth SSD speed benchmark",
+                ]
+                wiki_terms = ["MacBook Pro", "MacBook Air", "Apple silicon"]
+                broll_query = queries[0]
+            else:
+                print("[Stage 2A] Unattended AI Agent scanning live public tech RSS & Hacker News feeds...")
+                cand_report = discover_unattended_topics(existing_titles, top_k=7)
+                (run_dir / "topic_candidates.json").write_text(json.dumps(cand_report, ensure_ascii=False, indent=2), encoding="utf-8")
+                framed = formulate_topic_from_candidates(cand_report, existing_titles, video_type=args.video_type)
+                sel_file.write_text(json.dumps(framed, ensure_ascii=False, indent=2), encoding="utf-8")
+                selected_topic = framed["selected_topic"]
+                queries = framed.get("search_queries") or [selected_topic]
+                wiki_terms = framed.get("wiki_terms") or queries[:2]
+                broll_query = framed.get("broll_query") or queries[0]
+                print(f"  -> Unattended Agent Selected Topic: {selected_topic}")
 
-        print(f"[Stage 2B] Crawling public web sources & specs for: {selected_topic} ...")
-        dossier = crawl_topic_dossier(selected_topic, search_queries=queries, wiki_terms=wiki_terms)
-        dossier_file.write_text(json.dumps(dossier, ensure_ascii=False, indent=2), encoding="utf-8")
-        print(f"  -> Crawled {dossier['source_count']} verifiable public sources ([SRC-01]..[SRC-{dossier['source_count']:02d}])")
+            print(f"[Stage 2B] Deep Full-Text Crawling public specs & articles for: {selected_topic} ...")
+            dossier = crawl_topic_dossier(selected_topic, search_queries=queries, wiki_terms=wiki_terms)
+            dossier_file.write_text(json.dumps(dossier, ensure_ascii=False, indent=2), encoding="utf-8")
+            print(f"  -> Crawled {dossier['source_count']} deep public sources | Metrics pool: {dossier.get('verified_metrics_pool', [])[:10]}")
 
-        print("[Stage 3] Generating cited Long-Form + Traffic-Funnel Short script & storyboard...")
+            print(f"[Stage 2C] Harvesting genuine HD hardware motion B-roll clips via yt-dlp ({broll_query})...")
+            broll_clips = harvest_real_broll_clips([broll_query] + queries[:2], broll_dir, target_clips=8)
+            broll_manifest_file.write_text(json.dumps(broll_clips, ensure_ascii=False, indent=2), encoding="utf-8")
+            print(f"  -> Harvested {len(broll_clips)} clean 1080p@30fps hardware motion B-roll clips!")
+
+        print("[Stage 3] Generating V2 High-Density Long-Form + Interactive Funnel Short script & 3D storyboard...")
         plan = generate_production_plan(
             topic=selected_topic,
             video_type=args.video_type,
             dossier=dossier,
             target_long_beats=args.long_beats,
             target_short_steps=args.short_steps,
+            ckpt_dir=run_dir / "script_ckpts",
         )
+        # Append unique B-roll video sources into `cited_sources` for 100% transparent attribution
+        seen_urls = {s.get("url") for s in plan.get("cited_sources", [])}
+        next_idx = len(plan.get("cited_sources", [])) + 1
+        for bc in broll_clips:
+            if bc["url"] not in seen_urls and next_idx <= 12:
+                seen_urls.add(bc["url"])
+                plan["cited_sources"].append({
+                    "source_id": f"SRC-{next_idx:02d}",
+                    "publisher": bc["publisher"],
+                    "domain": "youtube.com",
+                    "title": f"[實拍畫面參考] {bc['title']}",
+                    "url": bc["url"],
+                    "published": "2026",
+                })
+                next_idx += 1
+
         plan_file.write_text(json.dumps(plan, ensure_ascii=False, indent=2), encoding="utf-8")
-        print(f"  -> Script ready! Long title: {plan.get('title_long')} ({len(plan.get('long_beats', []))} beats, Short: {len(plan.get('short_beats', []))} beats)")
+        print(f"  -> V2 Script & 3D Storyboard saved locally! Long: {len(plan['long_beats'])} beats | Short: {len(plan['short_beats'])} beats")
 
-    # Step 4: Heavy PyTorch Voice Cloning & AI Image Synthesis on RTX Pro 6000
-    print("[Stage 4] Syncing master heavy-worker script to RTX Pro 6000 & checking dependencies...")
+    # Free `:19465` 32B LLM VRAM before Stage 4 heavy voice/visual/video models
+    release_remote_32b_llm(client)
     client.put_file(REPO_ROOT / "worker" / "rtx6000_heavy_worker.py", "repo/rtx6000_heavy_worker.py")
-    ensure_remote_deps(client)
+    remote_hf_env = {"HF_HOME": "/dev/shm/heydigital_hf"}
 
-    # 4A: Voice Profile on RTX Pro 6000 (cached across runs!)
+    # Step 4A: Studio Voice Profile on RTX Pro 6000
     local_vp_dir = REPO_ROOT / "assets" / "voices" / "rtx6000_profile"
     if not (local_vp_dir / "voice_profile.json").exists():
         print("[Stage 4A] Extracting pure studio vocal profile of Alan's voice on RTX Pro 6000...")
@@ -163,6 +249,7 @@ def run_pipeline(args: argparse.Namespace) -> Path:
         jid_vp = client.exec_async(
             "python3 -u rtx6000_heavy_worker.py voice-profile --input-wav ../voices/alan_heydigital_ref_24s.wav --out-dir ../voices/profile",
             cwd="repo",
+            env=remote_hf_env,
             job_id=f"vp_{slug_ts}",
         )
         client.wait_job(jid_vp, poll_sec=3.0, max_wait_sec=600.0)
@@ -170,74 +257,95 @@ def run_pipeline(args: argparse.Namespace) -> Path:
         client.get_file("voices/profile/voice_profile.json", local_vp_dir / "voice_profile.json")
         client.get_file("voices/profile/alan_prompt_clip_24k.wav", local_vp_dir / "alan_prompt_clip_24k.wav")
     else:
-        # Ensure remote has profile if Colab restarted
         client.put_file(local_vp_dir / "alan_prompt_clip_24k.wav", "voices/profile/alan_prompt_clip_24k.wav")
         vp_obj = json.loads((local_vp_dir / "voice_profile.json").read_text(encoding="utf-8"))
         vp_obj["ref_wav"] = "/content/heydigital_g4c/voices/profile/alan_prompt_clip_24k.wav"
         client.put_bytes(json.dumps(vp_obj, ensure_ascii=False, indent=2).encode("utf-8"), "voices/profile/voice_profile.json")
 
-    # 4B: Batch PyTorch F5-TTS Voice Cloning for Long + Short on RTX Pro 6000
+    # Step 4B: Sentence-Level PyTorch F5-TTS + Whisper Forced Alignment on RTX Pro 6000
     tts_local_dir = run_dir / "tts"
     if not (tts_local_dir / "tts_results.json").exists():
-        tts_items = [{"id": b["id"], "text": b["narration"]} for b in plan.get("long_beats", [])] + [
-            {"id": sb["id"], "text": sb["narration"]} for sb in plan.get("short_beats", [])
-        ]
-        tts_manifest = {"speed": 1.03, "items": tts_items}
+        tts_items = []
+        for b in plan.get("long_beats", []):
+            tts_items.append({
+                "id": b["id"],
+                "text": b.get("narration", ""),
+                "tts_text": b.get("tts_text", ""),
+                "captions": b.get("captions", []),
+                "silent_duration": b.get("silent_duration", 1.85),
+            })
+        for sb in plan.get("short_beats", []):
+            tts_items.append({
+                "id": sb["id"],
+                "text": sb.get("narration", ""),
+                "tts_text": sb.get("tts_text", ""),
+                "captions": sb.get("captions", []),
+            })
+        tts_manifest = {"speed": 0.96, "items": tts_items}
         (run_dir / "tts_manifest.json").write_text(json.dumps(tts_manifest, ensure_ascii=False, indent=2), encoding="utf-8")
         client.put_file(run_dir / "tts_manifest.json", f"jobs/{run_dir.name}/tts_manifest.json")
 
-        print(f"[Stage 4B] Synthesizing {len(tts_items)} cloned voiceover segments on RTX Pro 6000...")
+        print(f"[Stage 4B] Synthesizing & Whisper-aligning {len(tts_items)} cloned voiceover segments on RTX Pro 6000...")
         jid_tts = client.exec_async(
             f"python3 -u rtx6000_heavy_worker.py tts-batch --manifest ../jobs/{run_dir.name}/tts_manifest.json --profile ../voices/profile/voice_profile.json --out-dir ../jobs/{run_dir.name}/tts",
             cwd="repo",
+            env=remote_hf_env,
             job_id=f"tts_{run_dir.name}",
         )
-        client.wait_job(jid_tts, poll_sec=4.0, max_wait_sec=1800.0)
+        client.wait_job(jid_tts, poll_sec=4.0, max_wait_sec=2400.0)
         client.get_tar_dir(f"jobs/{run_dir.name}/tts", tts_local_dir)
-        print(f"  -> Downloaded all {len(tts_items)} cloned WAVs to local {tts_local_dir}!")
+        print(f"  -> Downloaded all {len(tts_items)} broadcast WAVs + Whisper caption alignments to {tts_local_dir}!")
 
-    # 4C: Batch AI Studio Image Generation on RTX Pro 6000
+    # Step 4C: Commercial Studio Stills (`RealVisXL_V4.0`) + AI Motion Video (`LTX-Video` I2V) on RTX Pro 6000
     img_local_dir = run_dir / "images"
     if not (img_local_dir / "image_results.json").exists():
         img_items = []
-        th_prompt = (plan.get("thumbnail") or {}).get("image_prompt") or "Minimalist dark studio spotlight product shot of sleek aluminum Mac computer and AI chip, rim lighting, matte black background, no text, 8k"
-        img_items.append({"id": "THUMB_HERO", "prompt": th_prompt, "width": 1344, "height": 768, "seed": 8800})
+        th_prompt = (plan.get("thumbnail") or {}).get("image_prompt") or "Minimalist dark studio spotlight product shot of sleek silver and space black aluminum laptops side by side, rim lighting, matte charcoal background, no text, 8k"
+        img_items.append({"id": "THUMB_HERO", "prompt": th_prompt, "width": 1344, "height": 768, "seed": 8800, "animate_i2v": False})
 
+        i2v_budget = 3
         for idx, b in enumerate(plan.get("long_beats", [])):
-            if b.get("visual_type") in ("cinema_tech_broll", "chapter_dark_card") and b.get("image_prompt"):
+            if b.get("visual_type") in ("cinema_broll_video", "cinema_tech_broll", "chapter_dark_card"):
+                do_i2v = (b.get("visual_type") in ("cinema_broll_video", "cinema_tech_broll")) and (i2v_budget > 0)
+                if do_i2v:
+                    i2v_budget -= 1
                 img_items.append({
                     "id": b["id"],
-                    "prompt": b["image_prompt"],
+                    "prompt": b.get("image_prompt") or th_prompt,
                     "width": 1280,
                     "height": 720,
                     "seed": 5100 + idx,
-                })
-        for idx, sb in enumerate(plan.get("short_beats", [])):
-            if sb.get("visual_type") != "cta_funnel_endcard":
-                sp = sb.get("image_prompt") or th_prompt
-                img_items.append({
-                    "id": sb["id"],
-                    "prompt": sp,
-                    "width": 720,
-                    "height": 1280 if sb.get("visual_type") == "hook_sticker_broll" else 720,
-                    "seed": 6100 + idx,
+                    "animate_i2v": do_i2v,
                 })
 
-        img_manifest = {"items": img_items}
+        for idx, sb in enumerate(plan.get("short_beats", [])):
+            if sb.get("visual_type") != "cta_funnel_endcard":
+                is_vert_broll = sb.get("visual_type") in ("short_hook_dynamic", "hook_sticker_broll", "short_broll_summary")
+                img_items.append({
+                    "id": sb["id"],
+                    "prompt": sb.get("image_prompt") or th_prompt,
+                    "width": 720,
+                    "height": 1280 if is_vert_broll else 720,
+                    "seed": 6100 + idx,
+                    "animate_i2v": idx == 0,  # Animate Short Hook hero clip via LTX-Video I2V!
+                })
+
+        img_manifest = {"enable_i2v": not args.skip_i2v, "items": img_items}
         (run_dir / "img_manifest.json").write_text(json.dumps(img_manifest, ensure_ascii=False, indent=2), encoding="utf-8")
         client.put_file(run_dir / "img_manifest.json", f"jobs/{run_dir.name}/img_manifest.json")
 
-        print(f"[Stage 4C] Generating {len(img_items)} photorealistic studio visuals on RTX Pro 6000...")
+        print(f"[Stage 4C] Generating {len(img_items)} studio stills + LTX-Video I2V motion clips on RTX Pro 6000...")
         jid_img = client.exec_async(
             f"python3 -u rtx6000_heavy_worker.py img-batch --manifest ../jobs/{run_dir.name}/img_manifest.json --out-dir ../jobs/{run_dir.name}/images",
             cwd="repo",
+            env=remote_hf_env,
             job_id=f"img_{run_dir.name}",
         )
-        client.wait_job(jid_img, poll_sec=4.0, max_wait_sec=1800.0)
+        client.wait_job(jid_img, poll_sec=4.0, max_wait_sec=2400.0)
         client.get_tar_dir(f"jobs/{run_dir.name}/images", img_local_dir)
-        print(f"  -> Downloaded all {len(img_items)} generated studio visuals to local {img_local_dir}!")
+        print(f"  -> Downloaded all generated stills & I2V clips to local {img_local_dir}!")
 
-    # Step 5: Local Master Rendering (Thumbnail + Long-Form + Traffic-Funnel Short + Cited Metadata)
+    # Step 5: Local Metal WebGL2 Three.js + Interactive Short + Rhodes Sidechain Master Rendering
     deliverables_dir = run_dir / "deliverables"
     deliverables_dir.mkdir(parents=True, exist_ok=True)
 
@@ -248,18 +356,32 @@ def run_pipeline(args: argparse.Namespace) -> Path:
     print(f"[Stage 5A] Thumbnail rendered: {thumb_out}")
 
     long_out = deliverables_dir / "hey_digital_long_1080p.mp4"
-    long_meta_cache = run_dir / "long_render_info.json"
-    if long_out.exists() and long_meta_cache.exists() and not args.force_regen_script:
-        long_info = json.loads(long_meta_cache.read_text(encoding="utf-8"))
-        print(f"[Stage 5B] Reusing rendered Long-Form Video: {long_out} ({long_info['duration']}s)")
-    else:
-        long_info = assemble_long_video(plan, tts_local_dir, img_local_dir, long_out, run_dir / "work_long")
-        long_meta_cache.write_text(json.dumps(long_info, ensure_ascii=False, indent=2), encoding="utf-8")
-        print(f"[Stage 5B] Long-Form Video rendered: {long_out} ({long_info['duration']}s)")
+    long_info = assemble_long_video(
+        plan=plan,
+        tts_dir=tts_local_dir,
+        img_dir=img_local_dir,
+        out_mp4=long_out,
+        work_dir=run_dir / "work_long",
+        broll_dir=broll_dir,
+        repo_root=REPO_ROOT,
+        run_dir=run_dir,
+    )
+    (run_dir / "long_render_info.json").write_text(json.dumps(long_info, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"[Stage 5B] V2 Long-Form Video rendered: {long_out} ({long_info['duration']}s)")
 
     short_out = deliverables_dir / "hey_digital_short_funnel_1080x1920.mp4"
-    short_info = assemble_short_video(plan, tts_local_dir, img_local_dir, thumb_out, short_out, run_dir / "work_short")
-    print(f"[Stage 5C] Traffic-Funnel Short rendered: {short_out} ({short_info['duration']}s)")
+    short_info = assemble_short_video(
+        plan=plan,
+        tts_dir=tts_local_dir,
+        img_dir=img_local_dir,
+        thumb_path=thumb_out,
+        out_mp4=short_out,
+        work_dir=run_dir / "work_short",
+        broll_dir=broll_dir,
+        repo_root=REPO_ROOT,
+        run_dir=run_dir,
+    )
+    print(f"[Stage 5C] V2 Interactive Traffic-Funnel Short rendered: {short_out} ({short_info['duration']}s)")
 
     desc_long, desc_short = format_youtube_descriptions(plan, long_info["chapters"])
     (deliverables_dir / "youtube_long_metadata.txt").write_text(
@@ -269,6 +391,7 @@ def run_pipeline(args: argparse.Namespace) -> Path:
         f"TITLE:\n{plan.get('title_short', '')}\n\nRELATED LONG VIDEO:\n{plan.get('title_long', '')}\n\nDESCRIPTION:\n{desc_short}\n", encoding="utf-8"
     )
     summary = {
+        "pipeline_version": "2.0-gemini-4-carbon-webgl-rhodes",
         "run_id": run_dir.name,
         "topic": plan.get("topic"),
         "video_type": plan.get("video_type"),
@@ -283,20 +406,21 @@ def run_pipeline(args: argparse.Namespace) -> Path:
         "cited_sources": plan.get("cited_sources", []),
     }
     (deliverables_dir / "release_manifest.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"=== PIPELINE COMPLETE! Deliverables saved locally to: {deliverables_dir} ===")
+    print(f"=== V2 PIPELINE COMPLETE! Deliverables saved locally to: {deliverables_dir} ===")
     return deliverables_dir
 
 
 def build_arg_parser() -> argparse.ArgumentParser:
-    ap = argparse.ArgumentParser(description="Hey Digital Gemini 4 Carbon — Autonomous Video & Shorts Pipeline")
+    ap = argparse.ArgumentParser(description="Hey Digital Gemini 4 Carbon V2 — Autonomous Video & Shorts Pipeline")
     ap.add_argument("--topic", default="", help="Optional manual topic override; leave empty for 100%% unattended topic discovery")
     ap.add_argument("--queries", default="", help="Comma-separated search queries when --topic is provided")
     ap.add_argument("--video-type", default="versus_guide", choices=["versus_guide", "ai_benchmark", "deep_review", "hidden_tips", "news_analysis"])
-    ap.add_argument("--long-beats", type=int, default=20, help="Target number of narrative/visual beats for Long-form video")
+    ap.add_argument("--long-beats", type=int, default=28, help="Target number of narrative/visual beats for Long-form video")
     ap.add_argument("--short-steps", type=int, default=5, help="Target number of structured steps in Traffic-Funnel Short")
     ap.add_argument("--colab-url", default="", help="HTTPS trycloudflare URL for RTX Pro 6000 bridge")
     ap.add_argument("--colab-token", default="", help="Bearer token for RTX Pro 6000 bridge")
     ap.add_argument("--run-id", default="", help="Custom run folder name under runs/")
+    ap.add_argument("--skip-i2v", action="store_true", help="Skip LTX-Video I2V stage if quick turnaround is desired")
     ap.add_argument("--force-regen-script", action="store_true")
     return ap
 

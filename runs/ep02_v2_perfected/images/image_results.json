@@ -1,0 +1,127 @@
+{
+  "ok": true,
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "count": 15,
+  "items": [
+    {
+      "id": "THUMB_HERO",
+      "file": "THUMB_HERO.png",
+      "video_file": "",
+      "width": 1344,
+      "height": 768,
+      "mode": "sdxl_cuda(RealVisXL_V4.0)"
+    },
+    {
+      "id": "L07",
+      "file": "L07.png",
+      "video_file": "",
+      "width": 1280,
+      "height": 720,
+      "mode": "sdxl_cuda(RealVisXL_V4.0)"
+    },
+    {
+      "id": "L09",
+      "file": "L09.png",
+      "video_file": "L09_i2v.mp4",
+      "width": 1280,
+      "height": 720,
+      "mode": "sdxl_cuda(RealVisXL_V4.0)"
+    },
+    {
+      "id": "L14",
+      "file": "L14.png",
+      "video_file": "",
+      "width": 1280,
+      "height": 720,
+      "mode": "sdxl_cuda(RealVisXL_V4.0)"
+    },
+    {
+      "id": "L15",
+      "file": "L15.png",
+      "video_file": "L15_i2v.mp4",
+      "width": 1280,
+      "height": 720,
+      "mode": "sdxl_cuda(RealVisXL_V4.0)"
+    },
+    {
+      "id": "L18",
+      "file": "L18.png",
+      "video_file": "L18_i2v.mp4",
+      "width": 1280,
+      "height": 720,
+      "mode": "sdxl_cuda(RealVisXL_V4.0)"
+    },
+    {
+      "id": "L21",
+      "file": "L21.png",
+      "video_file": "",
+      "width": 1280,
+      "height": 720,
+      "mode": "sdxl_cuda(RealVisXL_V4.0)"
+    },
+    {
+      "id": "L23",
+      "file": "L23.png",
+      "video_file": "",
+      "width": 1280,
+      "height": 720,
+      "mode": "sdxl_cuda(RealVisXL_V4.0)"
+    },
+    {
+      "id": "S01",
+      "file": "S01.png",
+      "video_file": "S01_i2v.mp4",
+      "width": 720,
+      "height": 1280,
+      "mode": "sdxl_cuda(RealVisXL_V4.0)"
+    },
+    {
+      "id": "S02",
+      "file": "S02.png",
+      "video_file": "",
+      "width": 720,
+      "height": 720,
+      "mode": "sdxl_cuda(RealVisXL_V4.0)"
+    },
+    {
+      "id": "S03",
+      "file": "S03.png",
+      "video_file": "",
+      "width": 720,
+      "height": 720,
+      "mode": "sdxl_cuda(RealVisXL_V4.0)"
+    },
+    {
+      "id": "S04",
+      "file": "S04.png",
+      "video_file": "",
+      "width": 720,
+      "height": 720,
+      "mode": "sdxl_cuda(RealVisXL_V4.0)"
+    },
+    {
+      "id": "S05",
+      "file": "S05.png",
+      "video_file": "",
+      "width": 720,
+      "height": 720,
+      "mode": "sdxl_cuda(RealVisXL_V4.0)"
+    },
+    {
+      "id": "S06",
+      "file": "S06.png",
+      "video_file": "",
+      "width": 720,
+      "height": 720,
+      "mode": "sdxl_cuda(RealVisXL_V4.0)"
+    },
+    {
+      "id": "S07",
+      "file": "S07.png",
+      "video_file": "",
+      "width": 720,
+      "height": 1280,
+      "mode": "sdxl_cuda(RealVisXL_V4.0)"
+    }
+  ]
+}

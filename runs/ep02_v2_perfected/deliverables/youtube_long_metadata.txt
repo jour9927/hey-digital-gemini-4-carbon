@@ -1,0 +1,40 @@
+TITLE:
+差價四百美元，買 MacBook Air M6 還是直上 MacBook Pro？實測後發現三個隱藏刀法
+
+DESCRIPTION:
+面對 MacBook Air M6 與 MacBook Pro 的選擇，我們深入比較了兩者的硬體規格、性能表現及實際使用感受，揭開蘋果背後的升級策略與隱藏刀法。
+
+⏱️ 時間軸章節
+0:00 容量升級的價格陷阱
+0:30 晶片頻寬與散熱天花板
+1:30 螢幕光學與外接體驗
+2:13 三種預算終極買法
+
+📚 本期公開爬蟲資訊、實測數據與畫面參考來源
+[SRC-04] 9to5Mac — M5 MacBook Pro vs M4 MacBook Air: Which should you buy this holiday season?
+    https://9to5mac.com/2025/11/26/m5-macbook-pro-vs-m4-macbook-air-black-friday-holiday-comparison/
+[SRC-01] 9to5Mac — MacBook Neo vs MacBook Air: Every difference between Apple’s 13-inch laptops
+    https://9to5mac.com/2026/03/04/macbook-neo-vs-macbook-air/
+[SRC-02] Wikipedia (ZH) — MacBook Pro
+    https://zh.wikipedia.org/wiki/MacBook_Pro
+[SRC-03] Wikipedia (EN) — MacBook Air
+    https://en.wikipedia.org/wiki/MacBook_Air
+[SRC-05] 9to5Mac — M4 iPad Pro vs Microsoft Surface Pro: How do they stack up?
+    https://9to5mac.com/2024/05/21/m4-ipad-pro-vs-surface-pro/
+[SRC-06] Wikipedia (EN) — MacBook Pro
+    https://en.wikipedia.org/wiki/MacBook_Pro
+[SRC-07] 9to5Mac — M4 vs M3 and M2: What’s improved with the new Apple Silicon?
+    https://9to5mac.com/2024/05/30/m4-vs-m3-and-m2-apple-silicon/
+[SRC-08] 9to5Mac — Hands-on: 13-inch MacBook Pro (2020) – a long time coming [Video]
+    https://9to5mac.com/2020/05/14/macbook-pro-2020-review-fixed-keyboard-10th-generation-intel-cpu-video/
+[SRC-09] YouTube · Apple — [實拍畫面參考] MacBook Pro with M5 Pro and M5 Max
+    https://www.youtube.com/watch?v=GriXfu4tL30
+[SRC-10] YouTube · Apple — [實拍畫面參考] The MacBook Air with M5
+    https://www.youtube.com/watch?v=URwVV5tTJIA
+[SRC-11] YouTube · Apple — [實拍畫面參考] New MacBook Pro with PROLED XDR Display and Touch: The world’s best laptop display
+    https://www.youtube.com/watch?v=WzuIZLoHqqA
+[SRC-12] YouTube · Apple — [實拍畫面參考] New MacBook Pro with PROLED XDR Display: The first-ever Mac with Touch
+    https://www.youtube.com/watch?v=hnZI5uUSdEo
+
+🔔 喜歡這類硬核不灌水的科技選購與底層刀法拆解，記得訂閱 Hey Digital 並開啟小鈴鐺！
+#HeyDigital #科技評測 #選購指南 #Apple #AI硬體

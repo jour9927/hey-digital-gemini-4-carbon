@@ -1,0 +1,219 @@
+{
+  "pipeline_version": "2.0-gemini-4-carbon-webgl-rhodes",
+  "run_id": "ep02_v2_perfected",
+  "topic": "差價四百美元，買 MacBook Air M6 還是直上 MacBook Pro？實測後發現三個隱藏刀法",
+  "video_type": "versus_guide",
+  "title_long": "差價四百美元，買 MacBook Air M6 還是直上 MacBook Pro？實測後發現三個隱藏刀法",
+  "title_short": "買輕薄款還是直上 Pro？5 個關鍵刀法一次看懂！ #Shorts",
+  "long_video": "/Users/alan_dingchaoliao/Downloads/Hey Digital/hey-digital-gemini-4-carbon/runs/ep02_v2_perfected/deliverables/hey_digital_long_1080p.mp4",
+  "long_duration_sec": 184.6,
+  "short_video": "/Users/alan_dingchaoliao/Downloads/Hey Digital/hey-digital-gemini-4-carbon/runs/ep02_v2_perfected/deliverables/hey_digital_short_funnel_1080x1920.mp4",
+  "short_duration_sec": 84.3,
+  "thumbnail": "/Users/alan_dingchaoliao/Downloads/Hey Digital/hey-digital-gemini-4-carbon/runs/ep02_v2_perfected/deliverables/thumbnail_1080p.png",
+  "cited_sources_count": 12,
+  "cited_sources": [
+    {
+      "source_id": "SRC-04",
+      "publisher": "9to5Mac",
+      "domain": "9to5mac.com",
+      "title": "M5 MacBook Pro vs M4 MacBook Air: Which should you buy this holiday season?",
+      "url": "https://9to5mac.com/2025/11/26/m5-macbook-pro-vs-m4-macbook-air-black-friday-holiday-comparison/",
+      "published": "Wed, 26 Nov 2025",
+      "summary": "Apple offers two entry level MacBook models: the MacBook Air, and the base model MacBook Pro. There’s a couple hundred dollars in difference between the two, which begs the question – is the MacBook Pro worth the premium, or should you save money and stick to the MacBook Air? more… Apple offers two entry level MacBook models: the MacBook Air , and the base model MacBook Pro . There’s a couple hundred dollars in difference between the two, which begs the question – is the MacBook Pro worth the premium, or should you save money and stick to the MacBook Air ? The biggest debate to be had is going to revolve around the chipset. Do you need an M5 chip for your workflow? I’m not gonna delve into all of the details, you can read our M5 roundup here if you’d like. But, in short, this is what’s new with M5: 15% faster multithreaded CPU performance vs M4 45% faster GPU performance vs M4 30% increase in unified memory bandwidth 4x peak GPU compute performance for AI Overall, M5 is a great leap in GPU performance, and with Apple betting so heavily on local models for AI, that could be important in the future. However, M4 is still plenty fast, and I wouldn’t make any purchasing decisions based on what Apple might do in AI in the future. It’s also worth noting that Apple still does most of its Apple silicon comparisons to the M1 rather than newer chips like M2 or M3. I’ll let that speak for itself. Air vs Pro: Worth the premium? With the 14-inch MacBook Pro , you’re paying for a couple nice-to-have features. Those features are additional ports, a proper active cooling system, and a nice miniLED display with HDR support, better colors, and more. Also, you’ll get a larger display. MacBook Pro is 14.2-inch, vs 13.6-inch on the MacBook Air. The MacBook Air only comes with MagSafe and two Thunderbolt/USB-C ports, both of which are located on the left side. MacBook Pro comes with MagSafe, three Thunderbolt/USB-C ports (two left, one right), as well as an HDMI port and SD card slot. Thermals are also a big differentiator for the MacBook Pro . Simply put, MacBook Air doesn’t have a fan, and relies entirely on passive cooling. If your workflow is CPU/GPU intensive, you’ll likely run into thermal throttling on the MacBook Air if you’re pushing it for a while. Plus, to be completely honest: macOS Tahoe isn’t perfectly optimized quite yet, and I’ve heard from a number of MacBook Air users that their Macs are consistently running hot. Lastly, MacBook Pro has a fantastic display. Unless you’re constantly working with colors, this probably doesn’t matter as much. It’s not like the M",
+      "char_Depth": 3483,
+      "extracted_metrics": [
+        "1000 nits",
+        "500 nits",
+        "$400",
+        "256GB",
+        "512GB",
+        "$1199,",
+        "$1599",
+        "$949",
+        "$1399"
+      ]
+    },
+    {
+      "source_id": "SRC-01",
+      "publisher": "9to5Mac",
+      "domain": "9to5mac.com",
+      "title": "MacBook Neo vs MacBook Air: Every difference between Apple’s 13-inch laptops",
+      "url": "https://9to5mac.com/2026/03/04/macbook-neo-vs-macbook-air/",
+      "published": "Wed, 04 Mar 2026",
+      "summary": "The new MacBook Neo is officially here, and it gives MacBook Air a run for its money when it comes to casual usage. So what exactly is the $500 difference between Apple’s two 13-inch laptops? Let’s dig in to every difference. more… The new MacBook Neo is officially here, and it gives MacBook Air a run for its money when it comes to casual usage. So what exactly is the $500 difference between Apple’s two 13-inch laptops? Let’s dig in to every difference. Every difference between MacBook Neo and MacBook Air Battery life + charging method Same weight, different dimensions Key tradeoffs for keyboard and trackpad Every difference between MacBook Neo and MacBook Air Let’s start with the big stuff: price and main specs. MacBook Neo is a 13-inch laptop that costs $599 for 256GB storage and 8GB RAM . It runs on a version of Apple’s A18 Pro chip that was first introduced in the iPhone 16 Pro. $100 more doubles the storage to 512GB and adds a Touch ID fingerprint sensor to the keyboard, but memory is limited to just 8GB RAM. MacBook Air is a 13.6-inch laptop that costs $1099 for 512GB storage and 16GB RAM . It runs on Apple’s latest M5 chip that is also used in the latest iPad Pro and 14-inch MacBook Pro. MacBook Air storage upgrades include 1TB, 2TB, and 4TB options. RAM can be configured to 24GB or 32GB. Every MacBook Air comes with Touch ID. Equally as important: color options. The new MacBook Neo comes in silver , blush (pink), citrus (yellow), and indigo . MacBook Air continues to come in silver , sky blue (bluish silver), starlight (light gold), and midnight (dark blue). MacBook Neo wins the saturation competition. The A18 Pro chip inside MacBook Neo has a 6-core CPU and a 5-core GPU . The M5 chip inside the MacBook Air has a 10-core CPU and starts with an 8-core GPU . Apple A18 Pro chip 6-core CPU with 2 performance cores and 4 efficiency cores 5-core GPU Hardware-accelerated ray tracing 16-core Neural Engine 60GB/s memory bandwidth 10-core CPU with 4 super cores and 6 efficiency cores Up to 10-core GPU Neural Accelerators Hardware-accelerated ray tracing 16-core Neural Engine 153GB/s memory bandwidth Battery life + charging method Battery life and how you can charge are also different between MacBook Neo and MacBook Air. MacBook Neo advertises up to 11 hours of wireless web browsing and up to 16 hours of video streaming per charge. It features a 36.5-watt-hour lithium-ion battery. MacBook Air promises up to 15 hours of wireless web browsing and up to 18 hours of video streaming per charge. It uses a 53.8-watt-hour lithium ion battery. In practice, MacBook A",
+      "char_Depth": 3432,
+      "extracted_metrics": [
+        "$500",
+        "$599",
+        "256GB",
+        "8GB",
+        "$100",
+        "512GB",
+        "$1099",
+        "16GB",
+        "1TB",
+        "2TB",
+        "4TB",
+        "24GB",
+        "32GB",
+        "60GB/s",
+        "153GB/s",
+        "20W",
+        "40W",
+        "60W"
+      ]
+    },
+    {
+      "source_id": "SRC-02",
+      "publisher": "Wikipedia (ZH)",
+      "domain": "zh.wikipedia.org",
+      "title": "MacBook Pro",
+      "url": "https://zh.wikipedia.org/wiki/MacBook_Pro",
+      "published": "2026-10-03",
+      "summary": "MacBook Pro是蘋果公司於2006年1月開始推出的Mac筆記型電腦系列。它是繼 iMac 之後，蘋果推出的第二款搭載英特爾處理器的 Mac 筆記型電腦，也是 PowerBook G4 產品線的繼任者，它也是MacBook家族中的高端機型，雖然在此之前已有13、15及17英寸版本，但已經停產，只保留14及16英寸的產品。 == 歷史 == 2006年1月11日由蘋果公司時任總裁史蒂夫·賈伯斯在Macworld大會上發布，並於同年2月正式出售。第一代MacBook Pro的外觀與PowerBook G4相似，但其實是用了英特爾酷睿處理器，而不是一貫沿用的PowerPC G4處理器。15英寸的機型於2006年1月發布，而17英寸則於4月發布，兩款機型於同年10月推出酷睿2處理器的更新版本。 第二代機型，採用 「Unibody」 一體成型機身，由一整塊鋁合金加工而成，外殼設計更為錐形，並於2008年10月以出及15英寸的MacBook Pro，及13英寸鋁合金一體式的MacBook一起推出。次年1月推出了17英寸的機型，6月推出內建電池的MacBook Pro系列，包括蘋果公司引入的13英寸機型到這個系列。隨後它更升級至英特爾 Core i5 和 Core i7處理器，並引入 Thunderbolt 技術。 2012年6月的WWDC上，蘋果公司推出了第三代重新設計的15英寸螢幕的MacBook Pro。同時，上一代的13及15英寸一體式的機型也公布了更新，銷售的同時也停產了17英寸的機型。雖然尺寸比上一代更細小，但仍保持一體式的機身設計和風格。MacBook Pro的上代跟下代最大的差異，就是新一代的配備有更高解析度的Retina顯示器、以固態硬碟取代了傳統的機械硬碟，以及取消了光驅。第三代13英寸的MacBook Pro於2012年6月12日推出。 2016年10月，蘋果公司推出第四代全新設計的13英寸以及15英吋的MacBook Pro。擁有更輕薄的「Unibody」 一體式機身設計。共有三種機型：13英寸配備Touch Bar的MacBook Pro, 13英寸不配備Touch Bar的MacBook Pro，15英寸配備Touch Bar的MacBook Pro。與上一代的差異是：配備具有P3色域的Retina顯示器、配備替代功能鍵列的Touch Bar、整合Touch ID的指紋感測器、除了3.5mm耳機介面以外，該代機型取消了其他傳統介面、Force Touch觸控板面積相比上代大幅度增加、配備4個支援Thunderbolt 3的USB Type-C介面以及配備第二代蝶式結構鍵盤。 2019年11月，蘋果公司推出重新設計的16英寸的MacBook Pro，同時取代了15英寸機型。尺寸與2015年代15英寸產品相似，加大了16英寸Retina顯示器，加厚了0.03吋，鍵盤上方的多點觸控OLED帶代替了功能鍵；在輕觸條的右端有一個分離的Touch ID感測器（電源按鈕），在觸摸條的左端有一個分離的「esc」鍵。鍵盤則為與「Magic Keyboard」 相似的剪刀式結構鍵盤，取代了之前有爭議的蝶式鍵盤。2020年11月，基於蘋果自研的Apple M1的MacBook Pro 13英寸機型發佈。 2021年10月，蘋果公司推出第五代全新設計的14和16英吋的MacBook Pro，並搭載M1 Pro或M1 Max Apple Silicon處理器，機身尺寸與前代13英吋、16英吋的機型類似，但大幅縮減邊框的寬度，使這代MacBook Pro擁有更高的螢幕占比，並支援 ProMotion 自適應重新整理頻率技術。。這代MacBook Pro的連接方式較前代也有大幅改善，機身不再只提供USB-C連接埠3.5 mm耳機孔之外，該代機型還重新加入了此前被取消的 MagSafe 充電介面（MagSafe 3）、HDMI 埠和 SDXC 卡槽，USB-C 埠也升級為 Thunderbolt 4。，且同時支援充電功能。在鍵盤方面，取消了前代具有爭議的Touch Bar，並將該空間改為全尺寸的功能鍵，該代機型將 Touch ID 指紋辨識功能整合於電源按鈕。 == 英特爾晶片型號 == === 第一代 === 第一代的MacBook Pro於2006年1月10日由史蒂夫·賈伯斯於蘋果公司產品發布會中發布，17英寸機型於2006年4月24日發布。是第一款以英特爾 x86中央處理器來取代沿用已久的Power G4 CPU的筆記型電腦產品。15吋的MacBook Pro跟相同尺寸的PowerBook G4重量相同，但深了0.1吋（0.25厘米），寬了0.4吋（1.0厘米），及薄了0.1吋（0.25厘米）。與 PowerBook G4 相比，第一代 MacBook Pro 的其他變化還包括內建 iSight 網路攝影機、MagSafe電源插頭，它是一個磁性電源連接器，旨在防止筆記型電腦與電源入離時引致表面分離的情況，而這兩個功能後來帶到MacBook。為了裝配更薄的MacBook Pro，光驅只有PowerBook G4的一半速度，不支援燒錄雙層 DVD 光碟。。 === 原始規格 === 處理器：1.83GHz（停止發行）／2.2GHz（停止發行）／2.4GHz／2.53GHz／2.6GHz（停止發行）／2.8GHz的英特爾酷睿2雙核處理器。 主記憶體：2GB或4GB的1066MHz〔DDR3 SDRAM][667MHz DDR2 SDRAM（停止發行）〕（可通過額外的 SO-DIMM 插槽擴充主記憶體）。 螢幕：配備 13.3 英寸（1280×800）、15.4 英寸（1440×900）或 17 英寸（1920×1200）寬螢幕液晶顯示器。 電池：85瓦時的鋰離子電池。最長4.5-10小時無線網路操作 PCI Express：NVIDIA GeForce 8600M GT，配備 128 MB 或 256 MB GDDR3 視訊記憶體，並支援雙鏈路 DVI 輸出和 ExpressCard/34 插槽。 影片：內建 iSight 網路攝影機，支援 DVI 輸出，並可通過轉接器連接 VGA 顯示裝置。 音訊：配備支援 TO",
+      "char_Depth": 3800,
+      "extracted_metrics": [
+        "03吋",
+        "1吋",
+        "4吋",
+        "1.83GHz",
+        "2.2GHz",
+        "2.4GHz",
+        "2.53GHz",
+        "2.6GHz",
+        "667MHz",
+        "13.3 英寸",
+        "15.4 英寸",
+        "17 英寸",
+        "4GHz",
+        "5GHz",
+        "2.33GHz"
+      ]
+    },
+    {
+      "source_id": "SRC-03",
+      "publisher": "Wikipedia (EN)",
+      "domain": "en.wikipedia.org",
+      "title": "MacBook Air",
+      "url": "https://en.wikipedia.org/wiki/MacBook_Air",
+      "published": "2026-11-23",
+      "summary": "The MacBook Air is a line of consumer-oriented high-end notebook computers in the Mac series developed and manufactured by Apple since 2008. It features a thin, light structure in a machined aluminum case and either a 13 or 15 in (330 or 380 mm) screen. The MacBook Air's lower prices relative to the larger, higher performance MacBook Pro made it Apple's entry-level notebook for over a decade since the discontinuation of the original MacBook line in 2012, until the introduction of the MacBook Neo in 2026. == Intel-based == === Unibody (2008–2009) === Steve Jobs introduced the MacBook Air during Apple's keynote address at the 2008 Macworld conference on January 15, 2008. The first MacBook Air had a 13.3-inch (340 mm) screen and was initially promoted as the world's thinnest notebook at 19 mm (0.75 in) (a previous record holder, 2005's Toshiba Portege R200, was 19.8 mm (0.78 in) thick). It featured a custom Intel Merom CPU and Intel GMA GPU which were 40% smaller than the standard chip package. It also featured an anti-glare LED backlit TN 6-bit color panel display, a full-size keyboard, and a large trackpad that responded to multi-touch gestures such as pinching, swiping, and rotating. The MacBook Air was the first subcompact notebook offered by Apple after the 12-inch (300 mm) PowerBook G4 discontinued in 2006. It was also Apple's first computer with an optional solid-state drive. It was the last Mac to use a PATA storage drive. To conserve space, it uses the 1.8 in (46 mm) drive used in the iPod Classic instead of the typical 2.5 in (64 mm) drive. It was Apple's first notebook since the PowerBook 2400c without a built-in removable media drive. To read optical disks, users could either purchase an external USB drive such as Apple's SuperDrive or use the bundled Remote Disc software to access the drive of another computer wirelessly that has the program installed. The MacBook Air also did not include a FireWire port, Ethernet port, line-in, or Kensington Security Slot, which were standard features in most other Apple notebooks at the time. On October 14, 2008, a new model was announced with a low-voltage Penryn processor and Nvidia GeForce graphics. Storage capacity was increased to a 128 GB SSD or a 120 GB HDD, and the micro-DVI video port was replaced by the Mini DisplayPort. The disk drive was also changed from a PATA drive to the faster SATA drive. The mid-2009 revision featured slightly higher battery capacity and a faster Penryn CPU. === Tapered Unibody (2010–2017) === On October 20, 2010, Apple released a redesigned 13 in (330 mm) model with a taper",
+      "char_Depth": 3800,
+      "extracted_metrics": [
+        "380 mm",
+        "340 mm",
+        "19 mm",
+        "19.8 mm",
+        "300 mm",
+        "46 mm",
+        "64 mm",
+        "128 GB",
+        "120 GB",
+        "330 mm",
+        "290 mm",
+        "280 mm",
+        "256 GB"
+      ]
+    },
+    {
+      "source_id": "SRC-05",
+      "publisher": "9to5Mac",
+      "domain": "9to5mac.com",
+      "title": "M4 iPad Pro vs Microsoft Surface Pro: How do they stack up?",
+      "url": "https://9to5mac.com/2024/05/21/m4-ipad-pro-vs-surface-pro/",
+      "published": "Tue, 21 May 2024",
+      "summary": "On the heels of Apple’s M4 iPad Pro launching, Microsoft has debuted the 11th edition of the Surface Pro . Curious about what’s similar and different between these two portable devices? Join along for a look at the M4 iPad Pro vs Surface Pro. more… On the heels of Apple’s M4 iPad Pro launching, Microsoft has debuted the 11th edition of the Surface Pro . Curious about what’s similar and different between these two portable devices? Join along for a look at the M4 iPad Pro vs Surface Pro. M4 iPad Pro vs Surface Pro Performance Design, dimensions, weight, colors M4 iPad Pro vs Surface Pro conclusion The new iPad is the first Apple device to feature the M4 chip. That goes up against the Qualcomm Snapdragon Elite X in the new Surface Pro. While the Elite X chip features more CPU and GPU cores, it looks like the M4 is outperforming it in early benchmarks by quite a bit for single-core performance and the two are nearly tied for multi-core performance. There are a few areas where the Snapdragon X Elite has more raw power like 45 trillion op/s for the neural processor vs 38 trillion for Apple’s Neural Engine, slightly more memory bandwidth, and RAM going up to 32GB vs 16GB for iPad Pro. However, as usual, Apple fine-tunes the M4 iPad Pro as it makes both the hardware and software – getting more performance out of fewer CPU and GPU cores, less memory, etc. The M4 iPad Pro also offers hardware-accelerated ray tracing and support for hardware-accelerated 8K H.264, HEVC, ProREs, and ProRes RAW. That’s not true of the Snapdragon X Elite. ~3,700 single-core, ~14,000 multi-core ~2,400 single-core, ~14,000 multi-core Hardware-accelerated 8K H.264, HEVC, ProRes, and ProRes RAW support Hardware-accelerated ray tracing Qualcomm Hexagon NPU (45 trillion op/s) A nicety of the Surface Pro, the SSD is removable but no 5G cellular models yet, Microsoft says they are coming in fall 2024. The new M4 iPad Pro models go beyond their predecessors with a new “Ultra Retina XDR Display” and it’s the first to use Tandem OLED. Apple says the benefits of the new OLED display are brighter specular highlights, deeper true blacks, better detail in shadows and low light, and more. Both the smaller and larger iPad Pro feature the new OLED display which you can now upgrade the 1 or 2TB models with nano-texture display glass. You also get brighter SDR content up to 1000 nits with the M4 iPad Pro models (600 nits for M2 iPad Pro SDR content). In contrast, the high-end Surface Pro offers a 13″ OLED panel but it’s not quite as advanced as Apple’s with a lower brightness, smaller refresh rate range,",
+      "char_Depth": 3449,
+      "extracted_metrics": [
+        "32GB",
+        "16GB",
+        "5G",
+        "2TB",
+        "1000 nits",
+        "600 nits",
+        "1600 nits",
+        "1TB",
+        "5.1mm"
+      ]
+    },
+    {
+      "source_id": "SRC-06",
+      "publisher": "Wikipedia (EN)",
+      "domain": "en.wikipedia.org",
+      "title": "MacBook Pro",
+      "url": "https://en.wikipedia.org/wiki/MacBook_Pro",
+      "published": "2026-11-19",
+      "summary": "The MacBook Pro is a line of Mac-branded laptop computers developed and manufactured by Apple. Introduced in 2006, it is the high-end model of the MacBook family, sitting above the ultra-portable MacBook Air, the entry-level MacBook Neo, and previously the mid-range MacBook line. As of June 2026, it is currently sold with 14-and-16-inch (360 and 410 mm) screens, all using Apple M-series chips. Before the introduction of Apple silicon in 2020, all MacBook Pro models used Intel chips. The MacBook Pro is the first laptop made by Apple to use the Apple–Intel architecture, replacing the earlier PowerBook line for professional users. It is also the first Apple laptop to use the term \"MacBook\", which later replaced the earlier iBook line for the non-professional users. The MacBook Pro primarily runs the macOS operating system. == Overview == The first MacBook Pro used a similar design to the PowerBook G4, but replaced the PowerPC G4 chips with Intel Core Duo processors, added an iSight webcam, and introduced the MagSafe power connector. The 15-inch (380 mm) model was announced in January 2006 followed by the 17-inch (430 mm) model in April. Later revisions added Intel Core 2 Duo processors and LED-backlit displays. The unibody 15-inch (380 mm) model debuted in October 2008, with a 17-inch (430 mm) variant added in January 2009. In June 2009, a 13-inch (330 mm) variant was added to the MacBook Pro lineup, replacing the aluminum unibody MacBook. The \"unibody\" MacBook Pros are named as such because the case is machined from a single piece of aluminum. It has a thinner flush display than its predecessors, a redesigned trackpad whose entire surface acts as a single clickable button, and a redesigned keyboard. Updates brought Intel Core i5 and i7 processors, and introduced Intel's Thunderbolt connector. The Retina MacBook Pro was released in 2012: the 15-inch (380 mm) in June and a 13-inch (330 mm) model in October. It is thinner than its predecessor, made solid-state storage (SSD) standard, added HDMI, and included a high-resolution Retina display. It eliminated Ethernet, FireWire ports and the optical drive. The Touch Bar MacBook Pro, released in October 2016, adopted USB-C for all data ports and power and included a shallower \"butterfly\"-mechanism keyboard. On all but the base model, the function keys were replaced with an OLED touchscreen strip called the \"Touch Bar\" with a Touch ID sensor integrated into the power button. In November 2019, a revision to the Touch Bar MacBook Pro introduced the Magic Keyboard, which uses a scissor-switch mechanism. The initial 16",
+      "char_Depth": 3800,
+      "extracted_metrics": [
+        "410 mm",
+        "380 mm",
+        "430 mm",
+        "330 mm"
+      ]
+    },
+    {
+      "source_id": "SRC-07",
+      "publisher": "9to5Mac",
+      "domain": "9to5mac.com",
+      "title": "M4 vs M3 and M2: What’s improved with the new Apple Silicon?",
+      "url": "https://9to5mac.com/2024/05/30/m4-vs-m3-and-m2-apple-silicon/",
+      "published": "Thu, 30 May 2024",
+      "summary": "The new iPad Pro has debuted as Apple’s first device with the M4 chip , jumping up from the M2. How does the latest Apple Silicon improve over its predecessors? Here’s a detailed look at M4 vs M3 and M2 on CPU, GPU, Neural Engine, and more. more… The new iPad Pro has debuted as Apple’s first device with the M4 chip , jumping up from the M2. How does the latest Apple Silicon improve over its predecessors? Here’s a detailed look at M4 vs M3 and M2 on CPU, GPU, Neural Engine, and more. M4 vs M3 and M2: Apple Silicon comparison CPU, GPU, Neural Engine specs Since there’s no iPad with an M3 and no Mac with an M4, there’s a bit of unraveling to understand the differences and improvements between the three most recent Apple Silicon chips. Check out our detailed comparison on the latest devices and below we’ll dig into M4 vs M3 and M2 😁. M4 iPad Pro vs M2 iPad Pro: What’s new and improved? M4 iPad Pro vs M2 iPad Air: Is it worth the extra money? M3 MacBook Pro vs M2: What’s different? M4 vs M3 and M2: Apple Silicon comparison CPU, GPU, Neural Engine specs 8 or 16GB with iPad Pro (24GB likely with future Macs) Up to 24GB (max 16GB with iPad Pro) Up to 2TB with iPad Pro (8TB likely with future Macs) Related: M4 already? Here’s why Apple is abandoning the M3 chip line so fast The overall transistor count has increased to 28 billion for the M4 chip. That’s compared to 25 billion for the M3 and 20 billion for the M2. That’s an impressive 40% increase in just two years. Apple says that the M4 CPU is up to 50% faster than the M2 . However, it hasn’t shared a detailed comparison between the M4 and M3 CPUs. But when looking at what may be early M4 iPad Pro benchmarks , results show a ~3,700 single-core score and ~14,000 multi-core score. That’s compared to an M3 Mac CPU benchmarking at a ~3,100 single-score score and a ~12,000 multi-core score. If accurate that puts the M4 CPU up to 18% faster for single-core performance and up to 21% faster for multi-core performance Apple says the M4 GPU is 4x faster than the M2 . And it says the M3 GPU is up to 1.8x faster than the M2 . Based on those numbers from Apple the M4 is up to ~2x faster than the M3 GPU In what may be early Metal benchmark scores for the M4 iPad Pro, an average score of 53,000 has been established. Compared to the M3 average Metal score of 46,571 , that’s only 13% faster for Metal compute. But Apple’s more impressive numbers may be “up to” speed improvements for different GPU processes. Like its predecessors, the M4 has dedicated media engines to offer hardware-accelerated H.264, HEVC, ProRes, and ProRes RAW ",
+      "char_Depth": 3447,
+      "extracted_metrics": [
+        "16GB",
+        "24GB",
+        "2TB",
+        "8TB"
+      ]
+    },
+    {
+      "source_id": "SRC-08",
+      "publisher": "9to5Mac",
+      "domain": "9to5mac.com",
+      "title": "Hands-on: 13-inch MacBook Pro (2020) – a long time coming [Video]",
+      "url": "https://9to5mac.com/2020/05/14/macbook-pro-2020-review-fixed-keyboard-10th-generation-intel-cpu-video/",
+      "published": "Thu, 14 May 2020",
+      "summary": "The 13-inch MacBook Pro (2020) edition is a noteworthy release for a variety of reasons. The most compelling reason to take note is that it’s finally transitioned from the oft-maligned butterfly keyboard to the much-improved Magic Keyboard. Indeed, with the release of this MacBook Pro, the butterfly keyboard is no more. Should you consider upgrading? Watch our hands-on video for the details. more… The 13-inch MacBook Pro (2020) edition is a noteworthy release for a variety of reasons. The most compelling reason to take note is that it’s finally transitioned from the oft-maligned butterfly keyboard to the much-improved Magic Keyboard. Indeed, with the release of this MacBook Pro, the butterfly keyboard is no more. Should you consider upgrading? Watch our hands-on video for the details. Some of my favorite gear AirPods Pro 3 Jeff Benjamin's favorite wireless earbuds; they just keep getting better. First and foremost, I recommend ignoring any “new” MacBook Pro model below the $1799 version. Yes, they all feature the Magic Keyboard now, but cheaper models come with older 8th-generation Intel CPUs, and much-less-capable integrated graphics, among other deficiencies. If you just need a cheap Apple laptop for basic computing, I recommend looking at the MacBook Air (2020) instead, as it also has the Magic Keyboard. With that being said, here are the specifications for the $1799 model. These specs can be upgraded during the build to order process on Apple’s website. 2.0GHz quad-core 10th-generation Intel Core i5 processor 13-inch Retina display with True Tone 13-inch MacBook Pro (2020) video review Apple's budget MacBook, the cheapest way to experience macOS on the go. If you’ve ever unboxed a MacBook in the past, you won’t find any surprises when unboxing the 2020 MacBook Pro. Inside the box you’ll find the MacBook laptop, a “Designed by Apple in California” packet with MacBook Pro getting-started guide, warranty and regulatory information, and Apple stickers. You’ll also find a 61W USB‑C power adapter inside the box, along with a 2-meter USB-C charge cable. Design-wise, the MacBook Pro has changed very little from its predecessor. Unlike last year’s transition from the 15-inch MacBook Pro to the 16-inch MacBook Pro , Apple’s smallest Pro-designated laptop retains the same exact form factor as its direct predecessors. Jeff's favorite screen cleaning cloth that polishes to a shine. In other words, the screen size is exactly the same at 13.3-inches, and the black bezels that surround the display are the same size as well. At 3.1 pounds, weight is still the same, a",
+      "char_Depth": 3601,
+      "extracted_metrics": [
+        "$1799",
+        "2.0GHz",
+        "61W"
+      ]
+    },
+    {
+      "source_id": "SRC-09",
+      "publisher": "YouTube · Apple",
+      "domain": "youtube.com",
+      "title": "[實拍畫面參考] MacBook Pro with M5 Pro and M5 Max",
+      "url": "https://www.youtube.com/watch?v=GriXfu4tL30",
+      "published": "2026"
+    },
+    {
+      "source_id": "SRC-10",
+      "publisher": "YouTube · Apple",
+      "domain": "youtube.com",
+      "title": "[實拍畫面參考] The MacBook Air with M5",
+      "url": "https://www.youtube.com/watch?v=URwVV5tTJIA",
+      "published": "2026"
+    },
+    {
+      "source_id": "SRC-11",
+      "publisher": "YouTube · Apple",
+      "domain": "youtube.com",
+      "title": "[實拍畫面參考] New MacBook Pro with PROLED XDR Display and Touch: The world’s best laptop display",
+      "url": "https://www.youtube.com/watch?v=WzuIZLoHqqA",
+      "published": "2026"
+    },
+    {
+      "source_id": "SRC-12",
+      "publisher": "YouTube · Apple",
+      "domain": "youtube.com",
+      "title": "[實拍畫面參考] New MacBook Pro with PROLED XDR Display: The first-ever Mac with Touch",
+      "url": "https://www.youtube.com/watch?v=hnZI5uUSdEo",
+      "published": "2026"
+    }
+  ]
+}

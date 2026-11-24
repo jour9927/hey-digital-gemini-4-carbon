@@ -51,10 +51,29 @@ class ColabRTX6000Client:
             h.update(extra)
         return h
 
+    def _urlopen_retry(self, req: urllib.request.Request, timeout: float, retries: int = 6) -> bytes:
+        last_exc: Optional[Exception] = None
+        for attempt in range(retries):
+            try:
+                with urllib.request.urlopen(req, timeout=timeout) as resp:
+                    return resp.read()
+            except urllib.error.HTTPError as hexc:
+                last_exc = hexc
+                if hexc.code in (429, 500, 502, 503, 504) and attempt < retries - 1:
+                    time.sleep(1.6 * (attempt + 1))
+                    continue
+                raise
+            except (urllib.error.URLError, TimeoutError, ConnectionError, OSError) as uexc:
+                last_exc = uexc
+                if attempt < retries - 1:
+                    time.sleep(2.0 * (attempt + 1))
+                    continue
+                raise
+        raise RuntimeError(f"Bridge request failed after {retries} attempts: {last_exc}")
+
     def health(self) -> dict:
         req = urllib.request.Request(f"{self.base_url}/health", headers=self._headers(), method="GET")
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            return json.loads(resp.read().decode("utf-8"))
+        return json.loads(self._urlopen_retry(req, timeout=15).decode("utf-8"))
 
     def put_file(self, local_path: Path, remote_rel: str) -> dict:
         q = urllib.parse.urlencode({"path": remote_rel})
@@ -65,8 +84,7 @@ class ColabRTX6000Client:
             headers=self._headers({"Content-Type": "application/octet-stream", "Content-Length": str(len(data))}),
             method="POST",
         )
-        with urllib.request.urlopen(req, timeout=max(self.timeout, 120)) as resp:
-            return json.loads(resp.read().decode("utf-8"))
+        return json.loads(self._urlopen_retry(req, timeout=max(self.timeout, 120)).decode("utf-8"))
 
     def put_bytes(self, data: bytes, remote_rel: str) -> dict:
         q = urllib.parse.urlencode({"path": remote_rel})
@@ -76,23 +94,20 @@ class ColabRTX6000Client:
             headers=self._headers({"Content-Type": "application/octet-stream", "Content-Length": str(len(data))}),
             method="POST",
         )
-        with urllib.request.urlopen(req, timeout=max(self.timeout, 120)) as resp:
-            return json.loads(resp.read().decode("utf-8"))
+        return json.loads(self._urlopen_retry(req, timeout=max(self.timeout, 120)).decode("utf-8"))
 
     def get_file(self, remote_rel: str, local_path: Path) -> Path:
         q = urllib.parse.urlencode({"path": remote_rel})
         req = urllib.request.Request(f"{self.base_url}/get?{q}", headers=self._headers(), method="GET")
         local_path.parent.mkdir(parents=True, exist_ok=True)
-        with urllib.request.urlopen(req, timeout=max(self.timeout, 180)) as resp:
-            local_path.write_bytes(resp.read())
+        local_path.write_bytes(self._urlopen_retry(req, timeout=max(self.timeout, 180)))
         return local_path
 
     def get_tar_dir(self, remote_rel: str, local_dir: Path) -> Path:
         q = urllib.parse.urlencode({"path": remote_rel, "tar": "1"})
         req = urllib.request.Request(f"{self.base_url}/get?{q}", headers=self._headers(), method="GET")
         local_dir.mkdir(parents=True, exist_ok=True)
-        with urllib.request.urlopen(req, timeout=max(self.timeout, 300)) as resp:
-            raw = resp.read()
+        raw = self._urlopen_retry(req, timeout=max(self.timeout, 300))
         with tarfile.open(fileobj=io.BytesIO(raw), mode="r:gz") as tf:
             tf.extractall(path=str(local_dir), filter="data")
         return local_dir
@@ -110,8 +125,7 @@ class ColabRTX6000Client:
             headers=self._headers({"Content-Type": "application/json", "Content-Length": str(len(body))}),
             method="POST",
         )
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            res = json.loads(resp.read().decode("utf-8"))
+        res = json.loads(self._urlopen_retry(req, timeout=30).decode("utf-8"))
         return res["id"]
 
     def wait_job(self, job_id: str, poll_sec: float = 3.0, max_wait_sec: float = 1800.0) -> dict:
@@ -120,8 +134,7 @@ class ColabRTX6000Client:
         while (time.time() - t0) < max_wait_sec:
             q = urllib.parse.urlencode({"id": job_id, "tail": "12000"})
             req = urllib.request.Request(f"{self.base_url}/job?{q}", headers=self._headers(), method="GET")
-            with urllib.request.urlopen(req, timeout=30) as resp:
-                info = json.loads(resp.read().decode("utf-8"))
+            info = json.loads(self._urlopen_retry(req, timeout=30).decode("utf-8"))
             out = (info.get("output") or "").strip()
             if out:
                 cur_tail = out.splitlines()[-1]

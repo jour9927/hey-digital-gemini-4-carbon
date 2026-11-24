@@ -11,7 +11,11 @@ config/rtx6000_bridge.json
 # Large rendered media & intermediate build artifacts (keep sample frames/manifests if desired)
 runs/*/work_long/
 runs/*/work_short/
+runs/*/broll/
+runs/*/script_ckpts/
 runs/*/tts/*.wav
 runs/*/images/*.png
+runs/*/images/*.mp4
 runs/*/deliverables/*.mp4
+runs/ep02_v2_flagship/
 reference_downloads/

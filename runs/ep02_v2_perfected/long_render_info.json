@@ -1,0 +1,26 @@
+{
+  "duration": 184.6,
+  "chapters": [
+    {
+      "time": "0:00",
+      "seconds": 0.0,
+      "title": "容量升級的價格陷阱"
+    },
+    {
+      "time": "0:30",
+      "seconds": 30.7,
+      "title": "晶片頻寬與散熱天花板"
+    },
+    {
+      "time": "1:30",
+      "seconds": 90.9,
+      "title": "螢幕光學與外接體驗"
+    },
+    {
+      "time": "2:13",
+      "seconds": 133.7,
+      "title": "三種預算終極買法"
+    }
+  ],
+  "path": "/Users/alan_dingchaoliao/Downloads/Hey Digital/hey-digital-gemini-4-carbon/runs/ep02_v2_perfected/deliverables/hey_digital_long_1080p.mp4"
+}

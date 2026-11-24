@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """
-Hey Digital Gemini 4 Carbon — RTX Pro 6000 PyTorch Qwen2.5-14B-Instruct Server (Local Master)
-==============================================================================================
+Hey Digital Gemini 4 Carbon V2 — RTX Pro 6000 Flagship Qwen2.5-32B-Instruct Server (Local Master)
+=================================================================================================
 Runs an isolated OpenAI-compatible JSON generation microservice on `127.0.0.1:19465` inside
-`/local-scratch/heydigital_g4c` on RTX Pro 6000 (96GB Blackwell), accelerating AI script &
-storyboard heavy lifting at ~100+ tok/s in `bfloat16` while keeping all master logic locally.
+`/local-scratch/heydigital_g4c` on RTX Pro 6000 (96GB Blackwell).
+- Loads `Qwen/Qwen2.5-32B-Instruct` in 100% pure CUDA `bfloat16` when >= 65 GB VRAM is free.
+- Loads `Qwen/Qwen2.5-32B-Instruct` in 100% pure CUDA NF4 4-bit (`bitsandbytes`, ~19 GB VRAM,
+  ZERO slow CPU offload, ZERO extra model downloads!) when concurrent sessions share the GPU!
 """
 from __future__ import annotations
 
@@ -14,7 +16,7 @@ import os
 import threading
 import torch
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
 LOCK = threading.Lock()
 MODEL_ID = ""
@@ -26,10 +28,21 @@ def init_model():
     global MODEL_ID, TOK, MDL
     free_b, _ = torch.cuda.mem_get_info(0)
     free_mb = free_b // (1024 * 1024)
-    MODEL_ID = os.environ.get("HEYDIGITAL_RTX_LLM_ID") or "Qwen/Qwen2.5-7B-Instruct"
-    print(f"[RTX6000-LLM] Loading {MODEL_ID} in bfloat16 on CUDA (free={free_mb} MiB)...", flush=True)
+    MODEL_ID = os.environ.get("HEYDIGITAL_RTX_LLM_ID") or "Qwen/Qwen2.5-32B-Instruct"
     TOK = AutoTokenizer.from_pretrained(MODEL_ID)
-    MDL = AutoModelForCausalLM.from_pretrained(MODEL_ID, dtype=torch.bfloat16, device_map={"": 0})
+
+    if free_mb >= 65000:
+        print(f"[RTX6000-LLM] Loading {MODEL_ID} in 100% CUDA bfloat16 (free={free_mb} MiB)...", flush=True)
+        MDL = AutoModelForCausalLM.from_pretrained(MODEL_ID, dtype=torch.bfloat16, device_map={"": 0})
+    else:
+        print(f"[RTX6000-LLM] Shared GPU ({free_mb} MiB free); loading {MODEL_ID} in 100% CUDA NF4 4-bit (~19 GiB, zero CPU offload)...", flush=True)
+        qcfg = BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_quant_type="nf4",
+            bnb_4bit_use_double_quant=True,
+            bnb_4bit_compute_dtype=torch.bfloat16,
+        )
+        MDL = AutoModelForCausalLM.from_pretrained(MODEL_ID, quantization_config=qcfg, device_map={"": 0})
     MDL.eval()
     print(f"[RTX6000-LLM] READY on 127.0.0.1:19465 ({MODEL_ID})", flush=True)
 
@@ -57,7 +70,7 @@ class Handler(BaseHTTPRequestHandler):
         n = int(self.headers.get("Content-Length") or "0")
         req = json.loads(self.rfile.read(n).decode("utf-8"))
         msgs = req.get("messages") or []
-        max_tokens = int(req.get("max_tokens") or 2200)
+        max_tokens = int(req.get("max_tokens") or 2400)
         temp = float(req.get("temperature") or 0.38)
 
         with LOCK, torch.inference_mode():
