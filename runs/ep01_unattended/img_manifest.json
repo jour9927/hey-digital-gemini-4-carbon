@@ -1,0 +1,130 @@
+{
+  "items": [
+    {
+      "id": "THUMB_HERO",
+      "prompt": "Minimalist dark studio spotlight product shot of sleek aluminum MacBook Air and MacBook Pro laptops with glowing Apple silicon chip, dramatic rim light, matte black background, 8k, no text",
+      "width": 1344,
+      "height": 768,
+      "seed": 8800
+    },
+    {
+      "id": "L01",
+      "prompt": "Photorealistic walnut wood slat desk with silver MacBook Air and Space Black MacBook Pro side by side, warm studio rim lighting, 35mm cinema photo, no text",
+      "width": 1280,
+      "height": 720,
+      "seed": 5100
+    },
+    {
+      "id": "L03",
+      "prompt": "Photorealistic close-up of a MacBook Pro M6 Pro with its sleek design and 120Hz ProMotion display, warm studio rim lighting, 35mm cinema photo, no text",
+      "width": 1280,
+      "height": 720,
+      "seed": 5102
+    },
+    {
+      "id": "L04",
+      "prompt": "Photorealistic close-up of a MacBook Pro M6 with its slim design and 60Hz Liquid Retina display, warm studio rim lighting, 35mm cinema photo, no text",
+      "width": 1280,
+      "height": 720,
+      "seed": 5103
+    },
+    {
+      "id": "L05",
+      "prompt": "Photorealistic walnut wood slat desk with silver MacBook Air and Space Black MacBook Pro side by side, warm studio rim lighting, 35mm cinema photo, no text",
+      "width": 1280,
+      "height": 720,
+      "seed": 5104
+    },
+    {
+      "id": "L07",
+      "prompt": "Photorealistic MacBook Pro with M1 Pro chip, warm studio lighting, 35mm cinema photo, no text",
+      "width": 1280,
+      "height": 720,
+      "seed": 5106
+    },
+    {
+      "id": "L08",
+      "prompt": "Photorealistic MacBook Pro with M1 chip, warm studio lighting, 35mm cinema photo, no text",
+      "width": 1280,
+      "height": 720,
+      "seed": 5107
+    },
+    {
+      "id": "L09",
+      "prompt": "Photorealistic walnut wood slat desk with silver MacBook Air and Space Black MacBook Pro side by side, warm studio rim lighting, 35mm cinema photo, no text",
+      "width": 1280,
+      "height": 720,
+      "seed": 5108
+    },
+    {
+      "id": "L11",
+      "prompt": "Photorealistic MacBook Pro 14-inch M6 Pro with multiple external displays connected via Thunderbolt ports, warm studio lighting, 35mm cinema photo, no text",
+      "width": 1280,
+      "height": 720,
+      "seed": 5110
+    },
+    {
+      "id": "L13",
+      "prompt": "Photorealistic studio desk setup with aluminum MacBook Air and MacBook Pro, walnut wood slat wall, warm cinematic lighting, 8k, no text",
+      "width": 1280,
+      "height": 720,
+      "seed": 5112
+    },
+    {
+      "id": "L15",
+      "prompt": "Photorealistic studio desk setup with aluminum MacBook Air and MacBook Pro, walnut wood slat wall, warm cinematic lighting, 8k, no text",
+      "width": 1280,
+      "height": 720,
+      "seed": 5114
+    },
+    {
+      "id": "L16",
+      "prompt": "Photorealistic studio desk setup with aluminum MacBook Air and MacBook Pro, walnut wood slat wall, warm cinematic lighting, 8k, no text",
+      "width": 1280,
+      "height": 720,
+      "seed": 5115
+    },
+    {
+      "id": "S01",
+      "prompt": "Vertical close up studio shot of sleek aluminum MacBook laptop on dark desk, warm rim lighting, no text",
+      "width": 720,
+      "height": 1280,
+      "seed": 6100
+    },
+    {
+      "id": "S02",
+      "prompt": "Mockup of two side-by-side MacBook laptops with different storage capacities highlighted",
+      "width": 720,
+      "height": 720,
+      "seed": 6101
+    },
+    {
+      "id": "S03",
+      "prompt": "Mockup of two side-by-side MacBook laptops showing CPU and GPU performance metrics",
+      "width": 720,
+      "height": 720,
+      "seed": 6102
+    },
+    {
+      "id": "S04",
+      "prompt": "Mockup of two side-by-side MacBook laptops with their screens side-by-side, highlighting brightness and color accuracy",
+      "width": 720,
+      "height": 720,
+      "seed": 6103
+    },
+    {
+      "id": "S05",
+      "prompt": "Mockup of two side-by-side MacBook laptops with various external devices connected to them",
+      "width": 720,
+      "height": 720,
+      "seed": 6104
+    },
+    {
+      "id": "S06",
+      "prompt": "Mockup of two side-by-side MacBook laptops with a decision tree showing key factors to consider",
+      "width": 720,
+      "height": 720,
+      "seed": 6105
+    }
+  ]
+}

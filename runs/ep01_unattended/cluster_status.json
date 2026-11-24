@@ -1,0 +1,26 @@
+[
+  {
+    "host": "b850",
+    "reachable": true,
+    "hostname": "alan-eagle-B850-GAMING-X-WIFI6E",
+    "arch": "Linux x86_64",
+    "gpu": "NVIDIA GeForce RTX 5070 Ti, 16303 MiB, 6190 MiB",
+    "free_vram_mb": 6190
+  },
+  {
+    "host": "alan-fw",
+    "reachable": true,
+    "hostname": "jour9927-Desktop-AMD-Ryzen-AI-Max-300-Series",
+    "arch": "Linux x86_64",
+    "gpu": "NO_NVIDIA",
+    "free_vram_mb": 0
+  },
+  {
+    "host": "alan-mba",
+    "reachable": true,
+    "hostname": "DingChaodeMacBook-Air-5.local",
+    "arch": "Darwin arm64",
+    "gpu": "NO_NVIDIA",
+    "free_vram_mb": 0
+  }
+]

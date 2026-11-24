@@ -1,0 +1,26 @@
+{
+  "duration": 208.0,
+  "chapters": [
+    {
+      "time": "0:00",
+      "seconds": 0.0,
+      "title": "價格與定位陷阱"
+    },
+    {
+      "time": "0:55",
+      "seconds": 55.2,
+      "title": "晶片與散熱刀法"
+    },
+    {
+      "time": "1:33",
+      "seconds": 93.2,
+      "title": "螢幕與外接生態"
+    },
+    {
+      "time": "2:23",
+      "seconds": 143.8,
+      "title": "終極購買建議"
+    }
+  ],
+  "path": "runs/ep01_unattended/deliverables/hey_digital_long_1080p.mp4"
+}

@@ -1,0 +1,138 @@
+{
+  "topic": "M6 Pro vs M6：黑五特價下，你該選哪一款 MacBook Pro？",
+  "crawled_at": "2026-11-24T16:05:17.736043+00:00",
+  "queries": [
+    "M6 Pro vs M6",
+    "MacBook Pro 黑五特價",
+    "M6 Pro vs M6 何者較佳"
+  ],
+  "source_count": 12,
+  "sources": [
+    {
+      "source_id": "SRC-01",
+      "publisher": "Wikipedia (ZH)",
+      "domain": "zh.wikipedia.org",
+      "title": "MacBook Air",
+      "url": "https://zh.wikipedia.org/wiki/MacBook_Air",
+      "published": "2026-11-05",
+      "summary": "MacBook Air是蘋果公司（Apple）開發的超薄型麥金塔筆記型電腦系列產品，於2008年1月15日時首次發布。蘋果公司聲稱這部電腦是「世上最薄的筆記型電腦」。 MacBook Air 是 蘋果公司 （Apple）開發的超薄型 麥金塔 筆記型電腦 系列產品，於2008年1月15日時首次發布。蘋果公司聲稱這部電腦是「世上最薄的筆記型電腦」。 [ 1 ] 2010年10月20日，蘋果發布了新款13.3吋MacBook Air。新款擁有更輕的外殼，更高解析度的顯示器，以及更大的電池容量，並使用 固態硬碟 取代了傳統的硬碟機。同時發布的還有首次被公布的11.6吋型號。MacBook Air在2011年取代停產的MacBook系列 聚碳酸酯 外殼 麥金塔筆記型電腦 。 [ 2 ] [ 3 ] [ 4 ] 2018年10月，蘋果再次進行系列的重大翻新，推出新一代13.3吋的全新MacBook Air，更新了 Retina顯示器 、 Touch ID 、 Thunderbolt 3 連接埠、 Force Touch觸控板 與蝶式鍵盤，但是取消 USB-A接孔 與 MagSafe 2 還有Apple燈。 [ 5 ] 2020年3月，蘋果取消了MacBook Air為人詬病且故障率高的蝶式鍵盤，改回剪刀式鍵盤。 [ 6 ] 2020年11月，基於蘋果自研的 Apple M1 的MacBook Air發佈。 [ 7 ] 2022年6月，蘋果在 WWDC 發佈搭載 Apple M2 的MacBook Air，並一改先前楔型設計，調整為與 MacBook Pro 一致但較薄的Flat Unibo",
+      "extracted_metrics": [
+        "0.68吋"
+      ]
+    },
+    {
+      "source_id": "SRC-02",
+      "publisher": "Wikipedia (EN)",
+      "domain": "en.wikipedia.org",
+      "title": "MacBook Air",
+      "url": "https://en.wikipedia.org/wiki/MacBook_Air",
+      "published": "2026-11-23",
+      "summary": "The MacBook Air is a line of consumer-oriented high-end notebook computers in the Mac series developed and manufactured by Apple since 2008. It features a thin, light structure in a machined aluminum case and either a 13 or 15 in screen. The MacBook Air's lower prices relative to the larger, higher performance MacBook Pro made it Apple's entry-level notebook for over a decade since the discontinuation of the original MacBook line in 2012, until the introduction of the MacBook Neo in 2026. The MacBook Air is a line of consumer-oriented high-end notebook computers in the Mac series developed and manufactured by Apple since 2008. It features a thin, light structure in a machined aluminum case a",
+      "extracted_metrics": []
+    },
+    {
+      "source_id": "SRC-03",
+      "publisher": "Wikipedia (ZH)",
+      "domain": "zh.wikipedia.org",
+      "title": "MacBook Pro",
+      "url": "https://zh.wikipedia.org/wiki/MacBook_Pro",
+      "published": "2026-10-03",
+      "summary": "MacBook Pro是蘋果公司於2006年1月開始推出的Mac筆記型電腦系列。它是繼 iMac 之後，蘋果推出的第二款搭載英特爾處理器的 Mac 筆記型電腦，也是 PowerBook G4 產品線的繼任者，它也是MacBook家族中的高端機型，雖然在此之前已有13、15及17英寸版本，但已經停產，只保留14及16英寸的產品。 MacBook Pro 是 蘋果公司 於2006年1月開始推出的 Mac 筆記型電腦 系列。它是繼 iMac 之後，蘋果推出的第二款搭載英特爾處理器的 Mac 筆記型電腦，也是 PowerBook G4 產品線的繼任者，它也是 MacBook家族 中的高端機型，雖然在此之前已有13、15及17英寸版本，但已經停產，只保留14及16英寸的產品。 2006年1月11日由蘋果公司時任總裁 史蒂夫·賈伯斯 在 Macworld大會 （ 英語 ： Macworld/iWorld ） 上發布，並於同年2月正式出售 [ 參1 ] 。第一代MacBook Pro的外觀與PowerBook G4相似，但其實是用了 英特爾酷睿 處理器，而不是一貫沿用的 PowerPC G4 處理器。15英寸的機型於2006年1月發布，而17英寸則於4月發布，兩款機型於同年10月推出 酷睿2 處理器的更新版本。 第二代機型，採用 「Unibody」 一體成型機身，由一整塊 鋁合金 加工而成，外殼設計更為錐形，並於2008年10月以出及15英寸的MacBook Pro，及13英寸鋁合金一體式的MacBook一起推出。次年1月推出了17英寸的機型，6月推出內建電池的MacBook Pro系列，包",
+      "extracted_metrics": [
+        "03吋"
+      ]
+    },
+    {
+      "source_id": "SRC-04",
+      "publisher": "Wikipedia (EN)",
+      "domain": "en.wikipedia.org",
+      "title": "MacBook Pro",
+      "url": "https://en.wikipedia.org/wiki/MacBook_Pro",
+      "published": "2026-11-19",
+      "summary": "The MacBook Pro is a line of Mac-branded laptop computers developed and manufactured by Apple. Introduced in 2006, it is the high-end model of the MacBook family, sitting above the ultra-portable MacBook Air, the entry-level MacBook Neo, and previously the mid-range MacBook line. As of June 2026, it is currently sold with 14-and-16-inch screens, all using Apple M-series chips. Before the introduction of Apple silicon in 2020, all MacBook Pro models used Intel chips. The MacBook Pro is the first laptop made by Apple to use the Apple–Intel architecture, replacing the earlier PowerBook line for professional users. It is also the first Apple laptop to use the term \"MacBook\", which later replaced",
+      "extracted_metrics": []
+    },
+    {
+      "source_id": "SRC-05",
+      "publisher": "流動日報",
+      "domain": "news.google.com",
+      "title": "14 吋 MacBook Pro M6、M5 Pro、M5 Max 比較 三款晶片如何選擇？ - 流動日報",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQSHlxclZnb2JLY0FsN1BGQlcxWnk5dG9uTnZuckRXNEd3SFhaaUdtZG9QRVNvb0xrc0YtUGRSWkdfa2J5TFEycW9OWWdpMS1DNm9YaDg0WERLSlgyT1pSOGl2SFpBOVc2dmRXcS1CSTVCTWlPSVRpZDZWSEh6cTJCRkxoNVZxX18z?oc=5",
+      "published": "Wed, 28 Oct 2026 07:00:00",
+      "summary": "14 吋 MacBook Pro M6、M5 Pro、M5 Max 比較 三款晶片如何選擇？ 流動日報",
+      "extracted_metrics": [
+        "14 吋"
+      ]
+    },
+    {
+      "source_id": "SRC-06",
+      "publisher": "T客邦",
+      "domain": "news.google.com",
+      "title": "蘋果 M6 Pro 跑分成績現身 Geekbench！單核破 4100 分、多核大漲 12% 真的太強了 - T客邦",
+      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNVnNkMUVSOURpMExOTHAwX190ZlFKeF9RdlhLRmVQRDM1OVVJYng3UlB0Z3BZbllUeUtxRFRmWWlxM1owc3ZqTm5yS0FHSjg5cWtwd2ttb2dyUjQwVnA4b2g3NHAzeUVPZ09iTlh3T2JZcXh5X3dLSlZWREVGdlhMUDNURFdNVmZ0TUE?oc=5",
+      "published": "Wed, 23 Sep 2026 07:00:00",
+      "summary": "蘋果 M6 Pro 跑分成績現身 Geekbench！單核破 4100 分、多核大漲 12% 真的太強了 T客邦",
+      "extracted_metrics": []
+    },
+    {
+      "source_id": "SRC-07",
+      "publisher": "電腦王阿達",
+      "domain": "news.google.com",
+      "title": "M6 MacBook Pro 與 M3、M4 機型有何不同？ - 電腦王阿達",
+      "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE4wRU9qLWkybWxBSGNidmViT1VJUlo4MUJuUjhURjY5RTJINGtGLWZIamRRRF9BSFRic2ZvNUhJQWxiWTFlVWNNUDNBVi1JV0c1ZHc?oc=5",
+      "published": "Wed, 28 Oct 2026 07:00:00",
+      "summary": "M6 MacBook Pro 與 M3、M4 機型有何不同？ 電腦王阿達",
+      "extracted_metrics": []
+    },
+    {
+      "source_id": "SRC-08",
+      "publisher": "瘋先生",
+      "domain": "news.google.com",
+      "title": "Apple M6 MacBook Pro正式發表！9大規格亮點主打AI和告訴你該不該換 - 瘋先生",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFA0ZzFNbXJWZERCWEdOeE9hMFZ5RXpNQVd5V2lUbWFieGlYb292czRsU3dKajFGdV8zdjVnN0E3RExfS0N6ck1tZkFWSkNHN1c4OEdYZ2pKcHJmQU50UmxV?oc=5",
+      "published": "Thu, 29 Oct 2026 07:00:00",
+      "summary": "Apple M6 MacBook Pro正式發表！9大規格亮點主打AI和告訴你該不該換 瘋先生",
+      "extracted_metrics": []
+    },
+    {
+      "source_id": "SRC-09",
+      "publisher": "Macworld",
+      "domain": "news.google.com",
+      "title": "The M6 MacBook Pro is the perfect laptop if you check very specific boxes - Macworld",
+      "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE90cUJzdDBrb3p2RFRDNjRQM25WT0NiU2QwT2ZGX2tySnZ6emhiV05LaXJVYUFPYUkxRl9XS19aYlE3ZVBIcWJ3dXhLRlNESzI5YThZWkc2UE1jVHRXX0xvVk8tN21SVi1yN0JhcldoSWtGZ0RsMkE?oc=5",
+      "published": "Thu, 19 Nov 2026 13:47:01",
+      "summary": "The M6 MacBook Pro is the perfect laptop if you check very specific boxes Macworld",
+      "extracted_metrics": []
+    },
+    {
+      "source_id": "SRC-10",
+      "publisher": "PCMag",
+      "domain": "news.google.com",
+      "title": "Apple MacBook Pro 14-Inch (2026, M6) Review: If This Is Mini-LED's Swan Song, It's a Good One - PCMag",
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE85eTU5c3VmWFFwZ3FaTU5mQmkxdXB3MDQyNGJCMDNEbjFrM3h1UXdlWWE1Tk90Qi1GQTZpcHNvUmY5WFBCSGVBUlhVNWJoYXB4c1g4TXRTQTZTakFsUkcwQ3BGVXRld1pKVjhYdnNyWF8?oc=5",
+      "published": "Thu, 19 Nov 2026 14:51:22",
+      "summary": "Apple MacBook Pro 14-Inch (2026, M6) Review: If This Is Mini-LED's Swan Song, It's a Good One PCMag",
+      "extracted_metrics": []
+    },
+    {
+      "source_id": "SRC-11",
+      "publisher": "MacRumors",
+      "domain": "news.google.com",
+      "title": "M6 MacBook Pro Drops to $1,799 in New Black Friday Sale ($200 Off) - MacRumors",
+      "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE41QUxlQzZEdG04NkpTTnlNS2FGRXBNZG9vWXoyQ2VYUms5d19uZl90Nm5GM3loQkRjbmN0NjE2VXJaQ0t5dkhOWWt0QTF5aU5RSU0wXzJkbjRVMm9lZFRNWVlic0k1SWZxUkdFdVo1a09LRTg?oc=5",
+      "published": "Sun, 22 Nov 2026 15:39:37",
+      "summary": "M6 MacBook Pro Drops to $1,799 in New Black Friday Sale ($200 Off) MacRumors",
+      "extracted_metrics": []
+    },
+    {
+      "source_id": "SRC-12",
+      "publisher": "AppleInsider",
+      "domain": "news.google.com",
+      "title": "$1,799 M6 MacBook Pro deal beats Amazon by $50 for Black Friday - AppleInsider",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQRXRuQmFtdVhkRnlGalZjRkk5Wk5nUm1HX2lacm9SaTZ2R1B5Wlp3WC1pX3lSYTZ1bmFKeE9nWS1vY3RRSzlCa3ZmSGU3aFExZGJ5bENzS2E5bEtTQnRQMjVnemVETGE4bDZDZVZDSW1sVHYydnZZSWtJVEZKX1BGbTlsSTl3TFhrcjE0U1lEeXFGaTYzdjVYWlFUdTNoaE5Ua1k4?oc=5",
+      "published": "Thu, 19 Nov 2026 21:44:00",
+      "summary": "$1,799 M6 MacBook Pro deal beats Amazon by $50 for Black Friday AppleInsider",
+      "extracted_metrics": []
+    }
+  ]
+}

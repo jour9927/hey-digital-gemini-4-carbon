@@ -34,8 +34,16 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont
 
 
-CJK_FONT_CANDIDATES_BOLD = [
-    "/System/Library/Fonts/PingFang.ttc",
+import functools
+import glob
+
+def _discover_pingfang_ttc() -> list[str]:
+    direct = ["/System/Library/Fonts/PingFang.ttc"]
+    assets = glob.glob("/System/Library/AssetsV2/com_apple_MobileAsset_Font*/*/AssetData/PingFang.ttc")
+    return [p for p in (direct + assets) if os.path.exists(p)]
+
+CJK_FONT_CANDIDATES_BOLD = _discover_pingfang_ttc() + [
+    "/System/Library/Fonts/Hiragino Sans GB.ttc",
     "/System/Library/Fonts/STHeiti Medium.ttc",
     "/Library/Fonts/Arial Unicode.ttf",
     "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
@@ -50,12 +58,18 @@ LATIN_THIN_CANDIDATES = [
 ]
 
 
+@functools.lru_cache(maxsize=64)
 def get_cjk_font(size: int, bold: bool = True) -> ImageFont.FreeTypeFont:
     for fp in CJK_FONT_CANDIDATES_BOLD:
         if os.path.exists(fp):
             try:
-                # PingFang.ttc index 0=Regular, 2=Semibold/Medium on macOS
-                idx = 2 if (bold and fp.endswith("PingFang.ttc")) else 0
+                if fp.endswith("PingFang.ttc"):
+                    # macOS Sequoia PingFang.ttc: index 10 = PingFang TC Semibold, index 2 = PingFang TC Regular
+                    idx = 10 if bold else 2
+                elif fp.endswith("Hiragino Sans GB.ttc"):
+                    idx = 2 if bold else 0
+                else:
+                    idx = 0
                 return ImageFont.truetype(fp, size=size, index=idx)
             except Exception:
                 try:
@@ -65,6 +79,7 @@ def get_cjk_font(size: int, bold: bool = True) -> ImageFont.FreeTypeFont:
     return ImageFont.load_default()
 
 
+@functools.lru_cache(maxsize=64)
 def get_latin_thin_font(size: int) -> ImageFont.FreeTypeFont:
     for fp in LATIN_THIN_CANDIDATES:
         if os.path.exists(fp):
@@ -486,7 +501,7 @@ def render_short_frame(
     yy = np.linspace(0, 1, h)[:, None]
     xx = np.linspace(0, 1, w)[None, :]
     r = np.clip(222 + 24 * np.sin(yy * math.pi) - 8 * xx, 205, 250).astype(np.uint8)
-    g = np.clip(242 + 10 * np.sin(yy * math.pi), 232, 253).astype(np.uint8)
+    g = np.clip(242 + 10 * np.sin(yy * math.pi) + 0 * xx, 232, 253).astype(np.uint8)
     b = np.clip(218 + 26 * xx + 12 * np.sin(yy * math.pi), 210, 248).astype(np.uint8)
     canvas = Image.fromarray(np.dstack([r, g, b]), mode="RGB")
     draw = ImageDraw.Draw(canvas, "RGBA")
@@ -631,20 +646,20 @@ def render_thumbnail(plan: dict, hero_img: Optional[Image.Image], out_path: Path
         tw = bb[2] - bb[0]
         x = (w - tw) // 2
         y = 64 + li * 158
-        # Draw shadow
-        draw.text((x + 4, y + 6), ln, font=f_big, fill=(0, 0, 0, 210))
+        # Draw shadow + Heavy stroke punch matching @hey_digitall thumbnails
+        draw.text((x + 4, y + 7), ln, font=f_big, fill=(0, 0, 0, 215), stroke_width=3, stroke_fill=(0, 0, 0, 215))
         if gold and gold in ln:
             pre, post = ln.split(gold, 1)
             cx = x
             if pre:
-                draw.text((cx, y), pre, font=f_big, fill=(255, 255, 255, 255))
+                draw.text((cx, y), pre, font=f_big, fill=(255, 255, 255, 255), stroke_width=2, stroke_fill=(255, 255, 255, 255))
                 cx = draw.textbbox((cx, y), pre, font=f_big)[2]
-            draw.text((cx, y), gold, font=f_big, fill=(240, 202, 134, 255))
+            draw.text((cx, y), gold, font=f_big, fill=(240, 202, 134, 255), stroke_width=2, stroke_fill=(240, 202, 134, 255))
             cx = draw.textbbox((cx, y), gold, font=f_big)[2]
             if post:
-                draw.text((cx, y), post, font=f_big, fill=(255, 255, 255, 255))
+                draw.text((cx, y), post, font=f_big, fill=(255, 255, 255, 255), stroke_width=2, stroke_fill=(255, 255, 255, 255))
         else:
-            draw.text((x, y), ln, font=f_big, fill=(255, 255, 255, 255))
+            draw.text((x, y), ln, font=f_big, fill=(255, 255, 255, 255), stroke_width=2, stroke_fill=(255, 255, 255, 255))
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     canvas.save(str(out_path), quality=95)

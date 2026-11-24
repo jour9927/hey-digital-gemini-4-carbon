@@ -61,11 +61,15 @@ def format_youtube_descriptions(plan: dict, long_chapters: list[dict]) -> tuple[
         f"🔔 喜歡這類硬核不灌水的科技選購與實測拆解，記得訂閱 Hey Digital 並開啟小鈴铛！\n"
         f"#HeyDigital #科技評測 #選購指南 #AI硬體"
     )
+    short_src_lines = "\n".join(
+        f"[{s['source_id']}] {s['publisher']} — {s['title']}\n    {s['url']}"
+        for s in plan.get("cited_sources", [])[:4]
+    )
     desc_short = (
         f"{plan.get('summary_paragraph', '')[:160]}\n\n"
         f"👉 完整多維度實測對比與公開數據來源，請點擊下方關聯長片：\n"
         f"《{plan.get('title_long', '')}》\n\n"
-        f"📚 核心參考來源：\n{src_lines[:600]}\n\n"
+        f"📚 核心參考來源：\n{short_src_lines}\n\n"
         f"#Shorts #HeyDigital #科技避坑"
     )
     return desc_long, desc_short
@@ -244,8 +248,14 @@ def run_pipeline(args: argparse.Namespace) -> Path:
     print(f"[Stage 5A] Thumbnail rendered: {thumb_out}")
 
     long_out = deliverables_dir / "hey_digital_long_1080p.mp4"
-    long_info = assemble_long_video(plan, tts_local_dir, img_local_dir, long_out, run_dir / "work_long")
-    print(f"[Stage 5B] Long-Form Video rendered: {long_out} ({long_info['duration']}s)")
+    long_meta_cache = run_dir / "long_render_info.json"
+    if long_out.exists() and long_meta_cache.exists() and not args.force_regen_script:
+        long_info = json.loads(long_meta_cache.read_text(encoding="utf-8"))
+        print(f"[Stage 5B] Reusing rendered Long-Form Video: {long_out} ({long_info['duration']}s)")
+    else:
+        long_info = assemble_long_video(plan, tts_local_dir, img_local_dir, long_out, run_dir / "work_long")
+        long_meta_cache.write_text(json.dumps(long_info, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"[Stage 5B] Long-Form Video rendered: {long_out} ({long_info['duration']}s)")
 
     short_out = deliverables_dir / "hey_digital_short_funnel_1080x1920.mp4"
     short_info = assemble_short_video(plan, tts_local_dir, img_local_dir, thumb_out, short_out, run_dir / "work_short")

@@ -68,19 +68,29 @@ def extract_voice_profile(input_wav: Path, out_dir: Path) -> dict:
         "-ac", "1", "-ar", "24000", str(clean_24k),
     ])
 
-    from faster_whisper import WhisperModel
-    # faster-whisper small in float16 only uses ~420MB VRAM -> runs directly on RTX Pro 6000 CUDA even with 844MB free!
-    if has_cuda and free_mb >= 2400:
-        w_model_id, w_dev, w_ct = "deepdml/faster-whisper-large-v3-turbo-ct2", "cuda", "float16"
-    elif has_cuda and free_mb >= 550:
-        w_model_id, w_dev, w_ct = "small", "cuda", "float16"
-    else:
-        w_model_id, w_dev, w_ct = "small", "cpu", "int8"
+    import torch
+    import soundfile as sf
+    from transformers import pipeline as hf_pipeline
 
-    print(f"[VoiceProfile] Running faster-whisper ({w_model_id} on {w_dev}/{w_ct})...")
-    wmodel = WhisperModel(w_model_id, device=w_dev, compute_type=w_ct, cpu_threads=min(16, os.cpu_count() or 8))
-    segments, _ = wmodel.transcribe(str(clean_24k), language="zh", beam_size=5)
-    segs = [{"start": round(s.start, 2), "end": round(s.end, 2), "text": s.text.strip()} for s in segments if s.text.strip()]
+    w_dev = "cuda:0" if (has_cuda and free_mb >= 2000) else "cpu"
+    w_dtype = torch.float16 if w_dev.startswith("cuda") else torch.float32
+    w_model_id = "openai/whisper-large-v3-turbo" if w_dev.startswith("cuda") else "openai/whisper-small"
+    print(f"[VoiceProfile] Running PyTorch Whisper ({w_model_id} on {w_dev})...")
+
+    wav_16k = out_dir / "alan_clean_vocal_16k.wav"
+    run_cmd(["ffmpeg", "-y", "-i", str(clean_24k), "-ac", "1", "-ar", "16000", str(wav_16k)])
+    audio_np, _ = sf.read(str(wav_16k), dtype="float32")
+
+    asr = hf_pipeline("automatic-speech-recognition", model=w_model_id, device=w_dev, torch_dtype=w_dtype)
+    res = asr({"raw": audio_np, "sampling_rate": 16000}, return_timestamps=True, generate_kwargs={"language": "chinese", "task": "transcribe"})
+    segs = []
+    for ch in (res.get("chunks") or []):
+        ts = ch.get("timestamp") or (0.0, 9.0)
+        s0 = float(ts[0] if ts[0] is not None else 0.0)
+        s1 = float(ts[1] if ts[1] is not None else (s0 + 4.0))
+        txt = (ch.get("text") or "").strip()
+        if txt:
+            segs.append({"start": round(s0, 2), "end": round(s1, 2), "text": txt})
 
     chosen = []
     t0 = segs[0]["start"] if segs else 0.0
@@ -251,17 +261,35 @@ def generate_images_batch(manifest_path: Path, out_dir: Path) -> dict:
     cpus = os.cpu_count() or 8
     print(f"[ImageGen] GPU={gpu_name} | Free VRAM={free_mb} MiB | CPUs={cpus} | Images={len(items)}")
 
-    if has_cuda and free_mb >= 26000:
-        from diffusers import FluxPipeline
-        pipe = FluxPipeline.from_pretrained("black-forest-labs/FLUX.1-schnell", torch_dtype=torch.bfloat16).to("cuda")
-        mode = "flux_cuda"
-    elif has_cuda and free_mb >= 6500:
-        pipe = AutoPipelineForText2Image.from_pretrained(
-            "stabilityai/stable-diffusion-xl-base-1.0", torch_dtype=torch.float16, variant="fp16", use_safetensors=True
-        ).to("cuda")
-        mode = "sdxl_cuda"
-    else:
-        # 4-step SDXL-Turbo in bfloat16 AMX on 48-core server host (zero interference with concurrent VRAM jobs!)
+    pipe = None
+    mode = ""
+    if has_cuda and free_mb >= 26000 and os.environ.get("HF_TOKEN"):
+        try:
+            from diffusers import FluxPipeline
+            pipe = FluxPipeline.from_pretrained("black-forest-labs/FLUX.1-schnell", torch_dtype=torch.bfloat16).to("cuda")
+            mode = "flux_cuda"
+        except Exception as exc:
+            print(f"[ImageGen] FLUX gated/skipped ({exc}), using photorealistic SDXL CUDA...")
+
+    if pipe is None and has_cuda and free_mb >= 6500:
+        for sdxl_repo in ["SG161222/RealVisXL_V4.0", "stabilityai/stable-diffusion-xl-base-1.0"]:
+            try:
+                pipe = AutoPipelineForText2Image.from_pretrained(
+                    sdxl_repo, torch_dtype=torch.float16, variant="fp16", use_safetensors=True
+                ).to("cuda")
+                mode = f"sdxl_cuda({sdxl_repo.split('/')[-1]})"
+                break
+            except Exception:
+                try:
+                    pipe = AutoPipelineForText2Image.from_pretrained(
+                        sdxl_repo, torch_dtype=torch.float16, use_safetensors=True
+                    ).to("cuda")
+                    mode = f"sdxl_cuda({sdxl_repo.split('/')[-1]})"
+                    break
+                except Exception as exc:
+                    print(f"[ImageGen] {sdxl_repo} fallback ({exc})")
+
+    if pipe is None:
         torch.set_num_threads(min(40, cpus))
         pipe = AutoPipelineForText2Image.from_pretrained(
             "stabilityai/sdxl-turbo", torch_dtype=torch.bfloat16, variant="fp16"
@@ -281,9 +309,19 @@ def generate_images_batch(manifest_path: Path, out_dir: Path) -> dict:
         if mode == "flux_cuda":
             gen = torch.Generator(device="cuda").manual_seed(seed)
             img = pipe(prompt=prompt, width=req_w, height=req_h, num_inference_steps=4, guidance_scale=0.0, generator=gen).images[0]
-        elif mode == "sdxl_cuda":
+        elif mode.startswith("sdxl_cuda"):
+            neg = item.get(
+                "negative_prompt",
+                "text, watermark, letters, typography, logo, blurry, low quality, deformed, ugly, cartoon, anime, oversaturated"
+            )
+            # Ensure multiples of 8
+            w8 = (req_w // 8) * 8
+            h8 = (req_h // 8) * 8
             gen = torch.Generator(device="cuda").manual_seed(seed)
-            img = pipe(prompt=prompt, width=req_w, height=req_h, num_inference_steps=25, guidance_scale=6.5, generator=gen).images[0]
+            img = pipe(prompt=prompt, negative_prompt=neg, width=w8, height=h8, num_inference_steps=28, guidance_scale=6.0, generator=gen).images[0]
+            if (w8, h8) != (req_w, req_h):
+                from PIL import Image
+                img = img.resize((req_w, req_h), Image.Resampling.LANCZOS)
         else:
             # SDXL-Turbo native crisp aspect-matched resolution + Lanczos upscale
             tw, th = (768, 448) if req_w >= req_h else (448, 768)
@@ -319,6 +357,10 @@ def main():
     p_img.add_argument("--manifest", required=True)
     p_img.add_argument("--out-dir", required=True)
 
+    p_llm = sub.add_parser("llm-json")
+    p_llm.add_argument("--prompt-file", required=True)
+    p_llm.add_argument("--out-file", required=True)
+
     args = ap.parse_args()
     if args.cmd == "voice-profile":
         extract_voice_profile(Path(args.input_wav), Path(args.out_dir))
@@ -326,6 +368,20 @@ def main():
         synthesize_voice_batch(Path(args.manifest), Path(args.profile), Path(args.out_dir))
     elif args.cmd == "img-batch":
         generate_images_batch(Path(args.manifest), Path(args.out_dir))
+    elif args.cmd == "llm-json":
+        import torch
+        from transformers import AutoModelForCausalLM, AutoTokenizer
+        req = json.loads(Path(args.prompt_file).read_text(encoding="utf-8"))
+        has_cuda, free_mb, _ = get_free_cuda_mb()
+        mid = "Qwen/Qwen2.5-14B-Instruct" if (has_cuda and free_mb >= 32000) else "Qwen/Qwen2.5-7B-Instruct"
+        tok = AutoTokenizer.from_pretrained(mid)
+        mdl = AutoModelForCausalLM.from_pretrained(mid, torch_dtype=torch.bfloat16, device_map="auto")
+        msgs = [{"role": "system", "content": req["system"]}, {"role": "user", "content": req["user"]}]
+        txt_in = tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
+        inputs = tok([txt_in], return_tensors="pt").to(mdl.device)
+        out_ids = mdl.generate(**inputs, max_new_tokens=int(req.get("max_tokens", 2400)), temperature=0.38, do_sample=True)
+        gen_txt = tok.batch_decode(out_ids[:, inputs.input_ids.shape[1]:], skip_special_tokens=True)[0]
+        Path(args.out_file).write_text(gen_txt, encoding="utf-8")
 
 
 if __name__ == "__main__":

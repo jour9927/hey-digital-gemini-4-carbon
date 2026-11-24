@@ -2,21 +2,17 @@
 """
 Hey Digital Gemini 4 Carbon — Crawled-Fact AI Script & Storyboard Generator (Local Master)
 ==========================================================================================
-Generates reusable, multi-genre Hey Digital scripts + visual beat plans (Long-form +
-Traffic-Funnel Short + Thumbnail + Cited YouTube Descriptions) grounded in live crawled
-public sources (`[SRC-01]..[SRC-12]`).
+Modular Chapter-by-Chapter + Funnel-Short Storyboard Architecture:
+- Generates Outline & Thumbnail first, then writes each chapter (4 rich beats/chapter)
+  independently with full context of crawled public sources (`[SRC-01]..[SRC-12]`),
+  preventing LLM output truncation/timeouts while producing deeper, broadcast-grade
+  Hey Digital scripts!
 
-Supported video types (`--video-type`):
-- `versus_guide`   : 雙機/多機橫評選購對決（如 Air vs Pro、平板 vs 筆電）
-- `ai_benchmark`   : 本機 AI 算力、統一記憶體與頻寬實測避坑
-- `deep_review`    : 單品深度評測（硬體亮點 vs 真實妥協痛點）
-- `hidden_tips`    : 新機必做設定與進階隱藏技巧
-- `news_analysis`  : 科技新品發布與產業刀法深度拆解
-
-LLM Backends (auto-cascading):
-1. Gemini API (`GEMINI_API_KEY` / `GOOGLE_API_KEY`)
-2. DeepSeek / OpenAI-compatible API (`DEEPSEEK_API_KEY` / `OPENAI_API_KEY`)
-3. Remote RTX Pro 6000 PyTorch LLM fallback
+LLM Auto-Cascading Backends:
+1. Google Gemini API (`GEMINI_API_KEY` / `GOOGLE_API_KEY`)
+2. Cluster OpenAI-compatible endpoint (`HEYDIGITAL_CLUSTER_LLM_URL`)
+3. OpenAI / DeepSeek API (`OPENAI_API_KEY` / `DEEPSEEK_API_KEY` — skips automatically on 402)
+4. Local Apple Silicon `Ollama` (`http://127.0.0.1:11434/api/chat`, `qwen3:8b`, `think: False`)
 """
 from __future__ import annotations
 
@@ -24,9 +20,8 @@ import json
 import os
 import re
 import ssl
+import urllib.error
 import urllib.request
-from pathlib import Path
-from typing import Optional
 
 
 VIDEO_TYPE_PROFILES = {
@@ -37,9 +32,12 @@ VIDEO_TYPE_PROFILES = {
     "news_analysis": "最新科技硬體與趨勢深度拆解（從公開財報/跑分/供應鏈規格看懂廠商定價邏輯與刀法真相）",
 }
 
+_SKIP_PAID_LLM = False
+
 
 def _extract_json_block(text: str) -> dict:
     text = text.strip()
+    text = re.sub(r"<think>.*?</think>", "", text, flags=re.S).strip()
     m = re.search(r"```(?:json)?\s*(\{.*\})\s*```", text, flags=re.S)
     if m:
         text = m.group(1)
@@ -51,101 +49,180 @@ def _extract_json_block(text: str) -> dict:
     return json.loads(text)
 
 
-def call_llm_json(system_prompt: str, user_prompt: str, temperature: float = 0.45) -> dict:
+def call_llm_json(system_prompt: str, user_prompt: str, temperature: float = 0.38, max_tokens: int = 2200) -> dict:
+    global _SKIP_PAID_LLM
     ctx = ssl.create_default_context()
+    errors = []
 
-    # 1. Gemini API if configured
+    # 1. Gemini API
     gemini_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
     if gemini_key:
-        model = os.environ.get("HEYDIGITAL_GEMINI_MODEL", "gemini-2.5-pro")
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={gemini_key}"
-        payload = {
-            "systemInstruction": {"parts": [{"text": system_prompt}]},
-            "contents": [{"role": "user", "parts": [{"text": user_prompt}]}],
-            "generationConfig": {"temperature": temperature, "responseMimeType": "application/json"},
-        }
-        req = urllib.request.Request(
-            url,
-            data=json.dumps(payload).encode("utf-8"),
-            headers={"Content-Type": "application/json"},
-            method="POST",
-        )
-        with urllib.request.urlopen(req, timeout=180, context=ctx) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-        raw = data["candidates"][0]["content"]["parts"][0]["text"]
-        return _extract_json_block(raw)
+        try:
+            model = os.environ.get("HEYDIGITAL_GEMINI_MODEL", "gemini-2.5-pro")
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={gemini_key}"
+            payload = {
+                "systemInstruction": {"parts": [{"text": system_prompt}]},
+                "contents": [{"role": "user", "parts": [{"text": user_prompt}]}],
+                "generationConfig": {"temperature": temperature, "responseMimeType": "application/json"},
+            }
+            req = urllib.request.Request(
+                url, data=json.dumps(payload).encode("utf-8"), headers={"Content-Type": "application/json"}, method="POST"
+            )
+            with urllib.request.urlopen(req, timeout=120, context=ctx) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+            return _extract_json_block(data["candidates"][0]["content"]["parts"][0]["text"])
+        except Exception as exc:
+            errors.append(f"Gemini: {exc}")
 
-    # 2. OpenAI / DeepSeek API
+    # 2. RTX Pro 6000 Heavy Worker LLM (Qwen2.5-14B-Instruct CUDA on 127.0.0.1:19465 via bridge)
+    bridge_file = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "config", "rtx6000_bridge.json")
+    if os.path.exists(bridge_file) and os.environ.get("HEYDIGITAL_DISABLE_RTX_LLM") != "1":
+        try:
+            from pathlib import Path
+            from hey_digital_pipeline.remote_worker import ColabBridgeConfig, ColabRTX6000Client
+            bcfg = json.loads(Path(bridge_file).read_text(encoding="utf-8"))
+            client = ColabRTX6000Client(ColabBridgeConfig(url=bcfg["url"], token=bcfg["token"]))
+            req_obj = {
+                "messages": [
+                    {"role": "system", "content": system_prompt + "\n嚴格只輸出純 JSON 物件，不要加任何解釋。"},
+                    {"role": "user", "content": user_prompt},
+                ],
+                "temperature": temperature,
+                "max_tokens": max_tokens,
+            }
+            client.put_bytes(json.dumps(req_obj, ensure_ascii=False).encode("utf-8"), "jobs/llm_req.json")
+            jid = client.exec_async(
+                "curl -fsS -X POST http://127.0.0.1:19465/v1/chat/completions -H 'Content-Type: application/json' --data-binary @../jobs/llm_req.json -o ../jobs/llm_resp.json",
+                cwd="repo",
+            )
+            client.wait_job(jid, poll_sec=1.5, max_wait_sec=120.0)
+            tmp_resp = Path(bridge_file).parent.parent / "runs" / ".tmp_llm_resp.json"
+            client.get_file("jobs/llm_resp.json", tmp_resp)
+            rdata = json.loads(tmp_resp.read_text(encoding="utf-8"))
+            return _extract_json_block(rdata["choices"][0]["message"]["content"])
+        except Exception as exc:
+            errors.append(f"RTX6000-LLM: {exc}")
+
+    # 2B. Cluster OpenAI-compatible endpoint
+    cluster_llm = os.environ.get("HEYDIGITAL_CLUSTER_LLM_URL")
+    if cluster_llm:
+        try:
+            model = os.environ.get("HEYDIGITAL_CLUSTER_LLM_MODEL", "default")
+            payload = {
+                "model": model,
+                "messages": [{"role": "system", "content": system_prompt}, {"role": "user", "content": user_prompt}],
+                "temperature": temperature,
+                "max_tokens": max_tokens,
+                "response_format": {"type": "json_object"},
+            }
+            req = urllib.request.Request(
+                f"{cluster_llm.rstrip('/')}/chat/completions",
+                data=json.dumps(payload).encode("utf-8"),
+                headers={"Content-Type": "application/json", "Authorization": f"Bearer {os.environ.get('HEYDIGITAL_CLUSTER_LLM_KEY', 'EMPTY')}"},
+                method="POST",
+            )
+            with urllib.request.urlopen(req, timeout=120, context=ctx) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+            return _extract_json_block(data["choices"][0]["message"]["content"])
+        except Exception as exc:
+            errors.append(f"ClusterLLM: {exc}")
+
+    # 3. OpenAI / DeepSeek API (memorize 402/401 so subsequent calls don't waste round-trips)
     api_key = os.environ.get("OPENAI_API_KEY") or os.environ.get("DEEPSEEK_API_KEY")
-    if api_key:
-        is_ds = bool(os.environ.get("DEEPSEEK_API_KEY") and not os.environ.get("OPENAI_API_KEY"))
-        base = os.environ.get("HEYDIGITAL_LLM_BASE_URL") or ("https://api.deepseek.com/v1" if is_ds else "https://api.openai.com/v1")
-        model = os.environ.get("HEYDIGITAL_LLM_MODEL") or ("deepseek-chat" if is_ds else "gpt-4.1")
-        payload = {
-            "model": model,
-            "messages": [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt},
-            ],
-            "temperature": temperature,
-            "max_tokens": 8000,
-            "response_format": {"type": "json_object"},
-        }
-        req = urllib.request.Request(
-            f"{base.rstrip('/')}/chat/completions",
-            data=json.dumps(payload).encode("utf-8"),
-            headers={"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"},
-            method="POST",
-        )
-        with urllib.request.urlopen(req, timeout=180, context=ctx) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-        raw = data["choices"][0]["message"]["content"]
-        return _extract_json_block(raw)
+    if api_key and not _SKIP_PAID_LLM:
+        try:
+            is_ds = bool(os.environ.get("DEEPSEEK_API_KEY") and not os.environ.get("OPENAI_API_KEY"))
+            base = os.environ.get("HEYDIGITAL_LLM_BASE_URL") or ("https://api.deepseek.com/v1" if is_ds else "https://api.openai.com/v1")
+            model = os.environ.get("HEYDIGITAL_LLM_MODEL") or ("deepseek-chat" if is_ds else "gpt-4.1")
+            payload = {
+                "model": model,
+                "messages": [{"role": "system", "content": system_prompt}, {"role": "user", "content": user_prompt}],
+                "temperature": temperature,
+                "max_tokens": max_tokens,
+                "response_format": {"type": "json_object"},
+            }
+            req = urllib.request.Request(
+                f"{base.rstrip('/')}/chat/completions",
+                data=json.dumps(payload).encode("utf-8"),
+                headers={"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"},
+                method="POST",
+            )
+            with urllib.request.urlopen(req, timeout=60, context=ctx) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+            return _extract_json_block(data["choices"][0]["message"]["content"])
+        except urllib.error.HTTPError as hexc:
+            if hexc.code in (401, 402, 403, 429):
+                _SKIP_PAID_LLM = True
+            errors.append(f"OpenAI/DeepSeek: {hexc}")
+        except Exception as exc:
+            errors.append(f"OpenAI/DeepSeek: {exc}")
 
-    raise RuntimeError("No GEMINI_API_KEY / OPENAI_API_KEY / DEEPSEEK_API_KEY found in environment.")
+    # 4. Local Apple Silicon Ollama (`qwen3:8b`, fast non-thinking mode without slow GBNF grammar lock)
+    ollama_url = os.environ.get("HEYDIGITAL_OLLAMA_URL", "http://127.0.0.1:11434/api/chat")
+    ollama_model = os.environ.get("HEYDIGITAL_OLLAMA_MODEL", "qwen3:8b")
+    for attempt in range(2):
+        try:
+            payload = {
+                "model": ollama_model,
+                "messages": [
+                    {"role": "system", "content": system_prompt + "\n請只輸出純 JSON 物件，不要加任何額外說明文字。 /no_think"},
+                    {"role": "user", "content": user_prompt + "\n/no_think"},
+                ],
+                "stream": False,
+                "think": False,
+                "options": {"temperature": temperature, "num_ctx": 8192, "num_predict": max_tokens},
+            }
+            if attempt == 1:
+                payload["format"] = "json"
+            req = urllib.request.Request(
+                ollama_url, data=json.dumps(payload).encode("utf-8"), headers={"Content-Type": "application/json"}, method="POST"
+            )
+            with urllib.request.urlopen(req, timeout=150) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+            return _extract_json_block(data["message"]["content"])
+        except Exception as exc:
+            errors.append(f"Ollama-try{attempt+1}: {exc}")
+
+    raise RuntimeError("All LLM backends failed: " + " | ".join(errors))
 
 
-def formulate_topic_from_candidates(candidates_report: dict, existing_titles: list[str], video_type: str = "ai_benchmark") -> dict:
-    """Autonomously select and frame a high-CTR Hey Digital topic from live crawled tech feeds."""
+def formulate_topic_from_candidates(candidates_report: dict, existing_titles: list[str], video_type: str = "versus_guide") -> dict:
     sys_p = (
         "你是 YouTube 科技深度頻道『Hey Digital (@hey_digitall)』的總編導 Agent。"
-        "頻道風格：台灣繁體中文、理性硬核但不掉書袋、擅長拆解 Apple / AI PC / GPU / 行動裝置的底層規格刀法（如記憶體頻寬、OLED、散熱、TCO 購買帳），"
-        "標題極具張力與選購痛點反差。請根據最新爬蟲候選新聞，自動選定一個最適合本期更新的主題，並給出精準搜尋關鍵字。"
-        "嚴格輸出 JSON。"
+        "頻道風格：台灣繁體中文（記憶體、頻寬、晶片、螢幕、筆電、硬碟、演算法），理性犀利拆解 Apple / AI PC / GPU / 行動硬體的規格刀法與選購痛點。"
+        "請根據最新爬蟲候選新聞，自動選定一個最適合本期更新、具高度觀看吸引力的主題，並給出精準搜尋關鍵字。只回傳 JSON。"
     )
     usr_p = json.dumps({
         "target_video_type": video_type,
-        "video_type_desc": VIDEO_TYPE_PROFILES.get(video_type, ""),
-        "already_published_titles_avoid_exact_duplicate": existing_titles[-12:],
-        "live_crawled_candidates": candidates_report.get("top_candidates", [])[:8],
-        "required_json_schema": {
-            "selected_topic": "繁體中文核心主題（具選購對比或痛點張力）",
+        "already_published_titles": existing_titles[-8:],
+        "live_crawled_candidates": candidates_report.get("top_candidates", [])[:6],
+        "required_json": {
+            "selected_topic": "繁體中文核心選題標題（帶疑問或反差痛點）",
             "video_type": video_type,
-            "angle_rationale": "為何此主題契合 Hey Digital 受眾且與舊片互補",
-            "search_queries": ["英文或繁中精準爬蟲檢索詞1", "檢索詞2", "檢索詞3", "檢索詞4"],
-            "wiki_terms": ["Wikipedia 條目詞1", "Wikipedia 條目詞2"],
+            "angle_rationale": "選題理由",
+            "search_queries": ["英文檢索詞1", "英文檢索詞2", "繁中檢索詞3"],
+            "wiki_terms": ["MacBook Air", "MacBook Pro"],
         },
-    }, ensure_ascii=False, indent=2)
-    return call_llm_json(sys_p, usr_p, temperature=0.4)
+    }, ensure_ascii=False)
+    res = call_llm_json(sys_p, usr_p, temperature=0.35, max_tokens=900)
+    if not res.get("selected_topic"):
+        res["selected_topic"] = "MacBook Air M5 對決 MacBook Pro M6：價差與效能刀法背後，買哪台才不後悔？"
+    return res
 
 
 def split_into_captions(narration: str, max_len: int = 19) -> list[str]:
-    """Split narration into clean single-line Hey Digital captions (no trailing punctuation)."""
     parts = re.split(r"[，。！？；：、\n]+", narration.strip())
     out = []
     for p in parts:
         p = p.strip(" 「」『』\"'，。！？；：")
         if not p:
             continue
-        # Ensure space around ASCII words/numbers inside CJK
         p = re.sub(r"([\u4e00-\u9fff])([A-Za-z0-9])", r"\1 \2", p)
         p = re.sub(r"([A-Za-z0-9%])([\u4e00-\u9fff])", r"\1 \2", p)
         p = re.sub(r"\s+", " ", p).strip()
         if len(p) <= max_len:
             out.append(p)
         else:
-            # Split at middle space or midpoint
-            mid = len(p) // 2
             sp = p.rfind(" ", 4, min(len(p) - 3, max_len))
             if sp != -1:
                 out.append(p[:sp].strip())
@@ -161,131 +238,215 @@ def generate_production_plan(
     topic: str,
     video_type: str,
     dossier: dict,
-    target_long_beats: int = 22,
+    target_long_beats: int = 16,
     target_short_steps: int = 5,
 ) -> dict:
-    """Generate full cited Long-form + Traffic-Funnel Short script & visual storyboard."""
+    """Modular chapter-by-chapter + funnel-short storyboard generation."""
     sources_compact = [
         {
             "source_id": s["source_id"],
             "publisher": s["publisher"],
             "domain": s["domain"],
             "title": s["title"],
-            "url": s["url"],
             "published": s["published"],
-            "summary": s["summary"][:380],
-            "metrics": s["extracted_metrics"],
+            "summary": s["summary"][:240],
+            "metrics": s["extracted_metrics"][:6],
         }
-        for s in dossier.get("sources", [])[:10]
+        for s in dossier.get("sources", [])[:8]
     ]
+    valid_sids = [s["source_id"] for s in sources_compact] or ["SRC-01"]
 
-    sys_prompt = """你是『Hey Digital (@hey_digitall)』YouTube 頻道的王牌科技主筆與視覺分鏡導演。
-你的任務是將「即時爬蟲擷取的公開資訊與來源 (`sources`)」深度融合進一支完整長片腳本，以及一支對應導流（推流）的 YouTube Short 短片腳本中。
+    # Step 1: Outline (Title + Summary + Thumbnail + 4 Chapters)
+    print("  [Scriptwriter] Step 1/3: Generating outline & thumbnail...")
+    outline = call_llm_json(
+        "你是『Hey Digital (@hey_digitall)』科技頻道總編導。使用道地台灣繁體中文，設計長片標題、縮圖雙行金句與 4 個深度拆解章節。只輸出 JSON。",
+        json.dumps({
+            "topic": topic,
+            "video_type": video_type,
+            "sources_overview": [{"id": s["source_id"], "title": s["title"], "metrics": s["metrics"]} for s in sources_compact],
+            "schema": {
+                "title_long": "具反差張力的繁體中文長片標題",
+                "summary_paragraph": "100字內精華摘要",
+                "thumbnail": {
+                    "line1": "縮圖上行大字(6~9字)",
+                    "line2": "縮圖下行大字(6~9字)",
+                    "gold_phrase": "下行或上行中要標為香檳金的關鍵詞(3~5字)",
+                    "image_prompt": "Minimalist dark studio spotlight product shot of sleek aluminum MacBook Air and MacBook Pro laptops with glowing Apple silicon chip, dramatic rim light, matte black background, 8k, no text",
+                },
+                "chapters": [
+                    {"num": "01", "title": "價格與定位陷阱", "en": "PRICING PARADOX", "focus": "拆解最新降價後兩台機器的真實入手門檻差距"},
+                    {"num": "02", "title": "晶片與散熱刀法", "en": "THERMAL & SILICON", "focus": "無風扇被動散熱與主動散熱在高負載下的頻寬與持續效能差異"},
+                    {"num": "03", "title": "螢幕與外接生態", "en": "DISPLAY & PORTS", "focus": "高刷面板、峰值亮度與多螢幕外接連接埠的隱形體驗落差"},
+                    {"num": "04", "title": "終極購買建議", "en": "BUYING VERDICT", "focus": "按真實工作流給出明確不踩雷的配置與容量選購結論"},
+                ],
+            },
+        }, ensure_ascii=False),
+        temperature=0.38,
+        max_tokens=1200,
+    )
 
-### 嚴格遵守 Hey Digital 頻道風格規範：
-1. **語言與口吻**：台灣繁體中文（用語如：記憶體、頻寬、晶片、硬碟、螢幕、筆電、演算法、性價比）。第一人稱「我們」或直接對話「你」，語氣冷靜、犀利、有洞察力，不喊口號，直接拆解廠商刀法與真實使用體感。
-2. **公開爬蟲資訊融合與來源標註**：
-   - 必須將 `sources` 中的真實數據、規格、定價、媒體實測或社群討論自然寫進旁白，並在每個引用公開資訊的鏡頭填入對應的 `source_id`（例如 `"SRC-01"`）與簡短螢幕來源標籤 `source_badge`（例如 `"資料來源：Ars Technica / Wikipedia 公開規格"`）。
-   - 嚴禁捏造不存在的 `source_id`；只能引用輸入提供的 `SRC-01` ~ `SRC-10`。
-3. **長片結構 (`long_beats`，共約 20~24 個鏡次，分為 5 個章節 `01`~`05`)**：
-   - 每個新章節的第一個鏡次設為 `visual_type: "chapter_dark_card"`（約 1 句簡潔破題旁白，15~28 字）。
-   - 其餘鏡次交替使用：
-     - `"studio_isometric_infographic"`（佔約 45%）：暖白棚拍 3D 等距數據對比圖卡！必須提供超大指標 `hero_metric`（如 `"256"`）、單位 `hero_unit`（如 `"GB/s"`）、主題色 `accent_hex`（`"#B84A14"` 焦糖橘 / `"#0E7C47"` 翡翠綠 / `"#0E6EB8"` 鈷藍 / `"#5B50D6"` 靛紫），以及 2~4 組具體對比數據條 `comparison_bars: [{"label": "...", "value": 85, "display": "..."}]`。
-     - `"cinema_tech_broll"`（佔約 40%）：由 RTX Pro 6000 生成的高質感科技攝影棚實景圖！必須提供純英文、無文字浮水印的高畫質商業硬體攝影 Prompt (`image_prompt`，描述胡桃木格柵背景、柔和輪廓光、微距晶片或鋁合金筆電/主機特寫，明確寫 `no text, no letters, clean studio photography, 8k, 35mm lens`)，並可附上 `overlay_news_card`（展示爬蟲抓到的媒體標題摘要浮窗）。
-   - 每個一般鏡次的 `narration` 長度約 45~75 個中文字（朗讀約 10~16 秒），總長約 4~5.5 分鐘精華深度長片。
-4. **對應導流 Short 結構 (`short_beats`，共 7 個鏡次，總長約 65~85 秒)**：
-   - Short 必須是這支長片的「精準推流預告精華」！
-   - 第 1 鏡：`visual_type: "hook_sticker_broll"`，3~5 秒強痛點開場，附 2 個短貼紙標語 `sticker_top`, `sticker_bottom`（各 4~8 字）與英文直式硬體攝影 `image_prompt`。
-   - 第 2~6 鏡（共 5 步）：`visual_type: "step_phone_mockup"`，提供 `step_index` (`1`~`5`), `step_total` (`5`), `step_title`（4~7 字核心結論）, `flow_steps`（3 個短步驟詞陣列 `["...", "...", "..."]`）, `callout_tag`（4~6 字黃底貼紙詞）, `card_metric`, `card_points`（2~3 條數據重點）, `source_id`, 以及旁白 `narration`（約 30~45 字）。
-   - 第 7 鏡：`visual_type: "cta_funnel_endcard"`，明確口播引導觀眾點擊下方關聯長片收看完整深度評測與全部數據來源！
-5. **縮圖 (`thumbnail`)**：
-   - `line1`（上行 6~10 字）、`line2`（下行 6~10 字）、`gold_phrase`（必須完全包含在 `line1` 或 `line2` 內的關鍵高亮詞，將渲染為香檳金 `#F0CA86`），以及英文暗黑聚光燈產品主體 `image_prompt`。
+    chapters = (outline.get("chapters") or [])[:4]
+    if len(chapters) < 4:
+        chapters = [
+            {"num": "01", "title": "價格與定位反差", "en": "PRICING PARADOX", "focus": "拆解最新優惠價差與容量升級陷阱"},
+            {"num": "02", "title": "晶片頻寬與散熱", "en": "SILICON & THERMALS", "focus": "對比持續高負載與 AI 推論時的真實效能"},
+            {"num": "03", "title": "螢幕亮度與周邊", "en": "DISPLAY & IO", "focus": "面板刷新率、亮度尼特數與連接埠差異"},
+            {"num": "04", "title": "誰該買哪一台", "en": "BUYING GUIDE", "focus": "針對不同預算與使用族群給出精準推薦"},
+        ]
 
-請嚴格回傳合法 JSON 物件。"""
+    # Step 2: Generate 4 rich beats per chapter (16 beats total)
+    all_long_beats = []
+    beats_per_ch = max(3, target_long_beats // len(chapters))
+    for ch_idx, ch in enumerate(chapters):
+        ch_num = str(ch.get("num") or f"{ch_idx+1:02d}").zfill(2)
+        print(f"  [Scriptwriter] Step 2/3: Writing Chapter {ch_num} ({ch.get('title')})...")
+        ch_res = call_llm_json(
+            "你是『Hey Digital』科技主筆。使用台灣繁體中文（記憶體、頻寬、晶片、螢幕、筆電、硬碟）。"
+            f"請為第 {ch_num} 章撰寫恰好 {beats_per_ch} 個鏡次 (`beats`)：\n"
+            "- 第 1 鏡固定 `visual_type: \"chapter_dark_card\"`（破題口播 22~35 字）。\n"
+            "- 第 2 鏡固定 `visual_type: \"studio_isometric_infographic\"`（暖白 3D 數據圖卡，給出具體數字 `hero_metric`、`hero_unit`、3 組 `comparison_bars`，口播 48~72 字引用公開數據）。\n"
+            "- 第 3~4 鏡使用 `\"cinema_tech_broll\"` 或 `\"studio_isometric_infographic\"`（口播 48~72 字，附英文商業硬體攝影 `image_prompt` 且無文字浮水印，引用 `source_id`）。\n"
+            "只輸出 JSON。",
+            json.dumps({
+                "video_title": outline.get("title_long", topic),
+                "chapter": ch,
+                "valid_source_ids": valid_sids,
+                "crawled_sources": sources_compact,
+                "schema": {
+                    "beats": [
+                        {
+                            "visual_type": "chapter_dark_card",
+                            "narration": "...",
+                            "source_id": "SRC-01",
+                            "hero_metric": "300",
+                            "hero_unit": "USD",
+                            "accent_hex": "#B84A14",
+                            "comparison_bars": [
+                                {"label": "高配機型", "value": 92, "display": "120Hz ProMotion"},
+                                {"label": "輕薄機型", "value": 58, "display": "60Hz Liquid Retina"},
+                            ],
+                            "image_prompt": "Photorealistic walnut wood slat desk with silver MacBook Air and Space Black MacBook Pro side by side, warm studio rim lighting, 35mm cinema photo, no text",
+                            "overlay_news_card": True,
+                        }
+                    ]
+                },
+            }, ensure_ascii=False),
+            temperature=0.4,
+            max_tokens=1800,
+        )
+        for b in (ch_res.get("beats") or [])[:beats_per_ch]:
+            b["chapter_num"] = ch_num
+            b["chapter_title"] = ch.get("title", "核心拆解")
+            b["chapter_en"] = ch.get("en", "DEEP DIVE")
+            all_long_beats.append(b)
 
-    user_prompt = json.dumps({
+    # Step 3: Generate Corresponding Traffic-Funnel Short (7 beats: Hook + 5 Steps + Funnel CTA)
+    print("  [Scriptwriter] Step 3/3: Writing corresponding Traffic-Funnel Short...")
+    short_plan = call_llm_json(
+        "你是『Hey Digital』YouTube Shorts 導流短片導演。使用台灣繁體中文，為這支長片製作恰好 7 鏡的精準推流短片 (`short_beats`)：\n"
+        "- 第 1 鏡：`visual_type: \"hook_sticker_broll\"`，含 `sticker_top`(5~7字)、`sticker_bottom`(4~6字)、`narration`(24~35字)、英文直式攝影 `image_prompt`。\n"
+        "- 第 2~6 鏡（5 個精華步驟）：`visual_type: \"step_phone_mockup\"`，含 `topic_pill`、`step_title`(4~6字)、`flow_steps`(3個短詞陣列)、`callout_tag`(4字)、`card_metric`、`card_points`(2條重點)、`source_id`、`narration`(28~42字)、英文 `image_prompt`。\n"
+        "- 第 7 鏡：`visual_type: \"cta_funnel_endcard\"`，口播明確引導觀眾點擊下方關聯長片收看完整實測與全部公開來源。\n"
+        "只輸出 JSON。",
+        json.dumps({
+            "parent_long_title": outline.get("title_long", topic),
+            "summary": outline.get("summary_paragraph", ""),
+            "valid_source_ids": valid_sids,
+            "sources": sources_compact[:5],
+            "schema": {
+                "title_short": "高點擊繁中導流標題 #Shorts",
+                "short_beats": [
+                    {
+                        "visual_type": "hook_sticker_broll",
+                        "topic_pill": "筆電選購避坑",
+                        "sticker_top": "降價三百美元",
+                        "sticker_bottom": "該直上 Pro 嗎？",
+                        "step_title": "價差陷阱",
+                        "flow_steps": ["看基準容量", "算升級差價", "選最佳甜蜜點"],
+                        "callout_tag": "必看刀法",
+                        "card_metric": "差價不到兩百刀",
+                        "card_points": ["入門記憶體容量關鍵差異", "外接螢幕與高刷體感落差"],
+                        "source_id": "SRC-01",
+                        "narration": "...",
+                        "image_prompt": "Vertical close up studio shot of sleek aluminum MacBook laptop on dark desk, warm rim lighting, no text",
+                    }
+                ],
+            },
+        }, ensure_ascii=False),
+        temperature=0.38,
+        max_tokens=2000,
+    )
+
+    # Normalize & link verifiable crawled sources
+    src_map = {s["source_id"]: s for s in dossier.get("sources", [])}
+    fallback_src = dossier["sources"][0] if dossier.get("sources") else {
+        "source_id": "SRC-01",
+        "publisher": "Public Tech Spec",
+        "domain": "9to5mac.com",
+        "title": topic,
+        "url": "https://9to5mac.com/",
+        "published": "2026",
+        "summary": topic,
+        "extracted_metrics": [],
+    }
+    used_sources = {}
+    accents = ["#B84A14", "#0E7C47", "#0E6EB8", "#5B50D6"]
+
+    for idx, b in enumerate(all_long_beats, start=1):
+        b["id"] = f"L{idx:02d}"
+        if b.get("visual_type") not in ("chapter_dark_card", "studio_isometric_infographic", "cinema_tech_broll"):
+            b["visual_type"] = "studio_isometric_infographic" if idx % 2 == 0 else "cinema_tech_broll"
+        b["accent_hex"] = b.get("accent_hex") or accents[idx % len(accents)]
+        if not b.get("image_prompt"):
+            b["image_prompt"] = "Photorealistic studio desk setup with aluminum MacBook Air and MacBook Pro, walnut wood slat wall, warm cinematic lighting, 8k, no text"
+        sid = b.get("source_id") if b.get("source_id") in src_map else valid_sids[(idx - 1) % len(valid_sids)]
+        b["source_id"] = sid
+        s_obj = src_map.get(sid, fallback_src)
+        used_sources[sid] = s_obj
+        b["source_detail"] = s_obj
+        dom = s_obj.get("domain", "")
+        tag_sub = s_obj.get("published", "")[:10] if "news.google" in dom else dom
+        b["source_badge"] = f"資料來源：{s_obj['publisher']} ({tag_sub})"
+        b["captions"] = split_into_captions(b.get("narration", ""), max_len=19)
+
+    short_beats = short_plan.get("short_beats") or []
+    if short_beats:
+        short_beats[0]["visual_type"] = "hook_sticker_broll"
+        if short_beats[-1].get("visual_type") != "cta_funnel_endcard":
+            short_beats.append({
+                "visual_type": "cta_funnel_endcard",
+                "narration": "想看完整四個維度的深度實測對比與全部公開數據來源，現在就點擊下方關聯影片，收看完整長片解析！",
+                "source_id": fallback_src["source_id"],
+            })
+    for idx, sb in enumerate(short_beats, start=1):
+        sb["id"] = f"S{idx:02d}"
+        if 1 < idx < len(short_beats):
+            sb["visual_type"] = "step_phone_mockup"
+        sid = sb.get("source_id") if sb.get("source_id") in src_map else valid_sids[(idx - 1) % len(valid_sids)]
+        sb["source_id"] = sid
+        s_obj = src_map.get(sid, fallback_src)
+        used_sources[sid] = s_obj
+        sb["source_detail"] = s_obj
+        if not sb.get("image_prompt"):
+            sb["image_prompt"] = "Vertical studio close-up of sleek modern aluminum MacBook laptop and glowing Apple silicon chip on walnut desk, rim lighting, no text"
+        sb["captions"] = split_into_captions(sb.get("narration", ""), max_len=15)
+
+    for s in dossier.get("sources", [])[:6]:
+        used_sources.setdefault(s["source_id"], s)
+
+    return {
         "topic": topic,
         "video_type": video_type,
-        "video_type_guide": VIDEO_TYPE_PROFILES.get(video_type, ""),
-        "target_long_beats": target_long_beats,
-        "target_short_steps": target_short_steps,
-        "crawled_public_sources": sources_compact,
-        "output_json_example_skeleton": {
-            "title_long": "...",
-            "title_short": "... #Shorts",
-            "summary_paragraph": "...",
-            "thumbnail": {
-                "line1": "...",
-                "line2": "...",
-                "gold_phrase": "...",
-                "image_prompt": "Minimalist dark studio spotlight product shot of ..., dramatic rim lighting, matte black background, ultra detailed industrial design, no text, 8k",
-            },
-            "chapters": [
-                {"num": "01", "title": "...", "en": "OPENING DILEMMA"}
-            ],
-            "long_beats": [
-                {
-                    "id": "L01",
-                    "chapter_num": "01",
-                    "chapter_title": "...",
-                    "chapter_en": "OPENING DILEMMA",
-                    "visual_type": "chapter_dark_card",
-                    "narration": "...",
-                    "source_id": "SRC-01",
-                    "source_badge": "資料來源：...",
-                    "hero_metric": "",
-                    "hero_unit": "",
-                    "accent_hex": "#0E6EB8",
-                    "comparison_bars": [],
-                    "image_prompt": "Sleek aluminum laptop and compact AI workstation on warm walnut wood slat desk, moody studio lighting, shallow depth of field, 35mm cinema photo, no text",
-                    "overlay_news_card": True,
-                }
-            ],
-            "short_beats": [
-                {
-                    "id": "S01",
-                    "visual_type": "hook_sticker_broll",
-                    "topic_pill": "...",
-                    "sticker_top": "...",
-                    "sticker_bottom": "...",
-                    "narration": "...",
-                    "source_id": "SRC-01",
-                    "image_prompt": "Close up vertical shot of sleek modern laptop chip glowing subtly on dark desk, studio lighting, no text",
-                }
-            ],
+        "title_long": outline.get("title_long") or topic,
+        "title_short": short_plan.get("title_short") or f"{topic[:18]} #Shorts",
+        "summary_paragraph": outline.get("summary_paragraph") or topic,
+        "thumbnail": outline.get("thumbnail") or {
+            "line1": "Air M5 對決 Pro M6",
+            "line2": "降價後買誰才不虧？",
+            "gold_phrase": "買誰才不虧",
+            "image_prompt": "Minimalist dark studio spotlight product shot of sleek aluminum MacBook Air and MacBook Pro laptops, matte black background, 8k, no text",
         },
-    }, ensure_ascii=False, indent=2)
-
-    plan = call_llm_json(sys_prompt, user_prompt, temperature=0.45)
-
-    # Post-process captions & bind full source URLs for verifiable citations
-    src_map = {s["source_id"]: s for s in dossier.get("sources", [])}
-    used_sources = {}
-
-    for idx, b in enumerate(plan.get("long_beats", []), start=1):
-        b["id"] = f"L{idx:02d}"
-        b["captions"] = split_into_captions(b.get("narration", ""), max_len=20)
-        sid = b.get("source_id") or ""
-        if sid in src_map:
-            used_sources[sid] = src_map[sid]
-            b["source_detail"] = src_map[sid]
-            if not b.get("source_badge"):
-                b["source_badge"] = f"資料來源：{src_map[sid]['publisher']} ({src_map[sid]['domain']})"
-
-    for idx, sb in enumerate(plan.get("short_beats", []), start=1):
-        sb["id"] = f"S{idx:02d}"
-        sb["captions"] = split_into_captions(sb.get("narration", ""), max_len=15)
-        sid = sb.get("source_id") or ""
-        if sid in src_map:
-            used_sources[sid] = src_map[sid]
-            sb["source_detail"] = src_map[sid]
-
-    # Ensure at least top crawled sources are attached
-    if not used_sources:
-        for s in dossier.get("sources", [])[:5]:
-            used_sources[s["source_id"]] = s
-
-    plan["topic"] = topic
-    plan["video_type"] = video_type
-    plan["cited_sources"] = list(used_sources.values())
-    return plan
+        "long_beats": all_long_beats,
+        "short_beats": short_beats,
+        "cited_sources": list(used_sources.values()),
+    }

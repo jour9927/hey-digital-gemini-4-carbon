@@ -1,0 +1,47 @@
+{
+  "ref_wav": "../voices/profile/alan_prompt_clip_24k.wav",
+  "full_clean_wav": "../voices/profile/alan_clean_vocal_24k.wav",
+  "ref_text": "关于大尺寸平板到底能不能取代轻薄笔电这件事，科技圈已经争论了快10年。",
+  "clip_start": 0.0,
+  "clip_end": 7.1,
+  "clip_duration": 7.1,
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "whisper_device": "cuda:0",
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 4.0,
+      "text": "关于大尺寸平板到底能不能取代轻薄笔电这件事"
+    },
+    {
+      "start": 4.0,
+      "end": 7.0,
+      "text": "科技圈已经争论了快10年"
+    },
+    {
+      "start": 7.0,
+      "end": 10.0,
+      "text": "但站在现在这个时间点重新检视"
+    },
+    {
+      "start": 10.0,
+      "end": 13.0,
+      "text": "情况确实和前几年不太一样了"
+    },
+    {
+      "start": 13.0,
+      "end": 16.0,
+      "text": "一方面如今的13寸到14.6寸旗舰平板"
+    },
+    {
+      "start": 16.0,
+      "end": 21.0,
+      "text": "已经用上了和轻薄笔电同宗同源的桌机级晶片"
+    },
+    {
+      "start": 21.0,
+      "end": 24.0,
+      "text": "系统层面也陆续补齐了自由缩放的虚拟"
+    }
+  ]
+}

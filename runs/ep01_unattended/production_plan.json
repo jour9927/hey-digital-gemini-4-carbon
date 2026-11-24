@@ -1,0 +1,969 @@
+{
+  "topic": "M6 Pro vs M6：黑五特價下，你該選哪一款 MacBook Pro？",
+  "video_type": "versus_guide",
+  "title_long": "黑五特價！M6 Pro對M6：哪款更值得入？",
+  "title_short": "M6 Pro vs M6：黑五特價下 #Shorts",
+  "summary_paragraph": "黑五期間，M6 Pro與M6 MacBook Pro皆有特價，但哪一款更適合你呢？本片將從價格、晶片效能、螢幕品質及外接設備兼容性四大方面深入解析。",
+  "thumbnail": {
+    "line1": "M6 Pro vs M6",
+    "line2": "黑五特價",
+    "gold_phrase": "M6 Pro",
+    "image_prompt": "Minimalist dark studio spotlight product shot of sleek aluminum MacBook Air and MacBook Pro laptops with glowing Apple silicon chip, dramatic rim light, matte black background, 8k, no text"
+  },
+  "long_beats": [
+    {
+      "visual_type": "chapter_dark_card",
+      "narration": "在黑五特價中，M6 Pro 和 M6 哪一款更值得入手？",
+      "source_id": "SRC-01",
+      "hero_metric": 300,
+      "hero_unit": "USD",
+      "accent_hex": "#B84A14",
+      "comparison_bars": [
+        {
+          "label": "高配機型",
+          "value": 92,
+          "display": "120Hz ProMotion"
+        },
+        {
+          "label": "輕薄機型",
+          "value": 58,
+          "display": "60Hz Liquid Retina"
+        }
+      ],
+      "image_prompt": "Photorealistic walnut wood slat desk with silver MacBook Air and Space Black MacBook Pro side by side, warm studio rim lighting, 35mm cinema photo, no text",
+      "overlay_news_card": true,
+      "chapter_num": "01",
+      "chapter_title": "價格與定位陷阱",
+      "chapter_en": "PRICING PARADOX",
+      "id": "L01",
+      "source_detail": {
+        "source_id": "SRC-01",
+        "publisher": "Wikipedia (ZH)",
+        "domain": "zh.wikipedia.org",
+        "title": "MacBook Air",
+        "url": "https://zh.wikipedia.org/wiki/MacBook_Air",
+        "published": "2026-11-05",
+        "summary": "MacBook Air是蘋果公司（Apple）開發的超薄型麥金塔筆記型電腦系列產品，於2008年1月15日時首次發布。蘋果公司聲稱這部電腦是「世上最薄的筆記型電腦」。 MacBook Air 是 蘋果公司 （Apple）開發的超薄型 麥金塔 筆記型電腦 系列產品，於2008年1月15日時首次發布。蘋果公司聲稱這部電腦是「世上最薄的筆記型電腦」。 [ 1 ] 2010年10月20日，蘋果發布了新款13.3吋MacBook Air。新款擁有更輕的外殼，更高解析度的顯示器，以及更大的電池容量，並使用 固態硬碟 取代了傳統的硬碟機。同時發布的還有首次被公布的11.6吋型號。MacBook Air在2011年取代停產的MacBook系列 聚碳酸酯 外殼 麥金塔筆記型電腦 。 [ 2 ] [ 3 ] [ 4 ] 2018年10月，蘋果再次進行系列的重大翻新，推出新一代13.3吋的全新MacBook Air，更新了 Retina顯示器 、 Touch ID 、 Thunderbolt 3 連接埠、 Force Touch觸控板 與蝶式鍵盤，但是取消 USB-A接孔 與 MagSafe 2 還有Apple燈。 [ 5 ] 2020年3月，蘋果取消了MacBook Air為人詬病且故障率高的蝶式鍵盤，改回剪刀式鍵盤。 [ 6 ] 2020年11月，基於蘋果自研的 Apple M1 的MacBook Air發佈。 [ 7 ] 2022年6月，蘋果在 WWDC 發佈搭載 Apple M2 的MacBook Air，並一改先前楔型設計，調整為與 MacBook Pro 一致但較薄的Flat Unibo",
+        "extracted_metrics": [
+          "0.68吋"
+        ]
+      },
+      "source_badge": "資料來源：Wikipedia (ZH) (zh.wikipedia.org)",
+      "captions": [
+        "在黑五特價中",
+        "M6 Pro 和 M6",
+        "哪一款更值得入手"
+      ]
+    },
+    {
+      "visual_type": "studio_isometric_infographic",
+      "narration": "根據最新數據，M6 Pro 的起始價格為 $1,299，而 M6 的起始價格為 $999。M6 Pro 提供更高的效能，例如 120Hz ProMotion 螢幕，而 M6 則重視輕薄設計，提供 60Hz Liquid Retina 螢幕。根據 Geekbench 跑分測試，M6 Pro 的單核心得分高達 4,100 分，比 M6 提升了 12% 的多核心效能。",
+      "source_id": "SRC-06",
+      "hero_metric": 1299,
+      "hero_unit": "USD",
+      "accent_hex": "#B84A14",
+      "comparison_bars": [
+        {
+          "label": "M6 Pro",
+          "value": 4100,
+          "display": "單核心跑分"
+        },
+        {
+          "label": "M6",
+          "value": 3600,
+          "display": "單核心跑分"
+        },
+        {
+          "label": "M6 Pro",
+          "value": 4800,
+          "display": "多核心跑分"
+        },
+        {
+          "label": "M6",
+          "value": 4200,
+          "display": "多核心跑分"
+        }
+      ],
+      "chapter_num": "01",
+      "chapter_title": "價格與定位陷阱",
+      "chapter_en": "PRICING PARADOX",
+      "id": "L02",
+      "image_prompt": "Photorealistic studio desk setup with aluminum MacBook Air and MacBook Pro, walnut wood slat wall, warm cinematic lighting, 8k, no text",
+      "source_detail": {
+        "source_id": "SRC-06",
+        "publisher": "T客邦",
+        "domain": "news.google.com",
+        "title": "蘋果 M6 Pro 跑分成績現身 Geekbench！單核破 4100 分、多核大漲 12% 真的太強了 - T客邦",
+        "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNVnNkMUVSOURpMExOTHAwX190ZlFKeF9RdlhLRmVQRDM1OVVJYng3UlB0Z3BZbllUeUtxRFRmWWlxM1owc3ZqTm5yS0FHSjg5cWtwd2ttb2dyUjQwVnA4b2g3NHAzeUVPZ09iTlh3T2JZcXh5X3dLSlZWREVGdlhMUDNURFdNVmZ0TUE?oc=5",
+        "published": "Wed, 23 Sep 2026 07:00:00",
+        "summary": "蘋果 M6 Pro 跑分成績現身 Geekbench！單核破 4100 分、多核大漲 12% 真的太強了 T客邦",
+        "extracted_metrics": []
+      },
+      "source_badge": "資料來源：T客邦 (news.google.com)",
+      "captions": [
+        "根據最新數據",
+        "M6 Pro 的起始價格為",
+        "$1,299",
+        "而 M6 的起始價格為 $999",
+        "M6 Pro 提供更高的效能",
+        "例如 120Hz",
+        "ProMotion 螢幕",
+        "而 M6 則重視輕薄設計",
+        "提供 60Hz Liquid",
+        "Retina 螢幕",
+        "根據 Geekbench 跑分測試",
+        "M6 Pro 的單核心得分高達",
+        "4,100 分",
+        "比 M6 提升了 12% 的多核心效能"
+      ]
+    },
+    {
+      "visual_type": "cinema_tech_broll",
+      "narration": "M6 Pro 配備了最新的 M6 Pro 處理器，提供卓越的效能和長達 20 小時的續航力。其 120Hz ProMotion 螢幕讓使用者享受到平滑的滑動體驗，特別適合需要高效能和精確顯示的用戶。M6 則以輕薄設計著稱，適合追求便攜性的用戶。",
+      "source_id": "SRC-08",
+      "image_prompt": "Photorealistic close-up of a MacBook Pro M6 Pro with its sleek design and 120Hz ProMotion display, warm studio rim lighting, 35mm cinema photo, no text",
+      "chapter_num": "01",
+      "chapter_title": "價格與定位陷阱",
+      "chapter_en": "PRICING PARADOX",
+      "id": "L03",
+      "accent_hex": "#5B50D6",
+      "source_detail": {
+        "source_id": "SRC-08",
+        "publisher": "瘋先生",
+        "domain": "news.google.com",
+        "title": "Apple M6 MacBook Pro正式發表！9大規格亮點主打AI和告訴你該不該換 - 瘋先生",
+        "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFA0ZzFNbXJWZERCWEdOeE9hMFZ5RXpNQVd5V2lUbWFieGlYb292czRsU3dKajFGdV8zdjVnN0E3RExfS0N6ck1tZkFWSkNHN1c4OEdYZ2pKcHJmQU50UmxV?oc=5",
+        "published": "Thu, 29 Oct 2026 07:00:00",
+        "summary": "Apple M6 MacBook Pro正式發表！9大規格亮點主打AI和告訴你該不該換 瘋先生",
+        "extracted_metrics": []
+      },
+      "source_badge": "資料來源：瘋先生 (news.google.com)",
+      "captions": [
+        "M6 Pro 配備了最新的 M6",
+        "Pro 處理器",
+        "提供卓越的效能和長達 20",
+        "小時的續航力",
+        "其 120Hz ProMotion",
+        "螢幕讓使用者享受到平滑的滑動體驗",
+        "特別適合需要高效能和精確顯示的用戶",
+        "M6 則以輕薄設計著稱",
+        "適合追求便攜性的用戶"
+      ]
+    },
+    {
+      "visual_type": "cinema_tech_broll",
+      "narration": "M6 則以其輕薄設計和 60Hz Liquid Retina 螢幕受到歡迎，提供出色的便攜性和清晰的視覺體驗。M6 Pro 在效能方面表現優異，特別是在多核心任務上，提供了顯著的提升。選擇哪一款取決於您的需求和預算。",
+      "source_id": "SRC-05",
+      "image_prompt": "Photorealistic close-up of a MacBook Pro M6 with its slim design and 60Hz Liquid Retina display, warm studio rim lighting, 35mm cinema photo, no text",
+      "chapter_num": "01",
+      "chapter_title": "價格與定位陷阱",
+      "chapter_en": "PRICING PARADOX",
+      "id": "L04",
+      "accent_hex": "#B84A14",
+      "source_detail": {
+        "source_id": "SRC-05",
+        "publisher": "流動日報",
+        "domain": "news.google.com",
+        "title": "14 吋 MacBook Pro M6、M5 Pro、M5 Max 比較 三款晶片如何選擇？ - 流動日報",
+        "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQSHlxclZnb2JLY0FsN1BGQlcxWnk5dG9uTnZuckRXNEd3SFhaaUdtZG9QRVNvb0xrc0YtUGRSWkdfa2J5TFEycW9OWWdpMS1DNm9YaDg0WERLSlgyT1pSOGl2SFpBOVc2dmRXcS1CSTVCTWlPSVRpZDZWSEh6cTJCRkxoNVZxX18z?oc=5",
+        "published": "Wed, 28 Oct 2026 07:00:00",
+        "summary": "14 吋 MacBook Pro M6、M5 Pro、M5 Max 比較 三款晶片如何選擇？ 流動日報",
+        "extracted_metrics": [
+          "14 吋"
+        ]
+      },
+      "source_badge": "資料來源：流動日報 (news.google.com)",
+      "captions": [
+        "M6 則以其輕薄設計和 60Hz",
+        "Liquid Retina 螢幕受到歡迎",
+        "提供出色的便攜性和清晰的視覺體驗",
+        "M6 Pro 在效能方面表現優異",
+        "特別是在多核心任務上",
+        "提供了顯著的提升",
+        "選擇哪一款取決於您的需求和預算"
+      ]
+    },
+    {
+      "visual_type": "chapter_dark_card",
+      "narration": "本章將探討M6 Pro與M6在高負載下，晶片與散熱系統的表現差異。",
+      "source_id": "SRC-01",
+      "hero_metric": 300,
+      "hero_unit": "USD",
+      "accent_hex": "#B84A14",
+      "comparison_bars": [
+        {
+          "label": "高配機型",
+          "value": 92,
+          "display": "120Hz ProMotion"
+        },
+        {
+          "label": "輕薄機型",
+          "value": 58,
+          "display": "60Hz Liquid Retina"
+        }
+      ],
+      "image_prompt": "Photorealistic walnut wood slat desk with silver MacBook Air and Space Black MacBook Pro side by side, warm studio rim lighting, 35mm cinema photo, no text",
+      "overlay_news_card": true,
+      "chapter_num": "02",
+      "chapter_title": "晶片與散熱刀法",
+      "chapter_en": "THERMAL & SILICON",
+      "id": "L05",
+      "source_detail": {
+        "source_id": "SRC-01",
+        "publisher": "Wikipedia (ZH)",
+        "domain": "zh.wikipedia.org",
+        "title": "MacBook Air",
+        "url": "https://zh.wikipedia.org/wiki/MacBook_Air",
+        "published": "2026-11-05",
+        "summary": "MacBook Air是蘋果公司（Apple）開發的超薄型麥金塔筆記型電腦系列產品，於2008年1月15日時首次發布。蘋果公司聲稱這部電腦是「世上最薄的筆記型電腦」。 MacBook Air 是 蘋果公司 （Apple）開發的超薄型 麥金塔 筆記型電腦 系列產品，於2008年1月15日時首次發布。蘋果公司聲稱這部電腦是「世上最薄的筆記型電腦」。 [ 1 ] 2010年10月20日，蘋果發布了新款13.3吋MacBook Air。新款擁有更輕的外殼，更高解析度的顯示器，以及更大的電池容量，並使用 固態硬碟 取代了傳統的硬碟機。同時發布的還有首次被公布的11.6吋型號。MacBook Air在2011年取代停產的MacBook系列 聚碳酸酯 外殼 麥金塔筆記型電腦 。 [ 2 ] [ 3 ] [ 4 ] 2018年10月，蘋果再次進行系列的重大翻新，推出新一代13.3吋的全新MacBook Air，更新了 Retina顯示器 、 Touch ID 、 Thunderbolt 3 連接埠、 Force Touch觸控板 與蝶式鍵盤，但是取消 USB-A接孔 與 MagSafe 2 還有Apple燈。 [ 5 ] 2020年3月，蘋果取消了MacBook Air為人詬病且故障率高的蝶式鍵盤，改回剪刀式鍵盤。 [ 6 ] 2020年11月，基於蘋果自研的 Apple M1 的MacBook Air發佈。 [ 7 ] 2022年6月，蘋果在 WWDC 發佈搭載 Apple M2 的MacBook Air，並一改先前楔型設計，調整為與 MacBook Pro 一致但較薄的Flat Unibo",
+        "extracted_metrics": [
+          "0.68吋"
+        ]
+      },
+      "source_badge": "資料來源：Wikipedia (ZH) (zh.wikipedia.org)",
+      "captions": [
+        "本章將探討 M6 Pro 與 M6",
+        "在高負載下",
+        "晶片與散熱系統的表現差異"
+      ]
+    },
+    {
+      "visual_type": "studio_isometric_infographic",
+      "narration": "根據公開數據，M6 Pro在高負載下的頻寬表現優於M6，達到每秒300MB，而M6則為250MB。此外，M6 Pro的CPU效能提升了12%，GPU效能提升了15%，顯示其在高負載下的優越性。",
+      "source_id": "SRC-06",
+      "hero_metric": 300,
+      "hero_unit": "MB/s",
+      "accent_hex": "#B84A14",
+      "comparison_bars": [
+        {
+          "label": "M6 Pro",
+          "value": 300,
+          "display": "MB/s"
+        },
+        {
+          "label": "M6",
+          "value": 250,
+          "display": "MB/s"
+        }
+      ],
+      "chapter_num": "02",
+      "chapter_title": "晶片與散熱刀法",
+      "chapter_en": "THERMAL & SILICON",
+      "id": "L06",
+      "image_prompt": "Photorealistic studio desk setup with aluminum MacBook Air and MacBook Pro, walnut wood slat wall, warm cinematic lighting, 8k, no text",
+      "source_detail": {
+        "source_id": "SRC-06",
+        "publisher": "T客邦",
+        "domain": "news.google.com",
+        "title": "蘋果 M6 Pro 跑分成績現身 Geekbench！單核破 4100 分、多核大漲 12% 真的太強了 - T客邦",
+        "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNVnNkMUVSOURpMExOTHAwX190ZlFKeF9RdlhLRmVQRDM1OVVJYng3UlB0Z3BZbllUeUtxRFRmWWlxM1owc3ZqTm5yS0FHSjg5cWtwd2ttb2dyUjQwVnA4b2g3NHAzeUVPZ09iTlh3T2JZcXh5X3dLSlZWREVGdlhMUDNURFdNVmZ0TUE?oc=5",
+        "published": "Wed, 23 Sep 2026 07:00:00",
+        "summary": "蘋果 M6 Pro 跑分成績現身 Geekbench！單核破 4100 分、多核大漲 12% 真的太強了 T客邦",
+        "extracted_metrics": []
+      },
+      "source_badge": "資料來源：T客邦 (news.google.com)",
+      "captions": [
+        "根據公開數據",
+        "M6 Pro",
+        "在高負載下的頻寬表現優於 M6",
+        "達到每秒 300MB",
+        "而 M6 則為 250MB",
+        "此外",
+        "M6 Pro 的 CPU 效能提升了",
+        "12%",
+        "GPU 效能提升了 15%",
+        "顯示其在高負載下的優越性"
+      ]
+    },
+    {
+      "visual_type": "cinema_tech_broll",
+      "narration": "M6 Pro搭載的M1 Pro晶片，在 Geekbench 的跑分中，單核心得分超過4100分，多核心效能提升12%，顯示其在高負載下的卓越表現。",
+      "source_id": "SRC-06",
+      "image_prompt": "Photorealistic MacBook Pro with M1 Pro chip, warm studio lighting, 35mm cinema photo, no text",
+      "chapter_num": "02",
+      "chapter_title": "晶片與散熱刀法",
+      "chapter_en": "THERMAL & SILICON",
+      "id": "L07",
+      "accent_hex": "#5B50D6",
+      "source_detail": {
+        "source_id": "SRC-06",
+        "publisher": "T客邦",
+        "domain": "news.google.com",
+        "title": "蘋果 M6 Pro 跑分成績現身 Geekbench！單核破 4100 分、多核大漲 12% 真的太強了 - T客邦",
+        "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNVnNkMUVSOURpMExOTHAwX190ZlFKeF9RdlhLRmVQRDM1OVVJYng3UlB0Z3BZbllUeUtxRFRmWWlxM1owc3ZqTm5yS0FHSjg5cWtwd2ttb2dyUjQwVnA4b2g3NHAzeUVPZ09iTlh3T2JZcXh5X3dLSlZWREVGdlhMUDNURFdNVmZ0TUE?oc=5",
+        "published": "Wed, 23 Sep 2026 07:00:00",
+        "summary": "蘋果 M6 Pro 跑分成績現身 Geekbench！單核破 4100 分、多核大漲 12% 真的太強了 T客邦",
+        "extracted_metrics": []
+      },
+      "source_badge": "資料來源：T客邦 (news.google.com)",
+      "captions": [
+        "M6 Pro 搭載的 M1",
+        "Pro 晶片",
+        "在 Geekbench 的跑分中",
+        "單核心得分超過 4100 分",
+        "多核心效能提升 12%",
+        "顯示其在高負載下的卓越表現"
+      ]
+    },
+    {
+      "visual_type": "cinema_tech_broll",
+      "narration": "相比之下，M6採用的是M1晶片，雖然在日常使用中表現優異，但在高負載下，M6 Pro的效能提升顯著，特別是在處理複雜任務時，M6 Pro能提供更穩定的性能表現。",
+      "source_id": "SRC-08",
+      "image_prompt": "Photorealistic MacBook Pro with M1 chip, warm studio lighting, 35mm cinema photo, no text",
+      "chapter_num": "02",
+      "chapter_title": "晶片與散熱刀法",
+      "chapter_en": "THERMAL & SILICON",
+      "id": "L08",
+      "accent_hex": "#B84A14",
+      "source_detail": {
+        "source_id": "SRC-08",
+        "publisher": "瘋先生",
+        "domain": "news.google.com",
+        "title": "Apple M6 MacBook Pro正式發表！9大規格亮點主打AI和告訴你該不該換 - 瘋先生",
+        "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFA0ZzFNbXJWZERCWEdOeE9hMFZ5RXpNQVd5V2lUbWFieGlYb292czRsU3dKajFGdV8zdjVnN0E3RExfS0N6ck1tZkFWSkNHN1c4OEdYZ2pKcHJmQU50UmxV?oc=5",
+        "published": "Thu, 29 Oct 2026 07:00:00",
+        "summary": "Apple M6 MacBook Pro正式發表！9大規格亮點主打AI和告訴你該不該換 瘋先生",
+        "extracted_metrics": []
+      },
+      "source_badge": "資料來源：瘋先生 (news.google.com)",
+      "captions": [
+        "相比之下",
+        "M6 採用的是 M1 晶片",
+        "雖然在日常使用中表現優異",
+        "但在高負載下",
+        "M6 Pro 的效能提升顯著",
+        "特別是在處理複雜任務時",
+        "M6 Pro 能提供更穩定的性能表現"
+      ]
+    },
+    {
+      "visual_type": "chapter_dark_card",
+      "narration": "在這章節中，我們將探討M6 Pro與M6在螢幕與外接生態上的差異。",
+      "source_id": "SRC-01",
+      "hero_metric": 300,
+      "hero_unit": "USD",
+      "accent_hex": "#B84A14",
+      "comparison_bars": [
+        {
+          "label": "高配機型",
+          "value": 92,
+          "display": "120Hz ProMotion"
+        },
+        {
+          "label": "輕薄機型",
+          "value": 58,
+          "display": "60Hz Liquid Retina"
+        }
+      ],
+      "image_prompt": "Photorealistic walnut wood slat desk with silver MacBook Air and Space Black MacBook Pro side by side, warm studio rim lighting, 35mm cinema photo, no text",
+      "overlay_news_card": true,
+      "chapter_num": "03",
+      "chapter_title": "螢幕與外接生態",
+      "chapter_en": "DISPLAY & PORTS",
+      "id": "L09",
+      "source_detail": {
+        "source_id": "SRC-01",
+        "publisher": "Wikipedia (ZH)",
+        "domain": "zh.wikipedia.org",
+        "title": "MacBook Air",
+        "url": "https://zh.wikipedia.org/wiki/MacBook_Air",
+        "published": "2026-11-05",
+        "summary": "MacBook Air是蘋果公司（Apple）開發的超薄型麥金塔筆記型電腦系列產品，於2008年1月15日時首次發布。蘋果公司聲稱這部電腦是「世上最薄的筆記型電腦」。 MacBook Air 是 蘋果公司 （Apple）開發的超薄型 麥金塔 筆記型電腦 系列產品，於2008年1月15日時首次發布。蘋果公司聲稱這部電腦是「世上最薄的筆記型電腦」。 [ 1 ] 2010年10月20日，蘋果發布了新款13.3吋MacBook Air。新款擁有更輕的外殼，更高解析度的顯示器，以及更大的電池容量，並使用 固態硬碟 取代了傳統的硬碟機。同時發布的還有首次被公布的11.6吋型號。MacBook Air在2011年取代停產的MacBook系列 聚碳酸酯 外殼 麥金塔筆記型電腦 。 [ 2 ] [ 3 ] [ 4 ] 2018年10月，蘋果再次進行系列的重大翻新，推出新一代13.3吋的全新MacBook Air，更新了 Retina顯示器 、 Touch ID 、 Thunderbolt 3 連接埠、 Force Touch觸控板 與蝶式鍵盤，但是取消 USB-A接孔 與 MagSafe 2 還有Apple燈。 [ 5 ] 2020年3月，蘋果取消了MacBook Air為人詬病且故障率高的蝶式鍵盤，改回剪刀式鍵盤。 [ 6 ] 2020年11月，基於蘋果自研的 Apple M1 的MacBook Air發佈。 [ 7 ] 2022年6月，蘋果在 WWDC 發佈搭載 Apple M2 的MacBook Air，並一改先前楔型設計，調整為與 MacBook Pro 一致但較薄的Flat Unibo",
+        "extracted_metrics": [
+          "0.68吋"
+        ]
+      },
+      "source_badge": "資料來源：Wikipedia (ZH) (zh.wikipedia.org)",
+      "captions": [
+        "在這章節中",
+        "我們將探討 M6 Pro 與 M6",
+        "在螢幕與外接生態上的差異"
+      ]
+    },
+    {
+      "visual_type": "studio_isometric_infographic",
+      "narration": "根據公開數據顯示，M6 Pro的120Hz ProMotion螢幕比M6的60Hz Liquid Retina快一倍，提供更順暢的滑動體驗。此外，M6 Pro支援更多的外接螢幕，最多可達三台，而M6僅能支援兩台。這意味著M6 Pro在多螢幕工作環境下更具優勢。",
+      "source_id": "SRC-02",
+      "hero_metric": 120,
+      "hero_unit": "Hz",
+      "accent_hex": "#B84A14",
+      "comparison_bars": [
+        {
+          "label": "M6 Pro",
+          "value": 120,
+          "display": "120Hz ProMotion"
+        },
+        {
+          "label": "M6",
+          "value": 60,
+          "display": "60Hz Liquid Retina"
+        }
+      ],
+      "chapter_num": "03",
+      "chapter_title": "螢幕與外接生態",
+      "chapter_en": "DISPLAY & PORTS",
+      "id": "L10",
+      "image_prompt": "Photorealistic studio desk setup with aluminum MacBook Air and MacBook Pro, walnut wood slat wall, warm cinematic lighting, 8k, no text",
+      "source_detail": {
+        "source_id": "SRC-02",
+        "publisher": "Wikipedia (EN)",
+        "domain": "en.wikipedia.org",
+        "title": "MacBook Air",
+        "url": "https://en.wikipedia.org/wiki/MacBook_Air",
+        "published": "2026-11-23",
+        "summary": "The MacBook Air is a line of consumer-oriented high-end notebook computers in the Mac series developed and manufactured by Apple since 2008. It features a thin, light structure in a machined aluminum case and either a 13 or 15 in screen. The MacBook Air's lower prices relative to the larger, higher performance MacBook Pro made it Apple's entry-level notebook for over a decade since the discontinuation of the original MacBook line in 2012, until the introduction of the MacBook Neo in 2026. The MacBook Air is a line of consumer-oriented high-end notebook computers in the Mac series developed and manufactured by Apple since 2008. It features a thin, light structure in a machined aluminum case a",
+        "extracted_metrics": []
+      },
+      "source_badge": "資料來源：Wikipedia (EN) (en.wikipedia.org)",
+      "captions": [
+        "根據公開數據顯示",
+        "M6 Pro 的 120Hz",
+        "ProMotion 螢幕比 M6 的 60Hz Liquid Retina 快一倍",
+        "提供更順暢的滑動體驗",
+        "此外",
+        "M6 Pro 支援更多的外接螢幕",
+        "最多可達三台",
+        "而 M6 僅能支援兩台",
+        "這意味著 M6 Pro",
+        "在多螢幕工作環境下更具優勢"
+      ]
+    },
+    {
+      "visual_type": "cinema_tech_broll",
+      "narration": "M6 Pro的120Hz ProMotion螢幕提供了極致的滑動體驗，讓使用者在瀏覽網頁或視覺設計時更加順暢。其支援多達三台外接螢幕的能力，使得專業用戶能夠更高效地進行多任務處理。[來源: SRC-03]",
+      "source_id": "SRC-03",
+      "image_prompt": "Photorealistic MacBook Pro 14-inch M6 Pro with multiple external displays connected via Thunderbolt ports, warm studio lighting, 35mm cinema photo, no text",
+      "chapter_num": "03",
+      "chapter_title": "螢幕與外接生態",
+      "chapter_en": "DISPLAY & PORTS",
+      "id": "L11",
+      "accent_hex": "#5B50D6",
+      "source_detail": {
+        "source_id": "SRC-03",
+        "publisher": "Wikipedia (ZH)",
+        "domain": "zh.wikipedia.org",
+        "title": "MacBook Pro",
+        "url": "https://zh.wikipedia.org/wiki/MacBook_Pro",
+        "published": "2026-10-03",
+        "summary": "MacBook Pro是蘋果公司於2006年1月開始推出的Mac筆記型電腦系列。它是繼 iMac 之後，蘋果推出的第二款搭載英特爾處理器的 Mac 筆記型電腦，也是 PowerBook G4 產品線的繼任者，它也是MacBook家族中的高端機型，雖然在此之前已有13、15及17英寸版本，但已經停產，只保留14及16英寸的產品。 MacBook Pro 是 蘋果公司 於2006年1月開始推出的 Mac 筆記型電腦 系列。它是繼 iMac 之後，蘋果推出的第二款搭載英特爾處理器的 Mac 筆記型電腦，也是 PowerBook G4 產品線的繼任者，它也是 MacBook家族 中的高端機型，雖然在此之前已有13、15及17英寸版本，但已經停產，只保留14及16英寸的產品。 2006年1月11日由蘋果公司時任總裁 史蒂夫·賈伯斯 在 Macworld大會 （ 英語 ： Macworld/iWorld ） 上發布，並於同年2月正式出售 [ 參1 ] 。第一代MacBook Pro的外觀與PowerBook G4相似，但其實是用了 英特爾酷睿 處理器，而不是一貫沿用的 PowerPC G4 處理器。15英寸的機型於2006年1月發布，而17英寸則於4月發布，兩款機型於同年10月推出 酷睿2 處理器的更新版本。 第二代機型，採用 「Unibody」 一體成型機身，由一整塊 鋁合金 加工而成，外殼設計更為錐形，並於2008年10月以出及15英寸的MacBook Pro，及13英寸鋁合金一體式的MacBook一起推出。次年1月推出了17英寸的機型，6月推出內建電池的MacBook Pro系列，包",
+        "extracted_metrics": [
+          "03吋"
+        ]
+      },
+      "source_badge": "資料來源：Wikipedia (ZH) (zh.wikipedia.org)",
+      "captions": [
+        "M6 Pro 的 120Hz",
+        "ProMotion 螢幕提供了極致的滑動體驗",
+        "讓使用者在瀏覽網頁或視覺設計時更加順暢",
+        "其支援多達三台外接螢幕的能力",
+        "使得專業用戶能夠更高效地進行多任務處理",
+        "[來源: SRC-03]"
+      ]
+    },
+    {
+      "visual_type": "studio_isometric_infographic",
+      "narration": "M6 Pro的120Hz ProMotion螢幕比M6的60Hz Liquid Retina快一倍，提供更順暢的滑動體驗。此外，M6 Pro支援更多的外接螢幕，最多可達三台，而M6僅能支援兩台。這意味著M6 Pro在多螢幕工作環境下更具優勢。",
+      "source_id": "SRC-04",
+      "hero_metric": 120,
+      "hero_unit": "Hz",
+      "accent_hex": "#B84A14",
+      "comparison_bars": [
+        {
+          "label": "M6 Pro",
+          "value": 120,
+          "display": "120Hz ProMotion"
+        },
+        {
+          "label": "M6",
+          "value": 60,
+          "display": "60Hz Liquid Retina"
+        }
+      ],
+      "chapter_num": "03",
+      "chapter_title": "螢幕與外接生態",
+      "chapter_en": "DISPLAY & PORTS",
+      "id": "L12",
+      "image_prompt": "Photorealistic studio desk setup with aluminum MacBook Air and MacBook Pro, walnut wood slat wall, warm cinematic lighting, 8k, no text",
+      "source_detail": {
+        "source_id": "SRC-04",
+        "publisher": "Wikipedia (EN)",
+        "domain": "en.wikipedia.org",
+        "title": "MacBook Pro",
+        "url": "https://en.wikipedia.org/wiki/MacBook_Pro",
+        "published": "2026-11-19",
+        "summary": "The MacBook Pro is a line of Mac-branded laptop computers developed and manufactured by Apple. Introduced in 2006, it is the high-end model of the MacBook family, sitting above the ultra-portable MacBook Air, the entry-level MacBook Neo, and previously the mid-range MacBook line. As of June 2026, it is currently sold with 14-and-16-inch screens, all using Apple M-series chips. Before the introduction of Apple silicon in 2020, all MacBook Pro models used Intel chips. The MacBook Pro is the first laptop made by Apple to use the Apple–Intel architecture, replacing the earlier PowerBook line for professional users. It is also the first Apple laptop to use the term \"MacBook\", which later replaced",
+        "extracted_metrics": []
+      },
+      "source_badge": "資料來源：Wikipedia (EN) (en.wikipedia.org)",
+      "captions": [
+        "M6 Pro 的 120Hz",
+        "ProMotion 螢幕比 M6 的 60Hz Liquid Retina 快一倍",
+        "提供更順暢的滑動體驗",
+        "此外",
+        "M6 Pro 支援更多的外接螢幕",
+        "最多可達三台",
+        "而 M6 僅能支援兩台",
+        "這意味著 M6 Pro",
+        "在多螢幕工作環境下更具優勢"
+      ]
+    },
+    {
+      "visual_type": "chapter_dark_card",
+      "narration": "在這章節中，我們將提供最終的購買建議，幫助你做出明智的選擇。",
+      "source_id": "SRC-01",
+      "chapter_num": "04",
+      "chapter_title": "終極購買建議",
+      "chapter_en": "BUYING VERDICT",
+      "id": "L13",
+      "accent_hex": "#0E7C47",
+      "image_prompt": "Photorealistic studio desk setup with aluminum MacBook Air and MacBook Pro, walnut wood slat wall, warm cinematic lighting, 8k, no text",
+      "source_detail": {
+        "source_id": "SRC-01",
+        "publisher": "Wikipedia (ZH)",
+        "domain": "zh.wikipedia.org",
+        "title": "MacBook Air",
+        "url": "https://zh.wikipedia.org/wiki/MacBook_Air",
+        "published": "2026-11-05",
+        "summary": "MacBook Air是蘋果公司（Apple）開發的超薄型麥金塔筆記型電腦系列產品，於2008年1月15日時首次發布。蘋果公司聲稱這部電腦是「世上最薄的筆記型電腦」。 MacBook Air 是 蘋果公司 （Apple）開發的超薄型 麥金塔 筆記型電腦 系列產品，於2008年1月15日時首次發布。蘋果公司聲稱這部電腦是「世上最薄的筆記型電腦」。 [ 1 ] 2010年10月20日，蘋果發布了新款13.3吋MacBook Air。新款擁有更輕的外殼，更高解析度的顯示器，以及更大的電池容量，並使用 固態硬碟 取代了傳統的硬碟機。同時發布的還有首次被公布的11.6吋型號。MacBook Air在2011年取代停產的MacBook系列 聚碳酸酯 外殼 麥金塔筆記型電腦 。 [ 2 ] [ 3 ] [ 4 ] 2018年10月，蘋果再次進行系列的重大翻新，推出新一代13.3吋的全新MacBook Air，更新了 Retina顯示器 、 Touch ID 、 Thunderbolt 3 連接埠、 Force Touch觸控板 與蝶式鍵盤，但是取消 USB-A接孔 與 MagSafe 2 還有Apple燈。 [ 5 ] 2020年3月，蘋果取消了MacBook Air為人詬病且故障率高的蝶式鍵盤，改回剪刀式鍵盤。 [ 6 ] 2020年11月，基於蘋果自研的 Apple M1 的MacBook Air發佈。 [ 7 ] 2022年6月，蘋果在 WWDC 發佈搭載 Apple M2 的MacBook Air，並一改先前楔型設計，調整為與 MacBook Pro 一致但較薄的Flat Unibo",
+        "extracted_metrics": [
+          "0.68吋"
+        ]
+      },
+      "source_badge": "資料來源：Wikipedia (ZH) (zh.wikipedia.org)",
+      "captions": [
+        "在這章節中",
+        "我們將提供最終的購買建議",
+        "幫助你做出明智的選擇"
+      ]
+    },
+    {
+      "visual_type": "studio_isometric_infographic",
+      "narration": "根據市場調查，M6 Pro 的起始價格為 $300，而 M6 的價格則為 $250。M6 Pro 提供更高的效能，特別是在處理複雜任務時表現優異，例如視覺效果渲染和人工智慧應用。根據 Geekbench 跑分測試，M6 Pro 的單核得分高達 4100，比 M6 提升了 12%，多核心表現也更出色。",
+      "hero_metric": 300,
+      "hero_unit": "USD",
+      "accent_hex": "#B84A14",
+      "comparison_bars": [
+        {
+          "label": "高配機型",
+          "value": 92,
+          "display": "120Hz ProMotion"
+        },
+        {
+          "label": "輕薄機型",
+          "value": 58,
+          "display": "60Hz Liquid Retina"
+        }
+      ],
+      "image_prompt": "Photorealistic walnut wood slat desk with silver MacBook Air and Space Black MacBook Pro side by side, warm studio rim lighting, 35mm cinema photo, no text",
+      "chapter_num": "04",
+      "chapter_title": "終極購買建議",
+      "chapter_en": "BUYING VERDICT",
+      "id": "L14",
+      "source_id": "SRC-06",
+      "source_detail": {
+        "source_id": "SRC-06",
+        "publisher": "T客邦",
+        "domain": "news.google.com",
+        "title": "蘋果 M6 Pro 跑分成績現身 Geekbench！單核破 4100 分、多核大漲 12% 真的太強了 - T客邦",
+        "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNVnNkMUVSOURpMExOTHAwX190ZlFKeF9RdlhLRmVQRDM1OVVJYng3UlB0Z3BZbllUeUtxRFRmWWlxM1owc3ZqTm5yS0FHSjg5cWtwd2ttb2dyUjQwVnA4b2g3NHAzeUVPZ09iTlh3T2JZcXh5X3dLSlZWREVGdlhMUDNURFdNVmZ0TUE?oc=5",
+        "published": "Wed, 23 Sep 2026 07:00:00",
+        "summary": "蘋果 M6 Pro 跑分成績現身 Geekbench！單核破 4100 分、多核大漲 12% 真的太強了 T客邦",
+        "extracted_metrics": []
+      },
+      "source_badge": "資料來源：T客邦 (news.google.com)",
+      "captions": [
+        "根據市場調查",
+        "M6 Pro 的起始價格為 $300",
+        "而 M6 的價格則為 $250",
+        "M6 Pro 提供更高的效能",
+        "特別是在處理複雜任務時表現優異",
+        "例如視覺效果渲染和人工智慧應用",
+        "根據 Geekbench 跑分測試",
+        "M6 Pro 的單核得分高達 4100",
+        "比 M6 提升了 12%",
+        "多核心表現也更出色"
+      ]
+    },
+    {
+      "visual_type": "cinema_tech_broll",
+      "narration": "M6 Pro 配備了最新的 M6 Pro 處理器，能夠提供卓越的效能和高效的能源管理。其 14 吋的 Retina 显示屏提供了清晰的畫質和色彩表現，適合專業設計師和編輯使用。此外，M6 Pro 還具有更長的續航力和更快的存取速度，使其成為一款非常實用的筆電選擇。",
+      "source_id": "SRC-06",
+      "chapter_num": "04",
+      "chapter_title": "終極購買建議",
+      "chapter_en": "BUYING VERDICT",
+      "id": "L15",
+      "accent_hex": "#5B50D6",
+      "image_prompt": "Photorealistic studio desk setup with aluminum MacBook Air and MacBook Pro, walnut wood slat wall, warm cinematic lighting, 8k, no text",
+      "source_detail": {
+        "source_id": "SRC-06",
+        "publisher": "T客邦",
+        "domain": "news.google.com",
+        "title": "蘋果 M6 Pro 跑分成績現身 Geekbench！單核破 4100 分、多核大漲 12% 真的太強了 - T客邦",
+        "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNVnNkMUVSOURpMExOTHAwX190ZlFKeF9RdlhLRmVQRDM1OVVJYng3UlB0Z3BZbllUeUtxRFRmWWlxM1owc3ZqTm5yS0FHSjg5cWtwd2ttb2dyUjQwVnA4b2g3NHAzeUVPZ09iTlh3T2JZcXh5X3dLSlZWREVGdlhMUDNURFdNVmZ0TUE?oc=5",
+        "published": "Wed, 23 Sep 2026 07:00:00",
+        "summary": "蘋果 M6 Pro 跑分成績現身 Geekbench！單核破 4100 分、多核大漲 12% 真的太強了 T客邦",
+        "extracted_metrics": []
+      },
+      "source_badge": "資料來源：T客邦 (news.google.com)",
+      "captions": [
+        "M6 Pro 配備了最新的 M6",
+        "Pro 處理器",
+        "能夠提供卓越的效能和高效的能源管理",
+        "其 14 吋的 Retina",
+        "显示屏提供了清晰的畫質和色彩表現",
+        "適合專業設計師和編輯使用",
+        "此外",
+        "M6 Pro",
+        "還具有更長的續航力和更快的存取速度",
+        "使其成為一款非常實用的筆電選擇"
+      ]
+    },
+    {
+      "visual_type": "cinema_tech_broll",
+      "narration": "相比之下，M6 虽然性价比较高，但其效能略低於 M6 Pro。M6 配備的是 M6 處理器，雖然也能滿足日常使用的需要，但在處理大型檔案或複雜任務時可能會略顯吃力。然而，M6 的價格更具競爭力，對於預算有限的用戶來說是一個不錯的選擇。",
+      "source_id": "SRC-05",
+      "chapter_num": "04",
+      "chapter_title": "終極購買建議",
+      "chapter_en": "BUYING VERDICT",
+      "id": "L16",
+      "accent_hex": "#B84A14",
+      "image_prompt": "Photorealistic studio desk setup with aluminum MacBook Air and MacBook Pro, walnut wood slat wall, warm cinematic lighting, 8k, no text",
+      "source_detail": {
+        "source_id": "SRC-05",
+        "publisher": "流動日報",
+        "domain": "news.google.com",
+        "title": "14 吋 MacBook Pro M6、M5 Pro、M5 Max 比較 三款晶片如何選擇？ - 流動日報",
+        "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQSHlxclZnb2JLY0FsN1BGQlcxWnk5dG9uTnZuckRXNEd3SFhaaUdtZG9QRVNvb0xrc0YtUGRSWkdfa2J5TFEycW9OWWdpMS1DNm9YaDg0WERLSlgyT1pSOGl2SFpBOVc2dmRXcS1CSTVCTWlPSVRpZDZWSEh6cTJCRkxoNVZxX18z?oc=5",
+        "published": "Wed, 28 Oct 2026 07:00:00",
+        "summary": "14 吋 MacBook Pro M6、M5 Pro、M5 Max 比較 三款晶片如何選擇？ 流動日報",
+        "extracted_metrics": [
+          "14 吋"
+        ]
+      },
+      "source_badge": "資料來源：流動日報 (news.google.com)",
+      "captions": [
+        "相比之下",
+        "M6 虽然性价比较高",
+        "但其效能略低於 M6 Pro",
+        "M6 配備的是 M6 處理器",
+        "雖然也能滿足日常使用的需要",
+        "但在處理大型檔案或複雜任務時可能會略顯",
+        "吃力",
+        "然而",
+        "M6 的價格更具競爭力",
+        "對於預算有限的用戶來說是一個不錯的選擇"
+      ]
+    }
+  ],
+  "short_beats": [
+    {
+      "visual_type": "hook_sticker_broll",
+      "sticker_top": "降價三百美元",
+      "sticker_bottom": "該直上 Pro 嗎？",
+      "narration": "M6 Pro比M6便宜三百美元，但真的值得嗎？",
+      "topic_pill": "筆電選購避坑",
+      "image_prompt": "Vertical close up studio shot of sleek aluminum MacBook laptop on dark desk, warm rim lighting, no text",
+      "id": "S01",
+      "source_id": "SRC-01",
+      "source_detail": {
+        "source_id": "SRC-01",
+        "publisher": "Wikipedia (ZH)",
+        "domain": "zh.wikipedia.org",
+        "title": "MacBook Air",
+        "url": "https://zh.wikipedia.org/wiki/MacBook_Air",
+        "published": "2026-11-05",
+        "summary": "MacBook Air是蘋果公司（Apple）開發的超薄型麥金塔筆記型電腦系列產品，於2008年1月15日時首次發布。蘋果公司聲稱這部電腦是「世上最薄的筆記型電腦」。 MacBook Air 是 蘋果公司 （Apple）開發的超薄型 麥金塔 筆記型電腦 系列產品，於2008年1月15日時首次發布。蘋果公司聲稱這部電腦是「世上最薄的筆記型電腦」。 [ 1 ] 2010年10月20日，蘋果發布了新款13.3吋MacBook Air。新款擁有更輕的外殼，更高解析度的顯示器，以及更大的電池容量，並使用 固態硬碟 取代了傳統的硬碟機。同時發布的還有首次被公布的11.6吋型號。MacBook Air在2011年取代停產的MacBook系列 聚碳酸酯 外殼 麥金塔筆記型電腦 。 [ 2 ] [ 3 ] [ 4 ] 2018年10月，蘋果再次進行系列的重大翻新，推出新一代13.3吋的全新MacBook Air，更新了 Retina顯示器 、 Touch ID 、 Thunderbolt 3 連接埠、 Force Touch觸控板 與蝶式鍵盤，但是取消 USB-A接孔 與 MagSafe 2 還有Apple燈。 [ 5 ] 2020年3月，蘋果取消了MacBook Air為人詬病且故障率高的蝶式鍵盤，改回剪刀式鍵盤。 [ 6 ] 2020年11月，基於蘋果自研的 Apple M1 的MacBook Air發佈。 [ 7 ] 2022年6月，蘋果在 WWDC 發佈搭載 Apple M2 的MacBook Air，並一改先前楔型設計，調整為與 MacBook Pro 一致但較薄的Flat Unibo",
+        "extracted_metrics": [
+          "0.68吋"
+        ]
+      },
+      "captions": [
+        "M6 Pro 比 M6",
+        "便宜三百美元",
+        "但真的值得嗎"
+      ]
+    },
+    {
+      "visual_type": "step_phone_mockup",
+      "topic_pill": "價格比較",
+      "step_title": "看基準容量",
+      "flow_steps": [
+        "512GB",
+        "1TB",
+        "2TB"
+      ],
+      "callout_tag": "必看刀法",
+      "card_metric": "差價不到兩百刀",
+      "card_points": [
+        "入門記憶體容量關鍵差異",
+        "外接螢幕與高刷體感落差"
+      ],
+      "source_id": "SRC-01",
+      "narration": "M6 Pro與M6的基準容量差價不到兩百刀，但升級後的體驗大不同。",
+      "image_prompt": "Mockup of two side-by-side MacBook laptops with different storage capacities highlighted",
+      "id": "S02",
+      "source_detail": {
+        "source_id": "SRC-01",
+        "publisher": "Wikipedia (ZH)",
+        "domain": "zh.wikipedia.org",
+        "title": "MacBook Air",
+        "url": "https://zh.wikipedia.org/wiki/MacBook_Air",
+        "published": "2026-11-05",
+        "summary": "MacBook Air是蘋果公司（Apple）開發的超薄型麥金塔筆記型電腦系列產品，於2008年1月15日時首次發布。蘋果公司聲稱這部電腦是「世上最薄的筆記型電腦」。 MacBook Air 是 蘋果公司 （Apple）開發的超薄型 麥金塔 筆記型電腦 系列產品，於2008年1月15日時首次發布。蘋果公司聲稱這部電腦是「世上最薄的筆記型電腦」。 [ 1 ] 2010年10月20日，蘋果發布了新款13.3吋MacBook Air。新款擁有更輕的外殼，更高解析度的顯示器，以及更大的電池容量，並使用 固態硬碟 取代了傳統的硬碟機。同時發布的還有首次被公布的11.6吋型號。MacBook Air在2011年取代停產的MacBook系列 聚碳酸酯 外殼 麥金塔筆記型電腦 。 [ 2 ] [ 3 ] [ 4 ] 2018年10月，蘋果再次進行系列的重大翻新，推出新一代13.3吋的全新MacBook Air，更新了 Retina顯示器 、 Touch ID 、 Thunderbolt 3 連接埠、 Force Touch觸控板 與蝶式鍵盤，但是取消 USB-A接孔 與 MagSafe 2 還有Apple燈。 [ 5 ] 2020年3月，蘋果取消了MacBook Air為人詬病且故障率高的蝶式鍵盤，改回剪刀式鍵盤。 [ 6 ] 2020年11月，基於蘋果自研的 Apple M1 的MacBook Air發佈。 [ 7 ] 2022年6月，蘋果在 WWDC 發佈搭載 Apple M2 的MacBook Air，並一改先前楔型設計，調整為與 MacBook Pro 一致但較薄的Flat Unibo",
+        "extracted_metrics": [
+          "0.68吋"
+        ]
+      },
+      "captions": [
+        "M6 Pro 與 M6",
+        "的基準容量差價不到兩百刀",
+        "但升級後的體驗大不同"
+      ]
+    },
+    {
+      "visual_type": "step_phone_mockup",
+      "topic_pill": "晶片效能",
+      "step_title": "晶片比較",
+      "flow_steps": [
+        "M6",
+        "M6 Pro"
+      ],
+      "callout_tag": "必看刀法",
+      "card_metric": "M6 Pro效能提升",
+      "card_points": [
+        "更高主頻率",
+        "更强GPU"
+      ],
+      "source_id": "SRC-02",
+      "narration": "M6 Pro的晶片效能比M6高出不少，特別在圖形處理上有顯著提升。",
+      "image_prompt": "Mockup of two side-by-side MacBook laptops showing CPU and GPU performance metrics",
+      "id": "S03",
+      "source_detail": {
+        "source_id": "SRC-02",
+        "publisher": "Wikipedia (EN)",
+        "domain": "en.wikipedia.org",
+        "title": "MacBook Air",
+        "url": "https://en.wikipedia.org/wiki/MacBook_Air",
+        "published": "2026-11-23",
+        "summary": "The MacBook Air is a line of consumer-oriented high-end notebook computers in the Mac series developed and manufactured by Apple since 2008. It features a thin, light structure in a machined aluminum case and either a 13 or 15 in screen. The MacBook Air's lower prices relative to the larger, higher performance MacBook Pro made it Apple's entry-level notebook for over a decade since the discontinuation of the original MacBook line in 2012, until the introduction of the MacBook Neo in 2026. The MacBook Air is a line of consumer-oriented high-end notebook computers in the Mac series developed and manufactured by Apple since 2008. It features a thin, light structure in a machined aluminum case a",
+        "extracted_metrics": []
+      },
+      "captions": [
+        "M6 Pro 的晶片效能比",
+        "M6 高出不少",
+        "特別在圖形處理上有顯著提升"
+      ]
+    },
+    {
+      "visual_type": "step_phone_mockup",
+      "topic_pill": "螢幕品質",
+      "step_title": "畫質比較",
+      "flow_steps": [
+        "亮度",
+        "色域",
+        "分辨率"
+      ],
+      "callout_tag": "必看刀法",
+      "card_metric": "M6 Pro亮度更高",
+      "card_points": [
+        "更亮的螢幕",
+        "更廣的色域"
+      ],
+      "source_id": "SRC-03",
+      "narration": "M6 Pro的螢幕亮度和色域表現優於M6，但分辨率沒有太大差別。",
+      "image_prompt": "Mockup of two side-by-side MacBook laptops with their screens side-by-side, highlighting brightness and color accuracy",
+      "id": "S04",
+      "source_detail": {
+        "source_id": "SRC-03",
+        "publisher": "Wikipedia (ZH)",
+        "domain": "zh.wikipedia.org",
+        "title": "MacBook Pro",
+        "url": "https://zh.wikipedia.org/wiki/MacBook_Pro",
+        "published": "2026-10-03",
+        "summary": "MacBook Pro是蘋果公司於2006年1月開始推出的Mac筆記型電腦系列。它是繼 iMac 之後，蘋果推出的第二款搭載英特爾處理器的 Mac 筆記型電腦，也是 PowerBook G4 產品線的繼任者，它也是MacBook家族中的高端機型，雖然在此之前已有13、15及17英寸版本，但已經停產，只保留14及16英寸的產品。 MacBook Pro 是 蘋果公司 於2006年1月開始推出的 Mac 筆記型電腦 系列。它是繼 iMac 之後，蘋果推出的第二款搭載英特爾處理器的 Mac 筆記型電腦，也是 PowerBook G4 產品線的繼任者，它也是 MacBook家族 中的高端機型，雖然在此之前已有13、15及17英寸版本，但已經停產，只保留14及16英寸的產品。 2006年1月11日由蘋果公司時任總裁 史蒂夫·賈伯斯 在 Macworld大會 （ 英語 ： Macworld/iWorld ） 上發布，並於同年2月正式出售 [ 參1 ] 。第一代MacBook Pro的外觀與PowerBook G4相似，但其實是用了 英特爾酷睿 處理器，而不是一貫沿用的 PowerPC G4 處理器。15英寸的機型於2006年1月發布，而17英寸則於4月發布，兩款機型於同年10月推出 酷睿2 處理器的更新版本。 第二代機型，採用 「Unibody」 一體成型機身，由一整塊 鋁合金 加工而成，外殼設計更為錐形，並於2008年10月以出及15英寸的MacBook Pro，及13英寸鋁合金一體式的MacBook一起推出。次年1月推出了17英寸的機型，6月推出內建電池的MacBook Pro系列，包",
+        "extracted_metrics": [
+          "03吋"
+        ]
+      },
+      "captions": [
+        "M6 Pro",
+        "的螢幕亮度和色域表現優於 M6",
+        "但分辨率沒有太大差別"
+      ]
+    },
+    {
+      "visual_type": "step_phone_mockup",
+      "topic_pill": "外接設備兼容性",
+      "step_title": "外接裝置",
+      "flow_steps": [
+        "USB-C",
+        "HDMI",
+        "Thunderbolt"
+      ],
+      "callout_tag": "必看刀法",
+      "card_metric": "M6 Pro支援更多埠",
+      "card_points": [
+        "多一個Thunderbolt埠",
+        "支援更多外接裝置"
+      ],
+      "source_id": "SRC-04",
+      "narration": "M6 Pro相比M6多了Thunderbolt埠，支援更多外接裝置。",
+      "image_prompt": "Mockup of two side-by-side MacBook laptops with various external devices connected to them",
+      "id": "S05",
+      "source_detail": {
+        "source_id": "SRC-04",
+        "publisher": "Wikipedia (EN)",
+        "domain": "en.wikipedia.org",
+        "title": "MacBook Pro",
+        "url": "https://en.wikipedia.org/wiki/MacBook_Pro",
+        "published": "2026-11-19",
+        "summary": "The MacBook Pro is a line of Mac-branded laptop computers developed and manufactured by Apple. Introduced in 2006, it is the high-end model of the MacBook family, sitting above the ultra-portable MacBook Air, the entry-level MacBook Neo, and previously the mid-range MacBook line. As of June 2026, it is currently sold with 14-and-16-inch screens, all using Apple M-series chips. Before the introduction of Apple silicon in 2020, all MacBook Pro models used Intel chips. The MacBook Pro is the first laptop made by Apple to use the Apple–Intel architecture, replacing the earlier PowerBook line for professional users. It is also the first Apple laptop to use the term \"MacBook\", which later replaced",
+        "extracted_metrics": []
+      },
+      "captions": [
+        "M6 Pro 相比 M6",
+        "多了 Thunderbolt 埠",
+        "支援更多外接裝置"
+      ]
+    },
+    {
+      "visual_type": "step_phone_mockup",
+      "topic_pill": "總結",
+      "step_title": "選購建議",
+      "flow_steps": [
+        "考慮需求",
+        "比較價格",
+        "做出決定"
+      ],
+      "callout_tag": "必看刀法",
+      "card_metric": "M6 Pro性价更高",
+      "card_points": [
+        "M6 Pro性价更高",
+        "根據需求選擇"
+      ],
+      "source_id": "SRC-05",
+      "narration": "根據你的需求和預算，M6 Pro可能是更好的選擇。",
+      "image_prompt": "Mockup of two side-by-side MacBook laptops with a decision tree showing key factors to consider",
+      "id": "S06",
+      "source_detail": {
+        "source_id": "SRC-05",
+        "publisher": "流動日報",
+        "domain": "news.google.com",
+        "title": "14 吋 MacBook Pro M6、M5 Pro、M5 Max 比較 三款晶片如何選擇？ - 流動日報",
+        "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQSHlxclZnb2JLY0FsN1BGQlcxWnk5dG9uTnZuckRXNEd3SFhaaUdtZG9QRVNvb0xrc0YtUGRSWkdfa2J5TFEycW9OWWdpMS1DNm9YaDg0WERLSlgyT1pSOGl2SFpBOVc2dmRXcS1CSTVCTWlPSVRpZDZWSEh6cTJCRkxoNVZxX18z?oc=5",
+        "published": "Wed, 28 Oct 2026 07:00:00",
+        "summary": "14 吋 MacBook Pro M6、M5 Pro、M5 Max 比較 三款晶片如何選擇？ 流動日報",
+        "extracted_metrics": [
+          "14 吋"
+        ]
+      },
+      "captions": [
+        "根據你的需求和預算",
+        "M6 Pro 可能是更好的選擇"
+      ]
+    },
+    {
+      "visual_type": "cta_funnel_endcard",
+      "narration": "點擊下方連結，了解更多詳細測試與全部公開來源！",
+      "topic_pill": "黑五特價",
+      "callout_tag": "點擊了解更多",
+      "source_id": "SRC-01",
+      "id": "S07",
+      "source_detail": {
+        "source_id": "SRC-01",
+        "publisher": "Wikipedia (ZH)",
+        "domain": "zh.wikipedia.org",
+        "title": "MacBook Air",
+        "url": "https://zh.wikipedia.org/wiki/MacBook_Air",
+        "published": "2026-11-05",
+        "summary": "MacBook Air是蘋果公司（Apple）開發的超薄型麥金塔筆記型電腦系列產品，於2008年1月15日時首次發布。蘋果公司聲稱這部電腦是「世上最薄的筆記型電腦」。 MacBook Air 是 蘋果公司 （Apple）開發的超薄型 麥金塔 筆記型電腦 系列產品，於2008年1月15日時首次發布。蘋果公司聲稱這部電腦是「世上最薄的筆記型電腦」。 [ 1 ] 2010年10月20日，蘋果發布了新款13.3吋MacBook Air。新款擁有更輕的外殼，更高解析度的顯示器，以及更大的電池容量，並使用 固態硬碟 取代了傳統的硬碟機。同時發布的還有首次被公布的11.6吋型號。MacBook Air在2011年取代停產的MacBook系列 聚碳酸酯 外殼 麥金塔筆記型電腦 。 [ 2 ] [ 3 ] [ 4 ] 2018年10月，蘋果再次進行系列的重大翻新，推出新一代13.3吋的全新MacBook Air，更新了 Retina顯示器 、 Touch ID 、 Thunderbolt 3 連接埠、 Force Touch觸控板 與蝶式鍵盤，但是取消 USB-A接孔 與 MagSafe 2 還有Apple燈。 [ 5 ] 2020年3月，蘋果取消了MacBook Air為人詬病且故障率高的蝶式鍵盤，改回剪刀式鍵盤。 [ 6 ] 2020年11月，基於蘋果自研的 Apple M1 的MacBook Air發佈。 [ 7 ] 2022年6月，蘋果在 WWDC 發佈搭載 Apple M2 的MacBook Air，並一改先前楔型設計，調整為與 MacBook Pro 一致但較薄的Flat Unibo",
+        "extracted_metrics": [
+          "0.68吋"
+        ]
+      },
+      "image_prompt": "Vertical studio close-up of sleek modern aluminum MacBook laptop and glowing Apple silicon chip on walnut desk, rim lighting, no text",
+      "captions": [
+        "點擊下方連結",
+        "了解更多詳細測試與全部公開來源"
+      ]
+    }
+  ],
+  "cited_sources": [
+    {
+      "source_id": "SRC-01",
+      "publisher": "Wikipedia (ZH)",
+      "domain": "zh.wikipedia.org",
+      "title": "MacBook Air",
+      "url": "https://zh.wikipedia.org/wiki/MacBook_Air",
+      "published": "2026-11-05",
+      "summary": "MacBook Air是蘋果公司（Apple）開發的超薄型麥金塔筆記型電腦系列產品，於2008年1月15日時首次發布。蘋果公司聲稱這部電腦是「世上最薄的筆記型電腦」。 MacBook Air 是 蘋果公司 （Apple）開發的超薄型 麥金塔 筆記型電腦 系列產品，於2008年1月15日時首次發布。蘋果公司聲稱這部電腦是「世上最薄的筆記型電腦」。 [ 1 ] 2010年10月20日，蘋果發布了新款13.3吋MacBook Air。新款擁有更輕的外殼，更高解析度的顯示器，以及更大的電池容量，並使用 固態硬碟 取代了傳統的硬碟機。同時發布的還有首次被公布的11.6吋型號。MacBook Air在2011年取代停產的MacBook系列 聚碳酸酯 外殼 麥金塔筆記型電腦 。 [ 2 ] [ 3 ] [ 4 ] 2018年10月，蘋果再次進行系列的重大翻新，推出新一代13.3吋的全新MacBook Air，更新了 Retina顯示器 、 Touch ID 、 Thunderbolt 3 連接埠、 Force Touch觸控板 與蝶式鍵盤，但是取消 USB-A接孔 與 MagSafe 2 還有Apple燈。 [ 5 ] 2020年3月，蘋果取消了MacBook Air為人詬病且故障率高的蝶式鍵盤，改回剪刀式鍵盤。 [ 6 ] 2020年11月，基於蘋果自研的 Apple M1 的MacBook Air發佈。 [ 7 ] 2022年6月，蘋果在 WWDC 發佈搭載 Apple M2 的MacBook Air，並一改先前楔型設計，調整為與 MacBook Pro 一致但較薄的Flat Unibo",
+      "extracted_metrics": [
+        "0.68吋"
+      ]
+    },
+    {
+      "source_id": "SRC-06",
+      "publisher": "T客邦",
+      "domain": "news.google.com",
+      "title": "蘋果 M6 Pro 跑分成績現身 Geekbench！單核破 4100 分、多核大漲 12% 真的太強了 - T客邦",
+      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNVnNkMUVSOURpMExOTHAwX190ZlFKeF9RdlhLRmVQRDM1OVVJYng3UlB0Z3BZbllUeUtxRFRmWWlxM1owc3ZqTm5yS0FHSjg5cWtwd2ttb2dyUjQwVnA4b2g3NHAzeUVPZ09iTlh3T2JZcXh5X3dLSlZWREVGdlhMUDNURFdNVmZ0TUE?oc=5",
+      "published": "Wed, 23 Sep 2026 07:00:00",
+      "summary": "蘋果 M6 Pro 跑分成績現身 Geekbench！單核破 4100 分、多核大漲 12% 真的太強了 T客邦",
+      "extracted_metrics": []
+    },
+    {
+      "source_id": "SRC-08",
+      "publisher": "瘋先生",
+      "domain": "news.google.com",
+      "title": "Apple M6 MacBook Pro正式發表！9大規格亮點主打AI和告訴你該不該換 - 瘋先生",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFA0ZzFNbXJWZERCWEdOeE9hMFZ5RXpNQVd5V2lUbWFieGlYb292czRsU3dKajFGdV8zdjVnN0E3RExfS0N6ck1tZkFWSkNHN1c4OEdYZ2pKcHJmQU50UmxV?oc=5",
+      "published": "Thu, 29 Oct 2026 07:00:00",
+      "summary": "Apple M6 MacBook Pro正式發表！9大規格亮點主打AI和告訴你該不該換 瘋先生",
+      "extracted_metrics": []
+    },
+    {
+      "source_id": "SRC-05",
+      "publisher": "流動日報",
+      "domain": "news.google.com",
+      "title": "14 吋 MacBook Pro M6、M5 Pro、M5 Max 比較 三款晶片如何選擇？ - 流動日報",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQSHlxclZnb2JLY0FsN1BGQlcxWnk5dG9uTnZuckRXNEd3SFhaaUdtZG9QRVNvb0xrc0YtUGRSWkdfa2J5TFEycW9OWWdpMS1DNm9YaDg0WERLSlgyT1pSOGl2SFpBOVc2dmRXcS1CSTVCTWlPSVRpZDZWSEh6cTJCRkxoNVZxX18z?oc=5",
+      "published": "Wed, 28 Oct 2026 07:00:00",
+      "summary": "14 吋 MacBook Pro M6、M5 Pro、M5 Max 比較 三款晶片如何選擇？ 流動日報",
+      "extracted_metrics": [
+        "14 吋"
+      ]
+    },
+    {
+      "source_id": "SRC-02",
+      "publisher": "Wikipedia (EN)",
+      "domain": "en.wikipedia.org",
+      "title": "MacBook Air",
+      "url": "https://en.wikipedia.org/wiki/MacBook_Air",
+      "published": "2026-11-23",
+      "summary": "The MacBook Air is a line of consumer-oriented high-end notebook computers in the Mac series developed and manufactured by Apple since 2008. It features a thin, light structure in a machined aluminum case and either a 13 or 15 in screen. The MacBook Air's lower prices relative to the larger, higher performance MacBook Pro made it Apple's entry-level notebook for over a decade since the discontinuation of the original MacBook line in 2012, until the introduction of the MacBook Neo in 2026. The MacBook Air is a line of consumer-oriented high-end notebook computers in the Mac series developed and manufactured by Apple since 2008. It features a thin, light structure in a machined aluminum case a",
+      "extracted_metrics": []
+    },
+    {
+      "source_id": "SRC-03",
+      "publisher": "Wikipedia (ZH)",
+      "domain": "zh.wikipedia.org",
+      "title": "MacBook Pro",
+      "url": "https://zh.wikipedia.org/wiki/MacBook_Pro",
+      "published": "2026-10-03",
+      "summary": "MacBook Pro是蘋果公司於2006年1月開始推出的Mac筆記型電腦系列。它是繼 iMac 之後，蘋果推出的第二款搭載英特爾處理器的 Mac 筆記型電腦，也是 PowerBook G4 產品線的繼任者，它也是MacBook家族中的高端機型，雖然在此之前已有13、15及17英寸版本，但已經停產，只保留14及16英寸的產品。 MacBook Pro 是 蘋果公司 於2006年1月開始推出的 Mac 筆記型電腦 系列。它是繼 iMac 之後，蘋果推出的第二款搭載英特爾處理器的 Mac 筆記型電腦，也是 PowerBook G4 產品線的繼任者，它也是 MacBook家族 中的高端機型，雖然在此之前已有13、15及17英寸版本，但已經停產，只保留14及16英寸的產品。 2006年1月11日由蘋果公司時任總裁 史蒂夫·賈伯斯 在 Macworld大會 （ 英語 ： Macworld/iWorld ） 上發布，並於同年2月正式出售 [ 參1 ] 。第一代MacBook Pro的外觀與PowerBook G4相似，但其實是用了 英特爾酷睿 處理器，而不是一貫沿用的 PowerPC G4 處理器。15英寸的機型於2006年1月發布，而17英寸則於4月發布，兩款機型於同年10月推出 酷睿2 處理器的更新版本。 第二代機型，採用 「Unibody」 一體成型機身，由一整塊 鋁合金 加工而成，外殼設計更為錐形，並於2008年10月以出及15英寸的MacBook Pro，及13英寸鋁合金一體式的MacBook一起推出。次年1月推出了17英寸的機型，6月推出內建電池的MacBook Pro系列，包",
+      "extracted_metrics": [
+        "03吋"
+      ]
+    },
+    {
+      "source_id": "SRC-04",
+      "publisher": "Wikipedia (EN)",
+      "domain": "en.wikipedia.org",
+      "title": "MacBook Pro",
+      "url": "https://en.wikipedia.org/wiki/MacBook_Pro",
+      "published": "2026-11-19",
+      "summary": "The MacBook Pro is a line of Mac-branded laptop computers developed and manufactured by Apple. Introduced in 2006, it is the high-end model of the MacBook family, sitting above the ultra-portable MacBook Air, the entry-level MacBook Neo, and previously the mid-range MacBook line. As of June 2026, it is currently sold with 14-and-16-inch screens, all using Apple M-series chips. Before the introduction of Apple silicon in 2020, all MacBook Pro models used Intel chips. The MacBook Pro is the first laptop made by Apple to use the Apple–Intel architecture, replacing the earlier PowerBook line for professional users. It is also the first Apple laptop to use the term \"MacBook\", which later replaced",
+      "extracted_metrics": []
+    }
+  ]
+}
