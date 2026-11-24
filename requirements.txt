@@ -1,0 +1,17 @@
+# Local Master & Compositor Dependencies
+numpy>=1.26.0
+Pillow>=10.0.0
+
+# Remote Heavy GPU Node Dependencies (RTX Pro 6000 / b850 CUDA Worker)
+# Installed automatically on worker via run_pipeline.py:
+# torch>=2.4.0
+# torchaudio>=2.4.0
+# f5-tts
+# faster-whisper
+# diffusers>=0.30.0
+# transformers>=4.44.0
+# accelerate>=0.33.0
+# safetensors
+# soundfile
+# scipy
+# demucs

@@ -1,0 +1,44 @@
+# Hey Digital Gemini 4 Carbon — Tailscale SSH Mesh Config
+# Makes b850, b850-ubuntu, alan-fw, alan-mba, alan-hub seamlessly reachable via Tailscale SSH
+
+Host b850 b850-ubuntu alan-eagle
+    HostName 100.100.230.119
+    User alan-eagle
+    Port 22
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes
+    StrictHostKeyChecking accept-new
+    ConnectTimeout 8
+    ServerAliveInterval 30
+    ServerAliveCountMax 4
+
+Host alan-fw
+    HostName 100.78.161.123
+    User claw
+    Port 22
+    IdentityFile ~/.ssh/id_ed25519_openclaw_swarm
+    IdentitiesOnly yes
+    StrictHostKeyChecking accept-new
+    ConnectTimeout 8
+    ServerAliveInterval 30
+    ServerAliveCountMax 4
+
+Host alan-mba
+    HostName 100.102.171.50
+    User alan_dingchaoliao
+    Port 22
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes
+    StrictHostKeyChecking accept-new
+    ConnectTimeout 8
+    ServerAliveInterval 30
+    ServerAliveCountMax 4
+
+Host desktop-b0e99lv win1660 alan-1660
+    HostName 100.122.27.93
+    User 電腦
+    Port 22
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes
+    StrictHostKeyChecking accept-new
+    ConnectTimeout 5

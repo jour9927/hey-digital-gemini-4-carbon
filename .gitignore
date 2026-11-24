@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.DS_Store
+
+# Ephemeral secrets & tunnel tokens
+config/rtx6000_bridge.json
+.env
+
+# Large rendered media & intermediate build artifacts (keep sample frames/manifests if desired)
+runs/*/work_long/
+runs/*/work_short/
+runs/*/tts/*.wav
+runs/*/images/*.png
+runs/*/deliverables/*.mp4
+reference_downloads/
