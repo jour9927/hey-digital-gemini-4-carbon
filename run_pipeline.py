@@ -406,6 +406,10 @@ def run_pipeline(args: argparse.Namespace) -> Path:
         "cited_sources": plan.get("cited_sources", []),
     }
     (deliverables_dir / "release_manifest.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
+    if getattr(args, "send_tg", False):
+        from hey_digital_pipeline.tg_delivery import send_run_to_telegram
+        tg_res = send_run_to_telegram(deliverables_dir)
+        print(f"[Stage 6] Delivered Thumbnail + Long + Short to Telegram: {tg_res}")
     print(f"=== V2 PIPELINE COMPLETE! Deliverables saved locally to: {deliverables_dir} ===")
     return deliverables_dir
 
@@ -421,6 +425,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
     ap.add_argument("--colab-token", default="", help="Bearer token for RTX Pro 6000 bridge")
     ap.add_argument("--run-id", default="", help="Custom run folder name under runs/")
     ap.add_argument("--skip-i2v", action="store_true", help="Skip LTX-Video I2V stage if quick turnaround is desired")
+    ap.add_argument("--send-tg", action="store_true", help="Automatically push finished Thumbnail, Long MP4, and Short MP4 to Telegram")
     ap.add_argument("--force-regen-script", action="store_true")
     return ap
 
