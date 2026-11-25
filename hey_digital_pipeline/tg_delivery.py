@@ -3,9 +3,9 @@
 Hey Digital Gemini 4 Carbon V4 — Automatic Telegram Deliverable Push
 ====================================================================
 Automatically sends the rendered Spotlight Thumbnail (`1920x1080`), Long-Form Video (`1920x1080`),
-and Interactive Traffic-Funnel Short (`1080x1920`) directly to the channel owner's Telegram chat
-(`supports_streaming=true`), dynamically capping bitrate for >45MB MP4s to fit Telegram's 50MB Bot
-API limit for ANY episode duration cleanly without exposing secrets in logs or git.
+Interactive Traffic-Funnel Short (`1080x1920`), and Standalone Voiceover Master MP3 directly to the
+channel owner's Telegram chat (`supports_streaming=true`), dynamically capping bitrate for >45MB
+MP4s and generating spec-compliant `320x180` JPEG video previews.
 """
 from __future__ import annotations
 
@@ -98,7 +98,6 @@ def ensure_tg_size_limit(mp4_path: Path, max_mb: float = 44.5) -> Path:
         return tg_mp4
 
     dur = _probe_duration(mp4_path)
-    # Budget total kbps strictly under `max_mb` (with 192k AAC audio + container overhead headroom)
     target_v_kbps = max(550, min(1850, int((max_mb * 0.94 * 8192.0) / dur) - 196))
     buf_kbps = target_v_kbps * 2
 
@@ -117,12 +116,38 @@ def ensure_tg_size_limit(mp4_path: Path, max_mb: float = 44.5) -> Path:
     return tg_mp4
 
 
+def _make_tg_video_thumb_jpg(thumb_png: Path) -> Path:
+    """Telegram `sendVideo` requires a <=320px JPEG <200kB for inline streaming preview."""
+    jpg_p = thumb_png.with_name("_tg_thumb_320.jpg")
+    subprocess.run(
+        ["ffmpeg", "-y", "-i", str(thumb_png), "-vf", "scale=320:180", "-q:v", "5", str(jpg_p)],
+        check=True,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    return jpg_p
+
+
+def _extract_tg_voice_mp3(long_mp4: Path) -> Path:
+    mp3_p = long_mp4.with_name("hey_digital_v4_voice_master.mp3")
+    subprocess.run(
+        ["ffmpeg", "-y", "-i", str(long_mp4), "-vn", "-c:a", "libmp3lame", "-b:a", "192k", str(mp3_p)],
+        check=True,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    return mp3_p
+
+
 def send_run_to_telegram(deliverables_dir: Path) -> dict:
     token, chat_id = resolve_telegram_credentials()
     manifest = json.loads((deliverables_dir / "release_manifest.json").read_text(encoding="utf-8"))
     thumb_png = deliverables_dir / "thumbnail_1080p.png"
-    long_mp4 = ensure_tg_size_limit(deliverables_dir / "hey_digital_long_1080p.mp4")
+    thumb_320_jpg = _make_tg_video_thumb_jpg(thumb_png)
+    master_long_mp4 = deliverables_dir / "hey_digital_long_1080p.mp4"
+    long_mp4 = ensure_tg_size_limit(master_long_mp4)
     short_mp4 = ensure_tg_size_limit(deliverables_dir / "hey_digital_short_funnel_1080x1920.mp4")
+    voice_mp3 = _extract_tg_voice_mp3(master_long_mp4)
 
     title_long = manifest.get("title_long", "")
     title_short = manifest.get("title_short", "")
@@ -134,26 +159,35 @@ def send_run_to_telegram(deliverables_dir: Path) -> dict:
         "-F", f"chat_id={chat_id}",
         "-F", f"photo=@{thumb_png}",
         "-F", (
-            f"caption=🎬 Hey Digital Gemini 4 Carbon V4 原聲級配音精修成片（Run: {manifest.get('run_id')}）\n\n"
+            f"caption=🎬 Hey Digital V4 原聲級配音＋精準實拍成片（{manifest.get('run_id')}）\n\n"
             f"1️⃣ 【1080p 頻道聚光燈縮圖】\n"
             f"📌 長片標題：《{title_long}》\n"
-            f"📚 公開爬蟲與純硬體對位來源：{src_cnt} 筆\n"
-            f"🔗 GitHub：https://github.com/jour9927/hey-digital-gemini-4-carbon"
+            f"📚 公開爬蟲與純硬體對位來源：{src_cnt} 筆"
         ),
+    ])
+
+    r_audio = _tg_post(token, "sendAudio", [
+        "-F", f"chat_id={chat_id}",
+        "-F", f"audio=@{voice_mp3}",
+        "-F", f"thumbnail=@{thumb_320_jpg}",
+        "-F", f"duration={dur_long}",
+        "-F", "performer=Hey Digital (Alan Cloned V4)",
+        "-F", f"title={title_long[:48]}",
+        "-F", "caption=🎧 【V4 長片獨立母帶音軌 MP3｜可直接點開試聽咬字、破音字與呼吸感】",
     ])
 
     r_long = _tg_post(token, "sendVideo", [
         "-F", f"chat_id={chat_id}",
         "-F", f"video=@{long_mp4}",
-        "-F", f"thumbnail=@{thumb_png}",
+        "-F", f"thumbnail=@{thumb_320_jpg}",
         "-F", "width=1920",
         "-F", "height=1080",
         "-F", f"duration={dur_long}",
         "-F", "supports_streaming=true",
         "-F", (
             f"caption=2️⃣ 【V4 長片成片 1920x1080@30fps｜{dur_long}s｜-14.2 LUFS】\n"
-            f"• 真人原片級口語化配音：修復繁簡分詞破音字（彈性/幾乎/連接埠/拖著）、M5 與英文雙語無損參考乾音、零雙空白詞間卡頓、自然段落呼吸停頓\n"
-            f"• KeypointRCNN 零口播人臉過濾 + SigLIP 逐句精準對位實拍 + Three.js WebGL2 3D 動態模板 + 輕柔 Rhodes 電鋼琴閃避混音"
+            f"• 真人原片級口語化配音（修復破音字、M5雙語乾音、零詞間頓挫、自然呼吸停頓）\n"
+            f"• KeypointRCNN 零人臉過濾 + SigLIP 逐句對位實拍 + Three.js 3D 模板"
         ),
     ])
 
@@ -166,15 +200,14 @@ def send_run_to_telegram(deliverables_dir: Path) -> dict:
         "-F", "supports_streaming=true",
         "-F", (
             f"caption=3️⃣ 【V4 互動導流 Short 1080x1920@30fps｜{dur_short}s｜-14.3 LUFS】\n"
-            f"📌 標題：{title_short}\n"
-            f"• 明快緊湊口語節奏 + 超低干擾人聲優先混音（對標原片 Short 聽感）\n"
-            f"• 5 張彈簧貼紙開場 + 5 大步驟 iPhone 內嵌精準對位硬體特寫與動態開關 + 關聯長片導流收尾卡"
+            f"📌 標題：{title_short}"
         ),
     ])
 
     return {
         "chat_id": chat_id,
         "photo_message_id": r_photo.get("message_id"),
+        "audio_message_id": r_audio.get("message_id"),
         "long_video_message_id": r_long.get("message_id"),
         "short_video_message_id": r_short.get("message_id"),
     }

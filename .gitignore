@@ -18,6 +18,8 @@ runs/*/tts/*.wav
 runs/*/images/*.png
 runs/*/images/*.mp4
 runs/*/deliverables/*.mp4
+runs/*/deliverables/*.mp3
 runs/*/deliverables/*.png
+runs/*/deliverables/*.jpg
 runs/ep02_v2_flagship/
 reference_downloads/
