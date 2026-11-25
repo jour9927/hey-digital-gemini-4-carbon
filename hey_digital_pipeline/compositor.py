@@ -850,6 +850,6 @@ def assemble_short_video(
     sfx_wav = work_dir / "short_sfx.wav"
     generate_rhodes_chill_bgm(total_dur, bgm_wav, bpm=88.0)
     build_sfx_track(total_dur, sfx_events, sfx_wav)
-    master_video_with_sidechain(raw_joined, bgm_wav, sfx_wav, out_mp4, target_lufs=-14.3)
+    master_video_with_sidechain(raw_joined, bgm_wav, sfx_wav, out_mp4, target_lufs=-14.3, bgm_volume=0.14)
 
     return {"duration": round(total_dur, 2), "path": str(out_mp4)}

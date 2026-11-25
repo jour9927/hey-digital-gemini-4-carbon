@@ -253,39 +253,149 @@ def run_pipeline(args: argparse.Namespace) -> Path:
         vp_obj["ref_wav"] = "/content/heydigital_g4c/voices/profile/alan_prompt_clip_24k.wav"
         client.put_bytes(json.dumps(vp_obj, ensure_ascii=False, indent=2).encode("utf-8"), "voices/profile/voice_profile.json")
 
-    # Step 4B: Sentence-Level PyTorch F5-TTS + Whisper Forced Alignment on RTX Pro 6000
+    # Step 4B: V4 Studio-Condenser PyTorch F5-TTS + Whisper Forced Alignment (RTX Pro 6000 -> Tailscale b850 CUDA -> Local MPS)
     tts_local_dir = run_dir / "tts"
     if not (tts_local_dir / "tts_results.json").exists():
+        from hey_digital_pipeline.cn_verbalizer import verbalize_for_mandarin_tts
+
         tts_items = []
         for b in plan.get("long_beats", []):
+            nar = b.get("narration", "")
+            b["tts_text"] = verbalize_for_mandarin_tts(nar) if nar else ""
             tts_items.append({
                 "id": b["id"],
-                "text": b.get("narration", ""),
-                "tts_text": b.get("tts_text", ""),
+                "text": nar,
+                "tts_text": b["tts_text"],
                 "captions": b.get("captions", []),
                 "silent_duration": b.get("silent_duration", 1.85),
             })
         for sb in plan.get("short_beats", []):
+            nar = sb.get("narration", "")
+            sb["tts_text"] = verbalize_for_mandarin_tts(nar) if nar else ""
             tts_items.append({
                 "id": sb["id"],
-                "text": sb.get("narration", ""),
-                "tts_text": sb.get("tts_text", ""),
+                "text": nar,
+                "tts_text": sb["tts_text"],
                 "captions": sb.get("captions", []),
             })
-        tts_manifest = {"speed": 0.96, "items": tts_items}
+        plan_file.write_text(json.dumps(plan, ensure_ascii=False, indent=2), encoding="utf-8")
+        tts_manifest = {"speed": 1.01, "short_speed": 1.07, "items": tts_items}
         (run_dir / "tts_manifest.json").write_text(json.dumps(tts_manifest, ensure_ascii=False, indent=2), encoding="utf-8")
-        client.put_file(run_dir / "tts_manifest.json", f"jobs/{run_dir.name}/tts_manifest.json")
 
-        print(f"[Stage 4B] Synthesizing & Whisper-aligning {len(tts_items)} cloned voiceover segments on RTX Pro 6000...")
-        jid_tts = client.exec_async(
-            f"python3 -u rtx6000_heavy_worker.py tts-batch --manifest ../jobs/{run_dir.name}/tts_manifest.json --profile ../voices/profile/voice_profile.json --out-dir ../jobs/{run_dir.name}/tts",
-            cwd="repo",
-            env=remote_hf_env,
-            job_id=f"tts_{run_dir.name}",
-        )
-        client.wait_job(jid_tts, poll_sec=4.0, max_wait_sec=2400.0)
-        client.get_tar_dir(f"jobs/{run_dir.name}/tts", tts_local_dir)
-        print(f"  -> Downloaded all {len(tts_items)} broadcast WAVs + Whisper caption alignments to {tts_local_dir}!")
+        if client is not None:
+            client.put_file(run_dir / "tts_manifest.json", f"jobs/{run_dir.name}/tts_manifest.json")
+            print(f"[Stage 4B] Synthesizing & Whisper-aligning {len(tts_items)} cloned voiceover segments on RTX Pro 6000...")
+            jid_tts = client.exec_async(
+                f"python3 -u rtx6000_heavy_worker.py tts-batch --manifest ../jobs/{run_dir.name}/tts_manifest.json --profile ../voices/profile/voice_profile.json --out-dir ../jobs/{run_dir.name}/tts",
+                cwd="repo",
+                env=remote_hf_env,
+                job_id=f"tts_{run_dir.name}",
+            )
+            client.wait_job(jid_tts, poll_sec=4.0, max_wait_sec=2400.0)
+            client.get_tar_dir(f"jobs/{run_dir.name}/tts", tts_local_dir)
+            print(f"  -> Downloaded all {len(tts_items)} broadcast WAVs + Whisper caption alignments to {tts_local_dir}!")
+        else:
+            # Try Tailscale SSH `b850` RTX 5070 Ti CUDA in isolated `/dev/shm/heydigital_g4c` first (if >= 3500 MiB free), else local MPS!
+            import subprocess
+            import sys
+            ssh_cfg = REPO_ROOT / "config" / "ssh_config"
+            b850_ok = False
+            try:
+                chk = subprocess.check_output(
+                    ["ssh", "-F", str(ssh_cfg), "-o", "ConnectTimeout=4", "b850",
+                     "/dev/shm/heydigital_g4c/.venv/bin/python -c 'import torch; print(torch.cuda.mem_get_info(0)[0]//1048576)' 2>/dev/null"],
+                    text=True, timeout=8,
+                ).strip()
+                if chk.isdigit() and int(chk) >= 3400:
+                    b850_ok = True
+            except Exception:
+                b850_ok = False
+
+            if b850_ok:
+                print(f"[Stage 4B] Synthesizing & Whisper-aligning {len(tts_items)} segments on Tailscale `b850` RTX 5070 Ti CUDA (/dev/shm RAM-disk)...")
+                r_job = f"/dev/shm/heydigital_g4c/jobs/{run_dir.name}"
+                subprocess.run(["ssh", "-F", str(ssh_cfg), "b850", f"mkdir -p {r_job}/tts /dev/shm/heydigital_g4c/voices"], check=True)
+                vp_local = json.loads((local_vp_dir / "voice_profile.json").read_text(encoding="utf-8"))
+                ref_wav_local = REPO_ROOT / vp_local["ref_wav"]
+                if not ref_wav_local.exists():
+                    ref_wav_local = local_vp_dir / "alan_prompt_clip_24k.wav"
+                vp_remote = dict(vp_local)
+                vp_remote["ref_wav"] = "/dev/shm/heydigital_g4c/voices/alan_prompt_clip_24k.wav"
+                tmp_vp = run_dir / "_b850_vp.json"
+                tmp_vp.write_text(json.dumps(vp_remote, ensure_ascii=False, indent=2), encoding="utf-8")
+                subprocess.run([
+                    "scp", "-q", "-F", str(ssh_cfg),
+                    str(REPO_ROOT / "worker" / "rtx6000_heavy_worker.py"),
+                    "b850:/dev/shm/heydigital_g4c/rtx6000_heavy_worker.py",
+                ], check=True)
+                subprocess.run([
+                    "scp", "-q", "-F", str(ssh_cfg),
+                    str(ref_wav_local),
+                    "b850:/dev/shm/heydigital_g4c/voices/alan_prompt_clip_24k.wav",
+                ], check=True)
+                subprocess.run([
+                    "scp", "-q", "-F", str(ssh_cfg),
+                    str(tmp_vp),
+                    "b850:/dev/shm/heydigital_g4c/voices/voice_profile.json",
+                ], check=True)
+                subprocess.run([
+                    "scp", "-q", "-F", str(ssh_cfg),
+                    str(run_dir / "tts_manifest.json"),
+                    f"b850:{r_job}/tts_manifest.json",
+                ], check=True)
+                tmp_vp.unlink(missing_ok=True)
+                subprocess.run([
+                    "ssh", "-F", str(ssh_cfg), "b850",
+                    f"/dev/shm/heydigital_g4c/.venv/bin/python -u /dev/shm/heydigital_g4c/rtx6000_heavy_worker.py tts-batch "
+                    f"--manifest {r_job}/tts_manifest.json --profile /dev/shm/heydigital_g4c/voices/voice_profile.json --out-dir {r_job}/tts",
+                ], check=True)
+                tts_local_dir.mkdir(parents=True, exist_ok=True)
+                subprocess.run([
+                    "bash", "-c",
+                    f"ssh -F '{ssh_cfg}' b850 'tar -czf - -C {r_job}/tts .' | tar -xzf - -C '{tts_local_dir}' && ssh -F '{ssh_cfg}' b850 'rm -rf {r_job}'",
+                ], check=True)
+                print(f"  -> Pulled all {len(tts_items)} studio WAVs + Whisper alignments from `b850` to local {tts_local_dir}!")
+            else:
+                print(f"[Stage 4B] Synthesizing {len(tts_items)} segments locally via 2-way parallel Apple Metal MPS workers...")
+                tts_local_dir.mkdir(parents=True, exist_ok=True)
+                vp_local_abs = json.loads((local_vp_dir / "voice_profile.json").read_text(encoding="utf-8"))
+                vp_local_abs["ref_wav"] = str((REPO_ROOT / vp_local_abs["ref_wav"]).resolve())
+                tmp_vp = run_dir / "_local_vp.json"
+                tmp_vp.write_text(json.dumps(vp_local_abs, ensure_ascii=False, indent=2), encoding="utf-8")
+
+                n_workers = 2
+                procs = []
+                shard_dirs = []
+                for wi in range(n_workers):
+                    s_items = tts_items[wi::n_workers]
+                    s_mf = run_dir / f"_tts_mf_s{wi}.json"
+                    s_out = run_dir / f"_tts_out_s{wi}"
+                    s_out.mkdir(parents=True, exist_ok=True)
+                    s_mf.write_text(json.dumps({"speed": 1.01, "short_speed": 1.06, "items": s_items}, ensure_ascii=False), encoding="utf-8")
+                    shard_dirs.append((s_mf, s_out))
+                    procs.append(subprocess.Popen([
+                        sys.executable, "-u", str(REPO_ROOT / "worker" / "rtx6000_heavy_worker.py"),
+                        "tts-batch", "--manifest", str(s_mf), "--profile", str(tmp_vp), "--out-dir", str(s_out),
+                    ]))
+                for p_w in procs:
+                    if p_w.wait() != 0:
+                        raise RuntimeError("Local MPS TTS worker shard failed")
+
+                import shutil
+                merged_map = {}
+                for s_mf, s_out in shard_dirs:
+                    s_res = json.loads((s_out / "tts_results.json").read_text(encoding="utf-8"))
+                    for it in s_res["items"]:
+                        merged_map[it["id"]] = it
+                        shutil.move(str(s_out / it["wav"]), str(tts_local_dir / it["wav"]))
+                    s_mf.unlink(missing_ok=True)
+                    shutil.rmtree(s_out, ignore_errors=True)
+                ordered_items = [merged_map[it["id"]] for it in tts_items]
+                (tts_local_dir / "tts_results.json").write_text(
+                    json.dumps({"ok": True, "gpu": "Apple Silicon Metal MPS x2", "count": len(ordered_items), "items": ordered_items}, ensure_ascii=False, indent=2),
+                    encoding="utf-8",
+                )
+                tmp_vp.unlink(missing_ok=True)
 
     # Step 4C: Spotlight Thumbnail Hero (`RealVisXL_V4.0`) + Chapter Card Silhouettes (all B-roll uses real SigLIP-matched footage!)
     img_local_dir = run_dir / "images"

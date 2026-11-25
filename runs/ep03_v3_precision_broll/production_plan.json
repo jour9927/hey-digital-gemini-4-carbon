@@ -15,7 +15,7 @@
   "long_beats": [
     {
       "visual_type": "cinema_broll_video",
-      "narration": "入門版 MacBook Air M5 看起來便宜，但升級到 512GB 和 16GB 記憶體後，價格幾乎追平了高階款。",
+      "narration": "如果你最近想換一台 MacBook Air M5，大概都會遇到同一個糾結：入門款帳面上很便宜，可是一旦把容量補齊到 16GB 記憶體和 512GB SSD，價格幾乎瞬間貼近高階款。",
       "source_id": "SRC-01",
       "broll_shots": [
         {
@@ -34,11 +34,15 @@
       "chapter_en": "PRICING & TCO TRAP",
       "id": "L01",
       "accent_hex": "#B84A14",
-      "tts_text": "入門版 MacBook Air M 五 看起來便宜，但升級到 五百一十二 G 和 十六 G 記憶體後，價格幾乎追平了高階款。",
+      "tts_text": "如果你最近想换一台搭载 Em五晶片的 MacBook Air，大概都会遇到同一个纠结，入门款帐面上很便宜，可是一旦把容量补齐到十六G记忆体和五百一十二G固态硬碟，价格几乎瞬间贴近高阶款。",
       "captions": [
-        "入門版 MacBook Air M5 看起來便宜",
-        "但升級到 512GB 和 16GB 記憶體後",
-        "價格幾乎追平了高階款"
+        "如果你最近想換一",
+        "台 MacBook Air M5",
+        "大概都會遇到同一個糾結",
+        "入門款帳面上很便宜",
+        "可是一旦把容量補齊到 16GB 記",
+        "憶體和 512GB SSD",
+        "價格幾乎瞬間貼近高階款"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_detail": {
@@ -87,7 +91,7 @@
           "url": "https://www.youtube.com/watch?v=xfm-dprloQ8",
           "query_origin": "MacBook Air M5 keyboard trackpad ports close up",
           "match_score": 0.0745,
-          "clause_hint": "入門版 MacBook Air M5 看起來便宜",
+          "clause_hint": "如果你最近想換一，台 MacBook Air M5，大概都會遇到同一個糾結",
           "visual_desc": "macro close-up shot of MacBook Air M5 side Thunderbolt ports and thin aluminum chassis on desk, pure hardware close-up B-roll, no human face",
           "source_id": "SRC-09",
           "source_badge": "畫面與資料來源：YouTube · Simple Alpaca · SRC-09"
@@ -106,7 +110,7 @@
           "url": "https://www.youtube.com/watch?v=tS1BMlao0_c",
           "query_origin": "MacBook Pro display video editing review",
           "match_score": 0.085,
-          "clause_hint": "但升級到 512GB 和 16GB 記憶體後，價格幾乎追平了高階款",
+          "clause_hint": "入門款帳面上很便宜，可是一旦把容量補齊到 16GB 記，憶體和 512GB SSD，價格幾乎瞬間貼近高階款",
           "visual_desc": "close-up hands editing 4K video timeline on bright MacBook Pro screen in studio, pure hardware close-up B-roll, no human face",
           "source_id": "SRC-10",
           "source_badge": "畫面與資料來源：YouTube · Cristian Silvagnoli  · SRC-10"
@@ -115,7 +119,7 @@
     },
     {
       "visual_type": "webgl_memory_lanes",
-      "narration": "記憶體頻寬差異導致效能差距，16GB 版本頻寬僅有 153GB/s，而 32GB 版本則有 170GB/s。",
+      "narration": "很多人第一眼沒注意的是記憶體頻寬刀法，標準 16GB 版本的頻寬只有 153GB/s，要往上加到高階配置才能跑到 170GB/s 以上。",
       "hero_metric": "記憶體頻寬",
       "hero_unit": "GB/s",
       "secondary_metric": "記憶體容量",
@@ -136,11 +140,13 @@
       "chapter_en": "PRICING & TCO TRAP",
       "id": "L02",
       "accent_hex": "#0E7C47",
-      "tts_text": "記憶體頻寬差異導致效能差距，十六 G 版本頻寬僅有 每秒一百五十三 G 位元組，而 三十二 G 版本則有 每秒一百七十 G 位元組。",
+      "tts_text": "很多人第一眼没注意的是记忆体频宽刀法，标准十六G版本的频宽只有每秒一百五十三G，要往上加到高阶配置才能跑到每秒一百七十G以上。",
       "captions": [
-        "記憶體頻寬差異導致效能差距",
-        "16GB 版本頻寬僅有 153GB/s",
-        "而 32GB 版本則有 170GB/s"
+        "很多人第一眼沒注意的是記憶體頻寬刀法",
+        "標準 16GB 版本的",
+        "頻寬只有 153GB/s",
+        "要往上加到高階配置才能跑",
+        "到 170GB/s 以上"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_id": "SRC-02",
@@ -175,7 +181,7 @@
     },
     {
       "visual_type": "cinema_broll_video",
-      "narration": "升級 SSD 容量時，價格攀升速度驚人，從 256GB 升到 512GB 就要多花 $100，再升到 1TB 更要 $200。",
+      "narration": "更別說蘋果經典的儲存空間加價階梯，從 256GB 往上升到 512GB 先加 100 美元，再衝上 1TB 又要多掏 200 美元，預算一下就爆了。",
       "source_id": "SRC-01",
       "broll_shots": [
         {
@@ -194,13 +200,13 @@
       "chapter_en": "PRICING & TCO TRAP",
       "id": "L03",
       "accent_hex": "#5B50D6",
-      "tts_text": "升級 固態硬碟 容量時，價格攀升速度驚人，從 兩百五十六 G 升到 五百一十二 G 就要多花 一百美元，再升到 一 T 更要 兩百美元。",
+      "tts_text": "更别说苹果经典的储存空间加价阶梯，从二百五十六G往上升到五百一十二G先加一百美元，再冲上一T又要多掏两百美元，预算一下就爆了。",
       "captions": [
-        "升級 SSD 容量時",
-        "價格攀升速度驚人",
-        "從 256GB 升",
-        "到 512GB 就要多花 $100",
-        "再升到 1TB 更要 $200"
+        "更別說蘋果經典的儲存空間加價階梯",
+        "從 256GB 往上升",
+        "到 512GB 先加 100 美元",
+        "再衝上 1TB 又要多掏 200 美元",
+        "預算一下就爆了"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_detail": {
@@ -249,7 +255,7 @@
           "url": "https://www.youtube.com/watch?v=h4Gs97bXMZo",
           "query_origin": "MacBook Air M5 multitasking windows",
           "match_score": 0.1313,
-          "clause_hint": "升級 SSD 容量時，價格攀升速度驚人",
+          "clause_hint": "更別說蘋果經典的儲存空間加價階梯，從 256GB 往上升",
           "visual_desc": "close-up of MacBook Air M5 SSD storage upgrade options on screen, pure hardware close-up B-roll, no human face",
           "source_id": "SRC-11",
           "source_badge": "畫面與資料來源：YouTube · Adam Talks Tech · SRC-11"
@@ -268,7 +274,7 @@
           "url": "https://www.youtube.com/watch?v=IV_yvQpn5Yc",
           "query_origin": "MacBook Pro official reveal trailer Apple",
           "match_score": 0.0873,
-          "clause_hint": "從 256GB 升，到 512GB 就要多花 $100，再升到 1TB 更要 $200",
+          "clause_hint": "到 512GB 先加 100 美元，再衝上 1TB 又要多掏 200 美元，預算一下就爆了",
           "visual_desc": "close-up hands selecting SSD storage options on MacBook Pro screen with price tags, pure hardware close-up B-roll, no human face",
           "source_id": "SRC-12",
           "source_badge": "畫面與資料來源：YouTube · Gadget Master 99 · SRC-12"
@@ -277,7 +283,7 @@
     },
     {
       "visual_type": "webgl_stacked_tco",
-      "narration": "長期下來，硬碟升級成本累積，入門版和高階版的總持有成本差距不大。",
+      "narration": "把這筆容量升級費全部攤進總持有成本裡算一算，你會發現加配後的輕薄款跟直接買 MacBook Pro，真實價差其實已經非常小。",
       "hero_metric": "總持有成本",
       "hero_unit": "美元",
       "stack_left_label": "入門版",
@@ -302,11 +308,12 @@
       "chapter_en": "PRICING & TCO TRAP",
       "id": "L04",
       "accent_hex": "#0E6EB8",
-      "tts_text": "長期下來，硬碟升級成本累積，入門版和高階版的總持有成本差距不大。",
+      "tts_text": "把这笔容量升级费全部摊进总持有成本里算一算，你会发现加配后的轻薄款跟直接买 MacBook Pro，真实价差其实已经非常小。",
       "captions": [
-        "長期下來",
-        "硬碟升級成本累積",
-        "入門版和高階版的總持有成本差距不大"
+        "把這筆容量升級費全部攤進總持有成本裡算一算",
+        "你會發現加配後的輕薄款跟直",
+        "接買 MacBook Pro",
+        "真實價差其實已經非常小"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_id": "SRC-04",
@@ -335,7 +342,7 @@
     },
     {
       "visual_type": "cinema_broll_video",
-      "narration": "記憶體升級後，多工處理能力大幅提升，原本只能開幾個程式，現在可以順暢運行多個大型應用。",
+      "narration": "當然把統一記憶體拉高之後，日常體感確實差很多，以前開幾個分頁就開始吃緊，現在同時掛著剪輯軟體跟多個大型應用都還是很從容。",
       "source_id": "SRC-01",
       "broll_shots": [
         {
@@ -354,12 +361,13 @@
       "chapter_en": "PRICING & TCO TRAP",
       "id": "L05",
       "accent_hex": "#B84A14",
-      "tts_text": "記憶體升級後，多工處理能力大幅提升，原本只能開幾個程式，現在可以順暢運行多個大型應用。",
+      "tts_text": "当然把统一记忆体拉高之后，日常体感确实差很多，以前开几个分页就开始吃紧，现在同时挂着剪辑软体跟多个大型应用都还是很从容。",
       "captions": [
-        "記憶體升級後",
-        "多工處理能力大幅提升",
-        "原本只能開幾個程式",
-        "現在可以順暢運行多個大型應用"
+        "當然把統一記憶體拉高之後",
+        "日常體感確實差很多",
+        "以前開幾個分頁就開始吃緊",
+        "現在同時掛著剪輯軟體跟",
+        "多個大型應用都還是很從容"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_detail": {
@@ -408,7 +416,7 @@
           "url": "https://www.youtube.com/watch?v=edVre7zWsKk",
           "query_origin": "MacBook Air M5 multitasking windows",
           "match_score": 0.1097,
-          "clause_hint": "記憶體升級後，多工處理能力大幅提升",
+          "clause_hint": "當然把統一記憶體拉高之後，日常體感確實差很多",
           "visual_desc": "multiple windows open on MacBook Air M5 screen with limited space, pure hardware close-up B-roll, no human face",
           "source_id": "SRC-13",
           "source_badge": "畫面與資料來源：YouTube · Tricks Tips Fix · SRC-13"
@@ -427,7 +435,7 @@
           "url": "https://www.youtube.com/watch?v=edVre7zWsKk",
           "query_origin": "MacBook Air M5 multitasking windows",
           "match_score": 0.1208,
-          "clause_hint": "原本只能開幾個程式，現在可以順暢運行多個大型應用",
+          "clause_hint": "以前開幾個分頁就開始吃緊，現在同時掛著剪輯軟體跟，多個大型應用都還是很從容",
           "visual_desc": "several applications running smoothly on MacBook Pro screen, pure hardware close-up B-roll, no human face",
           "source_id": "SRC-13",
           "source_badge": "畫面與資料來源：YouTube · Tricks Tips Fix · SRC-13"
@@ -436,7 +444,7 @@
     },
     {
       "visual_type": "webgl_dual_laptop",
-      "narration": "硬體規格升級後，散熱效率和處理速度都有顯著提升，不再頻繁卡頓。",
+      "narration": "特別是在連續高負載工作下，更完整的硬體規格不只是跑分好看，而是長時間多工切換時，整台機器依然流暢不掉幀。",
       "hero_metric": "處理速度",
       "hero_unit": "毫秒",
       "left_label": "入門版",
@@ -447,11 +455,12 @@
       "chapter_en": "PRICING & TCO TRAP",
       "id": "L06",
       "accent_hex": "#0E7C47",
-      "tts_text": "硬體規格升級後，散熱效率和處理速度都有顯著提升，不再頻繁卡頓。",
+      "tts_text": "特别是在连续高负载工作下，更完整的硬体规格不只是跑分好看，而是长时间多工切换时，整台机器依然流畅不掉帧。",
       "captions": [
-        "硬體規格升級後",
-        "散熱效率和處理速度都有顯著提升",
-        "不再頻繁卡頓"
+        "特別是在連續高負載工作下",
+        "更完整的硬體規格不只是跑分好看",
+        "而是長時間多工切換時",
+        "整台機器依然流暢不掉幀"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_id": "SRC-06",
@@ -521,7 +530,7 @@
     },
     {
       "visual_type": "cinema_broll_video",
-      "narration": "MacBook Air M5 看起來輕薄，但無風扇設計在高強度運算時會迅速升溫，導致效能降頻，而 MacBook Pro 則透過主動散熱維持穩定表現。",
+      "narration": "來到第二個關鍵差異：MacBook Air M5 雖然極致輕薄，但無風扇設計遇到長時間高強度運算還是會觸發溫控降頻，而 MacBook Pro 靠主動散熱就能一路穩住效能。",
       "source_id": "SRC-02",
       "broll_shots": [
         {
@@ -540,13 +549,14 @@
       "chapter_en": "BANDWIDTH & THERMALS",
       "id": "L08",
       "accent_hex": "#0E6EB8",
-      "tts_text": "MacBook Air M 五 看起來輕薄，但無風扇設計在高強度運算時會迅速升溫，導致效能降頻，而 MacBook Pro 則透過主動散熱維持穩定表現。",
+      "tts_text": "来到第二个关键差异，搭载 Em五晶片的 MacBook Air虽然极致轻薄，但无风扇设计遇到长时间高强度运算还是会触发温控降频，而 MacBook Pro靠主动散热就能一路稳住效能。",
       "captions": [
-        "MacBook Air M5 看起來輕薄",
-        "但無風扇設計在高強度運算時會迅速升溫",
-        "導致效能降頻",
-        "而 MacBook Pro 則",
-        "透過主動散熱維持穩定表現"
+        "來到第二個關鍵差異",
+        "MacBook Air M5 雖然極致輕薄",
+        "但無風扇設計遇到長時間高",
+        "強度運算還是會觸發溫控降頻",
+        "而 MacBook Pro 靠",
+        "主動散熱就能一路穩住效能"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_detail": {
@@ -592,7 +602,7 @@
           "url": "https://www.youtube.com/watch?v=xfm-dprloQ8",
           "query_origin": "MacBook Air M5 keyboard trackpad ports close up",
           "match_score": 0.0744,
-          "clause_hint": "MacBook Air M5 看起來輕薄，但無風扇設計在高強度運算時會迅速升溫",
+          "clause_hint": "來到第二個關鍵差異，MacBook Air M5 雖然極致輕薄，但無風扇設計遇到長時間高",
           "visual_desc": "macro close-up shot of MacBook Air M5 side Thunderbolt ports and thin aluminum chassis on desk, pure hardware close-up B-roll, no human face",
           "source_id": "SRC-09",
           "source_badge": "畫面與資料來源：YouTube · Simple Alpaca · SRC-09"
@@ -611,7 +621,7 @@
           "url": "https://www.youtube.com/watch?v=tS1BMlao0_c",
           "query_origin": "MacBook Pro display video editing review",
           "match_score": 0.0753,
-          "clause_hint": "導致效能降頻，而 MacBook Pro 則，透過主動散熱維持穩定表現",
+          "clause_hint": "強度運算還是會觸發溫控降頻，而 MacBook Pro 靠，主動散熱就能一路穩住效能",
           "visual_desc": "close-up hands editing 4K video timeline on bright MacBook Pro screen in studio, pure hardware close-up B-roll, no human face",
           "source_id": "SRC-10",
           "source_badge": "畫面與資料來源：YouTube · Cristian Silvagnoli  · SRC-10"
@@ -620,7 +630,7 @@
     },
     {
       "visual_type": "webgl_memory_lanes",
-      "narration": "記憶體頻寬分級直接影響 AI 計算速度，16GB 版本僅能跑 153GB/s，而 32GB 版本則可達 170GB/s，差距達 10%。",
+      "narration": "如果你打算在本機跑大語言模型，記憶體頻寬分級更是直接決定生成速度，153GB/s 跟 170GB/s 的吞吐量差距一眼就能看出來。",
       "hero_metric": "Memory Bandwidth",
       "hero_unit": "GB/s",
       "secondary_metric": "Memory Capacity",
@@ -641,12 +651,12 @@
       "chapter_en": "BANDWIDTH & THERMALS",
       "id": "L09",
       "accent_hex": "#B84A14",
-      "tts_text": "記憶體頻寬分級直接影響 A I 計算速度，十六 G 版本僅能跑 每秒一百五十三 G 位元組，而 三十二 G 版本則可達 每秒一百七十 G 位元組，差距達百分之十。",
+      "tts_text": "如果你打算在本机跑大语言模型，记忆体频宽分级更是直接决定生成速度，每秒一百五十三G跟每秒一百七十G的吞吐量差距一眼就能看出来。",
       "captions": [
-        "記憶體頻寬分級直接影響 AI 計算速度",
-        "16GB 版本僅能跑 153GB/s",
-        "而 32GB 版本則可達 170GB/s",
-        "差距達 10%"
+        "如果你打算在本機跑大語言模型",
+        "記憶體頻寬分級更是直接決定生成速度",
+        "153GB/s 跟 170GB/s 的",
+        "吞吐量差距一眼就能看出來"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_id": "SRC-01",
@@ -684,7 +694,7 @@
     },
     {
       "visual_type": "cinema_broll_video",
-      "narration": "當你執行多工 AI 計算時，MacBook Air M5 的散熱系統會迅速達成溫度上限，導致效能下降，而 MacBook Pro 則能維持較低溫度與穩定運行。",
+      "narration": "當你連續執行多工 AI 推論或轉檔十幾分鐘後，無風扇機身的溫度很快就會摸到上限，反觀配備雙風扇散熱的 MacBook Pro 依然能維持低溫穩定輸出。",
       "source_id": "SRC-06",
       "broll_shots": [
         {
@@ -703,14 +713,12 @@
       "chapter_en": "BANDWIDTH & THERMALS",
       "id": "L10",
       "accent_hex": "#0E7C47",
-      "tts_text": "當你執行多工 A I 計算時，MacBook Air M 五 的散熱系統會迅速達成溫度上限，導致效能下降，而 MacBook Pro 則能維持較低溫度與穩定運行。",
+      "tts_text": "当你连续执行多工人工智慧推论或转档十几分钟后，无风扇机身的温度很快就会摸到上限，反观配备双风扇散热的 MacBook Pro依然能维持低温稳定输出。",
       "captions": [
-        "當你執行多工 AI 計算時",
-        "MacBook Air M5 的",
-        "散熱系統會迅速達成溫度上限",
-        "導致效能下降",
-        "而 MacBook Pro 則",
-        "能維持較低溫度與穩定運行"
+        "當你連續執行多工 AI 推論或轉檔十幾分鐘後",
+        "無風扇機身的溫度很快就會摸到上限",
+        "反觀配備雙風扇散熱的 MacBook Pro 依",
+        "然能維持低溫穩定輸出"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_detail": {
@@ -745,7 +753,7 @@
           "url": "https://www.youtube.com/watch?v=hnZI5uUSdEo",
           "query_origin": "MacBook Pro official reveal trailer Apple",
           "match_score": 0.0624,
-          "clause_hint": "當你執行多工 AI 計算時，MacBook Air M5 的，散熱系統會迅速達成溫度上限",
+          "clause_hint": "當你連續執行多工 AI 推論或轉檔十幾分鐘後，無風扇機身的溫度很快就會摸到上限",
           "visual_desc": "thermal imaging of MacBook Air M5 showing heat distribution during heavy AI workload, pure hardware close-up B-roll, no human face",
           "source_id": "SRC-14",
           "source_badge": "畫面與資料來源：YouTube · Apple · SRC-14"
@@ -764,7 +772,7 @@
           "url": "https://www.youtube.com/watch?v=TS8MhuSAlWk",
           "query_origin": "MacBook Pro Thunderbolt HDMI MagSafe SD card ports close up",
           "match_score": 0.0578,
-          "clause_hint": "導致效能下降，而 MacBook Pro 則，能維持較低溫度與穩定運行",
+          "clause_hint": "反觀配備雙風扇散熱的 MacBook Pro 依，然能維持低溫穩定輸出",
           "visual_desc": "thermal imaging of MacBook Pro showing even heat distribution during intensive tasks, pure hardware close-up B-roll, no human face",
           "source_id": "SRC-15",
           "source_badge": "畫面與資料來源：YouTube · SmartNest Tech · SRC-15"
@@ -773,7 +781,7 @@
     },
     {
       "visual_type": "webgl_chip_die",
-      "narration": "M5 晶片的無風扇設計讓散熱成為瓶頸，而 MacBook Pro 則透過主動散熱系統維持晶片核心在最佳運作溫度。",
+      "narration": "說白了，同一顆世代的晶片放進無風扇機殼裡，散熱天花板就是物理極限，而主動散熱系統才能把每一分算力完整釋放出來。",
       "chip_label": "M5 vs M3",
       "hero_metric": "Thermal Throttling",
       "hero_unit": "°C",
@@ -782,11 +790,12 @@
       "chapter_en": "BANDWIDTH & THERMALS",
       "id": "L11",
       "accent_hex": "#5B50D6",
-      "tts_text": "M 五 晶片的無風扇設計讓散熱成為瓶頸，而 MacBook Pro 則透過主動散熱系統維持晶片核心在最佳運作溫度。",
+      "tts_text": "说白了，同一颗世代的晶片放进无风扇机壳里，散热天花板就是物理极限，而主动散热系统才能把每一分算力完整释放出来。",
       "captions": [
-        "M5 晶片的無風扇設計讓散熱成為瓶頸",
-        "而 MacBook Pro 則透過主",
-        "動散熱系統維持晶片核心在最佳運作溫度"
+        "說白了",
+        "同一顆世代的晶片放進無風扇機殼裡",
+        "散熱天花板就是物理極限",
+        "而主動散熱系統才能把每一分算力完整釋放出來"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_id": "SRC-03",
@@ -819,7 +828,7 @@
     },
     {
       "visual_type": "webgl_dual_laptop",
-      "narration": "在高強度運算下，MacBook Air M5 的散熱效能與 MacBook Pro 相比，溫度差異高達 20°C，導致效能降頻與穩定性下降。",
+      "narration": "實測連續滿載壓測下來，兩台機器的核心與表面溫差最高能拉開將近 20°C，這正是決定長時間剪片會不會卡頓的分水嶺。",
       "hero_metric": "Thermal Performance",
       "hero_unit": "°C",
       "left_label": "MacBook Air M5",
@@ -830,13 +839,12 @@
       "chapter_en": "BANDWIDTH & THERMALS",
       "id": "L12",
       "accent_hex": "#0E6EB8",
-      "tts_text": "在高強度運算下，MacBook Air M 五 的散熱效能與 MacBook Pro 相比，溫度差異高達 二十°C，導致效能降頻與穩定性下降。",
+      "tts_text": "实测连续满载压测下来，两台机器的核心与表面温差最高能拉开将近二十度，这正是决定长时间剪片会不会卡顿的分水岭。",
       "captions": [
-        "在高強度運算下",
-        "MacBook Air M5 的散熱",
-        "效能與 MacBook Pro 相比",
-        "溫度差異高達 20°C",
-        "導致效能降頻與穩定性下降"
+        "實測連續滿載壓測下來",
+        "兩台機器的核心與表面溫差",
+        "最高能拉開將近 20°C",
+        "這正是決定長時間剪片會不會卡頓的分水嶺"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_id": "SRC-04",
@@ -865,7 +873,7 @@
     },
     {
       "visual_type": "ui_configurator_crawl",
-      "narration": "「無風扇被動散熱與記憶體頻寬分級，決定了高強度工作與本機 AI 的持續表現。」—— SRC-01",
+      "narration": "就像這份公開實測報告指出的，無風扇被動散熱加上記憶體頻寬分級，直接決定了高強度工作與本機 AI 的持續表現。",
       "source_id": "SRC-01",
       "highlight_quote": "無風扇被動散熱與記憶體頻寬分級，決定了高強度工作與本機 AI 的持續表現。",
       "chapter_num": "02",
@@ -873,11 +881,11 @@
       "chapter_en": "BANDWIDTH & THERMALS",
       "id": "L13",
       "accent_hex": "#B84A14",
-      "tts_text": "「無風扇被動散熱與記憶體頻寬分級，決定了高強度工作與本機 A I 的持續表現。」—— SRC-一。",
+      "tts_text": "就像这份公开实测报告指出的，无风扇被动散热加上记忆体频宽分级，直接决定了高强度工作与本机人工智慧的持续表现。",
       "captions": [
-        "無風扇被動散熱與記憶體頻寬分級",
-        "決定了高強度工作與本機 AI 的持續表現",
-        "—— SRC-01"
+        "就像這份公開實測報告指出的",
+        "無風扇被動散熱加上記憶體頻寬分級",
+        "直接決定了高強度工作與本機 AI 的持續表現"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_detail": {
@@ -960,7 +968,7 @@
     },
     {
       "visual_type": "cinema_broll_video",
-      "narration": "120Hz ProMotion 在剪輯影片時，真的能感受到滑動更流暢，而且 Mini-LED 的峰值亮度，讓你在戶外也能清晰看到細節。",
+      "narration": "第三塊最容易一用就回不去的，絕對是這塊螢幕：120Hz ProMotion 在拉動剪輯時間軸時絲滑得非常有感，加上 Mini-LED 的超高亮度，在窗邊或戶外也看得一清二楚。",
       "source_id": "SRC-04",
       "broll_shots": [
         {
@@ -979,12 +987,14 @@
       "chapter_en": "DISPLAY & WORKFLOW",
       "id": "L15",
       "accent_hex": "#5B50D6",
-      "tts_text": "一百二十赫茲 Pro Motion 在剪輯影片時，真的能感受到滑動更流暢，而且 Mini L E D 的峰值亮度，讓你在戶外也能清晰看到細節。",
+      "tts_text": "第三块最容易一用就回不去的，绝对是这块萤幕，一百二十赫兹 ProMotion在拉动剪辑时间轴时丝滑得非常有感，加上 Mini LED的超高亮度，在窗边或户外也看得一清二楚。",
       "captions": [
-        "120Hz ProMotion 在剪輯影片時",
-        "真的能感受到滑動更流暢",
-        "而且 Mini-LED 的峰值亮度",
-        "讓你在戶外也能清晰看到細節"
+        "第三塊最容易一用就回不去的",
+        "絕對是這塊螢幕",
+        "120Hz ProMotion 在",
+        "拉動剪輯時間軸時絲滑得非常有感",
+        "加上 Mini-LED 的超高亮度",
+        "在窗邊或戶外也看得一清二楚"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_detail": {
@@ -1024,7 +1034,7 @@
           "url": "https://www.youtube.com/watch?v=xfm-dprloQ8",
           "query_origin": "MacBook Air M5 keyboard trackpad ports close up",
           "match_score": 0.1082,
-          "clause_hint": "120Hz ProMotion 讓滑動更流暢",
+          "clause_hint": "第三塊最容易一用就回不去的，絕對是這塊螢幕，120Hz ProMotion 在",
           "visual_desc": "MacBook Pro trackpad showing smooth scrolling of web page, pure hardware close-up B-roll, no human face",
           "source_id": "SRC-09",
           "source_badge": "畫面與資料來源：YouTube · Simple Alpaca · SRC-09"
@@ -1043,7 +1053,7 @@
           "url": "https://www.youtube.com/watch?v=edVre7zWsKk",
           "query_origin": "MacBook Air M5 multitasking windows",
           "match_score": 0.0699,
-          "clause_hint": "Mini-LED 峰值亮度在戶外清晰顯示",
+          "clause_hint": "拉動剪輯時間軸時絲滑得非常有感，加上 Mini-LED 的超高亮度，在窗邊或戶外也看得一清二楚",
           "visual_desc": "close-up hands using MacBook Pro outdoors under sunlight, screen clearly visible, pure hardware close-up B-roll, no human face",
           "source_id": "SRC-13",
           "source_badge": "畫面與資料來源：YouTube · Tricks Tips Fix · SRC-13"
@@ -1052,7 +1062,7 @@
     },
     {
       "visual_type": "webgl_memory_lanes",
-      "narration": "連接埠的擴充性，像是 Thunderbolt 4，對於需要外接多個裝置的使用者來說，選擇多了很多彈性。",
+      "narration": "機身側邊的擴充連接埠更是實用派的痛點，完整的 Thunderbolt 4 與原生插槽，讓你出門不用隨時拖著一條轉接器尾巴，工作流多了很多彈性。",
       "hero_metric": "連接埠",
       "hero_unit": "",
       "secondary_metric": "擴充性",
@@ -1073,12 +1083,12 @@
       "chapter_en": "DISPLAY & WORKFLOW",
       "id": "L16",
       "accent_hex": "#0E6EB8",
-      "tts_text": "連接埠的擴充性，像是 Thunderbolt 四，對於需要外接多個裝置的使用者來說，選擇多了很多彈性。",
+      "tts_text": "机身侧边的扩充连接部更是实用派的痛点，完整的雷电四与原生插槽，让你出门不用随时拖着一条转接器尾巴，工作流多了很多弹性。",
       "captions": [
-        "連接埠的擴充性",
-        "像是 Thunderbolt 4",
-        "對於需要外接多個裝置的使用者來說",
-        "選擇多了很多彈性"
+        "機身側邊的擴充連接埠更是實用派的痛點",
+        "完整的 Thunderbolt 4 與原生插槽",
+        "讓你出門不用隨時拖著一條轉接器尾巴",
+        "工作流多了很多彈性"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_id": "SRC-08",
@@ -1101,7 +1111,7 @@
     },
     {
       "visual_type": "cinema_broll_video",
-      "narration": "Mini-LED 技術帶來的高對比度，使得暗部細節更加豐富，特別是在進行影像後製時，這一點顯得尤其重要。",
+      "narration": "特別是這塊 Mini-LED 螢幕帶來的極致對比度，修圖或調色時暗部細節層次非常乾淨，不會像一般液晶螢幕那樣發灰。",
       "source_id": "SRC-04",
       "broll_shots": [
         {
@@ -1120,12 +1130,12 @@
       "chapter_en": "DISPLAY & WORKFLOW",
       "id": "L17",
       "accent_hex": "#B84A14",
-      "tts_text": "Mini L E D 技術帶來的高對比度，使得暗部細節更加豐富，特別是在進行影像後製時，這一點顯得尤其重要。",
+      "tts_text": "特别是这块 Mini LED萤幕带来的极致对比度，修图或调色时暗部细节层次非常干净，不会像一般液晶萤幕那样发灰。",
       "captions": [
-        "Mini-LED 技術帶來的高對比度",
-        "使得暗部細節更加豐富",
-        "特別是在進行影像後製時",
-        "這一點顯得尤其重要"
+        "特別是這塊 Mini-LED 螢",
+        "幕帶來的極致對比度",
+        "修圖或調色時暗部細節層次非常乾淨",
+        "不會像一般液晶螢幕那樣發灰"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_detail": {
@@ -1165,7 +1175,7 @@
           "url": "https://www.youtube.com/watch?v=GriXfu4tL30",
           "query_origin": "MacBook Air M5 vs MacBook Pro cinematic B-roll keyboard trackpad",
           "match_score": 0.0727,
-          "clause_hint": "Mini-LED 技術帶來高對比度",
+          "clause_hint": "特別是這塊 Mini-LED 螢，幕帶來的極致對比度",
           "visual_desc": "close-up shot of MacBook Pro screen displaying high contrast image, pure hardware close-up B-roll, no human face",
           "source_id": "SRC-16",
           "source_badge": "畫面與資料來源：YouTube · Apple · SRC-16"
@@ -1184,7 +1194,7 @@
           "url": "https://www.youtube.com/watch?v=AxwUWQLaKgM",
           "query_origin": "MacBook Pro Final Cut Pro 4K video editing timeline B-roll",
           "match_score": 0.0662,
-          "clause_hint": "暗部細節更加豐富",
+          "clause_hint": "修圖或調色時暗部細節層次非常乾淨，不會像一般液晶螢幕那樣發灰",
           "visual_desc": "close-up hands editing dark details in photo on MacBook Pro screen, pure hardware close-up B-roll, no human face",
           "source_id": "SRC-17",
           "source_badge": "畫面與資料來源：YouTube · The Filmmakers Workshop · SRC-17"
@@ -1193,7 +1203,7 @@
     },
     {
       "visual_type": "webgl_stacked_tco",
-      "narration": "如果考慮到未來可能需要連接更多的外設，選擇擁有更多連接埠的 MacBook Pro，長遠來看其實更划算。",
+      "narration": "如果你未來兩三年會接高速硬碟、記憶卡或外接設備，一開始就選連接埠齊全的 MacBook Pro，省下的擴充底座費用長遠來看反而更划算。",
       "hero_metric": "TCO",
       "hero_unit": "美元",
       "stack_left_label": "初期成本",
@@ -1214,11 +1224,13 @@
       "chapter_en": "DISPLAY & WORKFLOW",
       "id": "L18",
       "accent_hex": "#0E7C47",
-      "tts_text": "如果考慮到未來可能需要連接更多的外設，選擇擁有更多連接埠的 MacBook Pro，長遠來看其實更划算。",
+      "tts_text": "如果你未来两三年会接高速硬碟、记忆卡或外接设备，一开始就选连接部齐全的 MacBook Pro，省下的扩充底座费用长远来看反而更划算。",
       "captions": [
-        "如果考慮到未來可能需要連接更多的外設",
-        "選擇擁有更多連接埠的 MacBook Pro",
-        "長遠來看其實更划算"
+        "如果你未來兩三年會接高速硬碟",
+        "記憶卡或外接設備",
+        "一開始就選連接埠齊全",
+        "的 MacBook Pro",
+        "省下的擴充底座費用長遠來看反而更划算"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_id": "SRC-02",
@@ -1253,7 +1265,7 @@
     },
     {
       "visual_type": "cinema_broll_video",
-      "narration": "外接顯示器的支援，讓 MacBook Pro 成為專業人士的首選，尤其是在需要多螢幕工作的場合。",
+      "narration": "再加上更完整的多螢幕外接支援能力，回到工作室只要插上一條線就能驅動雙螢幕桌面，這也是為什麼重度創作者最後還是會選 MacBook Pro。",
       "source_id": "SRC-04",
       "broll_shots": [
         {
@@ -1272,12 +1284,12 @@
       "chapter_en": "DISPLAY & WORKFLOW",
       "id": "L19",
       "accent_hex": "#5B50D6",
-      "tts_text": "外接顯示器的支援，讓 MacBook Pro 成為專業人士的首選，尤其是在需要多螢幕工作的場合。",
+      "tts_text": "再加上更完整的多萤幕外接支援能力，回到工作室只要插上一条线就能驱动双萤幕桌面，这也是为什么重度创作者最后还是会选 MacBook Pro。",
       "captions": [
-        "外接顯示器的支援",
-        "讓 MacBook Pro 成",
-        "為專業人士的首選",
-        "尤其是在需要多螢幕工作的場合"
+        "再加上更完整的多螢幕外接支援能力",
+        "回到工作室只要插上一條線就能驅動雙螢幕桌面",
+        "這也是為什麼重度創作者最後還",
+        "是會選 MacBook Pro"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_detail": {
@@ -1317,7 +1329,7 @@
           "url": "https://www.youtube.com/watch?v=ieBVfXuNwDs",
           "query_origin": "MacBook Pro dual external Studio Display desk setup B-roll",
           "match_score": 0.1112,
-          "clause_hint": "外接顯示器支援",
+          "clause_hint": "再加上更完整的多螢幕外接支援能力，回到工作室只要插上一條線就能驅動雙螢幕桌面",
           "visual_desc": "MacBook Pro connected to multiple external monitors on desk, pure hardware close-up B-roll, no human face",
           "source_id": "SRC-18",
           "source_badge": "畫面與資料來源：YouTube · RICH Photography · SRC-18"
@@ -1336,7 +1348,7 @@
           "url": "https://www.youtube.com/watch?v=tS1BMlao0_c",
           "query_origin": "MacBook Pro display video editing review",
           "match_score": 0.078,
-          "clause_hint": "多螢幕工作",
+          "clause_hint": "這也是為什麼重度創作者最後還，是會選 MacBook Pro",
           "visual_desc": "close-up hands working on video editing project with multiple monitors, pure hardware close-up B-roll, no human face",
           "source_id": "SRC-10",
           "source_badge": "畫面與資料來源：YouTube · Cristian Silvagnoli  · SRC-10"
@@ -1345,7 +1357,7 @@
     },
     {
       "visual_type": "webgl_dual_laptop",
-      "narration": "在處理大量多工任務時，ProMotion 的更新率優勢更加明顯，確保你在切換應用程式時，不會因為延遲而感到不耐。",
+      "narration": "而在日常高頻切換視窗與滑動長網頁時，120Hz 高更新率帶來的跟手感，連續盯螢幕幾個小時下來眼睛也舒服非常多。",
       "hero_metric": "多工處理",
       "hero_unit": "秒",
       "left_label": "MacBook Air M5",
@@ -1356,12 +1368,11 @@
       "chapter_en": "DISPLAY & WORKFLOW",
       "id": "L20",
       "accent_hex": "#0E6EB8",
-      "tts_text": "在處理大量多工任務時， Pro Motion 的更新率優勢更加明顯，確保你在切換應用程式時，不會因為延遲而感到不耐。",
+      "tts_text": "而在日常高频切换视窗与滑动长网页时，一百二十赫兹高更新率带来的跟手感，连续盯萤幕几个小时下来眼睛也舒服非常多。",
       "captions": [
-        "在處理大量多工任務時",
-        "ProMotion 的更新率優勢更加明顯",
-        "確保你在切換應用程式時",
-        "不會因為延遲而感到不耐"
+        "而在日常高頻切換視窗與滑動長網頁時",
+        "120Hz 高更新率帶來的跟手感",
+        "連續盯螢幕幾個小時下來眼睛也舒服非常多"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_id": "SRC-04",
@@ -1436,7 +1447,7 @@
     },
     {
       "visual_type": "cinema_broll_video",
-      "narration": "對於日常上網和文書工作，MacBook Air M5 已經足夠，但一旦涉及到剪片或多工，MacBook Pro 就展現出了其真正的實力。",
+      "narration": "最後幫大家按真實情境做個總結：如果你的日常就是寫寫報告、回信跟開網頁，那輕薄安靜的 MacBook Air M5 絕對夠用又省心；但只要會碰到四 K 剪片或重度多工，直上 MacBook Pro 才不會後悔。",
       "source_id": "SRC-04",
       "broll_shots": [
         {
@@ -1455,13 +1466,15 @@
       "chapter_en": "BUYING VERDICT",
       "id": "L22",
       "accent_hex": "#0E7C47",
-      "tts_text": "對於日常上網和文書工作，MacBook Air M 五 已經足夠，但一旦涉及到剪片或多工，MacBook Pro 就展現出了其真正的實力。",
+      "tts_text": "最后帮大家按真实情境做个总结，如果你的日常就是写写报告、回信跟开网页，那轻薄安静的搭载 Em五晶片的 MacBook Air绝对够用又省心；但只要会碰到四K剪片或重度多工，直上 MacBook Pro才不会后悔。",
       "captions": [
-        "對於日常上網和文書工作",
-        "MacBook Air M5 已經足夠",
-        "但一旦涉及到剪片或多工",
-        "MacBook Pro 就",
-        "展現出了其真正的實力"
+        "最後幫大家按真實情境做個總結",
+        "如果你的日常就是寫寫報告",
+        "回信跟開網頁",
+        "那輕薄安靜的 MacBook Air M5 絕",
+        "對夠用又省心",
+        "但只要會碰到四 K 剪片或重度多工",
+        "直上 MacBook Pro 才不會後悔"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_detail": {
@@ -1501,7 +1514,7 @@
           "url": "https://www.youtube.com/watch?v=YhNFhVx9pDI",
           "query_origin": "MacBook Air M5 official product video Apple",
           "match_score": 0.0633,
-          "clause_hint": "日常上網和文書工作",
+          "clause_hint": "最後幫大家按真實情境做個總結，如果你的日常就是寫寫報告，回信跟開網頁",
           "visual_desc": "close-up hands browsing web pages and typing documents on MacBook Air M5, pure hardware close-up B-roll, no human face",
           "source_id": "SRC-19",
           "source_badge": "畫面與資料來源：YouTube · Apple UK · SRC-19"
@@ -1520,7 +1533,7 @@
           "url": "https://www.youtube.com/watch?v=ZrETGXSVtFY",
           "query_origin": "MacBook Pro Thunderbolt HDMI MagSafe SD card ports close up",
           "match_score": 0.0766,
-          "clause_hint": "剪片或多工",
+          "clause_hint": "那輕薄安靜的 MacBook Air M5 絕，對夠用又省心，但只要會碰到四 K 剪片或重度多工，直上 MacBook Pro 才不會後悔",
           "visual_desc": "close-up hands juggling multiple apps and editing videos on MacBook Pro, pure hardware close-up B-roll, no human face",
           "source_id": "SRC-20",
           "source_badge": "畫面與資料來源：YouTube · Chris Mulia · SRC-20"
@@ -1529,7 +1542,7 @@
     },
     {
       "visual_type": "webgl_memory_lanes",
-      "narration": "記憶體頻寬的差異，對高負荷運算來說是一個隱藏的坑，16GB 版本的頻寬被削減，而 32GB 版本則提供更穩固的效能支撐。",
+      "narration": "千萬別掉進只看起步價的陷阱，因為入門配置一旦遇到高負荷運算，記憶體頻寬與散熱限制馬上就會浮現，升級上去的性價比遠不如高階款。",
       "hero_metric": "頻寬",
       "hero_unit": "GB/s",
       "lanes": [
@@ -1549,12 +1562,12 @@
       "chapter_en": "BUYING VERDICT",
       "id": "L23",
       "accent_hex": "#5B50D6",
-      "tts_text": "記憶體頻寬的差異，對高負荷運算來說是一個隱藏的坑，十六 G 版本的頻寬被削減，而 三十二 G 版本則提供更穩固的效能支撐。",
+      "tts_text": "千万别掉进只看起步价的陷阱，因为入门配置一旦遇到高负荷运算，记忆体频宽与散热限制马上就会浮现，升级上去的性价比远不如高阶款。",
       "captions": [
-        "記憶體頻寬的差異",
-        "對高負荷運算來說是一個隱藏的坑",
-        "16GB 版本的頻寬被削減",
-        "而 32GB 版本則提供更穩固的效能支撐"
+        "千萬別掉進只看起步價的陷阱",
+        "因為入門配置一旦遇到高負荷運算",
+        "記憶體頻寬與散熱限制馬上就會浮現",
+        "升級上去的性價比遠不如高階款"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_id": "SRC-07",
@@ -1578,7 +1591,7 @@
     },
     {
       "visual_type": "cinema_broll_video",
-      "narration": "Mini-LED 螢幕的峰值亮度，讓你在戶外也能清楚地看見細節，而這正是 MacBook Pro 能勝出的地方。",
+      "narration": "如果你常常需要帶著筆電跑咖啡廳或戶外工作，Mini-LED 螢幕的峰值亮度與抗反光表現，更是拉開日常體驗差距的關鍵勝出點。",
       "source_id": "SRC-04",
       "broll_shots": [
         {
@@ -1597,11 +1610,11 @@
       "chapter_en": "BUYING VERDICT",
       "id": "L24",
       "accent_hex": "#0E6EB8",
-      "tts_text": "Mini L E D 螢幕的峰值亮度，讓你在戶外也能清楚地看見細節，而這正是 MacBook Pro 能勝出的地方。",
+      "tts_text": "如果你常常需要带着笔电跑咖啡厅或户外工作， Mini LED萤幕的峰值亮度与抗反光表现，更是拉开日常体验差距的关键胜出点。",
       "captions": [
-        "Mini-LED 螢幕的峰值亮度",
-        "讓你在戶外也能清楚地看見細節",
-        "而這正是 MacBook Pro 能勝出的地方"
+        "如果你常常需要帶著筆電跑咖啡廳或戶外工作",
+        "Mini-LED 螢幕的峰值亮度與抗反光表現",
+        "更是拉開日常體驗差距的關鍵勝出點"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_detail": {
@@ -1641,7 +1654,7 @@
           "url": "https://www.youtube.com/watch?v=h4Gs97bXMZo",
           "query_origin": "MacBook Air M5 multitasking windows",
           "match_score": 0.0942,
-          "clause_hint": "Mini-LED 螢幕的峰值亮度",
+          "clause_hint": "如果你常常需要帶著筆電跑咖啡廳或戶外工作",
           "visual_desc": "close-up shot of MacBook Pro's bright display against sunlight, pure hardware close-up B-roll, no human face",
           "source_id": "SRC-11",
           "source_badge": "畫面與資料來源：YouTube · Adam Talks Tech · SRC-11"
@@ -1660,7 +1673,7 @@
           "url": "https://www.youtube.com/watch?v=xfm-dprloQ8",
           "query_origin": "MacBook Air M5 keyboard trackpad ports close up",
           "match_score": 0.0601,
-          "clause_hint": "讓你在戶外也能清楚地看見細節",
+          "clause_hint": "Mini-LED 螢幕的峰值亮度與抗反光表現，更是拉開日常體驗差距的關鍵勝出點",
           "visual_desc": "close-up hands reading MacBook Pro outdoors under direct sunlight, pure hardware close-up B-roll, no human face",
           "source_id": "SRC-09",
           "source_badge": "畫面與資料來源：YouTube · Simple Alpaca · SRC-09"
@@ -1669,7 +1682,7 @@
     },
     {
       "visual_type": "webgl_stacked_tco",
-      "narration": "長期來看，考慮到硬體升級的成本，購買更高階的配置可能會更經濟，因為這樣可以避免因硬體限制而頻繁升級。",
+      "narration": "買主力生產力工具看的永遠是三到四年的總擁有成本，與其為了省一點預算買回來天天嫌空間不夠，一次到位反而最省錢。",
       "hero_metric": "總擁有成本",
       "hero_unit": "$",
       "stack_left_label": "MacBook Air M5 16GB",
@@ -1690,12 +1703,12 @@
       "chapter_en": "BUYING VERDICT",
       "id": "L25",
       "accent_hex": "#B84A14",
-      "tts_text": "長期來看，考慮到硬體升級的成本，購買更高階的配置可能會更經濟，因為這樣可以避免因硬體限制而頻繁升級。",
+      "tts_text": "买主力生产力工具看的永远是三到四年的总拥有成本，与其为了省一点预算买回来天天嫌空间不够，一次到位反而最省钱。",
       "captions": [
-        "長期來看",
-        "考慮到硬體升級的成本",
-        "購買更高階的配置可能會更經濟",
-        "因為這樣可以避免因硬體限制而頻繁升級"
+        "買主力生產力工具看的永",
+        "遠是三到四年的總擁有成本",
+        "與其為了省一點預算買回來天天嫌空間不夠",
+        "一次到位反而最省錢"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_id": "SRC-01",
@@ -1733,7 +1746,7 @@
     },
     {
       "visual_type": "cinema_broll_video",
-      "narration": "如果你經常在外工作，那麼多個 Thunderbolt 4 連接埠就顯得非常重要，因為它可以讓你輕鬆連接更多的裝備。",
+      "narration": "尤其對經常在外奔波拍攝或接案的朋友來說，機身自帶多個 Thunderbolt 4 連接埠與記憶卡槽，關鍵時刻真的能省下超多麻煩。",
       "source_id": "SRC-04",
       "broll_shots": [
         {
@@ -1752,12 +1765,12 @@
       "chapter_en": "BUYING VERDICT",
       "id": "L26",
       "accent_hex": "#0E7C47",
-      "tts_text": "如果你經常在外工作，那麼多個 Thunderbolt 四 連接埠就顯得非常重要，因為它可以讓你輕鬆連接更多的裝備。",
+      "tts_text": "尤其对经常在外奔波拍摄或接案的朋友来说，机身自带多个雷电四连接部与记忆卡槽，关键时刻真的能省下超多麻烦。",
       "captions": [
-        "如果你經常在外工作",
-        "那麼多個 Thunderbolt 4 連",
-        "接埠就顯得非常重要",
-        "因為它可以讓你輕鬆連接更多的裝備"
+        "尤其對經常在外奔波拍攝或接案的朋友來說",
+        "機身自帶多個 Thunderbolt 4 連",
+        "接埠與記憶卡槽",
+        "關鍵時刻真的能省下超多麻煩"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_detail": {
@@ -1797,7 +1810,7 @@
           "url": "https://www.youtube.com/watch?v=ZrETGXSVtFY",
           "query_origin": "MacBook Pro Thunderbolt HDMI MagSafe SD card ports close up",
           "match_score": 0.0466,
-          "clause_hint": "如果你經常在外工作",
+          "clause_hint": "尤其對經常在外奔波拍攝或接案的朋友來說，機身自帶多個 Thunderbolt 4 連",
           "visual_desc": "close-up hands working on MacBook Pro in a busy coffee shop, pure hardware close-up B-roll, no human face",
           "source_id": "SRC-20",
           "source_badge": "畫面與資料來源：YouTube · Chris Mulia · SRC-20"
@@ -1816,7 +1829,7 @@
           "url": "https://www.youtube.com/watch?v=ieBVfXuNwDs",
           "query_origin": "MacBook Pro dual external Studio Display desk setup B-roll",
           "match_score": 0.0929,
-          "clause_hint": "多個Thunderbolt 4連接埠",
+          "clause_hint": "接埠與記憶卡槽，關鍵時刻真的能省下超多麻煩",
           "visual_desc": "multiple devices connected via Thunderbolt 4 ports on MacBook Pro, pure hardware close-up B-roll, no human face",
           "source_id": "SRC-18",
           "source_badge": "畫面與資料來源：YouTube · RICH Photography · SRC-18"
@@ -1825,7 +1838,7 @@
     },
     {
       "visual_type": "ui_configurator_crawl",
-      "narration": "根據真實使用情況，如果需要高強度運算和多任務處理，選擇 MacBook Pro 才不會後悔。",
+      "narration": "總結一句話：買輕薄款就堅守基礎配置最香，只要你的選配單開始往上加記憶體和硬碟，果斷直上 MacBook Pro 才是真正不踩雷的聰明買法！",
       "source_id": "SRC-04",
       "highlight_quote": "根據我們的測試，如果你需要高強度運算和多任務處理，選擇 MacBook Pro 才不會後悔。",
       "chapter_num": "04",
@@ -1833,11 +1846,13 @@
       "chapter_en": "BUYING VERDICT",
       "id": "L27",
       "accent_hex": "#5B50D6",
-      "tts_text": "根據真實使用情況，如果需要高強度運算和多任務處理，選擇 MacBook Pro 才不會後悔。",
+      "tts_text": "总结一句话，买轻薄款就坚守基础配置最香，只要你的选配单开始往上加记忆体和硬碟，果断直上 MacBook Pro才是真正不踩雷的聪明买法！",
       "captions": [
-        "根據真實使用情況",
-        "如果需要高強度運算和多任務處理",
-        "選擇 MacBook Pro 才不會後悔"
+        "總結一句話",
+        "買輕薄款就堅守基礎配置最香",
+        "只要你的選配單開始往上加記憶體和硬碟",
+        "果斷直上 MacBook Pro 才",
+        "是真正不踩雷的聰明買法"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_detail": {
@@ -1890,17 +1905,18 @@
           "style": "yellow"
         }
       ],
-      "narration": "差價四百美元，買 MacBook Air M5 還是直上 MacBook Pro？升級完價格馬上貼近，別只看跑分數據！",
+      "narration": "帳面差價四百美元，今年該買 MacBook Air M5 還是直上 MacBook Pro？別只看表面跑分，一旦升級容量價格馬上貼近，這五個硬體刀法先看懂再下單！",
       "source_id": "SRC-01",
       "image_prompt": "Vertical overhead studio shot of hands opening sleek space black aluminum MacBook laptop on wooden desk, moody rim lighting, no text",
       "id": "S01",
-      "tts_text": "差價四百美元，買 MacBook Air M 五 還是直上 MacBook Pro？升級完價格馬上貼近，別只看跑分數據！",
+      "tts_text": "帐面差价四百美元，今年该买搭载 Em五晶片的 MacBook Air还是直上 MacBook Pro？别只看表面跑分，一旦升级容量价格马上贴近，这五个硬体刀法先看懂再下单！",
       "captions": [
-        "差價四百美元",
-        "買 MacBook Air M5 還",
+        "帳面差價四百美元",
+        "今年該買 MacBook Air M5 還",
         "是直上 MacBook Pro",
-        "升級完價格馬上貼近",
-        "別只看跑分數據"
+        "別只看表面跑分",
+        "一旦升級容量價格馬上貼近",
+        "這五個硬體刀法先看懂再下單"
       ],
       "source_detail": {
         "source_id": "SRC-01",
@@ -1971,18 +1987,18 @@
           "toggle_on": true
         }
       ],
-      "narration": "第一步先算真實總價：入門款不加配最划算，但升級記憶體和硬碟後，Air 的價格逼近 Pro，這時候直上 Pro 反而換來更多硬體規格。",
+      "narration": "第一步先算真實總價：入門款不加配最划算，可是一旦把記憶體和硬碟往上加，價格幾乎瞬間摸到 MacBook Pro 門檻，這時候直上反而換來全套高階規格。",
       "source_id": "SRC-01",
       "image_prompt": "Vertical close up of sleek laptop keyboard and trackpad, studio lighting, no text",
       "id": "S02",
-      "tts_text": "第一步先算真實總價：入門款不加配最划算，但升級記憶體和硬碟後，Air 的價格逼近 Pro，這時候直上 Pro 反而換來更多硬體規格。",
+      "tts_text": "第一步先算真实总价，入门款不加配最划算，可是一旦把记忆体和硬碟往上加，价格几乎瞬间摸到 MacBook Pro门槛，这时候直上反而换来全套高阶规格。",
       "captions": [
         "第一步先算真實總價",
         "入門款不加配最划算",
-        "但升級記憶體和硬碟後",
-        "Air 的價格逼近 Pro",
-        "這時候直上 Pro 反",
-        "而換來更多硬體規格"
+        "可是一旦把記憶體和硬碟往上加",
+        "價格幾乎瞬間摸",
+        "到 MacBook Pro 門檻",
+        "這時候直上反而換來全套高階規格"
       ],
       "source_detail": {
         "source_id": "SRC-01",
@@ -2029,8 +2045,8 @@
       "callout_tag": "散熱差異",
       "ui_rows": [
         {
-          "title": "Air 散熱風扇",
-          "subtitle": "靜音但散熱有限",
+          "title": "Air 無風扇設計",
+          "subtitle": "零噪音極致安靜，長時滿載易降頻",
           "badge": "低噪音",
           "toggle_on": false
         },
@@ -2053,16 +2069,18 @@
           "toggle_on": true
         }
       ],
-      "narration": "第二步看散熱表現：Air 散熱風扇靜音但效能有限，Pro 具備主動散熱系統，散熱效能顯著優越。",
+      "narration": "第二步看散熱表現：Air 採用無風扇被動散熱，日常極致安靜但長時間滿載容易降頻；MacBook Pro 配備主動風扇散熱，連續剪片或跑模型依然穩如泰山。",
       "source_id": "SRC-01",
       "image_prompt": "Vertical close up of laptop fan blowing air, studio lighting, no text",
       "id": "S03",
-      "tts_text": "第二步看散熱表現：Air 散熱風扇靜音但效能有限，Pro 具備主動散熱系統，散熱效能顯著優越。",
+      "tts_text": "第二步看散热表现，Air采用无风扇被动散热，日常极致安静但长时间满载容易降频；MacBook Pro配备主动风扇散热，连续剪片或跑模型依然稳如泰山。",
       "captions": [
         "第二步看散熱表現",
-        "Air 散熱風扇靜音但效能有限",
-        "Pro 具備主動散熱系統",
-        "散熱效能顯著優越"
+        "Air 採用無風扇被動散熱",
+        "日常極致安靜但長時間滿載容易降頻",
+        "MacBook Pro 配",
+        "備主動風扇散熱",
+        "連續剪片或跑模型依然穩如泰山"
       ],
       "source_detail": {
         "source_id": "SRC-01",
@@ -2133,17 +2151,17 @@
           "toggle_on": true
         }
       ],
-      "narration": "第三步看螢幕顯示：Pro 螢幕亮度更高，色彩更鮮艷，支援高更新率，適合追求高畫質的用戶。",
+      "narration": "第三步看螢幕素質：MacBook Pro 擁有 Mini-LED 超高峰值亮度與 120Hz 高更新率，不論戶外強光還是滑動時間軸，視覺流暢度都完勝標準螢幕。",
       "source_id": "SRC-01",
       "image_prompt": "Vertical close up of laptop screen displaying bright colors, studio lighting, no text",
       "id": "S04",
-      "tts_text": "第三步看螢幕顯示：Pro 螢幕亮度更高，色彩更鮮艷，支援高更新率，適合追求高畫質的用戶。",
+      "tts_text": "第三步看萤幕素质，MacBook Pro拥有 Mini LED超高峰值亮度与一百二十赫兹高更新率，不论户外强光还是滑动时间轴，视觉流畅度都完胜标准萤幕。",
       "captions": [
-        "第三步看螢幕顯示",
-        "Pro 螢幕亮度更高",
-        "色彩更鮮艷",
-        "支援高更新率",
-        "適合追求高畫質的用戶"
+        "第三步看螢幕素質",
+        "MacBook Pro 擁有 Mini-LED 超",
+        "高峰值亮度與 120Hz 高更新率",
+        "不論戶外強光還是滑動時間軸",
+        "視覺流暢度都完勝標準螢幕"
       ],
       "source_detail": {
         "source_id": "SRC-01",
@@ -2214,16 +2232,18 @@
           "toggle_on": true
         }
       ],
-      "narration": "第四步看連接埠：Pro 多一個雷電 4 連接埠，擴展性更好，適合需要多連接埠的用戶。",
+      "narration": "第四步看連接埠擴充：MacBook Pro 多給了完整雷電四、HDMI 與記憶卡插槽，出門工作不用到處找轉接器，外接硬碟與雙螢幕一步到位。",
       "source_id": "SRC-01",
       "image_prompt": "Vertical close up of laptop ports, including USB-C and Thunderbolt, studio lighting, no text",
       "id": "S05",
-      "tts_text": "第四步看連接埠：Pro 多一個雷電 四 連接埠，擴展性更好，適合需要多連接埠的用戶。",
+      "tts_text": "第四步看连接部扩充，MacBook Pro多给了完整雷电四、 HDMI与记忆卡插槽，出门工作不用到处找转接器，外接硬碟与双萤幕一步到位。",
       "captions": [
-        "第四步看連接埠",
-        "Pro 多一個雷電 4 連接埠",
-        "擴展性更好",
-        "適合需要多連接埠的用戶"
+        "第四步看連接埠擴充",
+        "MacBook Pro 多",
+        "給了完整雷電四",
+        "HDMI 與記憶卡插槽",
+        "出門工作不用到處找轉接器",
+        "外接硬碟與雙螢幕一步到位"
       ],
       "source_detail": {
         "source_id": "SRC-01",
@@ -2270,8 +2290,8 @@
       "callout_tag": "輸入體驗",
       "ui_rows": [
         {
-          "title": "Air 鍵盤",
-          "subtitle": "剪刀腳結構，手感一般",
+          "title": "剪刀腳巧控鍵盤",
+          "subtitle": "1mm 鍵程回饋清脆，長時打字舒適",
           "badge": "一般",
           "toggle_on": false
         },
@@ -2294,17 +2314,16 @@
           "toggle_on": true
         }
       ],
-      "narration": "第五步看鍵盤與觸控板：Pro 鍵盤蝶式結構手感更好，觸控板更大，反應更快，適合追求舒適輸入的用戶。",
+      "narration": "第五步看輸入與外放體驗：全尺寸剪刀腳巧控鍵盤回饋紮實，搭配寬大的力度觸控板與六揚聲器音場，長時間打字剪輯的舒適度非常有感。",
       "source_id": "SRC-01",
       "image_prompt": "Vertical close up of laptop keyboard and trackpad, studio lighting, no text",
       "id": "S06",
-      "tts_text": "第五步看鍵盤與觸控板：Pro 鍵盤蝶式結構手感更好，觸控板更大，反應更快，適合追求舒適輸入的用戶。",
+      "tts_text": "第五步看输入与外放体验，全尺寸剪刀脚巧控键盘回馈扎实，搭配宽大的力度触控板与六扬声器音场，长时间打字剪辑的舒适度非常有感。",
       "captions": [
-        "第五步看鍵盤與觸控板",
-        "Pro 鍵盤蝶式結構手感更好",
-        "觸控板更大",
-        "反應更快",
-        "適合追求舒適輸入的用戶"
+        "第五步看輸入與外放體驗",
+        "全尺寸剪刀腳巧控鍵盤回饋紮實",
+        "搭配寬大的力度觸控板與六揚聲器音場",
+        "長時間打字剪輯的舒適度非常有感"
       ],
       "source_detail": {
         "source_id": "SRC-01",
@@ -2342,18 +2361,16 @@
     {
       "visual_type": "short_broll_summary",
       "topic_pill": "筆電選購避坑",
-      "narration": "綜合以上五個關鍵點，選擇筆電時要考慮散熱、螢幕、連接埠、鍵盤與觸控板，才能做出最佳選擇。",
+      "narration": "記住這句選購口訣：買 Air 就買基礎版賺輕薄性價比，只要選配加價超過兩階，直接上 MacBook Pro 才不會後悔！",
       "source_id": "SRC-01",
       "image_prompt": "Vertical b-roll footage of MacBook Air and MacBook Pro side by side, studio lighting, no text",
       "id": "S07",
-      "tts_text": "綜合以上五個關鍵點，選擇筆電時要考慮散熱、螢幕、連接埠、鍵盤與觸控板，才能做出最佳選擇。",
+      "tts_text": "记住这句选购口诀，买 Air就买基础版赚轻薄性价比，只要选配加价超过两阶，直接上 MacBook Pro才不会后悔！",
       "captions": [
-        "綜合以上五個關鍵點",
-        "選擇筆電時要考慮散熱",
-        "螢幕",
-        "連接埠",
-        "鍵盤與觸控板",
-        "才能做出最佳選擇"
+        "記住這句選購口訣",
+        "買 Air 就買基礎版賺輕薄性價比",
+        "只要選配加價超過兩階",
+        "直接上 MacBook Pro 才不會後悔"
       ],
       "source_detail": {
         "source_id": "SRC-01",
@@ -2391,15 +2408,15 @@
     {
       "visual_type": "cta_funnel_endcard",
       "topic_pill": "筆電選購避坑",
-      "narration": "這支短片只是精華重點，我們在完整長片裡實測了完整頻寬、散熱曲線與全部公開數據來源，現在就點擊下方關聯影片收看完整解析！",
+      "narration": "這支短片只是精華濃縮，我們在完整長片裡實測了記憶體頻寬、溫控差距與全部公開數據來源，現在就點擊下方關聯影片收看完整解析！",
       "source_id": "SRC-01",
       "image_prompt": "Vertical endcard with call-to-action button and video thumbnail, studio lighting, no text",
       "id": "S08",
-      "tts_text": "這支短片只是精華重點，我們在完整長片裡實測了完整頻寬、散熱曲線與全部公開數據來源，現在就點擊下方關聯影片收看完整解析！",
+      "tts_text": "这支短片只是精华浓缩，我们在完整长片里实测了记忆体频宽、温控差距与全部公开数据来源，现在就点击下方关联影片收看完整解析！",
       "captions": [
-        "這支短片只是精華重點",
-        "我們在完整長片裡實測了完整頻寬",
-        "散熱曲線與全部公開數據來源",
+        "這支短片只是精華濃縮",
+        "我們在完整長片裡實測了記憶體頻寬",
+        "溫控差距與全部公開數據來源",
         "現在就點擊下方關聯影片收看完整解析"
       ],
       "source_detail": {

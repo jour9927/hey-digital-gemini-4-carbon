@@ -19,13 +19,16 @@
      1. **`KeypointRCNN-ResNet50-FPN` 三影格（`15% / 50% / 85%`）零人臉審查**：100% 剔除國外 YouTuber 棚拍口播人臉與子母畫面頭像，完整保留「雙手鍵盤打字／觸控板滑動」與「純硬體微距特寫」。
      2. **`google/siglip-base-patch16-384` 視覺語義對位**：優先於 `RTX Pro 6000` CUDA（斷線時無縫回退本機 `M3 Pro` Apple Metal MPS）計算每個純硬體鏡頭與當句旁白 `visual_desc` 的語義匹配分數，並強制全片鏡頭全域不重複。
 
-3. **旗艦 32B 編導產稿與台灣繁中口播淨化站 (`scriptwriter.py` + `cn_verbalizer.py`)**
-   - 內嵌 `@hey_digitall` 原片逐字稿 Few-Shot 語氣錨點，採用 **50% 逐句精準對位第三方硬體實拍 (`cinema_broll_video`，每鏡拆分子分鏡 `broll_shots`) + 50% `Three.js` 3D 動態數據／選配模板** 黃金比例交錯編排。
-   - `cn_verbalizer.py` 自動將 80+ 項兩岸科技術語統一為台灣繁中慣用語，並將所有金額、晶片型號、頻寬與縮寫（`$1,299`、`9to5Mac`、`SSD`、`NPU`）100% 轉寫為自然中文讀法 `tts_text`。
+3. **旗艦 32B 口語化編導產稿與 V4 零破音繁簡分詞口播淨化站 (`scriptwriter.py` + `cn_verbalizer.py`)**
+   - 內嵌 `@hey_digitall` 原片逐字稿 Few-Shot 語氣錨點，強制產出真人面對面拆解風格的口語化播講稿，採用 **50% 逐句精準對位第三方硬體實拍 (`cinema_broll_video`) + 50% `Three.js` 3D 動態數據／選配模板** 黃金比例交錯編排。
+   - **V4 零破音字與零雙空白卡頓淨化 (`cn_verbalizer.py`)**：
+     - 畫面字幕維持 100% 台灣繁體科技用語（`記憶體`、`固態硬碟`、`螢幕`、`連接埠`、`更新率`），而送入 `F5-TTS` 的口播稿自動以純字級 `OpenCC('t2s')` 轉換並鎖定台灣讀音（修復 `彈性 tán xìng`、`幾乎 jī hū`、`連接埠 bù`、`拖著 zhe` 等破音字，同時保留台灣詞彙不變為大陸用語）。
+     - 針對 `F5-TTS` 底層 `convert_char_to_pinyin` 非對稱空白機制實作「中接英單空白、英接中零空白」規則，實現全片 **0 個雙空白停頓 token**，徹底消除詞中卡頓。
+     - 晶片與單位自然口語化：`M5` 映射為音標級 `Em五`（根除 `蠻五／門五` 連音）、`153GB/s` 轉為 `每秒一百五十三G`、`20°C` 轉為 `二十度`、自動剝離句尾 `SRC-01` 標記。
 
-4. **RTX Pro 6000 重活算力與句級氣口 PyTorch 聲紋克隆站 (`worker/rtx6000_heavy_worker.py`)**
-   - **本機優先安全原則**：所有最新主腳本、設定檔、分鏡 JSON、克隆音檔與成片資產一律優先保存於本機（`Alan-Hub`），臨時節點斷線時自動無縫切換本機 Apple Metal MPS 繼續執行，零資料遺失。
-   - **PyTorch 聲紋克隆與 Whisper 強制對齊**：以 `Demucs (htdemucs)` 分離純淨人聲乾音，透過 `PyTorch F5-TTS` 分句合成並以 `openai/whisper-large-v3-turbo` 輸出毫秒級字幕切點 `caption_timings`，供合成器於子句邊界精準切鏡。
+4. **多節點 GPU 算力調度與 V4 電容麥級 PyTorch 聲紋克隆站 (`worker/rtx6000_heavy_worker.py`)**
+   - **本機優先安全與三層算力自動調度**：所有主腳本、設定檔、分鏡 JSON、克隆音檔與成片一律優先保存於本機（`Alan-Hub`）；配音與重活依序自動調度 `RTX Pro 6000` → Tailscale `b850` (`RTX 5070 Ti` `/dev/shm` 記憶體磁碟 CUDA，自動偵測可用顯存零干擾) → 本機 `M3 Pro` 雙通道平行 Apple Metal `fp16` MPS。
+   - **雙語無損人聲參考檔與整句呼吸曲線**：採用 `Demucs (htdemucs)` 分離無損乾音（剔除破壞齒音的 `afftdn` 頻譜降噪，內含 `MacBook Pro`、`M5`、`MacBook Air` 真實雙語發音），整句連續推理搭配 `0.56s` 長片段落氣口／`0.26s` Short 明快氣口、`soxr` 升頻與 `240Hz` 減濁 + `3.8kHz/7.5kHz` 電容麥空氣感 EQ。
    - **Tailscale SSH 跨機叢集 (`config/ssh_config`)**：完整納管並驗證可達 `b850` / `b850-ubuntu` (`100.100.230.119`, RTX 5070 Ti 16GB)、`alan-fw` (`100.78.161.123`, AMD Ryzen AI Max+ 395 128GB) 與 `alan-mba` (`100.102.171.50`, M4 Air 24GB)。
 
 5. **Apple Metal `Three.js` WebGL2 真 3D 動態圖卡與互動 UI 站 (`hey_digital_pipeline/motion_studio.py`)**

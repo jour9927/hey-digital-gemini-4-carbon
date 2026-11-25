@@ -118,21 +118,9 @@ def generate_rhodes_chill_bgm(duration_sec: float, out_wav: Path, sr: int = 4410
             mel = _rhodes_note(mel_f, dur=beat_sec * 0.9, sr=sr, velocity=0.34)
             _mix_mono(left, right, bar_t0 + beat_sec * 3.25, mel, pan=0.25)
 
-        # 4. Warm sub-bass on Beat 1 and soft pickup on Beat 3.5
+        # 4. Warm sub-bass on Beat 1 and soft pickup on Beat 3.5 (pure warm Rhodes + sub-bass, zero white-noise hiss!)
         _mix_mono(left, right, bar_t0, _warm_bass_note(chord["bass"], beat_sec * 2.3, sr), pan=0.0)
-        _mix_mono(left, right, bar_t0 + beat_sec * 2.5, _warm_bass_note(chord["bass"] * 1.5 if bar_idx % 2 else chord["bass"], beat_sec * 1.3, sr) * 0.65, pan=0.0)
-
-        # 5. Subtle studio brushed pulse on 8th notes (keeps gentle rhythmic life without distracting speech)
-        for eighth in range(8):
-            et = bar_t0 + eighth * (beat_sec * 0.5)
-            sh_len = int(0.038 * sr)
-            t_sh = np.arange(sh_len, dtype=np.float32) / sr
-            noise = rng.normal(0.0, 1.0, sh_len).astype(np.float32)
-            # Differentiate noise for high-frequency crisp brush texture
-            hp_noise = np.diff(noise, prepend=0.0)
-            accent = 0.026 if eighth in (2, 6) else 0.012
-            sh_sig = hp_noise * np.exp(-t_sh * 85.0) * accent
-            _mix_mono(left, right, et, sh_sig, pan=-0.15 if eighth % 2 == 0 else 0.15)
+        _mix_mono(left, right, bar_t0 + beat_sec * 2.5, _warm_bass_note(chord["bass"] * 1.5 if bar_idx % 2 else chord["bass"], beat_sec * 1.3, sr) * 0.55, pan=0.0)
 
     # Classic Fender Suitcase Rhodes slow stereo tremolo + warm saturation
     t_all = np.arange(total_samples, dtype=np.float32) / sr
@@ -238,21 +226,22 @@ def master_video_with_sidechain(
     sfx_wav: Path,
     out_mp4: Path,
     target_lufs: float = -14.2,
+    bgm_volume: float = 0.42,
 ) -> Path:
     """
     Mix Voiceover + Tactile SFX + Sidechain-Ducked Rhodes Electric-Piano BGM:
-    - During silent chapter cards / breaths, Rhodes BGM plays cleanly at full bed level.
-    - Whenever Alan speaks, `sidechaincompress` ducks Rhodes BGM smoothly (-9 dB) with 35ms attack / 440ms release.
+    - Monotonically normalizes concatenated segment audio timestamps (`aresample=async=1:first_pts=0`).
+    - Keeps Alan's voice upfront and crystal-clear while Rhodes BGM gently blooms in chapter/paragraph pauses.
     - Final bus mastered to `-14.2 LUFS` / `-1.2 dBTP`.
     """
     out_mp4.parent.mkdir(parents=True, exist_ok=True)
     filter_complex = (
-        "[0:a]aformat=sample_fmts=fltp:sample_rates=44100:channel_layouts=stereo,volume=1.05,asplit=2[vo_main][vo_sc];"
-        "[1:a]aformat=sample_fmts=fltp:sample_rates=44100:channel_layouts=stereo,volume=0.88,lowpass=f=7500[bgm_pre];"
-        "[bgm_pre][vo_sc]sidechaincompress=threshold=0.015:ratio=4.8:attack=30:release=460:makeup=1.0[bgm_ducked];"
-        "[2:a]aformat=sample_fmts=fltp:sample_rates=44100:channel_layouts=stereo,volume=0.95[sfx];"
+        "[0:a]aresample=44100:async=1:first_pts=0,aformat=sample_fmts=fltp:sample_rates=44100:channel_layouts=stereo,asetpts=N/SR/TB,volume=1.08,asplit=2[vo_main][vo_sc];"
+        f"[1:a]aformat=sample_fmts=fltp:sample_rates=44100:channel_layouts=stereo,volume={bgm_volume:.3f},lowpass=f=4800[bgm_pre];"
+        "[bgm_pre][vo_sc]sidechaincompress=threshold=0.010:ratio=6.5:attack=18:release=540:makeup=1.0[bgm_ducked];"
+        "[2:a]aformat=sample_fmts=fltp:sample_rates=44100:channel_layouts=stereo,volume=0.82[sfx];"
         "[vo_main][bgm_ducked][sfx]amix=inputs=3:duration=first:dropout_transition=0:normalize=0,"
-        f"loudnorm=I={target_lufs}:TP=-1.2:LRA=5.5[aout]"
+        f"loudnorm=I={target_lufs}:TP=-1.2:LRA=6.5[aout]"
     )
     subprocess.run(
         [
