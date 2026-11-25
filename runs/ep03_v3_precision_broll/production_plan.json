@@ -36,12 +36,11 @@
       "accent_hex": "#B84A14",
       "tts_text": "如果你最近想换一台搭载 Em五晶片的 MacBook Air，大概都会遇到同一个纠结，入门款帐面上很便宜，可是一旦把容量补齐到十六G记忆体和五百一十二G固态硬碟，价格几乎瞬间贴近高阶款。",
       "captions": [
-        "如果你最近想換一",
-        "台 MacBook Air M5",
+        "如果你最近想換一台 MacBook Air M5",
         "大概都會遇到同一個糾結",
         "入門款帳面上很便宜",
-        "可是一旦把容量補齊到 16GB 記",
-        "憶體和 512GB SSD",
+        "可是一旦把容量補齊到",
+        "16GB 記憶體和 512GB SSD",
         "價格幾乎瞬間貼近高階款"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
@@ -143,10 +142,8 @@
       "tts_text": "很多人第一眼没注意的是记忆体频宽刀法，标准十六G版本的频宽只有每秒一百五十三G，要往上加到高阶配置才能跑到每秒一百七十G以上。",
       "captions": [
         "很多人第一眼沒注意的是記憶體頻寬刀法",
-        "標準 16GB 版本的",
-        "頻寬只有 153GB/s",
-        "要往上加到高階配置才能跑",
-        "到 170GB/s 以上"
+        "標準 16GB 版本的頻寬只有 153GB/s",
+        "要往上加到高階配置才能跑到 170GB/s 以上"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_id": "SRC-02",
@@ -203,8 +200,7 @@
       "tts_text": "更别说苹果经典的储存空间加价阶梯，从二百五十六G往上升到五百一十二G先加一百美元，再冲上一T又要多掏两百美元，预算一下就爆了。",
       "captions": [
         "更別說蘋果經典的儲存空間加價階梯",
-        "從 256GB 往上升",
-        "到 512GB 先加 100 美元",
+        "從 256GB 往上升到 512GB 先加 100 美元",
         "再衝上 1TB 又要多掏 200 美元",
         "預算一下就爆了"
       ],
@@ -311,8 +307,7 @@
       "tts_text": "把这笔容量升级费全部摊进总持有成本里算一算，你会发现加配后的轻薄款跟直接买 MacBook Pro，真实价差其实已经非常小。",
       "captions": [
         "把這筆容量升級費全部攤進總持有成本裡算一算",
-        "你會發現加配後的輕薄款跟直",
-        "接買 MacBook Pro",
+        "你會發現加配後的輕薄款跟直接買 MacBook Pro",
         "真實價差其實已經非常小"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
@@ -366,8 +361,8 @@
         "當然把統一記憶體拉高之後",
         "日常體感確實差很多",
         "以前開幾個分頁就開始吃緊",
-        "現在同時掛著剪輯軟體跟",
-        "多個大型應用都還是很從容"
+        "現在同時掛著剪輯軟體",
+        "跟多個大型應用都還是很從容"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_detail": {
@@ -553,10 +548,9 @@
       "captions": [
         "來到第二個關鍵差異",
         "MacBook Air M5 雖然極致輕薄",
-        "但無風扇設計遇到長時間高",
-        "強度運算還是會觸發溫控降頻",
-        "而 MacBook Pro 靠",
-        "主動散熱就能一路穩住效能"
+        "但無風扇設計遇到長時間高強度運算",
+        "還是會觸發溫控降頻",
+        "而 MacBook Pro 靠主動散熱就能一路穩住效能"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_detail": {
@@ -717,8 +711,8 @@
       "captions": [
         "當你連續執行多工 AI 推論或轉檔十幾分鐘後",
         "無風扇機身的溫度很快就會摸到上限",
-        "反觀配備雙風扇散熱的 MacBook Pro 依",
-        "然能維持低溫穩定輸出"
+        "反觀配備雙風扇散熱的",
+        "MacBook Pro 依然能維持低溫穩定輸出"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_detail": {
@@ -792,8 +786,7 @@
       "accent_hex": "#5B50D6",
       "tts_text": "说白了，同一颗世代的晶片放进无风扇机壳里，散热天花板就是物理极限，而主动散热系统才能把每一分算力完整释放出来。",
       "captions": [
-        "說白了",
-        "同一顆世代的晶片放進無風扇機殼裡",
+        "說白了，同一顆世代的晶片放進無風扇機殼裡",
         "散熱天花板就是物理極限",
         "而主動散熱系統才能把每一分算力完整釋放出來"
       ],
@@ -842,8 +835,8 @@
       "tts_text": "实测连续满载压测下来，两台机器的核心与表面温差最高能拉开将近二十度，这正是决定长时间剪片会不会卡顿的分水岭。",
       "captions": [
         "實測連續滿載壓測下來",
-        "兩台機器的核心與表面溫差",
-        "最高能拉開將近 20°C",
+        "兩台機器的核心與表面",
+        "溫差最高能拉開將近 20°C",
         "這正是決定長時間剪片會不會卡頓的分水嶺"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
@@ -991,8 +984,8 @@
       "captions": [
         "第三塊最容易一用就回不去的",
         "絕對是這塊螢幕",
-        "120Hz ProMotion 在",
-        "拉動剪輯時間軸時絲滑得非常有感",
+        "120Hz ProMotion 在拉動剪輯時間軸時",
+        "絲滑得非常有感",
         "加上 Mini-LED 的超高亮度",
         "在窗邊或戶外也看得一清二楚"
       ],
@@ -1132,8 +1125,7 @@
       "accent_hex": "#B84A14",
       "tts_text": "特别是这块 Mini LED萤幕带来的极致对比度，修图或调色时暗部细节层次非常干净，不会像一般液晶萤幕那样发灰。",
       "captions": [
-        "特別是這塊 Mini-LED 螢",
-        "幕帶來的極致對比度",
+        "特別是這塊 Mini-LED 螢幕帶來的極致對比度",
         "修圖或調色時暗部細節層次非常乾淨",
         "不會像一般液晶螢幕那樣發灰"
       ],
@@ -1226,10 +1218,9 @@
       "accent_hex": "#0E7C47",
       "tts_text": "如果你未来两三年会接高速硬碟、记忆卡或外接设备，一开始就选连接部齐全的 MacBook Pro，省下的扩充底座费用长远来看反而更划算。",
       "captions": [
-        "如果你未來兩三年會接高速硬碟",
-        "記憶卡或外接設備",
-        "一開始就選連接埠齊全",
-        "的 MacBook Pro",
+        "如果你未來兩三年會接",
+        "高速硬碟、記憶卡或外接設備",
+        "一開始就選連接埠齊全的 MacBook Pro",
         "省下的擴充底座費用長遠來看反而更划算"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
@@ -1288,8 +1279,8 @@
       "captions": [
         "再加上更完整的多螢幕外接支援能力",
         "回到工作室只要插上一條線就能驅動雙螢幕桌面",
-        "這也是為什麼重度創作者最後還",
-        "是會選 MacBook Pro"
+        "這也是為什麼重度創作者最後",
+        "還是會選 MacBook Pro"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_detail": {
@@ -1469,10 +1460,8 @@
       "tts_text": "最后帮大家按真实情境做个总结，如果你的日常就是写写报告、回信跟开网页，那轻薄安静的搭载 Em五晶片的 MacBook Air绝对够用又省心；但只要会碰到四K剪片或重度多工，直上 MacBook Pro才不会后悔。",
       "captions": [
         "最後幫大家按真實情境做個總結",
-        "如果你的日常就是寫寫報告",
-        "回信跟開網頁",
-        "那輕薄安靜的 MacBook Air M5 絕",
-        "對夠用又省心",
+        "如果你的日常就是寫寫報告、回信跟開網頁",
+        "那輕薄安靜的 MacBook Air M5 絕對夠用又省心",
         "但只要會碰到四 K 剪片或重度多工",
         "直上 MacBook Pro 才不會後悔"
       ],
@@ -1705,8 +1694,8 @@
       "accent_hex": "#B84A14",
       "tts_text": "买主力生产力工具看的永远是三到四年的总拥有成本，与其为了省一点预算买回来天天嫌空间不够，一次到位反而最省钱。",
       "captions": [
-        "買主力生產力工具看的永",
-        "遠是三到四年的總擁有成本",
+        "買主力生產力工具看的",
+        "永遠是三到四年的總擁有成本",
         "與其為了省一點預算買回來天天嫌空間不夠",
         "一次到位反而最省錢"
       ],
@@ -1768,8 +1757,7 @@
       "tts_text": "尤其对经常在外奔波拍摄或接案的朋友来说，机身自带多个雷电四连接部与记忆卡槽，关键时刻真的能省下超多麻烦。",
       "captions": [
         "尤其對經常在外奔波拍攝或接案的朋友來說",
-        "機身自帶多個 Thunderbolt 4 連",
-        "接埠與記憶卡槽",
+        "機身自帶多個 Thunderbolt 4 連接埠與記憶卡槽",
         "關鍵時刻真的能省下超多麻煩"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
@@ -1848,11 +1836,9 @@
       "accent_hex": "#5B50D6",
       "tts_text": "总结一句话，买轻薄款就坚守基础配置最香，只要你的选配单开始往上加记忆体和硬碟，果断直上 MacBook Pro才是真正不踩雷的聪明买法！",
       "captions": [
-        "總結一句話",
-        "買輕薄款就堅守基礎配置最香",
+        "總結一句話：買輕薄款就堅守基礎配置最香",
         "只要你的選配單開始往上加記憶體和硬碟",
-        "果斷直上 MacBook Pro 才",
-        "是真正不踩雷的聰明買法"
+        "果斷直上 MacBook Pro 才是真正不踩雷的聰明買法"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_detail": {
@@ -1912,8 +1898,8 @@
       "tts_text": "帐面差价四百美元，今年该买搭载 Em五晶片的 MacBook Air还是直上 MacBook Pro？别只看表面跑分，一旦升级容量价格马上贴近，这五个硬体刀法先看懂再下单！",
       "captions": [
         "帳面差價四百美元",
-        "今年該買 MacBook Air M5 還",
-        "是直上 MacBook Pro",
+        "今年該買 MacBook Air M5",
+        "還是直上 MacBook Pro",
         "別只看表面跑分",
         "一旦升級容量價格馬上貼近",
         "這五個硬體刀法先看懂再下單"
@@ -1996,8 +1982,7 @@
         "第一步先算真實總價",
         "入門款不加配最划算",
         "可是一旦把記憶體和硬碟往上加",
-        "價格幾乎瞬間摸",
-        "到 MacBook Pro 門檻",
+        "價格幾乎瞬間摸到 MacBook Pro 門檻",
         "這時候直上反而換來全套高階規格"
       ],
       "source_detail": {
@@ -2078,8 +2063,7 @@
         "第二步看散熱表現",
         "Air 採用無風扇被動散熱",
         "日常極致安靜但長時間滿載容易降頻",
-        "MacBook Pro 配",
-        "備主動風扇散熱",
+        "MacBook Pro 配備主動風扇散熱",
         "連續剪片或跑模型依然穩如泰山"
       ],
       "source_detail": {
@@ -2158,8 +2142,8 @@
       "tts_text": "第三步看萤幕素质，MacBook Pro拥有 Mini LED超高峰值亮度与一百二十赫兹高更新率，不论户外强光还是滑动时间轴，视觉流畅度都完胜标准萤幕。",
       "captions": [
         "第三步看螢幕素質",
-        "MacBook Pro 擁有 Mini-LED 超",
-        "高峰值亮度與 120Hz 高更新率",
+        "MacBook Pro 擁有 Mini-LED",
+        "超高峰值亮度與 120Hz 高更新率",
         "不論戶外強光還是滑動時間軸",
         "視覺流暢度都完勝標準螢幕"
       ],
@@ -2239,9 +2223,8 @@
       "tts_text": "第四步看连接部扩充，MacBook Pro多给了完整雷电四、 HDMI与记忆卡插槽，出门工作不用到处找转接器，外接硬碟与双萤幕一步到位。",
       "captions": [
         "第四步看連接埠擴充",
-        "MacBook Pro 多",
-        "給了完整雷電四",
-        "HDMI 與記憶卡插槽",
+        "MacBook Pro 多給了",
+        "完整雷電四、HDMI 與記憶卡插槽",
         "出門工作不用到處找轉接器",
         "外接硬碟與雙螢幕一步到位"
       ],
@@ -2415,8 +2398,9 @@
       "tts_text": "这支短片只是精华浓缩，我们在完整长片里实测了记忆体频宽、温控差距与全部公开数据来源，现在就点击下方关联影片收看完整解析！",
       "captions": [
         "這支短片只是精華濃縮",
-        "我們在完整長片裡實測了記憶體頻寬",
-        "溫控差距與全部公開數據來源",
+        "我們在完整長片裡實測了",
+        "記憶體頻寬、溫控差距",
+        "與全部公開數據來源",
         "現在就點擊下方關聯影片收看完整解析"
       ],
       "source_detail": {

@@ -108,41 +108,41 @@ def cover_resize(img: Image.Image, target_w: int, target_h: int) -> Image.Image:
 
 
 def draw_adaptive_caption(canvas: Image.Image, text: str, is_light_bg: bool, is_vertical: bool = False):
+    """
+    Render strictly SINGLE-LINE `@hey_digitall` caption (NEVER wraps to 2 lines or chops mid-word;
+    dynamically scales font down slightly only if an unusually dense line approaches screen edges).
+    """
     if not text:
         return
     w, h = canvas.size
-    font_size = 52 if is_vertical else 44
-    font = get_cjk_font(font_size, bold=True)
+    font_size = 44 if is_vertical else 40
+    max_px = int(w * (0.90 if is_vertical else 0.88))
     draw = ImageDraw.Draw(canvas, "RGBA")
 
-    max_px = int(w * (0.86 if is_vertical else 0.84))
+    font = get_cjk_font(font_size, bold=True)
     bbox = draw.textbbox((0, 0), text, font=font)
     tw = bbox[2] - bbox[0]
-    if tw > max_px and len(text) > 10:
-        mid = len(text) // 2
-        lines = [text[:mid].strip(), text[mid:].strip()]
-    else:
-        lines = [text]
+    while tw > max_px and font_size > 28:
+        font_size -= 2
+        font = get_cjk_font(font_size, bold=True)
+        bbox = draw.textbbox((0, 0), text, font=font)
+        tw = bbox[2] - bbox[0]
 
-    base_y = int(h * (0.775 if is_vertical else 0.905)) - (len(lines) - 1) * (font_size + 12)
-    for idx, ln in enumerate(lines):
-        bb = draw.textbbox((0, 0), ln, font=font)
-        lw = bb[2] - bb[0]
-        x = (w - lw) // 2
-        y = base_y + idx * (font_size + 12)
-        if is_light_bg and not is_vertical:
-            draw.text((x, y + 1), ln, font=font, fill=(255, 255, 255, 130))
-            draw.text((x, y), ln, font=font, fill=(22, 22, 24, 255))
-        else:
-            draw.text((x + 2, y + 4), ln, font=font, fill=(0, 0, 0, 190))
-            draw.text(
-                (x, y),
-                ln,
-                font=font,
-                fill=(255, 255, 255, 255),
-                stroke_width=4 if is_vertical else 2,
-                stroke_fill=(10, 12, 16, 240),
-            )
+    x = (w - tw) // 2
+    y = int(h * (0.848 if is_vertical else 0.908))
+    if is_light_bg and not is_vertical:
+        draw.text((x, y + 1), text, font=font, fill=(255, 255, 255, 135))
+        draw.text((x, y), text, font=font, fill=(22, 22, 24, 255))
+    else:
+        draw.text((x + 2, y + 4), text, font=font, fill=(0, 0, 0, 195))
+        draw.text(
+            (x, y),
+            text,
+            font=font,
+            fill=(255, 255, 255, 255),
+            stroke_width=4 if is_vertical else 2,
+            stroke_fill=(10, 12, 16, 245),
+        )
 
 
 def draw_source_badge(draw: ImageDraw.ImageDraw, badge_text: str, x: int, y: int, light_theme: bool):

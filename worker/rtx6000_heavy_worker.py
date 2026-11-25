@@ -147,13 +147,83 @@ def _split_tts_sentences(tts_text: str, max_chars: int = 54) -> list[str]:
     return out or [tts_text]
 
 
-def _align_captions_to_chunks(captions: list[str], whisper_chunks: list[dict], total_dur: float) -> list[dict]:
-    """Map display captions onto real spoken speech onset/offset envelope + Whisper chunk anchors."""
+def _align_captions_to_chunks(
+    captions: list[str],
+    whisper_chunks: list[dict],
+    total_dur: float,
+    whisper_words: list[dict] | None = None,
+    is_short: bool = False,
+) -> list[dict]:
+    """Map display captions onto exact spoken word timestamps (via monotonic SequenceMatcher) or chunk bounds."""
     if not captions:
         return []
-    # Speech active window from Whisper chunks (keeps captions strictly inside actual speech, not tail pause!)
+    if whisper_words:
+        import difflib
+        try:
+            from opencc import OpenCC
+            t2s = OpenCC("t2s").convert
+        except Exception:
+            t2s = lambda x: x
+
+        def _skel(s: str) -> str:
+            return "".join(ch.lower() for ch in t2s(s) if ("\u4e00" <= ch <= "\u9fff") or ch.isalnum())
+
+        w_chars, w_times = [], []
+        for wo in whisper_words:
+            wt = _skel(str(wo.get("word") or ""))
+            if not wt:
+                continue
+            t0 = float(wo.get("start", 0.04))
+            t1 = max(t0 + 0.04, float(wo.get("end", t0 + 0.16)))
+            st = (t1 - t0) / len(wt)
+            for ci, ch in enumerate(wt):
+                w_chars.append(ch)
+                w_times.append((t0 + ci * st, t0 + (ci + 1) * st))
+
+        if w_chars:
+            cap_ranges, full_c = [], ""
+            for c in captions:
+                cs = _skel(c) or "x"
+                r0 = len(full_c)
+                full_c += cs
+                cap_ranges.append((r0, len(full_c)))
+            sm = difflib.SequenceMatcher(None, full_c, "".join(w_chars), autojunk=False)
+            ac, aw = [0], [0]
+            for blk in sm.get_matching_blocks():
+                for k in range(blk.size):
+                    ac.append(blk.a + k)
+                    aw.append(blk.b + k)
+            ac.append(len(full_c))
+            aw.append(len(w_chars) - 1)
+
+            def _map_idx(ci: int) -> int:
+                for i in range(len(ac) - 1):
+                    if ac[i] <= ci <= ac[i + 1]:
+                        if ac[i + 1] == ac[i]:
+                            return min(len(w_chars) - 1, max(0, aw[i]))
+                        f = (ci - ac[i]) / (ac[i + 1] - ac[i])
+                        return min(len(w_chars) - 1, max(0, int(round(aw[i] + f * (aw[i + 1] - aw[i])))))
+                return len(w_chars) - 1
+
+            timings = []
+            for idx, (c_txt, (r0, r1)) in enumerate(zip(captions, cap_ranges)):
+                ws = _map_idx(r0)
+                we = max(ws, _map_idx(max(r0, r1 - 1)))
+                ts, te = w_times[ws][0], w_times[we][1]
+                if idx > 0 and ts < timings[-1]["end"]:
+                    mid = 0.5 * (timings[-1]["end"] + ts)
+                    timings[-1]["end"] = round(max(timings[-1]["start"] + 0.25, mid), 3)
+                    ts = timings[-1]["end"]
+                te = max(ts + 0.32, min(total_dur - 0.06, te))
+                timings.append({"text": c_txt, "start": round(max(0.0, ts), 3), "end": round(te, 3)})
+            for i in range(len(timings) - 1):
+                if 0.0 < timings[i + 1]["start"] - timings[i]["end"] < 0.28:
+                    timings[i]["end"] = timings[i + 1]["start"]
+            return timings
+
+    tail_pad = 0.24 if is_short else 0.52
     speech_start = 0.04
-    speech_end = max(0.35, total_dur - 0.22)
+    speech_end = max(0.35, total_dur - tail_pad)
     if whisper_chunks:
         c0 = whisper_chunks[0].get("timestamp") or [0.04, None]
         c_last = whisper_chunks[-1].get("timestamp") or [None, speech_end]
@@ -163,7 +233,7 @@ def _align_captions_to_chunks(captions: list[str], whisper_chunks: list[dict], t
             speech_end = min(total_dur - 0.08, float(c_last[1]) + 0.06)
 
     span = max(0.3, speech_end - speech_start)
-    weights = [max(1.5, float(len(re.sub(r"\s+", "", c)))) for c in captions]
+    weights = [max(1.5, sum(0.5 if ord(ch) < 128 else 1.0 for ch in c if not ch.isspace())) for c in captions]
     w_sum = sum(weights)
     timings = []
     cur = speech_start
@@ -342,15 +412,18 @@ def synthesize_voice_batch(manifest_path: Path, profile_path: Path, out_dir: Pat
         raw_24k.unlink(missing_ok=True)
         dur = round(float(sf.info(str(final_wav)).duration), 3)
 
-        # Whisper forced alignment + transcript QA log
+        # Whisper word-level forced alignment + transcript QA log
+        w_words = []
         w_chunks = []
         heard_txt = ""
         if fw_model is not None:
             try:
-                segs_iter, _ = fw_model.transcribe(str(final_wav), language="zh", word_timestamps=False)
+                segs_iter, _ = fw_model.transcribe(str(final_wav), language="zh", word_timestamps=True)
                 for s_obj in segs_iter:
                     w_chunks.append({"timestamp": [round(s_obj.start, 3), round(s_obj.end, 3)], "text": s_obj.text})
                     heard_txt += s_obj.text.strip()
+                    for w_it in (s_obj.words or []):
+                        w_words.append({"word": w_it.word, "start": round(w_it.start, 3), "end": round(w_it.end, 3)})
             except Exception:
                 w_chunks = []
         elif hf_asr is not None:
@@ -359,13 +432,17 @@ def synthesize_voice_batch(manifest_path: Path, profile_path: Path, out_dir: Pat
                 run_cmd(["ffmpeg", "-y", "-i", str(final_wav), "-ac", "1", "-ar", "16000", str(wav_16k)])
                 aud16, _ = sf.read(str(wav_16k), dtype="float32")
                 wav_16k.unlink(missing_ok=True)
-                w_res = hf_asr({"raw": aud16, "sampling_rate": 16000}, return_timestamps=True, generate_kwargs={"language": "chinese", "task": "transcribe"})
+                w_res = hf_asr({"raw": aud16, "sampling_rate": 16000}, return_timestamps="word", generate_kwargs={"language": "chinese", "task": "transcribe"})
                 w_chunks = w_res.get("chunks") or []
+                for ch_it in w_chunks:
+                    ts = ch_it.get("timestamp") or [0.0, 0.2]
+                    if ts[0] is not None and ts[1] is not None:
+                        w_words.append({"word": ch_it.get("text", ""), "start": float(ts[0]), "end": float(ts[1])})
                 heard_txt = (w_res.get("text") or "").strip()
             except Exception:
                 w_chunks = []
 
-        cap_timings = _align_captions_to_chunks(captions, w_chunks, dur)
+        cap_timings = _align_captions_to_chunks(captions, w_chunks, dur, whisper_words=w_words, is_short=is_short)
         print(f"  [{idx+1}/{len(items)}] {seg_id}: {dur:.2f}s (gen {time.time()-t0:.1f}s) | ASR: {heard_txt[:36] or tts_text[:36]}", flush=True)
         results.append({
             "id": seg_id,

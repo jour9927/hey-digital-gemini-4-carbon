@@ -95,13 +95,12 @@ def caption_for_timestamp(beat: dict, caption_timings: list[dict], t_local: floa
     """Resolve exact spoken caption at `t_local` using Whisper-aligned `caption_timings` (or char-weighted fallback)."""
     if caption_timings:
         for seg in caption_timings:
-            if float(seg["start"]) - 0.04 <= t_local <= float(seg["end"]) + 0.08:
+            if float(seg["start"]) - 0.03 <= t_local <= float(seg["end"]) + 0.06:
                 return seg["text"]
         if t_local < float(caption_timings[0]["start"]):
-            return caption_timings[0]["text"] if t_local >= 0.05 else ""
-        if t_local > float(caption_timings[-1]["end"]) + 0.25:
-            return ""
-        return caption_timings[-1]["text"]
+            return caption_timings[0]["text"] if t_local >= 0.04 else ""
+        # Between breath-separated sentences or after final speech offset: show clean frame (NEVER flash last caption!)
+        return ""
 
     caps = beat.get("captions") or []
     if not caps:
@@ -189,7 +188,7 @@ COMMON_LONG_HTML_TEMPLATE = r"""<!DOCTYPE html>
 
   .caption-bar {
     position: absolute; left: 50%; bottom: 48px; transform: translateX(-50%);
-    font-size: 44px; font-weight: 600; color: #171719;
+    font-size: 40px; font-weight: 600; color: #171719;
     text-shadow: 0 1px 0 rgba(255,255,255,0.75), 0 4px 16px rgba(255,255,255,0.45);
     letter-spacing: 0.02em; text-align: center; white-space: nowrap;
   }
@@ -949,35 +948,35 @@ SHORT_INTERACTIVE_HTML_TEMPLATE = r"""<!DOCTYPE html>
   .flow-item.on { color: #17884C; background: rgba(23,136,76,0.12); padding: 4px 14px; border-radius: 999px; }
 
   .iphone-bezel {
-    position: absolute; left: 165px; top: 392px; width: 750px; height: 1295px;
-    background: #111613; border-radius: 76px; border: 6px solid #26784B;
-    box-shadow: 0 32px 70px rgba(16, 38, 24, 0.22); padding: 22px;
+    position: absolute; left: 165px; top: 386px; width: 750px; height: 1184px;
+    background: #111613; border-radius: 74px; border: 6px solid #26784B;
+    box-shadow: 0 28px 64px rgba(16, 38, 24, 0.22); padding: 20px;
   }
   .iphone-screen {
     position: relative; width: 100%; height: 100%; background: #F4F6F8;
-    border-radius: 56px; overflow: hidden; display: flex; flex-direction: column;
+    border-radius: 54px; overflow: hidden; display: flex; flex-direction: column;
   }
   .status-bar {
-    height: 62px; display: flex; align-items: center; justify-content: space-between;
-    padding: 12px 38px 0 38px; font-size: 21px; font-weight: 700; color: #181A1E;
+    height: 56px; display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 36px 0 36px; font-size: 20px; font-weight: 700; color: #181A1E;
   }
   .dyn-island {
-    width: 158px; height: 36px; border-radius: 20px; background: #0B0D10;
+    width: 150px; height: 34px; border-radius: 20px; background: #0B0D10;
   }
   .phone-banner {
-    margin: 12px 24px 14px 24px; height: 228px; border-radius: 28px; overflow: hidden; position: relative;
+    margin: 10px 22px 10px 22px; height: 198px; border-radius: 26px; overflow: hidden; position: relative;
     background: #1C222B;
   }
   .phone-banner img { width: 100%; height: 100%; object-fit: cover; }
   .phone-banner-tag {
-    position: absolute; left: 18px; bottom: 14px;
+    position: absolute; left: 18px; bottom: 12px;
     background: rgba(12,16,22,0.78); backdrop-filter: blur(8px);
-    color: #FFF; font-size: 20px; font-weight: 700; padding: 6px 16px; border-radius: 999px;
+    color: #FFF; font-size: 19px; font-weight: 700; padding: 5px 15px; border-radius: 999px;
   }
 
-  .ios-list { padding: 6px 24px; display: flex; flex-direction: column; gap: 16px; flex: 1; }
+  .ios-list { padding: 4px 22px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
   .ios-row {
-    position: relative; background: #FFFFFF; border-radius: 26px; padding: 20px 24px;
+    position: relative; background: #FFFFFF; border-radius: 24px; padding: 15px 22px;
     border: 3px solid #E6EBF0; display: flex; align-items: center; justify-content: space-between;
     box-shadow: 0 6px 16px rgba(0,0,0,0.03);
   }
@@ -1030,12 +1029,13 @@ SHORT_INTERACTIVE_HTML_TEMPLATE = r"""<!DOCTYPE html>
   .seg-fill { height: 100%; background: #17884C; border-radius: 999px; width: 0%; }
 
   .short-caption {
-    position: absolute; left: 54px; right: 54px; top: 1455px; z-index: 25;
-    text-align: center; font-size: 52px; font-weight: 800; line-height: 1.28;
+    position: absolute; left: 32px; right: 32px; top: 1628px; z-index: 25;
+    text-align: center; font-size: 44px; font-weight: 800; line-height: 1.25;
+    white-space: nowrap;
     color: #FFFFFF;
-    -webkit-text-stroke: 7px #101318;
+    -webkit-text-stroke: 6px #101318;
     paint-order: stroke fill;
-    filter: drop-shadow(0 8px 18px rgba(0,0,0,0.42));
+    filter: drop-shadow(0 6px 14px rgba(0,0,0,0.36));
   }
 </style>
 </head>
@@ -1266,20 +1266,22 @@ async function setup() {
         rd.sw.className = "ios-switch" + (switched ? " on" : "");
       });
 
-      // Touch dot glides smoothly down the iOS switches on right side of phone
-      const rowCentersY = [805, 955, 1105, 1255];
+      // Touch dot glides smoothly down the exact live DOM centers of the iOS switches!
+      const swRects = rowDom.map(rd => rd.sw.getBoundingClientRect());
+      const rowCentersY = swRects.map((rc, i) => rc.height > 0 ? (rc.top + rc.height * 0.5) : (740 + i * 138));
+      const swCenterX = (swRects[0] && swRects[0].width > 0) ? (swRects[0].left + swRects[0].width * 0.5) : 812;
       const curFloat = clamp(prog * (rowDom.length - 0.15), 0, rowDom.length - 1);
       const idx0 = Math.floor(curFloat);
       const idx1 = Math.min(rowDom.length - 1, idx0 + 1);
       const frac = easeInOutCubic(curFloat - idx0);
       const ty = rowCentersY[idx0] + (rowCentersY[idx1] - rowCentersY[idx0]) * frac;
-      tDot.style.left = "812px"; tDot.style.top = `${ty}px`;
+      tDot.style.left = `${swCenterX}px`; tDot.style.top = `${ty}px`;
 
       const slotDur = dur / rowDom.length;
       const localSlot = (t % slotDur) / slotDur;
       if (localSlot >= 0.32 && localSlot <= 0.68) {
         const rp = (localSlot - 0.32) / 0.36;
-        tRip.style.left = "812px"; tRip.style.top = `${rowCentersY[activeRow]}px`;
+        tRip.style.left = `${swCenterX}px`; tRip.style.top = `${rowCentersY[activeRow]}px`;
         tRip.style.opacity = String(1 - rp);
         tRip.style.transform = `translate(-50%, -50%) scale(${0.4 + 1.2 * rp})`;
       } else {

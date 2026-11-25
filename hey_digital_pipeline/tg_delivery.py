@@ -159,7 +159,7 @@ def send_run_to_telegram(deliverables_dir: Path) -> dict:
         "-F", f"chat_id={chat_id}",
         "-F", f"photo=@{thumb_png}",
         "-F", (
-            f"caption=🎬 Hey Digital V4 原聲級配音＋精準實拍成片（{manifest.get('run_id')}）\n\n"
+            f"caption=🎬 Hey Digital V5 字幕斷字＋字級對齊精修成片（{manifest.get('run_id')}）\n\n"
             f"1️⃣ 【1080p 頻道聚光燈縮圖】\n"
             f"📌 長片標題：《{title_long}》\n"
             f"📚 公開爬蟲與純硬體對位來源：{src_cnt} 筆"
@@ -185,9 +185,9 @@ def send_run_to_telegram(deliverables_dir: Path) -> dict:
         "-F", f"duration={dur_long}",
         "-F", "supports_streaming=true",
         "-F", (
-            f"caption=2️⃣ 【V4 長片成片 1920x1080@30fps｜{dur_long}s｜-14.2 LUFS】\n"
-            f"• 真人原片級口語化配音（修復破音字、M5雙語乾音、零詞間頓挫、自然呼吸停頓）\n"
-            f"• KeypointRCNN 零人臉過濾 + SigLIP 逐句對位實拍 + Three.js 3D 模板"
+            f"caption=2️⃣ 【V5 長片成片 1920x1080@30fps｜{dur_long}s｜-14.2 LUFS】\n"
+            f"• 中文詞法語法斷字引擎（視覺字寬單行排版、零破詞、零句尾懸掛虛詞、保留頓號並列與轉折詞）+ Whisper 字級時間軸同步\n"
+            f"• KeypointRCNN 零人臉過濾 + SigLIP 逐句對位實拍 + Three.js 3D 模板 + 原聲級配音"
         ),
     ])
 

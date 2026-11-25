@@ -202,42 +202,14 @@ def formulate_topic_from_candidates(candidates_report: dict, existing_titles: li
     return res
 
 
-def split_into_captions(narration: str, max_len: int = 18) -> list[str]:
+def split_into_captions(narration: str, max_len: int = 18, is_vertical: bool = False) -> list[str]:
     """
-    Split narration into clean, balanced subtitle clauses:
-    - Never leaves orphan 1–4 char fragments ("格", "整解析", "GB/s").
-    - Never breaks inside ASCII number+unit tokens ("273 GB/s", "256GB SSD", "MacBook Air").
+    Linguistic word-boundary & visual-em-width subtitle segmenter (1:1 to `@hey_digitall`):
+    - Strictly single-line (`<= 21.8 em` Long / `<= 17.2 em` Short)
+    - Zero mid-word breaks (`還是`, `配備`, `摸到`, `升到`, `連接埠`, `高速硬碟`), zero `、` splits, zero dangling particles!
     """
-    narration = purify_tw_tech_text(narration)
-    parts = re.split(r"[，。！？；：、\n]+", narration)
-    out = []
-    soft_limit = max_len + 4
-    for p in parts:
-        p = p.strip(" 「」『』\"'，。！？；：")
-        if not p:
-            continue
-        if len(p) <= soft_limit:
-            out.append(p)
-            continue
-        # Find a safe split point near the middle that is NOT between ASCII/digit characters
-        mid = len(p) // 2
-        best_idx = -1
-        for delta in range(0, max(5, mid - 4)):
-            for cand in (mid + delta, mid - delta):
-                if 5 <= cand <= len(p) - 5:
-                    left_ch, right_ch = p[cand - 1], p[cand]
-                    # Only split where at least one side is CJK (never split "273 GB/s" or "Pro Motion")
-                    if ("\u4e00" <= left_ch <= "\u9fff") and ("\u4e00" <= right_ch <= "\u9fff"):
-                        best_idx = cand
-                        break
-            if best_idx != -1:
-                break
-        if best_idx != -1:
-            out.append(p[:best_idx].strip())
-            out.append(p[best_idx:].strip())
-        else:
-            out.append(p)
-    return [x for x in out if x]
+    from hey_digital_pipeline.subtitle_engine import segment_narration_to_captions
+    return segment_narration_to_captions(narration, is_vertical=is_vertical or (max_len <= 15))
 
 
 def generate_production_plan(
