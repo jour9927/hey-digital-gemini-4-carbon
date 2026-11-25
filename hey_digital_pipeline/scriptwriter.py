@@ -345,14 +345,17 @@ def generate_production_plan(
                     "【絕對鐵律】：\n"
                     "1. 這 6 鏡必須 100% 聚焦於本章主題《" + str(ch.get("title")) + "》，嚴禁重複前面章節已經寫過的句子、開場白或相同數據（例如前面講過容量加價，後面章節就專心講散熱降頻、Mini-LED 1000 nits 螢幕亮度、外接埠或三種預算買法）！\n"
                     "2. 嚴禁照抄下方欄位說明文字！每個鏡次的 `narration` 約 42~62 個繁體中文字，語氣自然像真人在聊天分析。\n"
-                    "3. 在 6 鏡中混合搭配最適合的 `visual_type`：\n"
-                    "   - `\"cinema_broll_video\"`：硬體實拍動態畫面（填 `image_prompt` 純英文寫實硬體特寫，無文字）\n"
-                    "   - `\"webgl_memory_lanes\"`：Three.js 3D 雙軌方塊對比（填 `hero_metric`, `hero_unit`, `secondary_metric`, `lanes: [{\"label\":...,\"value\":數字,\"display\":...}, ...]`）\n"
-                    "   - `\"webgl_stacked_tco\"`：Three.js 3D 價格或規格堆疊柱（填 `hero_metric`, `hero_unit`, `stack_left_label`, `stack_left_layers: [{\"name\":...,\"val\":數字},...]`, `stack_right_label`, `stack_right_val`）\n"
-                    "   - `\"webgl_ssd_particles\"`：Three.js 3D 儲存或資料流粒子飛入筆電（填 `hero_metric`, `hero_unit`）\n"
-                    "   - `\"webgl_chip_die\"`：Three.js 3D 晶片封裝核心發光特寫（填 `chip_label`, `hero_metric`, `hero_unit`）\n"
-                    "   - `\"webgl_dual_laptop\"`：Three.js 3D 雙機並排散熱熱力或速度對比（填 `hero_metric`, `hero_unit`, `left_label`, `right_label`, `mode`: `\"thermal\"` 或 `\"speed\"`）\n"
-                    "   - `\"ui_configurator_crawl\"`：動態選配器 + 真實爬蟲報導螢光筆視窗（填 `source_id`, `highlight_quote` 摘錄本章相關 18~30 字重點結論）\n"
+                    "3. 請採用 **50% 真實第三方硬體實拍對位 (`cinema_broll_video`，每章固定 3 鏡) + 50% Three.js 3D 動態數據／選配模板 (每章固定 3 鏡)** 的黃金比例交錯編排：\n"
+                    "   - **每當使用 `\"cinema_broll_video\"` 時（極重要！必須做到第三方實拍畫面逐句精準對應旁白！）**：\n"
+                    "     請把該鏡的 `narration` 拆成 **2 個子分鏡 `broll_shots`**，每個子分鏡對應半句具體旁白（如講到『連接埠』就搜 ports close up、講到『螢幕亮度』就搜 display XDR close up、講到『剪片或多工』就搜 video editing timeline on MacBook、講到『晶片架構』就搜 Apple Silicon chip reveal）：\n"
+                    "     `\"broll_shots\": [{\"clause_hint\": \"對應前半句旁白\", \"yt_query\": \"精準英文 YouTube 搜尋詞 (4~7 words)\", \"visual_desc\": \"純英文具體視覺畫面描述，供 SigLIP 視覺模型比對影格 (10~18 words)\"}, {\"clause_hint\": \"對應後半句旁白\", \"yt_query\": \"...\", \"visual_desc\": \"...\"}]`\n"
+                    "   - 其餘 3 鏡搭配最適合的 3D / UI 動態模板：\n"
+                    "     * `\"webgl_memory_lanes\"`：Three.js 3D 雙軌方塊對比（填 `hero_metric`, `hero_unit`, `secondary_metric`, `lanes: [{\"label\":...,\"value\":數字,\"display\":...}, ...]`）\n"
+                    "     * `\"webgl_stacked_tco\"`：Three.js 3D 價格或規格堆疊柱（填 `hero_metric`, `hero_unit`, `stack_left_label`, `stack_left_layers: [{\"name\":...,\"val\":數字},...]`, `stack_right_label`, `stack_right_val`）\n"
+                    "     * `\"webgl_ssd_particles\"`：Three.js 3D 儲存或資料流粒子飛入筆電（填 `hero_metric`, `hero_unit`）\n"
+                    "     * `\"webgl_chip_die\"`：Three.js 3D 晶片封裝核心發光特寫（填 `chip_label`, `hero_metric`, `hero_unit`）\n"
+                    "     * `\"webgl_dual_laptop\"`：Three.js 3D 雙機並排散熱熱力或速度對比（填 `hero_metric`, `hero_unit`, `left_label`, `right_label`, `mode`: `\"thermal\"` 或 `\"speed\"`）\n"
+                    "     * `\"ui_configurator_crawl\"`：動態選配器 + 真實爬蟲報導螢光筆視窗（填 `source_id`, `highlight_quote` 摘錄本章相關 18~30 字重點結論）\n"
                     "只輸出合法 JSON。",
                     json.dumps({
                         "video_title": outline.get("title_long", topic),
@@ -365,11 +368,21 @@ def generate_production_plan(
                         "required_output_format": {
                             "beats": [
                                 {
-                                    "visual_type": "從上述 7 種選一（6 鏡請交錯不同類型）",
-                                    "narration": f"請針對第 {ch_num} 章《{ch.get('title')}》撰寫全新口播內容，不可與前章重複",
+                                    "visual_type": "cinema_broll_video",
+                                    "narration": f"請針對第 {ch_num} 章《{ch.get('title')}》撰寫具體硬體體驗或細節旁白（不可與前章重複）",
                                     "source_id": valid_sids[ch_idx % len(valid_sids)],
-                                    "hero_metric": "純數值如 1000 或 153",
-                                    "hero_unit": "單位如 nits 或 GB/s",
+                                    "broll_shots": [
+                                        {
+                                            "clause_hint": "<填入前半句實際中文旁白關鍵詞>",
+                                            "yt_query": f"{prod_a} keyboard trackpad ports B-roll close up",
+                                            "visual_desc": f"macro close-up shot of {prod_a} side Thunderbolt ports and thin aluminum chassis on desk, no human face",
+                                        },
+                                        {
+                                            "clause_hint": "<填入後半句實際中文旁白關鍵詞>",
+                                            "yt_query": f"{prod_b} display video editing timeline B-roll",
+                                            "visual_desc": f"close-up of hands on keyboard editing 4K video timeline on bright {prod_b} screen in studio, no human face",
+                                        },
+                                    ],
                                 }
                             ]
                         },
@@ -411,6 +424,7 @@ def generate_production_plan(
         "- 第 1 鏡 (`visual_type: \"short_hook_dynamic\"`)：黃金前 10~13 秒強痛點開場（約 45~60 字口播），提供 **5 張依序隨語音彈出的動態貼紙** `pop_stickers: [{\"text\":\"...\",\"style\":\"white|yellow|green\"}, ...]`（每張 4~7 字，如原片『買 Air 還是 Pro？』、『差價陷阱！』、『不是只看跑分』、『3 個隱藏刀法』、『看完省下冤枉錢 →』）！\n"
         "- 第 2~6 鏡（共 5 個核心實戰步驟，`visual_type: \"short_phone_interactive\"`）：每鏡約 38~52 字自然口播，並在全尺寸 iPhone 螢幕內動態展示 **4 列互動規格／選購開關卡片 `ui_rows`**（含自動滑鼠點擊波紋與 iOS 綠色開關逐一開啟效果！每列含 `title`, `subtitle`, `badge`, `toggle_on`: true/false），以及頂部 `step_title`(4~6字)、`flow_steps`(3個短詞)、側邊彈出黃色刀法貼紙 `callout_tag`(4~6字) 與 `source_id`！\n"
         "- 第 7 鏡 (`visual_type: \"short_broll_summary\"`)：實拍硬體動態展示收束（約 30~40 字口播，給出一句話選購口訣）。\n"
+        "- 第 1~7 鏡都請附上精準對應當句旁白畫面的英文搜尋詞 `yt_query` 與英文視覺描述 `visual_desc`（例如講螢幕就配 display brightness close up，講連接埠就配 HDMI SD card ports close up），讓系統從第三方實拍庫精準對位畫面！\n"
         "- 第 8 鏡 (`visual_type: \"cta_funnel_endcard\"`)：明確口播導流：「這支短片只是精華重點，我們在完整長片裡實測了完整頻寬、散熱曲線與全部公開數據來源，現在就點擊下方關聯影片收看完整解析！」\n"
         "嚴格使用台灣繁體中文，只輸出合法 JSON。",
         json.dumps({

@@ -8,14 +8,16 @@ venv/
 config/rtx6000_bridge.json
 .env
 
-# Large rendered media & intermediate build artifacts (keep sample frames/manifests if desired)
+# Large rendered media & intermediate build artifacts (keep sample manifests only)
 runs/*/work_long/
 runs/*/work_short/
-runs/*/broll/
+runs/*/broll/candidates/
+runs/*/broll/_raw_multi_yt/
 runs/*/script_ckpts/
 runs/*/tts/*.wav
 runs/*/images/*.png
 runs/*/images/*.mp4
 runs/*/deliverables/*.mp4
+runs/*/deliverables/*.png
 runs/ep02_v2_flagship/
 reference_downloads/

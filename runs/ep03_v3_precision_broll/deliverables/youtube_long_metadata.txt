@@ -1,0 +1,62 @@
+TITLE:
+差價四百美元，買 MacBook Air M5 還是直上 MacBook Pro？實測後發現三個隱藏刀法
+
+DESCRIPTION:
+差價四百美元，究竟該買 MacBook Air M5 還是直上 MacBook Pro？實測後發現三個隱藏刀法，從記憶體頻寬到螢幕亮度，揭開高階款與入門款的真實差距。
+
+⏱️ 時間軸章節
+0:00 容量升級的價格陷阱
+0:49 晶片頻寬與散熱天花板
+1:51 螢幕光學與外接體驗
+2:45 三種預算終極買法
+
+📚 本期公開爬蟲資訊、實測數據與畫面參考來源
+[SRC-01] 9to5Mac — MacBook Neo vs MacBook Air: Every difference between Apple’s 13-inch laptops
+    https://9to5mac.com/2026/03/04/macbook-neo-vs-macbook-air/
+[SRC-02] Wikipedia (ZH) — MacBook Pro
+    https://zh.wikipedia.org/wiki/MacBook_Pro
+[SRC-04] 9to5Mac — M5 MacBook Pro vs M4 MacBook Air: Which should you buy this holiday season?
+    https://9to5mac.com/2025/11/26/m5-macbook-pro-vs-m4-macbook-air-black-friday-holiday-comparison/
+[SRC-06] Wikipedia (EN) — MacBook Pro
+    https://en.wikipedia.org/wiki/MacBook_Pro
+[SRC-03] Wikipedia (EN) — MacBook Air
+    https://en.wikipedia.org/wiki/MacBook_Air
+[SRC-08] 9to5Mac — Hands-on: 13-inch MacBook Pro (2020) – a long time coming [Video]
+    https://9to5mac.com/2020/05/14/macbook-pro-2020-review-fixed-keyboard-10th-generation-intel-cpu-video/
+[SRC-07] 9to5Mac — M4 vs M3 and M2: What’s improved with the new Apple Silicon?
+    https://9to5mac.com/2024/05/30/m4-vs-m3-and-m2-apple-silicon/
+[SRC-05] 9to5Mac — M4 iPad Pro vs Microsoft Surface Pro: How do they stack up?
+    https://9to5mac.com/2024/05/21/m4-ipad-pro-vs-surface-pro/
+[SRC-09] YouTube · Simple Alpaca — [第三方實拍對位素材] How To Use Your M5 MacBook Air! (Complete Beginners Guide)
+    https://www.youtube.com/watch?v=xfm-dprloQ8
+[SRC-10] YouTube · Cristian Silvagnoli  — [第三方實拍對位素材] The M5 Max MacBook Pro Is Everything I Wanted A MacBook To Be
+    https://www.youtube.com/watch?v=tS1BMlao0_c
+[SRC-11] YouTube · Adam Talks Tech — [第三方實拍對位素材] M5 MacBook Air: 16GB vs 24GB RAM Real-World Differences
+    https://www.youtube.com/watch?v=h4Gs97bXMZo
+[SRC-12] YouTube · Gadget Master 99 — [第三方實拍對位素材] New Apple MacBook Pro M1 Pro & M1 Max - Official Trailer
+    https://www.youtube.com/watch?v=IV_yvQpn5Yc
+[SRC-13] YouTube · Tricks Tips Fix — [第三方實拍對位素材] MacBook Air M5 : How to Multi Task Using Split Screen
+    https://www.youtube.com/watch?v=edVre7zWsKk
+[SRC-14] YouTube · Apple — [第三方實拍對位素材] New MacBook Pro with PROLED XDR Display: The first-ever Mac with Touch
+    https://www.youtube.com/watch?v=hnZI5uUSdEo
+[SRC-15] YouTube · SmartNest Tech — [第三方實拍對位素材] Brydge ProDock Duo TB4 MacBook Docking Station Review - Watch Before You Buy!
+    https://www.youtube.com/watch?v=TS8MhuSAlWk
+[SRC-16] YouTube · Apple — [第三方實拍對位素材] MacBook Pro with M5 Pro and M5 Max
+    https://www.youtube.com/watch?v=GriXfu4tL30
+[SRC-17] YouTube · The Filmmakers Workshop — [第三方實拍對位素材] Edit Blackmagic RAW clips In Final Cut Pro 12. 2
+    https://www.youtube.com/watch?v=AxwUWQLaKgM
+[SRC-18] YouTube · RICH Photography — [第三方實拍對位素材] Dream Desk Setup | iMac and MacBook Pro | Detailed Look
+    https://www.youtube.com/watch?v=ieBVfXuNwDs
+[SRC-19] YouTube · Apple UK — [第三方實拍對位素材] The new MacBook Air with M5
+    https://www.youtube.com/watch?v=YhNFhVx9pDI
+[SRC-20] YouTube · Chris Mulia — [第三方實拍對位素材] MacBook Pro PROLED XDR Unboxing | No Talking
+    https://www.youtube.com/watch?v=ZrETGXSVtFY
+[SRC-21] YouTube · Adam Talks Tech — [第三方實拍對位素材] I Review Mac Gear for a Living. This Is What Stayed on My Desk
+    https://www.youtube.com/watch?v=EssNx9jhr7s
+[SRC-22] YouTube · Just Josh — [第三方實拍對位素材] Is Nanotexture a $150 Upgrade… or a $550 Mistake?
+    https://www.youtube.com/watch?v=OpLM8MJVS5U
+[SRC-23] YouTube · DetroitFury — [第三方實拍對位素材] My Ultimate M1 MAX MacBook Pro 16 Inch Modern Desk Setup Tour
+    https://www.youtube.com/watch?v=TlKbnXLflT0
+
+🔔 喜歡這類硬核不灌水的科技選購與底層刀法拆解，記得訂閱 Hey Digital 並開啟小鈴鐺！
+#HeyDigital #科技評測 #選購指南 #Apple #AI硬體

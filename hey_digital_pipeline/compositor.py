@@ -325,6 +325,29 @@ def render_thumbnail(plan: dict, hero_img: Optional[Image.Image], out_path: Path
     return out_path
 
 
+def _compute_subshot_windows(matched_subshots: list[dict], caption_timings: list[dict], real_dur: float) -> list[tuple[float, float, dict]]:
+    """Align B-roll sub-shot cut points directly to Whisper forced-aligned clause boundaries!"""
+    if not matched_subshots:
+        return []
+    k = len(matched_subshots)
+    if k == 1:
+        return [(0.0, real_dur, matched_subshots[0])]
+
+    cuts = [0.0]
+    if caption_timings and len(caption_timings) >= k:
+        for i in range(1, k):
+            cap_idx = max(0, min(len(caption_timings) - 2, round(i * len(caption_timings) / k) - 1))
+            t_cut = float(caption_timings[cap_idx]["end"])
+            # Keep every sub-shot comfortably watchable (at least 1.8s)
+            t_cut = max(cuts[-1] + 1.8, min(real_dur - (k - i) * 1.8, t_cut))
+            cuts.append(t_cut)
+    else:
+        for i in range(1, k):
+            cuts.append(real_dur * (i / k))
+    cuts.append(real_dur)
+    return [(cuts[i], cuts[i + 1], matched_subshots[i]) for i in range(k)]
+
+
 def _render_broll_video_beat(
     beat: dict,
     wav_path: Path,
@@ -337,7 +360,11 @@ def _render_broll_video_beat(
     is_vertical: bool = False,
     show_news_card: bool = False,
 ):
-    """Stream real 30fps motion video B-roll (or smooth parallax photo) with crisp Hey Digital HUD & aligned captions."""
+    """
+    V3 Phrase-Synced Multi-Shot Third-Party B-Roll Renderer:
+    Cuts frame-accurately across `beat["matched_subshots"]` right on the Whisper spoken clause
+    timestamps, updating the on-screen source badge for each real hardware shot!
+    """
     tw, th = (1080, 1920) if is_vertical else (1920, 1080)
     n_frames = max(fps, int(round(real_dur * fps)))
 
@@ -353,31 +380,52 @@ def _render_broll_video_beat(
     enc_proc = subprocess.Popen(ff_enc, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     assert enc_proc.stdin is not None
 
-    dec_proc = None
     frame_bytes = tw * th * 3
-    if video_src is not None and video_src.exists():
-        vf = f"scale={tw}:{th}:force_original_aspect_ratio=increase,crop={tw}:{th},fps={fps}"
-        ff_dec = [
-            "ffmpeg", "-v", "error", "-stream_loop", "-1",
-            "-i", str(video_src),
-            "-vf", vf,
-            "-f", "rawvideo", "-pix_fmt", "rgb24", "-",
-        ]
-        dec_proc = subprocess.Popen(ff_dec, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+    vf = f"scale={tw}:{th}:force_original_aspect_ratio=increase,crop={tw}:{th},fps={fps}"
+
+    matched_subs = [s for s in (beat.get("matched_subshots") or []) if s.get("mp4") and Path(s["mp4"]).exists()]
+    windows = _compute_subshot_windows(matched_subs, caption_timings, real_dur) if (matched_subs and not is_vertical) else []
+
+    active_idx = -1
+    dec_proc: Optional[subprocess.Popen] = None
+    active_badge = beat.get("source_badge") or ""
+    sid = beat.get("source_id") or ""
+    if active_badge and sid and sid not in active_badge:
+        active_badge = f"{active_badge} · {sid}"
+
+    def _open_decoder(mp4_p: Path) -> subprocess.Popen:
+        return subprocess.Popen(
+            ["ffmpeg", "-v", "error", "-stream_loop", "-1", "-i", str(mp4_p), "-vf", vf, "-f", "rawvideo", "-pix_fmt", "rgb24", "-"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL,
+        )
+
+    if not windows and video_src is not None and video_src.exists():
+        dec_proc = _open_decoder(video_src)
 
     ch_num = str(beat.get("chapter_num") or "01").zfill(2)
     hud_txt = f"{ch_num}  ·  {beat.get('chapter_title', '實測畫面')}"
     f_hud = get_cjk_font(23, bold=False)
-    badge_txt = beat.get("source_badge") or ""
-    sid = beat.get("source_id") or ""
-    if badge_txt and sid and sid not in badge_txt:
-        badge_txt = f"{badge_txt} · {sid}"
 
     hi_w, hi_h = int(tw * 1.12), int(th * 1.12)
     src_hi = cover_resize(fallback_img, hi_w, hi_h) if fallback_img is not None else Image.new("RGB", (hi_w, hi_h), (20, 23, 30))
 
     for fi in range(n_frames):
         t_loc = fi / fps
+        if windows:
+            want_idx = len(windows) - 1
+            for wi, (t0_w, t1_w, _) in enumerate(windows):
+                if t_loc < t1_w - 1e-4:
+                    want_idx = wi
+                    break
+            if want_idx != active_idx:
+                if dec_proc is not None:
+                    dec_proc.terminate()
+                active_idx = want_idx
+                cur_sub = windows[active_idx][2]
+                dec_proc = _open_decoder(Path(cur_sub["mp4"]))
+                active_badge = cur_sub.get("source_badge") or active_badge
+
         frame: Optional[Image.Image] = None
         if dec_proc is not None and dec_proc.stdout is not None:
             raw = dec_proc.stdout.read(frame_bytes)
@@ -394,7 +442,6 @@ def _render_broll_video_beat(
 
         draw = ImageDraw.Draw(frame, "RGBA")
         if not is_vertical:
-            # Subtle bottom scrim so captions & source badge always pop cleanly over real footage
             draw.rectangle([0, th - 210, tw, th], fill=(8, 10, 14, 92))
             hb = draw.textbbox((0, 0), hud_txt, font=f_hud)
             hx = tw - (hb[2] - hb[0]) - 84
@@ -402,7 +449,7 @@ def _render_broll_video_beat(
             draw.text((hx, 58), hud_txt, font=f_hud, fill=(238, 242, 248, 245))
             if show_news_card and t_loc >= 0.45:
                 overlay_crawled_news_card(frame, beat)
-            draw_source_badge(draw, badge_txt, x=96, y=858, light_theme=False)
+            draw_source_badge(draw, active_badge, x=96, y=858, light_theme=False)
         else:
             draw.rectangle([0, th - 480, tw, th], fill=(8, 10, 14, 110))
             pill_txt = (beat.get("topic_pill") or "Hey Digital 選購結論")[:14]
@@ -520,20 +567,24 @@ def assemble_long_video(
                 proc.wait()
 
             elif vtype in WEBGL_LONG_TYPES:
-                beat_enriched = dict(beat)
-                beat_enriched["visual_type"] = vtype
-                beat_enriched.setdefault("product_a", plan.get("product_a", "標準輕薄款"))
-                beat_enriched.setdefault("product_b", plan.get("product_b", "Pro 進階款"))
-                rel_sfx = studio.render_long_webgl_beat(
-                    beat=beat_enriched,
-                    wav_path=wav_path,
-                    caption_timings=timings_map.get(bid, []),
-                    real_dur=real_dur,
-                    out_mp4=seg_mp4,
-                    fps=fps,
-                )
-                for ev in rel_sfx:
-                    sfx_events.append({"time": cur_time + ev["offset"], "kind": ev["kind"], "pan": ev.get("pan", 0.0)})
+                if os.environ.get("HEYDIGITAL_REUSE_WEBGL") == "1" and seg_mp4.exists() and seg_mp4.stat().st_size > 40_000:
+                    sfx_events.append({"time": cur_time + 0.12, "kind": "pop", "pan": -0.15})
+                    sfx_events.append({"time": cur_time + min(real_dur * 0.45, 2.2), "kind": "click", "pan": 0.15})
+                else:
+                    beat_enriched = dict(beat)
+                    beat_enriched["visual_type"] = vtype
+                    beat_enriched.setdefault("product_a", plan.get("product_a", "標準輕薄款"))
+                    beat_enriched.setdefault("product_b", plan.get("product_b", "Pro 進階款"))
+                    rel_sfx = studio.render_long_webgl_beat(
+                        beat=beat_enriched,
+                        wav_path=wav_path,
+                        caption_timings=timings_map.get(bid, []),
+                        real_dur=real_dur,
+                        out_mp4=seg_mp4,
+                        fps=fps,
+                    )
+                    for ev in rel_sfx:
+                        sfx_events.append({"time": cur_time + ev["offset"], "kind": ev["kind"], "pan": ev.get("pan", 0.0)})
 
             else:
                 # Cinema Motion B-Roll: prefer LTX-Video I2V clip -> harvested real HD B-roll clip -> high-res studio still
@@ -555,7 +606,7 @@ def assemble_long_video(
                     out_mp4=seg_mp4,
                     fps=fps,
                     is_vertical=False,
-                    show_news_card=bool(beat.get("overlay_news_card") or (broll_cursor % 3 == 1)),
+                    show_news_card=bool(beat.get("overlay_news_card")),
                 )
 
             segment_mp4s.append(seg_mp4)
@@ -688,20 +739,22 @@ def assemble_short_video(
     step_beats = [b for b in sbeats if b.get("visual_type") in ("short_phone_interactive", "step_phone_mockup")]
     step_total = max(1, len(step_beats))
 
-    # Prepare vertical 9:16 hook background clip inside `run_dir` so browser `<video>` can load it seamlessly
+    # Prepare vertical 9:16 hook background clip from SigLIP-matched real B-roll (or I2V / harvested clip)
     hook_vert_rel = None
+    s01_matched_mp4 = Path(sbeats[0]["matched_broll_mp4"]) if (sbeats and sbeats[0].get("matched_broll_mp4")) else None
     s01_i2v = img_dir / "S01_i2v.mp4"
-    if s01_i2v.exists():
-        hook_vert_rel = str(s01_i2v.relative_to(run_dir))
-    elif harvested_mp4s:
+    hook_src_mp4 = s01_matched_mp4 if (s01_matched_mp4 and s01_matched_mp4.exists()) else (harvested_mp4s[0] if harvested_mp4s else None)
+    if hook_src_mp4 is not None:
         hv_out = work_dir / "hook_vert_bg.mp4"
         subprocess.run([
-            "ffmpeg", "-y", "-i", str(harvested_mp4s[0]),
+            "ffmpeg", "-y", "-i", str(hook_src_mp4),
             "-an", "-vf", "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,fps=30,format=yuv420p",
             "-g", "15", "-c:v", "libx264", "-preset", "fast", "-crf", "20", str(hv_out),
         ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         if hv_out.exists():
             hook_vert_rel = str(hv_out.relative_to(run_dir))
+    elif s01_i2v.exists():
+        hook_vert_rel = str(s01_i2v.relative_to(run_dir))
 
     segment_mp4s = []
     sfx_events: list[dict] = []
@@ -722,11 +775,13 @@ def assemble_short_video(
             elif vtype == "step_phone_mockup":
                 vtype = "short_phone_interactive"
 
-            bg_png = img_dir / f"{bid}.png"
+            # Prefer SigLIP-matched real hardware keyframe inside Short phone steps!
+            matched_jpg = Path(beat["matched_broll_jpg"]) if beat.get("matched_broll_jpg") else None
+            bg_png = matched_jpg if (matched_jpg and matched_jpg.exists()) else (img_dir / f"{bid}.png")
             if not bg_png.exists():
-                cands = sorted(list(img_dir.glob("S*.png")) + list(img_dir.glob("L*.png")))
+                cands = sorted(list(img_dir.glob("*.png")))
                 bg_png = cands[idx % len(cands)] if cands else bg_png
-            bg_rel = str(bg_png.relative_to(run_dir)) if bg_png.exists() else None
+            bg_rel = str(bg_png.relative_to(run_dir)) if (bg_png.exists() and str(bg_png.resolve()).startswith(str(run_dir.resolve()))) else None
             bg_img = Image.open(bg_png).convert("RGB") if bg_png.exists() else None
 
             seg_mp4 = clips_dir / f"{bid}.mp4"
@@ -752,8 +807,9 @@ def assemble_short_video(
                     sfx_events.append({"time": total_dur + ev["offset"], "kind": ev["kind"], "pan": ev.get("pan", 0.0)})
 
             elif vtype == "short_broll_summary":
+                matched_v = Path(beat["matched_broll_mp4"]) if beat.get("matched_broll_mp4") else None
                 vid_cand = img_dir / f"{bid}_i2v.mp4"
-                chosen_v = vid_cand if vid_cand.exists() else (harvested_mp4s[-1] if harvested_mp4s else None)
+                chosen_v = matched_v if (matched_v and matched_v.exists()) else (vid_cand if vid_cand.exists() else (harvested_mp4s[-1] if harvested_mp4s else None))
                 _render_broll_video_beat(
                     beat=beat,
                     wav_path=wav_path,

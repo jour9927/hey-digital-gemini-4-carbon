@@ -28,14 +28,18 @@ def init_model():
     global MODEL_ID, TOK, MDL
     free_b, _ = torch.cuda.mem_get_info(0)
     free_mb = free_b // (1024 * 1024)
-    MODEL_ID = os.environ.get("HEYDIGITAL_RTX_LLM_ID") or "Qwen/Qwen2.5-32B-Instruct"
+    hf_home = os.environ.get("HF_HOME") or "/content/heydigital_g4c/hf_cache"
+    has_32b_cached = os.path.exists(os.path.join(hf_home, "hub", "models--Qwen--Qwen2.5-32B-Instruct"))
+    default_id = "Qwen/Qwen2.5-32B-Instruct" if has_32b_cached else "Qwen/Qwen2.5-14B-Instruct"
+    MODEL_ID = os.environ.get("HEYDIGITAL_RTX_LLM_ID") or default_id
     TOK = AutoTokenizer.from_pretrained(MODEL_ID)
 
-    if free_mb >= 65000:
+    req_bf16_mb = 65000 if "32B" in MODEL_ID else 31000
+    if free_mb >= req_bf16_mb:
         print(f"[RTX6000-LLM] Loading {MODEL_ID} in 100% CUDA bfloat16 (free={free_mb} MiB)...", flush=True)
         MDL = AutoModelForCausalLM.from_pretrained(MODEL_ID, dtype=torch.bfloat16, device_map={"": 0})
     else:
-        print(f"[RTX6000-LLM] Shared GPU ({free_mb} MiB free); loading {MODEL_ID} in 100% CUDA NF4 4-bit (~19 GiB, zero CPU offload)...", flush=True)
+        print(f"[RTX6000-LLM] Shared GPU ({free_mb} MiB free); loading {MODEL_ID} in 100% CUDA NF4 4-bit (zero CPU offload)...", flush=True)
         qcfg = BitsAndBytesConfig(
             load_in_4bit=True,
             bnb_4bit_quant_type="nf4",

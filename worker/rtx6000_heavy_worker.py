@@ -415,6 +415,73 @@ def generate_images_and_i2v_batch(manifest_path: Path, out_dir: Path) -> dict:
     return out_meta
 
 
+def vision_match_broll_batch(work_dir: Path) -> dict:
+    """
+    V3 Neural Vision-Language Semantic B-Roll Matcher on RTX Pro 6000 CUDA:
+    Uses `google/siglip-base-patch16-384` to score every candidate real third-party hardware video
+    shot against every narration clause's `visual_desc`, while penalizing talking-head YouTuber
+    faces, white text slides, and giant title overlays!
+    """
+    import torch
+    from PIL import Image
+    from transformers import AutoModel, AutoProcessor
+
+    req = json.loads((work_dir / "vision_req.json").read_text(encoding="utf-8"))
+    slots = req["slots"]
+    cands = req["candidates"]
+    neg_prompts = req.get("negative_prompts") or []
+
+    has_cuda, free_mb, gpu_name = get_free_cuda_mb()
+    dev = "cuda:0" if (has_cuda and free_mb >= 1800) else "cpu"
+    model_id = "google/siglip-base-patch16-384"
+    print(f"[VisionMatch V3] Scoring {len(cands)} real B-roll shots x {len(slots)} narration clauses via {model_id} on {dev} ({gpu_name})...", flush=True)
+
+    proc = AutoProcessor.from_pretrained(model_id)
+    mdl = AutoModel.from_pretrained(model_id).to(dev).eval()
+
+    pil_imgs = [Image.open(work_dir / c["jpg_name"]).convert("RGB") for c in cands]
+    all_texts = [s["visual_desc"] for s in slots] + list(neg_prompts)
+
+    with torch.inference_mode():
+        img_chunks = []
+        for i in range(0, len(pil_imgs), 32):
+            inp_i = proc(images=pil_imgs[i : i + 32], return_tensors="pt").to(dev)
+            f_i = mdl.get_image_features(**inp_i)
+            if not isinstance(f_i, torch.Tensor):
+                f_i = f_i.pooler_output
+            f_i = f_i / f_i.norm(dim=-1, keepdim=True)
+            img_chunks.append(f_i.float().cpu())
+        img_emb = torch.cat(img_chunks, dim=0)
+
+        inp_t = proc(text=all_texts, padding="max_length", truncation=True, return_tensors="pt").to(dev)
+        f_t = mdl.get_text_features(**inp_t)
+        if not isinstance(f_t, torch.Tensor):
+            f_t = f_t.pooler_output
+        txt_emb = (f_t / f_t.norm(dim=-1, keepdim=True)).float().cpu()
+
+    sims = (img_emb @ txt_emb.T).numpy()
+    # Compute calibrated SigLIP sigmoid probabilities for hard face / text-slide rejection!
+    scale = float(mdl.logit_scale.exp().detach().cpu().item()) if hasattr(mdl, "logit_scale") else 100.0
+    bias = float(mdl.logit_bias.detach().cpu().item()) if hasattr(mdl, "logit_bias") else -10.0
+    import numpy as np
+    probs = 1.0 / (1.0 + np.exp(-(sims * scale + bias)))
+
+    pos_sims = sims[:, : len(slots)]
+    reject_probs = []
+    if neg_prompts:
+        neg_probs = probs[:, len(slots) :]
+        reject_probs = [round(float(x), 4) for x in neg_probs.max(axis=1)]
+        adjusted = pos_sims - neg_probs.max(axis=1, keepdims=True) * 0.50
+    else:
+        adjusted = pos_sims
+        reject_probs = [0.0] * len(cands)
+
+    scores = {slots[si]["slot_id"]: [round(float(x), 5) for x in adjusted[:, si]] for si in range(len(slots))}
+    out = {"ok": True, "gpu": gpu_name, "model": model_id, "scores": scores, "reject_probs": reject_probs}
+    (work_dir / "vision_scores.json").write_text(json.dumps(out, ensure_ascii=False), encoding="utf-8")
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -432,6 +499,9 @@ def main():
     p_img.add_argument("--manifest", required=True)
     p_img.add_argument("--out-dir", required=True)
 
+    p_vis = sub.add_parser("vision-match")
+    p_vis.add_argument("--work-dir", required=True)
+
     args = ap.parse_args()
     if args.cmd == "voice-profile":
         extract_voice_profile(Path(args.input_wav), Path(args.out_dir))
@@ -439,6 +509,8 @@ def main():
         synthesize_voice_batch(Path(args.manifest), Path(args.profile), Path(args.out_dir))
     elif args.cmd == "img-batch":
         generate_images_and_i2v_batch(Path(args.manifest), Path(args.out_dir))
+    elif args.cmd == "vision-match":
+        vision_match_broll_batch(Path(args.work_dir))
 
 
 if __name__ == "__main__":

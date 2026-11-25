@@ -1,60 +1,58 @@
-# Hey Digital Gemini 4 Carbon 產線 V2 (`@hey_digitall`)
+# Hey Digital Gemini 4 Carbon 產線 V3 (`@hey_digitall`)
 
-**1:1 原片級全自動無人值守長片 + 互動導流 Short 影片產線（含深度全文爬蟲、實拍 B-Roll 自動採集、32B 查證產稿、台灣繁中純中文數字口播淨化、PyTorch 句級氣口聲紋克隆 + Whisper 時間軸對齊、Apple Metal `Three.js` WebGL2 真 3D 動態圖卡、`LTX-Video` I2V AI 運鏡與 Rhodes 電鋼琴閃避混音）**
+**1:1 原片級全自動無人值守長片 + 互動導流 Short 影片產線（含深度全文爬蟲、多關鍵字實拍鏡頭切分、`KeypointRCNN` 零人臉純硬體過濾、`SigLIP` 逐句旁白視覺語義精準對位、32B 查證產稿、台灣繁中純中文數字口播淨化、PyTorch 句級氣口聲紋克隆 + Whisper 時間軸對齊、Apple Metal `Three.js` WebGL2 真 3D 動態圖卡、Rhodes 電鋼琴閃避混音與 Telegram 自動交付）**
 
-本專案逐幀逐秒對標 YouTube 科技深度頻道 **Hey Digital (`@hey_digitall`)** 全部參考長片與導流 Short，完整重建並升級外包剪輯師的全套製作鏈，實現從「自動選題 → 多源公開全文爬蟲與實拍 B-Roll 採集 → 32B 深度散文腳本與 3D 分鏡導演 → Alan 本人 PyTorch 聲紋克隆與時間軸對齊 → 真 3D WebGL 動態圖卡與 AI 動態攝影 → 長片與對應導流 Short 成片混音輸出」**全程 100% 無人值守（Unattended End-to-End）**。
+本專案逐幀逐秒對標 YouTube 科技深度頻道 **Hey Digital (`@hey_digitall`)** 全部參考長片與導流 Short，完整重建並升級外包剪輯師的全套製作鏈，實現從「自動選題 → 多源公開全文爬蟲與第三方硬體實拍池採集 → 32B 深度散文腳本與逐句 B-Roll / 3D 分鏡編導 → `KeypointRCNN` 零口播人臉過濾 + `SigLIP` 視覺語義對位 → Alan 本人 PyTorch 聲紋克隆與時間軸對齊 → 真 3D WebGL 動態圖卡與逐句實拍切鏡合成 → 長片、對應導流 Short 與縮圖自動傳送 Telegram」**全程 100% 無人值守（Unattended End-to-End）**。
 
 ---
 
-## 六大工作站架構（V2 全站升級）
+## 七大工作站架構（V3 第三方素材逐句精準對位升級）
 
-1. **深度全文公開爬蟲與實拍 B-Roll 自動採集站 (`hey_digital_pipeline/crawler.py`)**
+1. **深度全文公開爬蟲站 (`hey_digital_pipeline/crawler.py`)**
    - 支援 `MediaWiki explaintext=1` 多章節完整規格擷取、`9to5Mac` / `MacRumors` / `Ars Technica` / `The Verge` / `Hacker News` 正文與規格表深度抓取，以及 `Google News 台灣科技 RSS` 即時熱點掃描。
-   - 內建 `harvest_real_broll_clips()`：自動透過 `yt-dlp --download-sections` 採集公開產品發表與上手實拍動態畫面，經亮度對比過濾裁切為乾淨 `1920x1080@30fps` 實拍 B-Roll 鏡頭。
-   - 所有文字與畫面來源皆綁定可驗證編號（`[SRC-01]` ~ `[SRC-12]`），同步呈現於 **左下角毛玻璃來源膠囊**、**動態瀏覽器引述視窗**、**片尾公開參考來源總表** 與 **YouTube 資訊欄**。
+   - 所有文字與第三方實拍畫面來源皆綁定可驗證編號（`[SRC-01]` ~ `[SRC-20]`），同步呈現於 **左下角毛玻璃來源膠囊**、**動態瀏覽器引述視窗**、**片尾公開參考來源總表** 與 **YouTube 資訊欄**。
 
-2. **旗艦 32B 編導產稿與台灣繁中口播淨化站 (`scriptwriter.py` + `cn_verbalizer.py`)**
-   - 內嵌 `@hey_digitall` 原片逐字稿 Few-Shot 語氣錨點，優先調度 `RTX Pro 6000` 上的 `Qwen/Qwen2.5-32B-Instruct`（支援 `Gemini 2.5 Pro` / 本機 `Ollama` 自動回退），產出 **27~28 鏡高密度長片分鏡** 與 **8 鏡互動導流 Short 分鏡**。
-   - 支援五大可重用影片類型：`versus_guide`、`ai_benchmark`、`deep_review`、`hidden_tips`、`news_analysis`。
-   - `cn_verbalizer.py` 自動將 80+ 項兩岸科技術語統一為台灣繁中慣用語（記憶體、硬碟、晶片、螢幕、影片等），並將所有金額、晶片型號、頻寬與百分比（如 `$1,299`、`M6 Pro`、`170 GB/s`）100% 轉寫為自然中文讀法 `tts_text`，徹底根除 TTS 英文唸數字與吞字問題。
+2. **多關鍵字第三方實拍切鏡、`KeypointRCNN` 零人臉過濾與 `SigLIP` 逐句對位站 (`hey_digital_pipeline/broll_matcher.py`)**
+   - **逐句多關鍵字平行採集**：根據每鏡前半句與後半句旁白（如 `連接埠`、`120Hz 滑動`、`Mini-LED 亮度`、`多螢幕外接`、`時間軸剪片`、`SSD 測速`）平行啟動 14 組 `yt-dlp` 精準硬體檢索。
+   - **無跳剪連續硬體特寫切分**：以 `2fps` RGB 縮圖差分偵測硬切點，精準擷取 `2.5s–5.0s` 單一連續運鏡特寫，自動剔除白底網頁、靜態簡報與底部燒錄外文字幕條。
+   - **雙階段神經網路視覺把關**：
+     1. **`KeypointRCNN-ResNet50-FPN` 三影格（`15% / 50% / 85%`）零人臉審查**：100% 剔除國外 YouTuber 棚拍口播人臉與子母畫面頭像，完整保留「雙手鍵盤打字／觸控板滑動」與「純硬體微距特寫」。
+     2. **`google/siglip-base-patch16-384` 視覺語義對位**：優先於 `RTX Pro 6000` CUDA（斷線時無縫回退本機 `M3 Pro` Apple Metal MPS）計算每個純硬體鏡頭與當句旁白 `visual_desc` 的語義匹配分數，並強制全片鏡頭全域不重複。
 
-3. **RTX Pro 6000 重活算力與句級氣口 PyTorch 聲紋克隆站 (`worker/rtx6000_heavy_worker.py`)**
-   - **本機優先安全原則**：所有最新主腳本、設定檔、分鏡 JSON 與成片資產一律優先保存於本機（`Alan-Hub`），遠端節點透過 `/dev/shm` 高速記憶體磁碟無狀態執行，臨時節點斷線亦零資料遺失。
-   - **PyTorch 聲紋克隆與 Whisper 對齊**：以 `Demucs (htdemucs)` 分離 Alan 純淨人聲乾音，透過 `PyTorch F5-TTS` 分句合成並保留自然 `0.27s` 換氣停頓與完整尾音收束；隨後在 CUDA 上執行 `openai/whisper-large-v3-turbo` 驗證語音完整度並輸出毫秒級字幕時間軸 `caption_timings`。
-   - **AI 商業棚拍與 I2V 動態運鏡**：採用 `RealVisXL_V4.0` 生成高質感硬體棚拍底圖，並以 `Lightricks/LTX-Video` 渲染真實視差運鏡動態影片。
+3. **旗艦 32B 編導產稿與台灣繁中口播淨化站 (`scriptwriter.py` + `cn_verbalizer.py`)**
+   - 內嵌 `@hey_digitall` 原片逐字稿 Few-Shot 語氣錨點，採用 **50% 逐句精準對位第三方硬體實拍 (`cinema_broll_video`，每鏡拆分子分鏡 `broll_shots`) + 50% `Three.js` 3D 動態數據／選配模板** 黃金比例交錯編排。
+   - `cn_verbalizer.py` 自動將 80+ 項兩岸科技術語統一為台灣繁中慣用語，並將所有金額、晶片型號、頻寬與縮寫（`$1,299`、`9to5Mac`、`SSD`、`NPU`）100% 轉寫為自然中文讀法 `tts_text`。
+
+4. **RTX Pro 6000 重活算力與句級氣口 PyTorch 聲紋克隆站 (`worker/rtx6000_heavy_worker.py`)**
+   - **本機優先安全原則**：所有最新主腳本、設定檔、分鏡 JSON、克隆音檔與成片資產一律優先保存於本機（`Alan-Hub`），臨時節點斷線時自動無縫切換本機 Apple Metal MPS 繼續執行，零資料遺失。
+   - **PyTorch 聲紋克隆與 Whisper 強制對齊**：以 `Demucs (htdemucs)` 分離純淨人聲乾音，透過 `PyTorch F5-TTS` 分句合成並以 `openai/whisper-large-v3-turbo` 輸出毫秒級字幕切點 `caption_timings`，供合成器於子句邊界精準切鏡。
    - **Tailscale SSH 跨機叢集 (`config/ssh_config`)**：完整納管並驗證可達 `b850` / `b850-ubuntu` (`100.100.230.119`, RTX 5070 Ti 16GB)、`alan-fw` (`100.78.161.123`, AMD Ryzen AI Max+ 395 128GB) 與 `alan-mba` (`100.102.171.50`, M4 Air 24GB)。
 
-4. **Apple Metal `Three.js` WebGL2 真 3D 動態圖卡與互動 UI 站 (`hey_digital_pipeline/motion_studio.py`)**
-   - 透過 Playwright 驅動本機 Chrome Metal WebGL2 與 `Three.js` (`PCFSoftShadowMap` 真實柔光陰影 + 三次貝茲 3D 運鏡 + 彈簧物理)，支援 6 大長片動態母版：
-     - `webgl_memory_lanes`：雙軌 / 三軌 3D 記憶體與頻寬方塊通道 + 巨型細體數字動態計數與差值膠囊
-     - `webgl_stacked_tco`：3D 鋁合金筆電推鏡至雙底座加配價格堆疊柱（重現入門加價逼近高階款）
-     - `webgl_ssd_particles`：3D NAND 快閃晶圓陣列 + 拋物線資料方塊飛入 3D 筆電
-     - `webgl_chip_die`：3D SoC 晶片封裝環繞運鏡與發光 CPU / GPU / NPU 核心矩陣
-     - `webgl_dual_laptop`：3D 雙機並排高負載競速與熱力環 vs 冷卻氣流環對比
-     - `ui_configurator_crawl`：Apple 風格選配器自動滑鼠點擊波紋 + 真實爬蟲報導螢光筆劃重點視窗
+5. **Apple Metal `Three.js` WebGL2 真 3D 動態圖卡與互動 UI 站 (`hey_digital_pipeline/motion_studio.py`)**
+   - 保留並支援 6 大長片 3D / UI 動態母版：`webgl_memory_lanes`、`webgl_stacked_tco`、`webgl_ssd_particles`、`webgl_chip_die`、`webgl_dual_laptop`、`ui_configurator_crawl`。
 
-5. **互動導流 Short 動態編排站 (`motion_studio.py` + `compositor.py`)**
-   - `short_hook_dynamic`：直式動態 B-Roll 背景 + 5 張圓角貼紙與軋型放大鏡圖示依序彈簧彈出。
-   - `short_phone_interactive`：薄荷綠漸層底 + 全尺寸 iPhone 邊框 + 4 列動態 iOS 規格卡片（觸控游標滑動點擊波紋、綠色開關自動切換、黃色聚焦框與分段進度條），底部描邊字幕零重疊。
-   - `cta_funnel_endcard`：關聯長片縮圖動態推鏡與導流按鈕。
+6. **互動導流 Short 動態編排站 (`motion_studio.py` + `compositor.py`)**
+   - `short_hook_dynamic`（直式純硬體動態實拍底 + 5 張彈簧貼紙）、`short_phone_interactive`（薄荷綠漸層 + iPhone 內嵌對位實拍畫面 + 觸控點擊波紋與動態 iOS 開關）、`short_broll_summary` 與 `cta_funnel_endcard`。
 
-6. **Rhodes 電鋼琴律動配樂、轉場音效與閃避混音站 (`hey_digital_pipeline/audio_studio.py`)**
-   - 程序化合成 `86 BPM` Fender Rhodes 電鋼琴爵士和弦進行（`Cmaj9 → Am11 → Dm9 → G13sus4`），於 `1.85s` 無口播章節黑卡自然浮現，口播進入時透過 FFmpeg `sidechaincompress` 平滑閃避壓低，並精準疊加章節氣流轉場音（`whoosh`）、貼紙彈出音（`pop`）與介面點擊音（`click`），最終母帶標準化至 `-14.2 LUFS`。
+7. **Rhodes 電鋼琴閃避混音與 Telegram 一鍵交付站 (`audio_studio.py` + `tg_delivery.py`)**
+   - 程序化合成 `86 BPM` Fender Rhodes 電鋼琴和弦進行 + 轉場／彈出／點擊音效 + FFmpeg `sidechaincompress` 閃避壓低與 `-14.2 LUFS` 響度標準化。
+   - 支援 `--send-tg` 自動將完稿縮圖、長片（超過 50MB 自動壓製高畫質串流版）與導流 Short 推送至頻道經營者 Telegram。
 
 ---
 
-## 快速啟動（無人值守一鍵成片）
+## 快速啟動（無人值守一鍵成片 + Telegram 交付）
 
 ```bash
-# 1. 完全無人值守（自動爬蟲選題 -> 深度全文與實拍 B-Roll 採集 -> 32B 產稿 -> RTX Pro 6000 克隆配音與生圖/I2V -> 3D WebGL 長片 + 互動 Short + 縮圖輸出）
-python3 -u run_pipeline.py --video-type versus_guide
+# 1. 完全無人值守產出長片 + 導流 Short + 縮圖並自動傳送至 Telegram
+.venv/bin/python -u run_pipeline.py --video-type versus_guide --send-tg
 
-# 2. 指定任意主題與影片類型（同樣自動爬取公開規格、實拍 B-Roll 與來源佐證）
-python3 -u run_pipeline.py \
+# 2. 指定任意主題與影片類型（自動爬取公開規格、零人臉實拍 B-Roll 逐句對位與來源佐證）
+.venv/bin/python -u run_pipeline.py \
   --topic "M4 Pro Mac mini 對決 AMD AI Max+ 395：本機跑大模型誰才不虧？" \
   --video-type ai_benchmark \
   --long-beats 28 \
-  --short-steps 5
+  --short-steps 5 \
+  --send-tg
 
 # 3. 驗證 b850 與 Tailscale 節點 SSH 連通性
 ssh -F config/ssh_config b850 "hostname && nvidia-smi -L"
