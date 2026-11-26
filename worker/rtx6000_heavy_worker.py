@@ -165,8 +165,30 @@ def _align_captions_to_chunks(
         except Exception:
             t2s = lambda x: x
 
+        def _zh_num_to_digits(txt_s: str) -> str:
+            d_map = {"零": 0, "一": 1, "二": 2, "兩": 2, "两": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9}
+            u_map = {"十": 10, "百": 100, "千": 1000}
+            z_tr = str.maketrans("零一二三四五六七八九兩两", "012345678922")
+            def _c(m: re.Match) -> str:
+                s = m.group(0)
+                if not any(u in s for u in "十百千"):
+                    return s.translate(z_tr)
+                tot, cur = 0, 0
+                for ch in s:
+                    if ch in d_map:
+                        cur = d_map[ch]
+                    elif ch in u_map:
+                        tot += (cur if cur else 1) * u_map[ch]
+                        cur = 0
+                tot += cur
+                return str(tot) if tot > 0 else s
+            return re.sub(r"[零一二三四五六七八九兩两十百千]{2,}", _c, txt_s).translate(z_tr)
+
         def _skel(s: str) -> str:
-            return "".join(ch.lower() for ch in t2s(s) if ("\u4e00" <= ch <= "\u9fff") or ch.isalnum())
+            norm = t2s(s).lower()
+            norm = norm.replace("赫兹", "hz").replace("gb/s", "gs").replace("tb/s", "ts").replace("gb", "g").replace("tb", "t")
+            norm = _zh_num_to_digits(norm)
+            return "".join(ch for ch in norm if ("\u4e00" <= ch <= "\u9fff") or ch.isalnum())
 
         w_chars, w_times = [], []
         for wo in whisper_words:
@@ -250,25 +272,23 @@ def _align_captions_to_chunks(
 
 def synthesize_voice_batch(manifest_path: Path, profile_path: Path, out_dir: Path) -> dict:
     """
-    V4 Studio-Condenser PyTorch F5-TTS Voice Cloning + Whisper Large-v3 QA & Forced Timestamp Alignment:
-    - Uses clean Demucs-separated bilingual reference vocal (`MacBook Pro` + `M五晶片` + `MacBook Air`, zero `afftdn` artifacts)
-    - Synthesizes full sentences (`<= 54` chars) with `sway_sampling_coef=-1.0` & deterministic 32-bit seeds
-      (avoids `PYTHONHASHSEED` > 32-bit crash and preserves natural rising-falling narrative prosody!)
-    - Applies raised-cosine micro-fades, `0.22s` inter-sentence breaths, and `0.56s` Long / `0.26s` Short paragraph breaths
-    - Masters vocal via `soxr` 44.1kHz resampling + `-1.8dB@240Hz` mud cut + `+1.6dB@3.8kHz` condenser presence + `loudnorm`
-    - Verifies speech completeness & extracts exact timestamps via `faster-whisper` or HuggingFace `whisper-large-v3-turbo`!
+    V6 Dual-Engine Broadcast Voice Cloning (`Qwen3-TTS-12Hz-1.7B-Base` primary + `F5-TTS` V6 fallback)
+    + Whisper Large-v3-Turbo Word-Level Forced Alignment:
+    - Uses pure Demucs-isolated zero-hole Long & Short vocal prompts (`ref_wav` + `short_ref_wav`!).
+    - Pads reference prompts with 0.38s clean silence for Qwen3-TTS 12Hz codec boundary cleanliness (zero prompt tail bleed!).
+    - Saves raw `whisper_words` alongside `caption_timings` in `tts_results.json` for offline re-segmentation!
     """
     import numpy as np
     import soundfile as sf
     import torch
-    from f5_tts.api import F5TTS
 
     out_dir.mkdir(parents=True, exist_ok=True)
     profile = json.loads(profile_path.read_text(encoding="utf-8"))
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     items = manifest["items"]
+    preferred_engine = str(manifest.get("engine") or os.environ.get("HEYDIGITAL_TTS_ENGINE") or "qwen3").lower()
     base_long_speed = float(manifest.get("speed", 1.01))
-    base_short_speed = float(manifest.get("short_speed", 1.07))
+    base_short_speed = float(manifest.get("short_speed", 1.03))
 
     has_cuda, free_mb, gpu_name = get_free_cuda_mb()
     if has_cuda and free_mb >= 2400:
@@ -278,39 +298,70 @@ def synthesize_voice_batch(manifest_path: Path, profile_path: Path, out_dir: Pat
         gpu_name = "Apple Silicon Metal MPS"
     else:
         device = "cpu"
-    print(f"[VoiceClone V4] Loading PyTorch F5-TTS on {device} ({gpu_name}, free={free_mb} MiB)...", flush=True)
 
-    tts = F5TTS(device=device)
+    long_ref_file = profile["ref_wav"]
+    long_ref_text = profile["ref_text"]
+    short_ref_file = profile.get("short_ref_wav") or long_ref_file
+    short_ref_text = profile.get("short_ref_text") or long_ref_text
+    if not Path(short_ref_file).exists():
+        short_ref_file, short_ref_text = long_ref_file, long_ref_text
 
-    # Prefer ultra-fast CTranslate2 `faster-whisper` (`large-v3`) when available, else HF `whisper-large-v3-turbo`
-    fw_model = None
-    hf_asr = None
-    try:
-        from faster_whisper import WhisperModel
-        fw_dev = "cuda" if (device == "cuda" and free_mb >= 3800) else "cpu"
-        fw_ctype = "float16" if fw_dev == "cuda" else "int8"
-        for m_name in ("large-v3", "base"):
-            try:
-                fw_model = WhisperModel(m_name, device=fw_dev, compute_type=fw_ctype)
-                print(f"[VoiceClone V4] Loaded faster-whisper ({m_name}) on {fw_dev}!", flush=True)
-                break
-            except Exception:
-                continue
-    except Exception:
-        pass
+    qw_model = None
+    qw_prompt_long = None
+    qw_prompt_short = None
+    f5_tts = None
+    active_engine = "f5"
 
-    if fw_model is None and device in ("cuda", "mps"):
+    if preferred_engine == "qwen3" and device == "cuda" and free_mb >= 5200:
         try:
-            from transformers import pipeline as hf_pipeline
-            w_dev = "cuda:0" if device == "cuda" else "mps"
-            hf_asr = hf_pipeline("automatic-speech-recognition", model="openai/whisper-large-v3-turbo", device=w_dev, dtype=torch.float16)
-        except Exception:
-            hf_asr = None
+            subprocess.run("which sox >/dev/null 2>&1 || (apt-get update -qq && apt-get install -y -qq sox libsox-fmt-all)", shell=True, check=False)
+            subprocess.run([sys.executable, "-m", "pip", "install", "-q", "qwen-tts"], check=False)
+            def _noop_cmi(*args, **kwargs):
+                if len(args) == 1 and callable(args[0]) and not kwargs:
+                    return args[0]
+                return lambda fn: fn
+            import transformers.utils.generic as _tug
+            _tug.check_model_inputs = _noop_cmi
+            import transformers.modeling_utils as _tmu
+            if hasattr(_tmu, "check_model_inputs"):
+                _tmu.check_model_inputs = _noop_cmi
 
-    ref_file = profile["ref_wav"]
-    ref_text = profile["ref_text"]
+            from qwen_tts import Qwen3TTSModel
+            print(f"[VoiceClone V6] Loading Qwen3-TTS-12Hz-1.7B-Base on {device} ({gpu_name}, free={free_mb} MiB)...", flush=True)
+            qw_model = Qwen3TTSModel.from_pretrained(
+                "Qwen/Qwen3-TTS-12Hz-1.7B-Base",
+                device_map="cuda:0",
+                dtype=torch.bfloat16,
+                attn_implementation="sdpa",
+            )
 
-    results = []
+            def _pad_qwen_ref(src_wav: str, tag: str) -> str:
+                w, sr_r = sf.read(src_wav, dtype="float32")
+                fo = min(len(w) // 4, int(0.025 * sr_r))
+                fi = min(len(w) // 4, int(0.020 * sr_r))
+                if fi > 1:
+                    w[:fi] *= (0.5 - 0.5 * np.cos(np.linspace(0.0, math.pi, fi, dtype=np.float32)))
+                if fo > 1:
+                    w[-fo:] *= (0.5 + 0.5 * np.cos(np.linspace(0.0, math.pi, fo, dtype=np.float32)))
+                padded = np.concatenate([np.zeros(int(0.06 * sr_r), dtype=np.float32), w, np.zeros(int(0.38 * sr_r), dtype=np.float32)])
+                dst = str(out_dir / f"_qwen_ref_{tag}.wav")
+                sf.write(dst, padded, sr_r)
+                return dst
+
+            qw_prompt_long = qw_model.create_voice_clone_prompt(ref_audio=_pad_qwen_ref(long_ref_file, "long"), ref_text=long_ref_text)
+            qw_prompt_short = qw_model.create_voice_clone_prompt(ref_audio=_pad_qwen_ref(short_ref_file, "short"), ref_text=short_ref_text)
+            active_engine = "qwen3-1.7b"
+        except Exception as exc:
+            print(f"[VoiceClone V6] Qwen3-TTS load fallback to F5-TTS ({exc})", flush=True)
+            qw_model = None
+
+    if qw_model is None:
+        from f5_tts.api import F5TTS
+        print(f"[VoiceClone V6] Loading PyTorch F5-TTS on {device} ({gpu_name}, free={free_mb} MiB)...", flush=True)
+        f5_tts = F5TTS(device=device)
+        active_engine = "f5-v6"
+
+    raw_items = []
     for idx, item in enumerate(items):
         seg_id = item["id"]
         is_short = seg_id.startswith("S")
@@ -323,41 +374,68 @@ def synthesize_voice_batch(manifest_path: Path, profile_path: Path, out_dir: Pat
             sil_dur = float(item.get("silent_duration") or 1.85)
             n_samp = int(round(sil_dur * 44100))
             sf.write(str(final_wav), np.zeros(n_samp, dtype=np.float32), 44100)
-            results.append({"id": seg_id, "wav": f"{seg_id}.wav", "duration": round(sil_dur, 3), "silent": True, "caption_timings": []})
+            raw_items.append({"id": seg_id, "wav": f"{seg_id}.wav", "duration": round(sil_dur, 3), "silent": True, "captions": []})
             print(f"  [{idx+1}/{len(items)}] {seg_id}: {sil_dur:.2f}s (musical chapter card)", flush=True)
             continue
 
-        t0 = time.time()
-        sentences = _split_tts_sentences(tts_text, max_chars=48 if is_short else 54)
-        target_speed = base_short_speed if is_short else base_long_speed
-        tail_pause_s = 0.26 if is_short else 0.56
-        inter_pause_s = 0.16 if is_short else 0.22
-        sr_out = 24000
-        best_audio = None
+        if final_wav.exists() and final_wav.stat().st_size > 20000:
+            dur = round(float(sf.info(str(final_wav)).duration), 3)
+            raw_items.append({
+                "id": seg_id, "wav": f"{seg_id}.wav", "duration": dur, "silent": False,
+                "is_short": is_short, "text": display_text, "tts_text": tts_text,
+                "captions": captions, "gen_sec": 0.0,
+            })
+            print(f"  [{idx+1}/{len(items)}] {seg_id} (cached): {dur:.2f}s", flush=True)
+            continue
 
-        for attempt in range(3):
-            pieces = []
-            cur_speed = target_speed if attempt == 0 else max(0.94, target_speed - 0.04 * attempt)
-            for s_idx, sent in enumerate(sentences):
-                det_seed = (20261100 + idx * 31 + s_idx * 7 + attempt * 997) % 2147483647
-                if device == "mps":
-                    with torch.inference_mode(), torch.autocast("mps", dtype=torch.float16):
-                        wav_s, sr_s, _ = tts.infer(
-                            ref_file=ref_file,
-                            ref_text=ref_text,
-                            gen_text=sent,
-                            speed=cur_speed,
-                            nfe_step=22,
-                            cfg_strength=2.0,
-                            sway_sampling_coef=-1.0,
-                            remove_silence=False,
-                            seed=det_seed,
-                        )
-                else:
-                    wav_s, sr_s, _ = tts.infer(
-                        ref_file=ref_file,
-                        ref_text=ref_text,
-                        gen_text=sent,
+        t0 = time.time()
+        tail_pause_s = 0.24 if is_short else 0.48
+
+        if qw_model is not None:
+            # Cleanly collapse letter-spaced acronyms (`H D M I` -> `HDMI`) so Qwen3-TTS reads native English tokens!
+            qw_txt = (
+                tts_text.replace(" H D M I ", " HDMI ")
+                .replace(" U S B C ", " USB-C ")
+                .replace(" Mini L E D ", " Mini-LED ")
+                .replace(" T B ", " TB ")
+                .replace(" A I ", " AI ")
+            )
+            torch.manual_seed(20261126 + idx)
+            wavs_q, sr_out = qw_model.generate_voice_clone(
+                text=qw_txt,
+                language="Chinese",
+                voice_clone_prompt=qw_prompt_short if is_short else qw_prompt_long,
+            )
+            wnp = np.asarray(wavs_q[0], dtype=np.float32).squeeze()
+            nz = np.where(np.abs(wnp) > 0.010)[0]
+            if len(nz) > 0:
+                wnp = wnp[max(0, int(nz[0]) - int(0.025 * sr_out)) : min(len(wnp), int(nz[-1]) + int(0.11 * sr_out))]
+            fi_n = min(len(wnp) // 4, int(0.018 * sr_out))
+            fo_n = min(len(wnp) // 4, int(0.035 * sr_out))
+            if fi_n > 1:
+                wnp[:fi_n] *= (0.5 - 0.5 * np.cos(np.linspace(0.0, math.pi, fi_n, dtype=np.float32)))
+            if fo_n > 1:
+                wnp[-fo_n:] *= (0.5 + 0.5 * np.cos(np.linspace(0.0, math.pi, fo_n, dtype=np.float32)))
+            best_audio = np.concatenate([wnp, np.zeros(int(tail_pause_s * sr_out), dtype=np.float32)])
+        else:
+            ref_file_cur = short_ref_file if is_short else long_ref_file
+            ref_text_cur = short_ref_text if is_short else long_ref_text
+            sentences = _split_tts_sentences(tts_text, max_chars=38 if is_short else 42)
+            target_speed = base_short_speed if is_short else base_long_speed
+            inter_pause_s = 0.13 if is_short else 0.17
+            sr_out = 24000
+            best_audio = None
+
+            for attempt in range(3):
+                pieces = []
+                cur_speed = target_speed if attempt == 0 else max(0.95, target_speed - 0.03 * attempt)
+                for s_idx, sent in enumerate(sentences):
+                    sent_in = sent if sent[-1] in "。！？" else (sent.rstrip("，、 ") + "。")
+                    det_seed = (20261100 + idx * 31 + s_idx * 7 + attempt * 997) % 2147483647
+                    wav_s, sr_s, _ = f5_tts.infer(
+                        ref_file=ref_file_cur,
+                        ref_text=ref_text_cur,
+                        gen_text=sent_in,
                         speed=cur_speed,
                         nfe_step=32 if device == "cuda" else 22,
                         cfg_strength=2.0,
@@ -365,68 +443,76 @@ def synthesize_voice_batch(manifest_path: Path, profile_path: Path, out_dir: Pat
                         remove_silence=False,
                         seed=det_seed,
                     )
-                os.environ.pop("PYTHONHASHSEED", None)
-                sr_out = sr_s
-                wav_np = np.asarray(wav_s, dtype=np.float32)
-
-                # Trim leading/trailing dead air cleanly while preserving full final vowel resonance!
-                abs_w = np.abs(wav_np)
-                nz = np.where(abs_w > 0.0065)[0]
-                if len(nz) > 0:
-                    lead = max(0, int(nz[0]) - int(0.035 * sr_out))
-                    trail = min(len(wav_np), int(nz[-1]) + int(0.14 * sr_out))
-                    wav_np = wav_np[lead:trail]
-
-                # Raised-cosine 16ms fade-in & 40ms fade-out (zero splice clicks!)
-                fi_n = min(len(wav_np) // 4, int(0.016 * sr_out))
-                fo_n = min(len(wav_np) // 4, int(0.040 * sr_out))
-                if fi_n > 1:
-                    wav_np[:fi_n] *= (0.5 - 0.5 * np.cos(np.linspace(0.0, math.pi, fi_n, dtype=np.float32)))
-                if fo_n > 1:
-                    wav_np[-fo_n:] *= (0.5 + 0.5 * np.cos(np.linspace(0.0, math.pi, fo_n, dtype=np.float32)))
-
-                pieces.append(wav_np)
-                if s_idx < len(sentences) - 1:
-                    pieces.append(np.zeros(int(inter_pause_s * sr_out), dtype=np.float32))
-
-            pieces.append(np.zeros(int(tail_pause_s * sr_out), dtype=np.float32))
-            joined = np.concatenate(pieces)
-            best_audio = joined
-
-            cjk_count = len(re.findall(r"[\u4e00-\u9fff]", tts_text))
-            spoken_dur = (len(joined) / sr_out) - tail_pause_s
-            min_expected = max(1.1, cjk_count * (0.105 if is_short else 0.118))
-            max_expected = max(4.5, cjk_count * 0.28 + 2.5)
-            if min_expected <= spoken_dur <= max_expected:
-                break
-            print(f"    [VoiceQA] {seg_id} duration={spoken_dur:.2f}s outside [{min_expected:.1f}s..{max_expected:.1f}s] for {cjk_count} chars; regenerating...", flush=True)
+                    os.environ.pop("PYTHONHASHSEED", None)
+                    sr_out = sr_s
+                    wav_np = np.asarray(wav_s, dtype=np.float32)
+                    nz = np.where(np.abs(wav_np) > 0.008)[0]
+                    if len(nz) > 0:
+                        wav_np = wav_np[max(0, int(nz[0]) - int(0.025 * sr_out)) : min(len(wav_np), int(nz[-1]) + int(0.10 * sr_out))]
+                    fi_n = min(len(wav_np) // 4, int(0.015 * sr_out))
+                    fo_n = min(len(wav_np) // 4, int(0.035 * sr_out))
+                    if fi_n > 1:
+                        wav_np[:fi_n] *= (0.5 - 0.5 * np.cos(np.linspace(0.0, math.pi, fi_n, dtype=np.float32)))
+                    if fo_n > 1:
+                        wav_np[-fo_n:] *= (0.5 + 0.5 * np.cos(np.linspace(0.0, math.pi, fo_n, dtype=np.float32)))
+                    pieces.append(wav_np)
+                    if s_idx < len(sentences) - 1:
+                        pieces.append(np.zeros(int(inter_pause_s * sr_out), dtype=np.float32))
+                pieces.append(np.zeros(int(tail_pause_s * sr_out), dtype=np.float32))
+                best_audio = np.concatenate(pieces)
+                cjk_count = len(re.findall(r"[\u4e00-\u9fff]", tts_text))
+                spoken_dur = (len(best_audio) / sr_out) - tail_pause_s
+                if max(1.0, cjk_count * 0.105) <= spoken_dur <= max(4.5, cjk_count * 0.27 + 2.5):
+                    break
 
         raw_24k = out_dir / f"{seg_id}_24k.wav"
         sf.write(str(raw_24k), best_audio, sr_out)
-        # Studio condenser mastering: soxr 44.1kHz + cut 240Hz boxiness + boost 3.8kHz & 7.5kHz clarity + true-peak loudnorm
         run_cmd([
             "ffmpeg", "-y", "-i", str(raw_24k),
-            "-af", "aresample=44100:resampler=soxr,highpass=f=75,equalizer=f=240:t=q:w=1.2:g=-1.8,equalizer=f=3800:t=q:w=1.3:g=1.6,treble=g=1.4:f=7500,loudnorm=I=-15.5:TP=-1.2:LRA=7.0",
+            "-af", "aresample=44100:resampler=soxr,highpass=f=75,equalizer=f=240:t=q:w=1.2:g=-1.5,equalizer=f=3800:t=q:w=1.3:g=1.2,loudnorm=I=-15.5:TP=-1.2:LRA=7.5",
             "-ac", "1", "-ar", "44100", str(final_wav),
         ])
         raw_24k.unlink(missing_ok=True)
         dur = round(float(sf.info(str(final_wav)).duration), 3)
+        raw_items.append({
+            "id": seg_id,
+            "wav": f"{seg_id}.wav",
+            "duration": dur,
+            "silent": False,
+            "is_short": is_short,
+            "text": display_text,
+            "tts_text": tts_text,
+            "captions": captions,
+            "gen_sec": round(time.time() - t0, 1),
+        })
+        print(f"  [{idx+1}/{len(items)}] {seg_id} ({active_engine}): {dur:.2f}s (gen {time.time()-t0:.1f}s)", flush=True)
 
-        # Whisper word-level forced alignment + transcript QA log
-        w_words = []
-        w_chunks = []
-        heard_txt = ""
-        if fw_model is not None:
-            try:
-                segs_iter, _ = fw_model.transcribe(str(final_wav), language="zh", word_timestamps=True)
-                for s_obj in segs_iter:
-                    w_chunks.append({"timestamp": [round(s_obj.start, 3), round(s_obj.end, 3)], "text": s_obj.text})
-                    heard_txt += s_obj.text.strip()
-                    for w_it in (s_obj.words or []):
-                        w_words.append({"word": w_it.word, "start": round(w_it.start, 3), "end": round(w_it.end, 3)})
-            except Exception:
-                w_chunks = []
-        elif hf_asr is not None:
+    # Free TTS VRAM before loading Whisper for word-level forced alignment (CUDA 13 compatible!)
+    del qw_model, f5_tts
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+
+    hf_asr = None
+    if device in ("cuda", "mps"):
+        try:
+            from transformers import pipeline as hf_pipeline
+            w_dev = "cuda:0" if device == "cuda" else "mps"
+            hf_asr = hf_pipeline("automatic-speech-recognition", model="openai/whisper-large-v3-turbo", device=w_dev, dtype=torch.float16)
+            print(f"[VoiceClone V6] Running Whisper Large-v3-Turbo word-level alignment on {w_dev}...", flush=True)
+        except Exception as exc:
+            print(f"[VoiceClone V6] HF Whisper load warning: {exc}", flush=True)
+
+    results = []
+    for r_it in raw_items:
+        if r_it["silent"]:
+            results.append({"id": r_it["id"], "wav": r_it["wav"], "duration": r_it["duration"], "silent": True, "caption_timings": []})
+            continue
+        seg_id = r_it["id"]
+        final_wav = out_dir / r_it["wav"]
+        dur = r_it["duration"]
+        is_short = r_it["is_short"]
+        w_words, w_chunks, heard_txt = [], [], ""
+        if hf_asr is not None:
             try:
                 wav_16k = out_dir / f"{seg_id}_16k.wav"
                 run_cmd(["ffmpeg", "-y", "-i", str(final_wav), "-ac", "1", "-ar", "16000", str(wav_16k)])
@@ -437,25 +523,27 @@ def synthesize_voice_batch(manifest_path: Path, profile_path: Path, out_dir: Pat
                 for ch_it in w_chunks:
                     ts = ch_it.get("timestamp") or [0.0, 0.2]
                     if ts[0] is not None and ts[1] is not None:
-                        w_words.append({"word": ch_it.get("text", ""), "start": float(ts[0]), "end": float(ts[1])})
+                        w_words.append({"word": ch_it.get("text", ""), "start": round(float(ts[0]), 3), "end": round(float(ts[1]), 3)})
                 heard_txt = (w_res.get("text") or "").strip()
             except Exception:
                 w_chunks = []
-
-        cap_timings = _align_captions_to_chunks(captions, w_chunks, dur, whisper_words=w_words, is_short=is_short)
-        print(f"  [{idx+1}/{len(items)}] {seg_id}: {dur:.2f}s (gen {time.time()-t0:.1f}s) | ASR: {heard_txt[:36] or tts_text[:36]}", flush=True)
+        cap_timings = _align_captions_to_chunks(r_it["captions"], w_chunks, dur, whisper_words=w_words, is_short=is_short)
         results.append({
             "id": seg_id,
-            "wav": f"{seg_id}.wav",
+            "wav": r_it["wav"],
             "duration": dur,
             "silent": False,
-            "text": display_text,
-            "tts_text": tts_text,
+            "engine": active_engine,
+            "text": r_it["text"],
+            "tts_text": r_it["tts_text"],
             "asr_heard": heard_txt,
+            "whisper_words": w_words,
             "caption_timings": cap_timings,
         })
 
-    out_meta = {"ok": True, "gpu": gpu_name, "count": len(results), "items": results}
+    for tmp_f in out_dir.glob("_qwen_ref_*.wav"):
+        tmp_f.unlink(missing_ok=True)
+    out_meta = {"ok": True, "gpu": gpu_name, "engine": active_engine, "count": len(results), "items": results}
     (out_dir / "tts_results.json").write_text(json.dumps(out_meta, ensure_ascii=False, indent=2), encoding="utf-8")
     return out_meta
 

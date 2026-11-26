@@ -6,9 +6,9 @@ DESCRIPTION:
 
 ⏱️ 時間軸章節
 0:00 容量升級的價格陷阱
-1:16 晶片頻寬與散熱天花板
-2:34 螢幕光學與外接體驗
-3:47 三種預算終極買法
+1:04 晶片頻寬與散熱天花板
+2:06 螢幕光學與外接體驗
+3:10 三種預算終極買法
 
 📚 本期公開爬蟲資訊、實測數據與畫面參考來源
 [SRC-01] 9to5Mac — MacBook Neo vs MacBook Air: Every difference between Apple’s 13-inch laptops

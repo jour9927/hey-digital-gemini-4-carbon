@@ -33,9 +33,12 @@ from typing import Optional
 from hey_digital_pipeline.cn_verbalizer import purify_tw_tech_text
 
 try:
-    import rjieba
+    import rjieba as _jieba_mod
 except Exception:
-    rjieba = None
+    try:
+        import jieba as _jieba_mod
+    except Exception:
+        _jieba_mod = None
 
 try:
     from opencc import OpenCC
@@ -50,7 +53,8 @@ PROTECTED_CJK_WORDS = sorted([
     "超高峰值亮度", "峰值亮度", "超高亮度", "高更新率", "更新率", "記憶卡插槽", "記憶卡槽", "記憶卡", "雷電四", "雷電五", "雷電三",
     "記憶體", "連接埠", "觸控板", "揚聲器", "轉接器", "時間軸", "對比度", "解析度", "性價比", "分水嶺", "剪刀腳",
     "無風扇", "雙風扇", "高強度", "高負載", "高負荷", "長時間", "多螢幕", "雙螢幕", "入門款", "入門版", "高階款", "高階版",
-    "輕薄款", "基礎版", "主力機", "起售價", "起步價", "總持有成本", "總擁有成本", "捉襟見肘", "一清二楚", "穩如泰山", "一步到位",
+    "輕薄款", "基礎版", "基礎款", "主力機", "起售價", "起步價", "總持有成本", "總擁有成本", "表面溫差", "溫控差距", "溫控降頻", "溫差", "溫控",
+    "擴充底座", "選配單", "資料來源", "公開數據", "捉襟見肘", "一清二楚", "穩如泰山", "一步到位",
     "還是", "配備", "擁有", "採用", "搭配", "透過", "藉由", "導致", "決定", "支援", "針對", "涉及", "觸發", "維持", "釋放",
     "摸到", "升到", "跑到", "拉到", "衝上", "加到", "直上", "直接", "成為", "反而", "而且", "因為", "所以", "如果", "雖然",
     "但是", "不論", "無論", "加上", "反觀", "尤其", "特別", "幾乎", "瞬間", "超高", "極致", "顯著", "完整", "流暢", "穩定", "高速",
@@ -70,6 +74,7 @@ FORBIDDEN_LINE_END_TOKENS = {
 
 # Enclitics / suffixes that must NEVER start a new split subtitle line
 FORBIDDEN_LINE_START_TOKENS = {
+    "，", "：", "、", "。", "！", "？",
     "的", "地", "得", "了", "著", "過", "嗎", "呢", "吧", "啊", "呀", "喔", "們",
     "性", "化", "度", "率", "感", "款", "版", "級", "槽", "器", "埠",
 }
@@ -184,12 +189,12 @@ def _jieba_tw_slice(sub: str) -> list[str]:
     # Keep postpositional `時` separate when followed by adjectives/verbs (`時間軸` + `時` + `絲滑`, never `時絲`)
     if len(sub) >= 2 and sub[0] == "時" and sub[1] not in "間代刻候脈區常機尚":
         return ["時"] + _jieba_tw_slice(sub[1:])
-    if rjieba is not None and _T2S is not None:
+    if _jieba_mod is not None and _T2S is not None:
         simp = _T2S.convert(sub)
         if len(simp) == len(sub):
             out = []
             cur = 0
-            for w in rjieba.cut(simp):
+            for w in _jieba_mod.cut(simp):
                 ln = len(w)
                 out.append(sub[cur : cur + ln])
                 cur += ln
@@ -359,10 +364,10 @@ def segment_narration_to_captions(narration: str, is_vertical: bool = False) -> 
     final_captions: list[str] = []
 
     for sent in sent_chunks:
-        # 2. Split on `，` and `：` ONLY (keep `、` intact!)
+        # 2. Split on `，` and `：` ONLY (keep `、` and numeric ratios like `16:9` intact!)
         raw_clauses: list[tuple[str, str]] = []
         c_pos = 0
-        for cm in re.finditer(r"[，：:]", sent):
+        for cm in re.finditer(r"[，：]|(?<!\d):(?!\d)", sent):
             sub_c = sent[c_pos : cm.start()].strip()
             sep_c = "：" if cm.group(0) in ("：", ":") else "，"
             if sub_c:
@@ -421,9 +426,38 @@ def segment_narration_to_captions(narration: str, is_vertical: bool = False) -> 
     return [c.strip(" ，。；：") for c in final_captions if c.strip(" ，。；：")]
 
 
+_ZH_DIGIT_MAP = str.maketrans("零一二三四五六七八九兩", "01234567892")
+
+
+def _zh_num_phrase_to_digits(text: str) -> str:
+    """Convert common spoken Chinese number phrases (`五百一十二` -> `512`, `一百二十` -> `120`, `十六` -> `16`) for alignment."""
+    def _conv(m: re.Match) -> str:
+        s = m.group(0)
+        if not any(u in s for u in "十百千"):
+            return s.translate(_ZH_DIGIT_MAP)
+        d_map = {"零": 0, "一": 1, "二": 2, "兩": 2, "两": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9}
+        u_map = {"十": 10, "百": 100, "千": 1000}
+        total = 0
+        cur = 0
+        for ch in s:
+            if ch in d_map:
+                cur = d_map[ch]
+            elif ch in u_map:
+                u = u_map[ch]
+                total += (cur if cur else 1) * u
+                cur = 0
+        total += cur
+        return str(total) if total > 0 else s
+
+    t = re.sub(r"[零一二三四五六七八九兩两十百千]{2,}", _conv, text)
+    return t.translate(_ZH_DIGIT_MAP)
+
+
 def _norm_char_skeleton(s: str) -> tuple[str, list[int]]:
-    """Build Simplified alphanumeric/CJK skeleton + index map back to original string indices."""
+    """Build Simplified alphanumeric/CJK skeleton (normalizing spoken Chinese numerals & units) for Whisper alignment."""
     src = _T2S.convert(s) if (_T2S is not None) else s
+    src = src.replace("赫兹", "hz").replace("gb/s", "gs").replace("tb/s", "ts").replace("gb", "g").replace("tb", "t")
+    src = _zh_num_phrase_to_digits(src)
     skel_chars: list[str] = []
     orig_idxs: list[int] = []
     for idx, ch in enumerate(src):

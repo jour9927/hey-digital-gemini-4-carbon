@@ -248,38 +248,52 @@ def run_pipeline(args: argparse.Namespace) -> Path:
         client.get_file("voices/profile/voice_profile.json", local_vp_dir / "voice_profile.json")
         client.get_file("voices/profile/alan_prompt_clip_24k.wav", local_vp_dir / "alan_prompt_clip_24k.wav")
     elif client is not None and (local_vp_dir / "voice_profile.json").exists():
-        client.put_file(local_vp_dir / "alan_prompt_clip_24k.wav", "voices/profile/alan_prompt_clip_24k.wav")
         vp_obj = json.loads((local_vp_dir / "voice_profile.json").read_text(encoding="utf-8"))
-        vp_obj["ref_wav"] = "/content/heydigital_g4c/voices/profile/alan_prompt_clip_24k.wav"
+        long_ref_local = REPO_ROOT / vp_obj["ref_wav"] if not Path(vp_obj["ref_wav"]).is_absolute() else Path(vp_obj["ref_wav"])
+        if not long_ref_local.exists():
+            long_ref_local = local_vp_dir / "alan_v6_long_m5_24k.wav"
+        client.put_file(long_ref_local, f"voices/profile/{long_ref_local.name}")
+        vp_obj["ref_wav"] = f"/content/heydigital_g4c/voices/profile/{long_ref_local.name}"
+
+        if vp_obj.get("short_ref_wav"):
+            short_ref_local = REPO_ROOT / vp_obj["short_ref_wav"] if not Path(vp_obj["short_ref_wav"]).is_absolute() else Path(vp_obj["short_ref_wav"])
+            if short_ref_local.exists():
+                client.put_file(short_ref_local, f"voices/profile/{short_ref_local.name}")
+                vp_obj["short_ref_wav"] = f"/content/heydigital_g4c/voices/profile/{short_ref_local.name}"
         client.put_bytes(json.dumps(vp_obj, ensure_ascii=False, indent=2).encode("utf-8"), "voices/profile/voice_profile.json")
 
-    # Step 4B: V4 Studio-Condenser PyTorch F5-TTS + Whisper Forced Alignment (RTX Pro 6000 -> Tailscale b850 CUDA -> Local MPS)
+    # Step 4B: V6 Dual-Engine Voice Cloning (Qwen3-TTS-1.7B / F5-TTS V6) + Whisper Forced Alignment
     tts_local_dir = run_dir / "tts"
     if not (tts_local_dir / "tts_results.json").exists():
-        from hey_digital_pipeline.cn_verbalizer import verbalize_for_mandarin_tts
+        from hey_digital_pipeline.cn_verbalizer import purify_tw_tech_text, verbalize_for_mandarin_tts
+        from hey_digital_pipeline.subtitle_engine import segment_narration_to_captions
 
         tts_items = []
         for b in plan.get("long_beats", []):
-            nar = b.get("narration", "")
+            nar = purify_tw_tech_text(b.get("narration", "")) if b.get("narration") else ""
+            b["narration"] = nar
+            b["captions"] = segment_narration_to_captions(nar, is_vertical=False) if nar else []
             b["tts_text"] = verbalize_for_mandarin_tts(nar) if nar else ""
             tts_items.append({
                 "id": b["id"],
                 "text": nar,
                 "tts_text": b["tts_text"],
-                "captions": b.get("captions", []),
+                "captions": b["captions"],
                 "silent_duration": b.get("silent_duration", 1.85),
             })
         for sb in plan.get("short_beats", []):
-            nar = sb.get("narration", "")
+            nar = purify_tw_tech_text(sb.get("narration", "")) if sb.get("narration") else ""
+            sb["narration"] = nar
+            sb["captions"] = segment_narration_to_captions(nar, is_vertical=True) if nar else []
             sb["tts_text"] = verbalize_for_mandarin_tts(nar) if nar else ""
             tts_items.append({
                 "id": sb["id"],
                 "text": nar,
                 "tts_text": sb["tts_text"],
-                "captions": sb.get("captions", []),
+                "captions": sb["captions"],
             })
         plan_file.write_text(json.dumps(plan, ensure_ascii=False, indent=2), encoding="utf-8")
-        tts_manifest = {"speed": 1.01, "short_speed": 1.07, "items": tts_items}
+        tts_manifest = {"engine": "qwen3", "speed": 1.01, "short_speed": 1.03, "items": tts_items}
         (run_dir / "tts_manifest.json").write_text(json.dumps(tts_manifest, ensure_ascii=False, indent=2), encoding="utf-8")
 
         if client is not None:
@@ -316,22 +330,31 @@ def run_pipeline(args: argparse.Namespace) -> Path:
                 r_job = f"/dev/shm/heydigital_g4c/jobs/{run_dir.name}"
                 subprocess.run(["ssh", "-F", str(ssh_cfg), "b850", f"mkdir -p {r_job}/tts /dev/shm/heydigital_g4c/voices"], check=True)
                 vp_local = json.loads((local_vp_dir / "voice_profile.json").read_text(encoding="utf-8"))
-                ref_wav_local = REPO_ROOT / vp_local["ref_wav"]
+                ref_wav_local = REPO_ROOT / vp_local["ref_wav"] if not Path(vp_local["ref_wav"]).is_absolute() else Path(vp_local["ref_wav"])
                 if not ref_wav_local.exists():
-                    ref_wav_local = local_vp_dir / "alan_prompt_clip_24k.wav"
+                    ref_wav_local = local_vp_dir / "alan_v6_long_m5_24k.wav"
                 vp_remote = dict(vp_local)
-                vp_remote["ref_wav"] = "/dev/shm/heydigital_g4c/voices/alan_prompt_clip_24k.wav"
+                vp_remote["ref_wav"] = f"/dev/shm/heydigital_g4c/voices/{ref_wav_local.name}"
+                subprocess.run([
+                    "scp", "-q", "-F", str(ssh_cfg),
+                    str(ref_wav_local),
+                    f"b850:/dev/shm/heydigital_g4c/voices/{ref_wav_local.name}",
+                ], check=True)
+                if vp_local.get("short_ref_wav"):
+                    s_wav_local = REPO_ROOT / vp_local["short_ref_wav"] if not Path(vp_local["short_ref_wav"]).is_absolute() else Path(vp_local["short_ref_wav"])
+                    if s_wav_local.exists():
+                        vp_remote["short_ref_wav"] = f"/dev/shm/heydigital_g4c/voices/{s_wav_local.name}"
+                        subprocess.run([
+                            "scp", "-q", "-F", str(ssh_cfg),
+                            str(s_wav_local),
+                            f"b850:/dev/shm/heydigital_g4c/voices/{s_wav_local.name}",
+                        ], check=True)
                 tmp_vp = run_dir / "_b850_vp.json"
                 tmp_vp.write_text(json.dumps(vp_remote, ensure_ascii=False, indent=2), encoding="utf-8")
                 subprocess.run([
                     "scp", "-q", "-F", str(ssh_cfg),
                     str(REPO_ROOT / "worker" / "rtx6000_heavy_worker.py"),
                     "b850:/dev/shm/heydigital_g4c/rtx6000_heavy_worker.py",
-                ], check=True)
-                subprocess.run([
-                    "scp", "-q", "-F", str(ssh_cfg),
-                    str(ref_wav_local),
-                    "b850:/dev/shm/heydigital_g4c/voices/alan_prompt_clip_24k.wav",
                 ], check=True)
                 subprocess.run([
                     "scp", "-q", "-F", str(ssh_cfg),
@@ -346,7 +369,7 @@ def run_pipeline(args: argparse.Namespace) -> Path:
                 tmp_vp.unlink(missing_ok=True)
                 subprocess.run([
                     "ssh", "-F", str(ssh_cfg), "b850",
-                    f"/dev/shm/heydigital_g4c/.venv/bin/python -u /dev/shm/heydigital_g4c/rtx6000_heavy_worker.py tts-batch "
+                    f"HF_HOME=/tmp/heydigital_hf TMPDIR=/tmp /dev/shm/heydigital_g4c/.venv/bin/python -u /dev/shm/heydigital_g4c/rtx6000_heavy_worker.py tts-batch "
                     f"--manifest {r_job}/tts_manifest.json --profile /dev/shm/heydigital_g4c/voices/voice_profile.json --out-dir {r_job}/tts",
                 ], check=True)
                 tts_local_dir.mkdir(parents=True, exist_ok=True)
@@ -476,7 +499,7 @@ def run_pipeline(args: argparse.Namespace) -> Path:
         f"TITLE:\n{plan.get('title_short', '')}\n\nRELATED LONG VIDEO:\n{plan.get('title_long', '')}\n\nDESCRIPTION:\n{desc_short}\n", encoding="utf-8"
     )
     summary = {
-        "pipeline_version": "2.0-gemini-4-carbon-webgl-rhodes",
+        "pipeline_version": "6.0-qwen3-tts-bilingual-precision",
         "run_id": run_dir.name,
         "topic": plan.get("topic"),
         "video_type": plan.get("video_type"),

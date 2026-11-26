@@ -461,7 +461,10 @@ def _render_broll_video_beat(
 
         cap = caption_for_timestamp(beat, caption_timings, t_loc, real_dur)
         draw_adaptive_caption(frame, cap, is_light_bg=False, is_vertical=is_vertical)
-        enc_proc.stdin.write(frame.tobytes())
+        try:
+            enc_proc.stdin.write(frame.tobytes())
+        except BrokenPipeError:
+            break
 
     if dec_proc is not None:
         dec_proc.terminate()
@@ -562,7 +565,10 @@ def assemble_long_video(
                     if not silent_map.get(bid, True):
                         cap = caption_for_timestamp(beat, timings_map.get(bid, []), t_loc, real_dur)
                         draw_adaptive_caption(frame, cap, is_light_bg=False, is_vertical=False)
-                    proc.stdin.write(frame.tobytes())
+                    try:
+                        proc.stdin.write(frame.tobytes())
+                    except BrokenPipeError:
+                        break
                 proc.stdin.close()
                 proc.wait()
 
@@ -703,7 +709,10 @@ def _render_cta_endcard_animated(
 
         cap = caption_for_timestamp(beat, caption_timings, t_loc, real_dur)
         draw_adaptive_caption(canvas, cap, is_light_bg=False, is_vertical=True)
-        proc.stdin.write(canvas.tobytes())
+        try:
+            proc.stdin.write(canvas.tobytes())
+        except BrokenPipeError:
+            break
 
     proc.stdin.close()
     proc.wait()

@@ -1,7 +1,9 @@
 {
-  "ref_wav": "assets/voices/rtx6000_profile/alan_bilingual_m5_24k.wav",
-  "ref_text": "价格瞬间就逼近 MacBook Pro，让人陷入无止境的纠结。到了二零二六年，搭载 Em五晶片的全新 MacBook Air。",
-  "short_ref_wav": "assets/voices/rtx6000_profile/alan_short_punchy_24k.wav",
+  "ref_wav": "assets/voices/rtx6000_profile/alan_v6_long_m5_24k.wav",
+  "ref_text": "到了二零二六年，搭载 M五晶片的全新 MacBook Air，终于把这块最让人诟病的短板给补齐了。",
+  "ref_text_raw": "到了 2026 年，搭载 M5 晶片的全新 MacBook Air，终于把这块最让人诟病的短板给补齐了。",
+  "short_ref_wav": "assets/voices/rtx6000_profile/alan_v6_short_24k.wav",
   "short_ref_text": "明明买的是旗舰手机，为什么拍出来的照片总感觉糊糊的？其实很多时候真不是手机的问题，而是有几个关键的小细节没设置对。",
-  "clip_duration": 9.76
+  "clip_duration": 6.48,
+  "short_clip_duration": 8.0
 }

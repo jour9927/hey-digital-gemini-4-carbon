@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 """
-Hey Digital Gemini 4 Carbon V4 — Taiwan Tech Lexicon, Polyphone-Safe Simplified F5-TTS Verbalizer & Oral Normalizer
-===================================================================================================================
-Fixes ALL auditory defects identified in side-by-side listening against `@hey_digitall` reference videos:
-1. Keeps 100% authentic Taiwan Traditional Chinese (`記憶體`, `固態硬碟`, `螢幕`, `連接埠`, `更新率`) on screen (`display_text`),
-   while converting `tts_text` via character-only `OpenCC('t2s')` (`记忆体`, `固态硬碟`, `弹性`, `几乎`) WITH ZERO CJK SPACES
-   so `F5-TTS`'s `jieba` + `pypinyin` tokenizer NEVER misreads polyphones (`彈性 -> dàn xìng`, `幾乎 -> jǐ hū`) and NEVER
-   stutters mid-word (`記憶…體`, `散…熱`, `差…異`)!
-2. Natural Human Spoken Units (matching `@hey_digitall` host Alan's exact spoken phrasing):
-   - `153GB/s` -> `每秒一百五十三G` (NEVER robotic `"每秒一百五十三 G 位元組"`)
-   - `20°C` / `20℃` -> `二十度` (NEVER `"二十 gabri C"`)
-   - Strips citation tags (`—— SRC-01`, `[SRC-01]`) from `tts_text` (NEVER reads `"S R C 一"` aloud!)
-   - Separates `Air` and `M5` (`MacBook Air M5` -> `M五版的 MacBook Air`) so `Air M` never slurs into `"欸兒阿曼"`!
-   - Maps phonetic traps (`Thunderbolt 4` -> `雷电四`, `Mini-LED` -> `Mini LED`, `ProMotion` -> `ProMotion`) cleanly!
+Hey Digital V6 — 1:1 Visual-Audio Aligned Taiwan Tech Lexicon & F5/Neural TTS Oral Normalizer
+==============================================================================================
+Fixes ALL prosodic & phonetic defects audited against `@hey_digitall` reference videos (`D9IiQF_QIYg`, `1TO7dzrTuQg`, `QrBoNy0wse8`):
+1. 1:1 Subtitle-to-Speech Word Parity (ZERO secret word additions or substitutions):
+   - `MacBook Air M5` stays `MacBook Air M五` (NEVER rewritten to `"搭載 Em五晶片的 MacBook Air"`, and NEVER `Em五`!).
+   - `SSD` -> `固態硬碟` and `RAM` -> `記憶體` happen in `purify_tw_tech_text` so on-screen captions and spoken audio match 1:1!
+   - Standalone `Air` and `Pro` stay `Air` and `Pro` (NEVER rewritten to `MacBook Pro`).
+   - Spoken acronyms (`AI`, `NAS`, `OLED`, `HDMI`, `USB-C`, `Mini-LED`, `ProMotion`, `Wi-Fi 7`) stay aligned between screen and voice.
+2. Phonetic Clarity & Natural `@hey_digitall` Spoken Units:
+   - `M5` / `M6` -> `M五` / `M六` (matches exact single-letter `M` token in clean reference prompt!).
+   - `1TB` -> `一 TB` (prevents `一T` slurring into `"ET"`), `16GB` -> `十六G`, `153GB/s` -> `每秒一百五十三G`.
+   - `120Hz` -> `一百二十赫茲`, `20°C` -> `二十度`, `2026年` -> `二零二六年`.
+   - Keeps `連接埠` intact (`埠` is already 4th-tone `bu4`; never corrupts to `连接部`).
 """
 from __future__ import annotations
 
@@ -24,7 +24,7 @@ try:
 except Exception:
     _T2S = None
 
-# Mainland / Simplified -> Taiwan Traditional Tech Lexicon (for ON-SCREEN display_text & captions)
+# Mainland / Simplified -> Taiwan Traditional Tech Lexicon (applied to BOTH display_text & tts_text)
 TW_TECH_LEXICON = [
     ("内存带宽", "記憶體頻寬"), ("统一内存", "統一記憶體"), ("内存", "記憶體"), ("运存", "統一記憶體"), ("显存", "顯示記憶體"),
     ("带宽", "頻寬"), ("固态硬盘", "固態硬碟"), ("硬盘", "硬碟"),
@@ -48,13 +48,20 @@ TW_TECH_LEXICON = [
 ]
 
 _DIGITS = "零一二三四五六七八九"
+_ZH_K_MAP = {"二": "2", "四": "4", "五": "5", "六": "6", "八": "8"}
 
 
 def purify_tw_tech_text(text: str) -> str:
-    """Normalize on-screen text to crisp Taiwan Traditional tech typography."""
+    """Normalize on-screen text to crisp Taiwan Traditional tech typography (matching spoken lexicon 1:1)."""
     t = text or ""
     for src, dst in TW_TECH_LEXICON:
         t = t.replace(src, dst)
+    # Normalize `四 K` / `4 K` -> `4K` on screen
+    t = re.sub(r"([二四五六八])\s*K\b", lambda m: f"{_ZH_K_MAP[m.group(1)]}K", t, flags=re.I)
+    t = re.sub(r"\b([24568])\s+K\b", r"\1K", t, flags=re.I)
+    # Align SSD / RAM on screen with `@hey_digitall`'s natural spoken Mandarin (`512GB 固態硬碟`, `16GB 記憶體`)
+    t = re.sub(r"(?<![A-Za-z])SSD(?![A-Za-z])", "固態硬碟", t)
+    t = re.sub(r"(?<![A-Za-z])RAM(?![A-Za-z])", "記憶體", t)
     t = re.sub(r"([\u4e00-\u9fff])([A-Za-z0-9$])", r"\1 \2", t)
     t = re.sub(r"([A-Za-z0-9%°℃])([\u4e00-\u9fff])", r"\1 \2", t)
     return re.sub(r"\s+", " ", t).strip()
@@ -120,14 +127,13 @@ def year_to_zh(y: str) -> str:
     return "".join(_DIGITS[int(c)] for c in y if c.isdigit())
 
 
-def verbalize_for_mandarin_tts(raw_text: str) -> str:
+def verbalize_for_mandarin_tts(raw_text: str, letter_space_acronyms: bool = True) -> str:
     """
-    Convert Taiwan Traditional display script into polyphone-safe, zero-stutter F5-TTS oral script:
-    - Strips citation tags (`SRC-01`) & visual brackets
-    - Converts all numbers/units/temperatures into natural spoken `@hey_digitall` Mandarin
-    - Prevents Latin token collisions (`MacBook Air M5` -> `搭載M五的 MacBook Air`)
-    - Converts characters to Simplified (`OpenCC('t2s')`) WITHOUT altering Taiwan vocabulary (`记忆体`, `硬碟`),
-      eliminating `jieba`/`pypinyin` polyphone & word-splitting bugs!
+    Convert Taiwan Traditional display script into 1:1 word-order aligned, polyphone-safe oral script:
+    - Preserves exact word order (`MacBook Air M5` -> `MacBook Air M五`, zero added/swapped words!).
+    - Converts numbers/units/temperatures into natural `@hey_digitall` spoken Mandarin.
+    - Converts Traditional -> Simplified characters ONLY (`OpenCC('t2s')`) while keeping Taiwan vocabulary
+      (`记忆体`, `固态硬碟`, `连接埠`, `萤幕`) for accurate `jieba`/`pypinyin` polyphone disambiguation.
     """
     t = purify_tw_tech_text(raw_text)
 
@@ -139,45 +145,37 @@ def verbalize_for_mandarin_tts(raw_text: str) -> str:
     t = re.sub(r"[—–]+", "，", t)
     t = re.sub(r"\s*：\s*", "，", t)
 
-    # 1. Prevent `MacBook Air M5` Latin boundary slur & map `M` -> phonetic `Em` (`/ɛm/` + Chinese digit = exact "M5"!)
-    t = re.sub(
-        r"MacBook\s+Air\s+M\s*(\d+)",
-        lambda m: f"搭載 Em{int_to_zh(int(m.group(1)))}晶片的 MacBook Air",
-        t,
-        flags=re.I,
-    )
-    t = re.sub(
-        r"MacBook\s+Pro\s+M\s*(\d+)\s*(Pro|Max)?",
-        lambda m: f"搭載 Em{int_to_zh(int(m.group(1)))}{(' ' + m.group(2)) if m.group(2) else ''}晶片的 MacBook Pro",
-        t,
-        flags=re.I,
-    )
+    # 1. Brand names, ports & display standards spoken cleanly in `@hey_digitall` reference videos
+    hdmi_tok = " H D M I " if letter_space_acronyms else " HDMI "
+    usb_c_tok = " U S B C " if letter_space_acronyms else " USB-C "
+    mini_led_tok = " Mini L E D " if letter_space_acronyms else " Mini-LED "
+    ai_tok = " A I " if letter_space_acronyms else " AI "
 
-    # 2. Brand names, ports & display standards spoken cleanly in Mandarin tech videos
     brand_pre_map = [
         (r"9\s*to\s*5\s*Mac", " Nine to Five Mac "),
-        (r"Thunderbolt\s*(\d+)", lambda m: f"雷電{int_to_zh(int(m.group(1)))}"),
-        (r"\bThunderbolt\b", "雷電"),
-        (r"\bMagSafe\s*(\d+)?", lambda m: f"磁吸充電{int_to_zh(int(m.group(1))) if m.group(1) else ''}"),
+        (r"Thunderbolt\s*(\d+)", lambda m: f" Thunderbolt {int_to_zh(int(m.group(1)))} "),
+        (r"\bMagSafe\s*(\d+)?", lambda m: f" MagSafe {int_to_zh(int(m.group(1))) if m.group(1) else ''} "),
         (r"\b3D\b", "三D"),
         (r"\b4K\b", "四K"),
         (r"\b5K\b", "五K"),
         (r"\b6K\b", "六K"),
         (r"\b8K\b", "八K"),
-        (r"Mini\s*-?\s*LED", " Mini LED "),
+        (r"Mini\s*-?\s*LED", mini_led_tok),
         (r"Pro\s*Motion", " ProMotion "),
         (r"Wi-?Fi\s*6E\b", " Wi-Fi 六E "),
         (r"Wi-?Fi\s*(\d+)\b", lambda m: f" Wi-Fi {int_to_zh(int(m.group(1)))} "),
-        (r"USB\s*-?\s*C", " USB C "),
-        (r"USB\s*(\d+)", lambda m: f" USB {int_to_zh(int(m.group(1)))} "),
+        (r"USB\s*-?\s*C\b", usb_c_tok),
+        (r"USB\s*(\d+)\b", lambda m: f" U S B {int_to_zh(int(m.group(1)))} " if letter_space_acronyms else f" USB {int_to_zh(int(m.group(1)))} "),
+        (r"\bHDMI\b", hdmi_tok),
+        (r"\bAI\b", ai_tok),
     ]
     for pat, repl in brand_pre_map:
         t = re.sub(pat, repl, t, flags=re.I)
 
-    # 3. Years: 2020年..2035年 -> 二零二六年
+    # 2. Years: 2020年..2035年 -> 二零二六年
     t = re.sub(r"\b(19\d\d|20\d\d)\s*年", lambda m: f"{year_to_zh(m.group(1))}年", t)
 
-    # 4. Temperatures: 20°C / 20 °C / 20℃ -> 二十度 (fixes "20 gabri C"!)
+    # 3. Temperatures: 20°C / 20 °C / 20℃ -> 二十度
     t = re.sub(
         r"(-?\d+(?:\.\d+)?)\s*(?:°\s*C|℃|度\s*C)\b",
         lambda m: (f"零下{num_str_to_zh(m.group(1)[1:], two_as_liang=True)}度" if m.group(1).startswith("-") else f"{num_str_to_zh(m.group(1), two_as_liang=True)}度"),
@@ -185,7 +183,7 @@ def verbalize_for_mandarin_tts(raw_text: str) -> str:
         flags=re.I,
     )
 
-    # 5. Currencies: NT$34,900 / $1,299 / 100 美元
+    # 4. Currencies: NT$34,900 / $1,299 / 100 美元
     t = re.sub(
         r"NT\$\s*(\d[\d,]*(?:\.\d+)?)",
         lambda m: f"台幣{num_str_to_zh(m.group(1), two_as_liang=True)}元",
@@ -204,22 +202,21 @@ def verbalize_for_mandarin_tts(raw_text: str) -> str:
         flags=re.I,
     )
 
-    # 6. Apple / Tech Chip Designators: M6 Pro -> Em六 Pro, M5 -> Em五, N1 -> En一, A20 -> A二十
-    _chip_phonetic = {"M": "Em", "N": "En", "A": "A", "C": "C"}
+    # 5. Apple / Tech Chip Designators: `M5` -> `M五`, `M6 Pro` -> `M六 Pro`, `N1` -> `N一`, `A18 Pro` -> `A十八 Pro`
     t = re.sub(
-        r"\b([MANC])\s*(\d{1,2})(?=\s*(?:Pro|Max|Ultra|晶片|處理器|核心|版|\b))",
-        lambda m: f"{_chip_phonetic.get(m.group(1).upper(), m.group(1))}{int_to_zh(int(m.group(2)))}",
+        r"\b([MANC])\s*(\d{1,2})(?=\s*(?:Pro|Max|Ultra|晶片|處理器|核心|版|世代|\b))",
+        lambda m: f"{m.group(1).upper()}{int_to_zh(int(m.group(2)))}",
         t,
     )
 
-    # 7. Ranges: 4-5 年 / 13~15 吋 -> 四到五年
+    # 6. Ranges: 4-5 年 / 13~15 吋 -> 四到五年
     t = re.sub(
         r"(\d+(?:\.\d+)?)\s*[-~～至]\s*(\d+(?:\.\d+)?)",
         lambda m: f"{num_str_to_zh(m.group(1), two_as_liang=True)}到{num_str_to_zh(m.group(2), two_as_liang=True)}",
         t,
     )
 
-    # 8. Percentages: -10% -> 負百分之十, 10% -> 百分之十
+    # 7. Percentages: -10% -> 負百分之十, 10% -> 百分之十
     t = re.sub(
         r"(?<=[少減降跌])\s*-\s*(\d+(?:\.\d+)?)\s*%",
         lambda m: f"百分之{num_str_to_zh(m.group(1))}",
@@ -236,13 +233,14 @@ def verbalize_for_mandarin_tts(raw_text: str) -> str:
         t,
     )
 
-    # 9. Natural Spoken Tech Units (matches @hey_digitall: `153GB/s` -> `每秒一百五十三G`, `256GB` -> `二百五十六G`)
+    # 8. Natural Spoken Tech Units (`153GB/s` -> `每秒一百五十三G`, `1TB` -> `一 TB` so `一T` never slurs into `ET`!)
+    tb_unit = " T B " if letter_space_acronyms else " TB "
     unit_rules = [
         (r"(\d[\d,]*(?:\.\d+)?)\s*GB/s\b", lambda v: f"每秒{num_str_to_zh(v, two_as_liang=False)}G"),
-        (r"(\d[\d,]*(?:\.\d+)?)\s*TB/s\b", lambda v: f"每秒{num_str_to_zh(v, two_as_liang=False)}T"),
-        (r"(\d[\d,]*(?:\.\d+)?)\s*tok/s\b", lambda v: f"每秒{num_str_to_zh(v)}個token"),
+        (r"(\d[\d,]*(?:\.\d+)?)\s*TB/s\b", lambda v: f"每秒{num_str_to_zh(v, two_as_liang=True)}{tb_unit}"),
+        (r"(\d[\d,]*(?:\.\d+)?)\s*tok/s\b", lambda v: f"每秒{num_str_to_zh(v)}個 token "),
         (r"(\d[\d,]*(?:\.\d+)?)\s*GB\b", lambda v: f"{num_str_to_zh(v, two_as_liang=False)}G"),
-        (r"(\d[\d,]*(?:\.\d+)?)\s*TB\b", lambda v: f"{num_str_to_zh(v, two_as_liang=False)}T"),
+        (r"(\d[\d,]*(?:\.\d+)?)\s*TB\b", lambda v: f"{num_str_to_zh(v, two_as_liang=True)}{tb_unit}"),
         (r"(\d[\d,]*(?:\.\d+)?)\s*GHz\b", lambda v: f"{num_str_to_zh(v)}G赫茲"),
         (r"(\d[\d,]*(?:\.\d+)?)\s*Hz\b", lambda v: f"{num_str_to_zh(v)}赫茲"),
         (r"(\d[\d,]*(?:\.\d+)?)\s*(?:nits?|尼特)\b", lambda v: f"{num_str_to_zh(v, two_as_liang=True)}尼特"),
@@ -256,57 +254,28 @@ def verbalize_for_mandarin_tts(raw_text: str) -> str:
     for pat, fn in unit_rules:
         t = re.sub(pat, lambda m, f=fn: f(m.group(1)), t, flags=re.I)
 
-    # 10. Remaining standalone decimals & integers
+    # 9. Remaining standalone decimals & integers
     t = re.sub(
-        r"\b2(?=\s*(?:台|顆|款|種|倍|個|小時|年|天|支|張|大|階|步))",
+        r"\b2(?=\s*(?:台|顆|款|種|倍|個|小時|年|天|支|張|大|階|步|奈米))",
         "兩",
         t,
     )
     t = re.sub(r"\d[\d,]*(?:\.\d+)?", lambda m: num_str_to_zh(m.group(0)), t)
 
-    # 11. Common Acronyms spoken cleanly in Mandarin tech channels (ZERO spaces next to Chinese!)
-    acronym_map = [
-        ("OLED", " OLED "),
-        ("SSD", "固態硬碟"),
-        ("HDD", "傳統硬碟"),
-        ("NVMe", "高速固態"),
-        ("NPU", "神經網路引擎"),
-        ("GPU", "繪圖處理器"),
-        ("CPU", "中央處理器"),
-        ("RAM", "記憶體"),
-        ("LLM", "大語言模型"),
-        ("HDR", "高動態範圍"),
-        ("HDMI", " HDMI "),
-        ("SDXC", "記憶卡"),
-        ("NAS", "網路儲存"),
-        ("AI", "人工智慧"),
-    ]
-    for k, v in acronym_map:
-        t = re.sub(rf"(?<![A-Za-z]){re.escape(k)}(?![A-Za-z])", v, t)
-
-    # Avoid bare standalone "Pro" right before Chinese verbs turning into "鋪具備"
-    t = re.sub(r"(?<![A-Za-z]\s)(?<![A-Za-z])\bPro\b(?!\s*Motion)", " MacBook Pro ", t)
-    t = re.sub(r"MacBook\s+MacBook\s+Pro", "MacBook Pro", t)
-
-    # 12. Convert characters ONLY from Traditional -> Simplified (`OpenCC('t2s')`) so `F5-TTS`'s
-    #     Simplified `jieba` + `pypinyin` gets 100% accurate word segmentation & polyphone tones
-    #     (`弹性 -> tán xìng`, `几乎 -> jī hū`, `记忆体` stays Taiwan vocab "jì yì tǐ"!)
+    # 10. Convert characters ONLY from Traditional -> Simplified (`OpenCC('t2s')`)
     if _T2S is not None:
         t = _T2S.convert(t)
-    # Fix `著` -> `着` (`zhe`) except in `显著/著名/著作/执著` so `挂着/带着/拖着/看着/随着` never reads `zhù`!
+    # Fix `著` -> `着` (`zhe`) except in `显著/著名/著作/执著`
     t = re.sub(r"(?<![显執执專专名原編编])著(?![名作稱称重])", "着", t)
-    # Fix Taiwan 4th-tone `連接埠` (`lián jiē bù`) so mainland pypinyin never reads 3rd-tone `bǔ`!
-    t = t.replace("连接埠", "连接部").replace("扩充埠", "扩充部")
 
-    # Remove ANY spaces between CJK characters (prevents mid-sentence micro-stutters!)
+    # Remove spaces between pure CJK characters (prevents mid-word stutters)
     t = re.sub(r"(?<=[\u4e00-\u9fff])\s+(?=[\u4e00-\u9fff])", "", t)
-    # Exact F5-TTS `convert_char_to_pinyin` asymmetric rule:
-    # - 1 space BEFORE Latin (`CJK + ' ' + Latin` -> single `' '` token)
-    # - 0 spaces AFTER Latin before CJK (`Latin + CJK` -> single `' '` token; having a space here creates DOUBLE `' ', ' '` pause!)
+    # Keep clean single spaces around English words so `Air采用` never coarticulates into `A2采用` and `Pro配备` never becomes `Pro Pay被`!
     t = re.sub(r"([\u4e00-\u9fff])\s*([A-Za-z])", r"\1 \2", t)
-    t = re.sub(r"([A-Za-z])\s+([\u4e00-\u9fff])", r"\1\2", t)
-    # Exception: single-letter unit `G` / `T` / `K` / `B` right after Chinese numeral (`十六G记忆体`, `四K影片`)
-    t = re.sub(r"([零一二三四五六七八九十百千萬億點兩])\s+([GTKB])(?=[\u4e00-\u9fff，。！？]|$)", r"\1\2", t)
+    t = re.sub(r"([A-Za-z])\s*([\u4e00-\u9fff])", r"\1 \2", t)
+    # Keep single-letter unit `G` / `K` / `B` tight after Chinese numeral (`十六G记忆体`, `四K影片`) and `M五` tight (`M五晶片`)
+    t = re.sub(r"([零一二三四五六七八九十百千万亿点两])\s+([GKB])\s*(?=[\u4e00-\u9fff，、。！？]|$)", r"\1\2", t)
+    t = re.sub(r"\b([MANC])\s+([零一二三四五六七八九十]+)", r"\1\2", t)
 
     t = re.sub(r"\s+", " ", t).strip(" ，,")
     if t and t[-1] not in "。！？":

@@ -129,7 +129,7 @@ def _make_tg_video_thumb_jpg(thumb_png: Path) -> Path:
 
 
 def _extract_tg_voice_mp3(long_mp4: Path) -> Path:
-    mp3_p = long_mp4.with_name("hey_digital_v4_voice_master.mp3")
+    mp3_p = long_mp4.with_name("hey_digital_v6_voice_master.mp3")
     subprocess.run(
         ["ffmpeg", "-y", "-i", str(long_mp4), "-vn", "-c:a", "libmp3lame", "-b:a", "192k", str(mp3_p)],
         check=True,
@@ -159,7 +159,7 @@ def send_run_to_telegram(deliverables_dir: Path) -> dict:
         "-F", f"chat_id={chat_id}",
         "-F", f"photo=@{thumb_png}",
         "-F", (
-            f"caption=🎬 Hey Digital V5 字幕斷字＋字級對齊精修成片（{manifest.get('run_id')}）\n\n"
+            f"caption=🎬 Hey Digital V6 原聲級雙語配音＋視覺與事實精修成片（{manifest.get('run_id')}）\n\n"
             f"1️⃣ 【1080p 頻道聚光燈縮圖】\n"
             f"📌 長片標題：《{title_long}》\n"
             f"📚 公開爬蟲與純硬體對位來源：{src_cnt} 筆"
@@ -171,9 +171,9 @@ def send_run_to_telegram(deliverables_dir: Path) -> dict:
         "-F", f"audio=@{voice_mp3}",
         "-F", f"thumbnail=@{thumb_320_jpg}",
         "-F", f"duration={dur_long}",
-        "-F", "performer=Hey Digital (Alan Cloned V4)",
+        "-F", "performer=Hey Digital (Qwen3-TTS-1.7B V6)",
         "-F", f"title={title_long[:48]}",
-        "-F", "caption=🎧 【V4 長片獨立母帶音軌 MP3｜可直接點開試聽咬字、破音字與呼吸感】",
+        "-F", "caption=🎧 【V6 長片獨立母帶音軌 MP3｜Qwen3-TTS-1.7B 零斷氣雙語克隆＋1:1 字幕對齊】",
     ])
 
     r_long = _tg_post(token, "sendVideo", [
@@ -185,9 +185,9 @@ def send_run_to_telegram(deliverables_dir: Path) -> dict:
         "-F", f"duration={dur_long}",
         "-F", "supports_streaming=true",
         "-F", (
-            f"caption=2️⃣ 【V5 長片成片 1920x1080@30fps｜{dur_long}s｜-14.2 LUFS】\n"
-            f"• 中文詞法語法斷字引擎（視覺字寬單行排版、零破詞、零句尾懸掛虛詞、保留頓號並列與轉折詞）+ Whisper 字級時間軸同步\n"
-            f"• KeypointRCNN 零人臉過濾 + SigLIP 逐句對位實拍 + Three.js 3D 模板 + 原聲級配音"
+            f"caption=2️⃣ 【V6 長片成片 1920x1080@30fps｜{dur_long}s｜-14.2 LUFS】\n"
+            f"• Qwen3-TTS-1.7B 雙母帶零樣本配音（根治詞中斷氣與中英縮寫誤讀）+ Whisper 字級時間軸同步\n"
+            f"• 修正選配階梯數據與 Three.js 3D 指標防重疊排版 + Rhodes 電鋼琴動態閃避混音"
         ),
     ])
 
@@ -199,7 +199,8 @@ def send_run_to_telegram(deliverables_dir: Path) -> dict:
         "-F", f"duration={dur_short}",
         "-F", "supports_streaming=true",
         "-F", (
-            f"caption=3️⃣ 【V4 互動導流 Short 1080x1920@30fps｜{dur_short}s｜-14.3 LUFS】\n"
+            f"caption=3️⃣ 【V6 互動導流 Short 1080x1920@30fps｜{dur_short}s｜-14.3 LUFS】\n"
+            f"• Short 專屬輕快聲紋 + 修正連接埠／巧控鍵盤卡片與第 7 鏡實拍構圖\n"
             f"📌 標題：{title_short}"
         ),
     ])

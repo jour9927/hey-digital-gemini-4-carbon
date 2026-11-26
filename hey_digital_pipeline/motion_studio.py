@@ -318,6 +318,8 @@ const srcDet = B.source_detail || {};
 heroSubEl.textContent = srcDet.title ? `${srcDet.publisher || ""}：${srcDet.title.slice(0, 42)}` : (B.chapter_title || "");
 
 const rawHeroStr = String(B.hero_metric || "");
+const hVisualLen = Array.from(rawHeroStr).reduce((acc, ch) => acc + (ch.charCodeAt(0) < 128 ? 0.62 : 1.0), 0);
+heroNumEl.style.fontSize = hVisualLen <= 4.2 ? "148px" : (hVisualLen <= 7.5 ? "98px" : "66px");
 const numMatch = rawHeroStr.match(/-?\d+(\.\d+)?/);
 const heroTargetVal = numMatch ? parseFloat(numMatch[0]) : null;
 const heroPrefix = numMatch ? rawHeroStr.slice(0, numMatch.index) : "";
@@ -361,10 +363,11 @@ function add3DLabel(html, worldVec) {
 
 function sync3DLabels() {
   if (!camera) return;
+  const minSy = (rawHeroStr && B.visual_type !== "ui_configurator_crawl") ? 304 : 136;
   for (const item of trackedLabels) {
     const v = item.vec.clone().project(camera);
     const sx = clamp((v.x * 0.5 + 0.5) * 1920, 155, 1745);
-    const sy = clamp((-v.y * 0.5 + 0.5) * 1080, 132, 815);
+    const sy = clamp((-v.y * 0.5 + 0.5) * 1080, minSy, 815);
     item.el.style.left = `${sx.toFixed(1)}px`;
     item.el.style.top = `${sy.toFixed(1)}px`;
   }
@@ -733,8 +736,8 @@ function initWebGL() {
     const barR = new THREE.Mesh(new THREE.BoxGeometry(2.2, 0.22, 0.22), new THREE.MeshStandardMaterial({ color: 0x0E6EB8, roughness: 0.25 }));
     scene.add(barL); scene.add(barR);
 
-    add3DLabel(`<span>${B.left_label || B.product_a || "無風扇輕薄款"}</span>`, new THREE.Vector3(-2.35, 2.65, 0.35));
-    add3DLabel(`<span>${B.right_label || B.product_b || "主動散熱 Pro 款"}</span>`, new THREE.Vector3(2.35, 2.65, 0.35));
+    add3DLabel(`<span>${B.left_label || B.product_a || "無風扇輕薄款"}</span>`, new THREE.Vector3(-2.35, 2.28, 0.35));
+    add3DLabel(`<span>${B.right_label || B.product_b || "主動散熱 Pro 款"}</span>`, new THREE.Vector3(2.35, 2.28, 0.35));
 
     updateSceneFn = (t, dur) => {
       const u = easeInOutCubic(t / Math.max(4, dur));
@@ -749,8 +752,8 @@ function initWebGL() {
 
       const pL = clamp(easeOutCubic(t / 1.8) * 0.62, 0.05, 0.62);
       const pR = clamp(easeOutCubic(t / 1.5) * 1.00, 0.05, 1.00);
-      barL.scale.x = pL; barL.position.set(-2.35 - 1.1 * (1 - pL), 2.22, 0.5);
-      barR.scale.x = pR; barR.position.set(2.35 - 1.1 * (1 - pR), 2.22, 0.5);
+      barL.scale.x = pL; barL.position.set(-2.35 - 1.1 * (1 - pL), 1.96, 0.5);
+      barR.scale.x = pR; barR.position.set(2.35 - 1.1 * (1 - pR), 1.96, 0.5);
     };
   }
 }
@@ -769,18 +772,18 @@ function initUIConfigurator() {
         <div class="cfg-eyebrow">HARDWARE CONFIGURATOR · 選配階梯模擬</div>
         <div class="cfg-title">
           <span>${pA} 升級試算</span>
-          <span class="cfg-price" id="cfg-price">$999</span>
+          <span class="cfg-price" id="cfg-price">$1,099</span>
         </div>
         <div class="cfg-opt active" id="opt-0">
-          <div><div class="cfg-opt-name">標準起步配置</div><div class="cfg-opt-sub">日常文書瀏覽、輕量影音串流</div></div>
+          <div><div class="cfg-opt-name">16GB + 512GB 起步配置</div><div class="cfg-opt-sub">日常文書瀏覽、輕量影音串流</div></div>
           <div class="cfg-opt-delta">基礎售價</div>
         </div>
         <div class="cfg-opt" id="opt-1">
-          <div><div class="cfg-opt-name">升級統一記憶體容量</div><div class="cfg-opt-sub">多工常駐與本機 AI 模型必備門檻</div></div>
+          <div><div class="cfg-opt-name">升至 24GB 統一記憶體</div><div class="cfg-opt-sub">多工常駐與本機 AI 模型進階門檻</div></div>
           <div class="cfg-opt-delta">+$200</div>
         </div>
         <div class="cfg-opt" id="opt-2">
-          <div><div class="cfg-opt-name">升級高速 SSD 儲存空間</div><div class="cfg-opt-sub">總價已逼近 ${pB} 起步門檻！</div></div>
+          <div><div class="cfg-opt-name">升至 1TB 高速固態硬碟</div><div class="cfg-opt-sub">總價已逼近 ${pB} 起步門檻！</div></div>
           <div class="cfg-opt-delta">+$200</div>
         </div>
       </div>
@@ -835,7 +838,7 @@ function initUIConfigurator() {
     const c2 = t >= 2.35;
     document.getElementById("opt-1").className = "cfg-opt" + (c1 ? " active" : "");
     document.getElementById("opt-2").className = "cfg-opt" + (c2 ? " active" : "");
-    priceEl.textContent = c2 ? "$1,399" : (c1 ? "$1,199" : "$999");
+    priceEl.textContent = c2 ? "$1,499" : (c1 ? "$1,299" : "$1,099");
     priceEl.style.color = c2 ? "#D95D1E" : "#0E6EB8";
 
     let ripP = -1;

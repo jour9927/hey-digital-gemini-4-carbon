@@ -9,14 +9,14 @@
   "thumbnail": {
     "line1": "差價四百美元",
     "line2": "買 Air 還是 Pro？",
-    "gold_phrase": "記憶體頻寬",
+    "gold_phrase": "四百美元",
     "image_prompt": "Minimalist dark Apple keynote studio spotlight shot of two sleek aluminum laptops side by side, silver and space black, subtle rim light, dark charcoal background, 8k commercial product photography, no text"
   },
   "long_beats": [
     {
       "visual_type": "cinema_broll_video",
-      "narration": "如果你最近想換一台 MacBook Air M5，大概都會遇到同一個糾結：入門款帳面上很便宜，可是一旦把容量補齊到 16GB 記憶體和 512GB SSD，價格幾乎瞬間貼近高階款。",
-      "source_id": "SRC-01",
+      "narration": "如果你最近想換一台 MacBook Air M5，大概都會遇到同一個糾結：基礎款帳面上便宜四百美元，可是一旦把規格升到 24GB 記憶體和 1TB 固態硬碟，價格幾乎瞬間貼近 MacBook Pro。",
+      "source_id": "SRC-04",
       "broll_shots": [
         {
           "clause_hint": "入門版 MacBook Air M5 看起來便宜",
@@ -34,44 +34,35 @@
       "chapter_en": "PRICING & TCO TRAP",
       "id": "L01",
       "accent_hex": "#B84A14",
-      "tts_text": "如果你最近想换一台搭载 Em五晶片的 MacBook Air，大概都会遇到同一个纠结，入门款帐面上很便宜，可是一旦把容量补齐到十六G记忆体和五百一十二G固态硬碟，价格几乎瞬间贴近高阶款。",
+      "tts_text": "如果你最近想换一台 MacBook Air M五，大概都会遇到同一个纠结，基础款帐面上便宜四百美元，可是一旦把规格升到二十四G记忆体和一 T B 固态硬碟，价格几乎瞬间贴近 MacBook Pro。",
       "captions": [
         "如果你最近想換一台 MacBook Air M5",
         "大概都會遇到同一個糾結",
-        "入門款帳面上很便宜",
-        "可是一旦把容量補齊到",
-        "16GB 記憶體和 512GB SSD",
-        "價格幾乎瞬間貼近高階款"
+        "基礎款帳面上便宜四百美元",
+        "可是一旦把規格升到 24GB",
+        "記憶體和 1TB 固態硬碟",
+        "價格幾乎瞬間貼近 MacBook Pro"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_detail": {
-        "source_id": "SRC-01",
+        "source_id": "SRC-04",
         "publisher": "9to5Mac",
         "domain": "9to5mac.com",
-        "title": "MacBook Neo vs MacBook Air: Every difference between Apple’s 13-inch laptops",
-        "url": "https://9to5mac.com/2026/03/04/macbook-neo-vs-macbook-air/",
-        "published": "Wed, 04 Mar 2026",
-        "summary": "The new MacBook Neo is officially here, and it gives MacBook Air a run for its money when it comes to casual usage. So what exactly is the $500 difference between Apple’s two 13-inch laptops? Let’s dig in to every difference. more… The new MacBook Neo is officially here, and it gives MacBook Air a run for its money when it comes to casual usage. So what exactly is the $500 difference between Apple’s two 13-inch laptops? Let’s dig in to every difference. Every difference between MacBook Neo and MacBook Air Battery life + charging method Same weight, different dimensions Key tradeoffs for keyboard and trackpad Every difference between MacBook Neo and MacBook Air Let’s start with the big stuff: price and main specs. MacBook Neo is a 13-inch laptop that costs $599 for 256GB storage and 8GB RAM . It runs on a version of Apple’s A18 Pro chip that was first introduced in the iPhone 16 Pro. $100 more doubles the storage to 512GB and adds a Touch ID fingerprint sensor to the keyboard, but memory is limited to just 8GB RAM. MacBook Air is a 13.6-inch laptop that costs $1099 for 512GB storage and 16GB RAM . It runs on Apple’s latest M5 chip that is also used in the latest iPad Pro and 14-inch MacBook Pro. MacBook Air storage upgrades include 1TB, 2TB, and 4TB options. RAM can be configured to 24GB or 32GB. Every MacBook Air comes with Touch ID. Equally as important: color options. The new MacBook Neo comes in silver , blush (pink), citrus (yellow), and indigo . MacBook Air continues to come in silver , sky blue (bluish silver), starlight (light gold), and midnight (dark blue). MacBook Neo wins the saturation competition. The A18 Pro chip inside MacBook Neo has a 6-core CPU and a 5-core GPU . The M5 chip inside the MacBook Air has a 10-core CPU and starts with an 8-core GPU . Apple A18 Pro chip 6-core CPU with 2 performance cores and 4 efficiency cores 5-core GPU Hardware-accelerated ray tracing 16-core Neural Engine 60GB/s memory bandwidth 10-core CPU with 4 super cores and 6 efficiency cores Up to 10-core GPU Neural Accelerators Hardware-accelerated ray tracing 16-core Neural Engine 153GB/s memory bandwidth Battery life + charging method Battery life and how you can charge are also different between MacBook Neo and MacBook Air. MacBook Neo advertises up to 11 hours of wireless web browsing and up to 16 hours of video streaming per charge. It features a 36.5-watt-hour lithium-ion battery. MacBook Air promises up to 15 hours of wireless web browsing and up to 18 hours of video streaming per charge. It uses a 53.8-watt-hour lithium ion battery. In practice, MacBook A",
-        "char_Depth": 3432,
+        "title": "M5 MacBook Pro vs M4 MacBook Air: Which should you buy this holiday season?",
+        "url": "https://9to5mac.com/2025/11/26/m5-macbook-pro-vs-m4-macbook-air-black-friday-holiday-comparison/",
+        "published": "Wed, 26 Nov 2025",
+        "summary": "Apple offers two entry level MacBook models: the MacBook Air, and the base model MacBook Pro. There’s a couple hundred dollars in difference between the two, which begs the question – is the MacBook Pro worth the premium, or should you save money and stick to the MacBook Air? more… Apple offers two entry level MacBook models: the MacBook Air , and the base model MacBook Pro . There’s a couple hundred dollars in difference between the two, which begs the question – is the MacBook Pro worth the premium, or should you save money and stick to the MacBook Air ? The biggest debate to be had is going to revolve around the chipset. Do you need an M5 chip for your workflow? I’m not gonna delve into all of the details, you can read our M5 roundup here if you’d like. But, in short, this is what’s new with M5: 15% faster multithreaded CPU performance vs M4 45% faster GPU performance vs M4 30% increase in unified memory bandwidth 4x peak GPU compute performance for AI Overall, M5 is a great leap in GPU performance, and with Apple betting so heavily on local models for AI, that could be important in the future. However, M4 is still plenty fast, and I wouldn’t make any purchasing decisions based on what Apple might do in AI in the future. It’s also worth noting that Apple still does most of its Apple silicon comparisons to the M1 rather than newer chips like M2 or M3. I’ll let that speak for itself. Air vs Pro: Worth the premium? With the 14-inch MacBook Pro , you’re paying for a couple nice-to-have features. Those features are additional ports, a proper active cooling system, and a nice miniLED display with HDR support, better colors, and more. Also, you’ll get a larger display. MacBook Pro is 14.2-inch, vs 13.6-inch on the MacBook Air. The MacBook Air only comes with MagSafe and two Thunderbolt/USB-C ports, both of which are located on the left side. MacBook Pro comes with MagSafe, three Thunderbolt/USB-C ports (two left, one right), as well as an HDMI port and SD card slot. Thermals are also a big differentiator for the MacBook Pro . Simply put, MacBook Air doesn’t have a fan, and relies entirely on passive cooling. If your workflow is CPU/GPU intensive, you’ll likely run into thermal throttling on the MacBook Air if you’re pushing it for a while. Plus, to be completely honest: macOS Tahoe isn’t perfectly optimized quite yet, and I’ve heard from a number of MacBook Air users that their Macs are consistently running hot. Lastly, MacBook Pro has a fantastic display. Unless you’re constantly working with colors, this probably doesn’t matter as much. It’s not like the M",
+        "char_Depth": 3483,
         "extracted_metrics": [
-          "$500",
-          "$599",
+          "1000 nits",
+          "500 nits",
+          "$400",
           "256GB",
-          "8GB",
-          "$100",
           "512GB",
-          "$1099",
-          "16GB",
-          "1TB",
-          "2TB",
-          "4TB",
-          "24GB",
-          "32GB",
-          "60GB/s",
-          "153GB/s",
-          "20W",
-          "40W",
-          "60W"
+          "$1199,",
+          "$1599",
+          "$949",
+          "$1399"
         ]
       },
       "source_badge": "資料來源：9to5Mac · 9to5mac.com",
@@ -119,19 +110,19 @@
     {
       "visual_type": "webgl_memory_lanes",
       "narration": "很多人第一眼沒注意的是記憶體頻寬刀法，標準 16GB 版本的頻寬只有 153GB/s，要往上加到高階配置才能跑到 170GB/s 以上。",
-      "hero_metric": "記憶體頻寬",
+      "hero_metric": "153",
       "hero_unit": "GB/s",
-      "secondary_metric": "記憶體容量",
+      "secondary_metric": "標準頻寬分級",
       "lanes": [
         {
-          "label": "16GB",
+          "label": "MacBook Air M5 16GB",
           "value": 153,
-          "display": "153GB/s"
+          "display": "153 GB/s"
         },
         {
-          "label": "32GB",
+          "label": "高階配置頻寬",
           "value": 170,
-          "display": "170GB/s"
+          "display": "170+ GB/s"
         }
       ],
       "chapter_num": "01",
@@ -178,8 +169,8 @@
     },
     {
       "visual_type": "cinema_broll_video",
-      "narration": "更別說蘋果經典的儲存空間加價階梯，從 256GB 往上升到 512GB 先加 100 美元，再衝上 1TB 又要多掏 200 美元，預算一下就爆了。",
-      "source_id": "SRC-01",
+      "narration": "更別說蘋果經典的選配加價階梯，記憶體從 16GB 升到 24GB 先加 200 美元，固態硬碟再衝上 1TB 又要多掏 200 美元，四百美元價差一下就蒸發了。",
+      "source_id": "SRC-04",
       "broll_shots": [
         {
           "clause_hint": "升級 SSD 容量時，價格攀升速度驚人",
@@ -197,42 +188,33 @@
       "chapter_en": "PRICING & TCO TRAP",
       "id": "L03",
       "accent_hex": "#5B50D6",
-      "tts_text": "更别说苹果经典的储存空间加价阶梯，从二百五十六G往上升到五百一十二G先加一百美元，再冲上一T又要多掏两百美元，预算一下就爆了。",
+      "tts_text": "更别说苹果经典的选配加价阶梯，记忆体从十六G升到二十四G先加两百美元，固态硬碟再冲上一 T B 又要多掏两百美元，四百美元价差一下就蒸发了。",
       "captions": [
-        "更別說蘋果經典的儲存空間加價階梯",
-        "從 256GB 往上升到 512GB 先加 100 美元",
-        "再衝上 1TB 又要多掏 200 美元",
-        "預算一下就爆了"
+        "更別說蘋果經典的選配加價階梯",
+        "記憶體從 16GB 升到 24GB 先加 200 美元",
+        "固態硬碟再衝上 1TB 又要多掏 200 美元",
+        "四百美元價差一下就蒸發了"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
       "source_detail": {
-        "source_id": "SRC-01",
+        "source_id": "SRC-04",
         "publisher": "9to5Mac",
         "domain": "9to5mac.com",
-        "title": "MacBook Neo vs MacBook Air: Every difference between Apple’s 13-inch laptops",
-        "url": "https://9to5mac.com/2026/03/04/macbook-neo-vs-macbook-air/",
-        "published": "Wed, 04 Mar 2026",
-        "summary": "The new MacBook Neo is officially here, and it gives MacBook Air a run for its money when it comes to casual usage. So what exactly is the $500 difference between Apple’s two 13-inch laptops? Let’s dig in to every difference. more… The new MacBook Neo is officially here, and it gives MacBook Air a run for its money when it comes to casual usage. So what exactly is the $500 difference between Apple’s two 13-inch laptops? Let’s dig in to every difference. Every difference between MacBook Neo and MacBook Air Battery life + charging method Same weight, different dimensions Key tradeoffs for keyboard and trackpad Every difference between MacBook Neo and MacBook Air Let’s start with the big stuff: price and main specs. MacBook Neo is a 13-inch laptop that costs $599 for 256GB storage and 8GB RAM . It runs on a version of Apple’s A18 Pro chip that was first introduced in the iPhone 16 Pro. $100 more doubles the storage to 512GB and adds a Touch ID fingerprint sensor to the keyboard, but memory is limited to just 8GB RAM. MacBook Air is a 13.6-inch laptop that costs $1099 for 512GB storage and 16GB RAM . It runs on Apple’s latest M5 chip that is also used in the latest iPad Pro and 14-inch MacBook Pro. MacBook Air storage upgrades include 1TB, 2TB, and 4TB options. RAM can be configured to 24GB or 32GB. Every MacBook Air comes with Touch ID. Equally as important: color options. The new MacBook Neo comes in silver , blush (pink), citrus (yellow), and indigo . MacBook Air continues to come in silver , sky blue (bluish silver), starlight (light gold), and midnight (dark blue). MacBook Neo wins the saturation competition. The A18 Pro chip inside MacBook Neo has a 6-core CPU and a 5-core GPU . The M5 chip inside the MacBook Air has a 10-core CPU and starts with an 8-core GPU . Apple A18 Pro chip 6-core CPU with 2 performance cores and 4 efficiency cores 5-core GPU Hardware-accelerated ray tracing 16-core Neural Engine 60GB/s memory bandwidth 10-core CPU with 4 super cores and 6 efficiency cores Up to 10-core GPU Neural Accelerators Hardware-accelerated ray tracing 16-core Neural Engine 153GB/s memory bandwidth Battery life + charging method Battery life and how you can charge are also different between MacBook Neo and MacBook Air. MacBook Neo advertises up to 11 hours of wireless web browsing and up to 16 hours of video streaming per charge. It features a 36.5-watt-hour lithium-ion battery. MacBook Air promises up to 15 hours of wireless web browsing and up to 18 hours of video streaming per charge. It uses a 53.8-watt-hour lithium ion battery. In practice, MacBook A",
-        "char_Depth": 3432,
+        "title": "M5 MacBook Pro vs M4 MacBook Air: Which should you buy this holiday season?",
+        "url": "https://9to5mac.com/2025/11/26/m5-macbook-pro-vs-m4-macbook-air-black-friday-holiday-comparison/",
+        "published": "Wed, 26 Nov 2025",
+        "summary": "Apple offers two entry level MacBook models: the MacBook Air, and the base model MacBook Pro. There’s a couple hundred dollars in difference between the two, which begs the question – is the MacBook Pro worth the premium, or should you save money and stick to the MacBook Air? more… Apple offers two entry level MacBook models: the MacBook Air , and the base model MacBook Pro . There’s a couple hundred dollars in difference between the two, which begs the question – is the MacBook Pro worth the premium, or should you save money and stick to the MacBook Air ? The biggest debate to be had is going to revolve around the chipset. Do you need an M5 chip for your workflow? I’m not gonna delve into all of the details, you can read our M5 roundup here if you’d like. But, in short, this is what’s new with M5: 15% faster multithreaded CPU performance vs M4 45% faster GPU performance vs M4 30% increase in unified memory bandwidth 4x peak GPU compute performance for AI Overall, M5 is a great leap in GPU performance, and with Apple betting so heavily on local models for AI, that could be important in the future. However, M4 is still plenty fast, and I wouldn’t make any purchasing decisions based on what Apple might do in AI in the future. It’s also worth noting that Apple still does most of its Apple silicon comparisons to the M1 rather than newer chips like M2 or M3. I’ll let that speak for itself. Air vs Pro: Worth the premium? With the 14-inch MacBook Pro , you’re paying for a couple nice-to-have features. Those features are additional ports, a proper active cooling system, and a nice miniLED display with HDR support, better colors, and more. Also, you’ll get a larger display. MacBook Pro is 14.2-inch, vs 13.6-inch on the MacBook Air. The MacBook Air only comes with MagSafe and two Thunderbolt/USB-C ports, both of which are located on the left side. MacBook Pro comes with MagSafe, three Thunderbolt/USB-C ports (two left, one right), as well as an HDMI port and SD card slot. Thermals are also a big differentiator for the MacBook Pro . Simply put, MacBook Air doesn’t have a fan, and relies entirely on passive cooling. If your workflow is CPU/GPU intensive, you’ll likely run into thermal throttling on the MacBook Air if you’re pushing it for a while. Plus, to be completely honest: macOS Tahoe isn’t perfectly optimized quite yet, and I’ve heard from a number of MacBook Air users that their Macs are consistently running hot. Lastly, MacBook Pro has a fantastic display. Unless you’re constantly working with colors, this probably doesn’t matter as much. It’s not like the M",
+        "char_Depth": 3483,
         "extracted_metrics": [
-          "$500",
-          "$599",
+          "1000 nits",
+          "500 nits",
+          "$400",
           "256GB",
-          "8GB",
-          "$100",
           "512GB",
-          "$1099",
-          "16GB",
-          "1TB",
-          "2TB",
-          "4TB",
-          "24GB",
-          "32GB",
-          "60GB/s",
-          "153GB/s",
-          "20W",
-          "40W",
-          "60W"
+          "$1199,",
+          "$1599",
+          "$949",
+          "$1399"
         ]
       },
       "source_badge": "資料來源：9to5Mac · 9to5mac.com",
@@ -280,25 +262,25 @@
     {
       "visual_type": "webgl_stacked_tco",
       "narration": "把這筆容量升級費全部攤進總持有成本裡算一算，你會發現加配後的輕薄款跟直接買 MacBook Pro，真實價差其實已經非常小。",
-      "hero_metric": "總持有成本",
-      "hero_unit": "美元",
-      "stack_left_label": "入門版",
+      "hero_metric": "$1,499",
+      "hero_unit": "加配總價",
+      "stack_left_label": "Air M5 加配版",
       "stack_left_layers": [
         {
-          "name": "初始價格",
-          "val": 1000
+          "name": "16G+512G 起售價",
+          "val": 1099
         },
         {
-          "name": "升級硬碟",
+          "name": "+24GB 記憶體",
           "val": 200
         },
         {
-          "name": "升級記憶體",
-          "val": 100
+          "name": "+1TB 固態硬碟",
+          "val": 200
         }
       ],
-      "stack_right_label": "高階版",
-      "stack_right_val": 1300,
+      "stack_right_label": "MacBook Pro 14",
+      "stack_right_val": 1599,
       "chapter_num": "01",
       "chapter_title": "容量升級的價格陷阱",
       "chapter_en": "PRICING & TCO TRAP",
@@ -440,10 +422,10 @@
     {
       "visual_type": "webgl_dual_laptop",
       "narration": "特別是在連續高負載工作下，更完整的硬體規格不只是跑分好看，而是長時間多工切換時，整台機器依然流暢不掉幀。",
-      "hero_metric": "處理速度",
-      "hero_unit": "毫秒",
-      "left_label": "入門版",
-      "right_label": "高階版",
+      "hero_metric": "0",
+      "hero_unit": "掉幀卡頓",
+      "left_label": "基礎入門配置",
+      "right_label": "高階完整規格",
       "mode": "speed",
       "chapter_num": "01",
       "chapter_title": "容量升級的價格陷阱",
@@ -475,7 +457,8 @@
           "330 mm"
         ]
       },
-      "source_badge": "資料來源：Wikipedia (EN) · en.wikipedia.org"
+      "source_badge": "資料來源：Wikipedia (EN) · en.wikipedia.org",
+      "secondary_metric": "高負載多工實測"
     },
     {
       "chapter_num": "02",
@@ -544,7 +527,7 @@
       "chapter_en": "BANDWIDTH & THERMALS",
       "id": "L08",
       "accent_hex": "#0E6EB8",
-      "tts_text": "来到第二个关键差异，搭载 Em五晶片的 MacBook Air虽然极致轻薄，但无风扇设计遇到长时间高强度运算还是会触发温控降频，而 MacBook Pro靠主动散热就能一路稳住效能。",
+      "tts_text": "来到第二个关键差异，MacBook Air M五虽然极致轻薄，但无风扇设计遇到长时间高强度运算还是会触发温控降频，而 MacBook Pro 靠主动散热就能一路稳住效能。",
       "captions": [
         "來到第二個關鍵差異",
         "MacBook Air M5 雖然極致輕薄",
@@ -625,19 +608,19 @@
     {
       "visual_type": "webgl_memory_lanes",
       "narration": "如果你打算在本機跑大語言模型，記憶體頻寬分級更是直接決定生成速度，153GB/s 跟 170GB/s 的吞吐量差距一眼就能看出來。",
-      "hero_metric": "Memory Bandwidth",
+      "hero_metric": "170",
       "hero_unit": "GB/s",
-      "secondary_metric": "Memory Capacity",
+      "secondary_metric": "+11% 吞吐優勢",
       "lanes": [
         {
-          "label": "MacBook Air M5 16GB",
+          "label": "16GB 標準頻寬",
           "value": 153,
-          "display": "153GB/s"
+          "display": "153 GB/s"
         },
         {
-          "label": "MacBook Air M5 32GB",
+          "label": "高階配置頻寬",
           "value": 170,
-          "display": "170GB/s"
+          "display": "170+ GB/s"
         }
       ],
       "chapter_num": "02",
@@ -688,7 +671,7 @@
     },
     {
       "visual_type": "cinema_broll_video",
-      "narration": "當你連續執行多工 AI 推論或轉檔十幾分鐘後，無風扇機身的溫度很快就會摸到上限，反觀配備雙風扇散熱的 MacBook Pro 依然能維持低溫穩定輸出。",
+      "narration": "當你連續執行多工 AI 推論或轉檔十幾分鐘後，無風扇機身的溫度很快就會摸到上限，反觀配備主動風扇散熱的 MacBook Pro 依然能維持低溫穩定輸出。",
       "source_id": "SRC-06",
       "broll_shots": [
         {
@@ -707,11 +690,11 @@
       "chapter_en": "BANDWIDTH & THERMALS",
       "id": "L10",
       "accent_hex": "#0E7C47",
-      "tts_text": "当你连续执行多工人工智慧推论或转档十几分钟后，无风扇机身的温度很快就会摸到上限，反观配备双风扇散热的 MacBook Pro依然能维持低温稳定输出。",
+      "tts_text": "当你连续执行多工 A I 推论或转档十几分钟后，无风扇机身的温度很快就会摸到上限，反观配备主动风扇散热的 MacBook Pro 依然能维持低温稳定输出。",
       "captions": [
         "當你連續執行多工 AI 推論或轉檔十幾分鐘後",
         "無風扇機身的溫度很快就會摸到上限",
-        "反觀配備雙風扇散熱的",
+        "反觀配備主動風扇散熱的",
         "MacBook Pro 依然能維持低溫穩定輸出"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
@@ -753,32 +736,32 @@
           "source_badge": "畫面與資料來源：YouTube · Apple · SRC-14"
         },
         {
-          "cand_id": "CAND_015",
-          "mp4": "/Users/alan_dingchaoliao/Downloads/Hey Digital/hey-digital-gemini-4-carbon/runs/ep03_v3_precision_broll/broll/candidates/CAND_015.mp4",
-          "jpg": "/Users/alan_dingchaoliao/Downloads/Hey Digital/hey-digital-gemini-4-carbon/runs/ep03_v3_precision_broll/broll/candidates/CAND_015.jpg",
+          "cand_id": "CAND_113",
+          "mp4": "/Users/alan_dingchaoliao/Downloads/Hey Digital/hey-digital-gemini-4-carbon/runs/ep03_v3_precision_broll/broll/candidates/CAND_113.mp4",
+          "jpg": "/Users/alan_dingchaoliao/Downloads/Hey Digital/hey-digital-gemini-4-carbon/runs/ep03_v3_precision_broll/broll/candidates/CAND_113.jpg",
           "jpg_a": "/Users/alan_dingchaoliao/Downloads/Hey Digital/hey-digital-gemini-4-carbon/runs/ep03_v3_precision_broll/broll/candidates/CAND_015_a.jpg",
           "jpg_b": "/Users/alan_dingchaoliao/Downloads/Hey Digital/hey-digital-gemini-4-carbon/runs/ep03_v3_precision_broll/broll/candidates/CAND_015_b.jpg",
           "jpg_name": "CAND_015.jpg",
           "duration": 3.45,
-          "video_id": "TS8MhuSAlWk",
-          "publisher": "YouTube · SmartNest Tech",
-          "title": "Brydge ProDock Duo TB4 MacBook Docking Station Review - Watch Before You Buy!",
+          "video_id": "edVre7zWsKk",
+          "publisher": "YouTube · Tricks Tips Fix",
+          "title": "MacBook Air M5 : How to Multi Task Using Split Screen",
           "url": "https://www.youtube.com/watch?v=TS8MhuSAlWk",
           "query_origin": "MacBook Pro Thunderbolt HDMI MagSafe SD card ports close up",
           "match_score": 0.0578,
           "clause_hint": "反觀配備雙風扇散熱的 MacBook Pro 依，然能維持低溫穩定輸出",
           "visual_desc": "thermal imaging of MacBook Pro showing even heat distribution during intensive tasks, pure hardware close-up B-roll, no human face",
           "source_id": "SRC-15",
-          "source_badge": "畫面與資料來源：YouTube · SmartNest Tech · SRC-15"
+          "source_badge": "畫面與資料來源：YouTube · Tricks Tips Fix · SRC-19"
         }
       ]
     },
     {
       "visual_type": "webgl_chip_die",
       "narration": "說白了，同一顆世代的晶片放進無風扇機殼裡，散熱天花板就是物理極限，而主動散熱系統才能把每一分算力完整釋放出來。",
-      "chip_label": "M5 vs M3",
-      "hero_metric": "Thermal Throttling",
-      "hero_unit": "°C",
+      "chip_label": "Apple M5 Silicon",
+      "hero_metric": "10",
+      "hero_unit": "核心全釋放",
       "chapter_num": "02",
       "chapter_title": "晶片頻寬與散熱天花板",
       "chapter_en": "BANDWIDTH & THERMALS",
@@ -817,15 +800,16 @@
           "256 GB"
         ]
       },
-      "source_badge": "資料來源：Wikipedia (EN) · en.wikipedia.org"
+      "source_badge": "資料來源：Wikipedia (EN) · en.wikipedia.org",
+      "secondary_metric": "主動散熱 vs 無風扇"
     },
     {
       "visual_type": "webgl_dual_laptop",
       "narration": "實測連續滿載壓測下來，兩台機器的核心與表面溫差最高能拉開將近 20°C，這正是決定長時間剪片會不會卡頓的分水嶺。",
-      "hero_metric": "Thermal Performance",
-      "hero_unit": "°C",
-      "left_label": "MacBook Air M5",
-      "right_label": "MacBook Pro",
+      "hero_metric": "20",
+      "hero_unit": "°C 溫差",
+      "left_label": "MacBook Air M5（無風扇）",
+      "right_label": "MacBook Pro（主動散熱）",
       "mode": "thermal",
       "chapter_num": "02",
       "chapter_title": "晶片頻寬與散熱天花板",
@@ -835,8 +819,8 @@
       "tts_text": "实测连续满载压测下来，两台机器的核心与表面温差最高能拉开将近二十度，这正是决定长时间剪片会不会卡顿的分水岭。",
       "captions": [
         "實測連續滿載壓測下來",
-        "兩台機器的核心與表面",
-        "溫差最高能拉開將近 20°C",
+        "兩台機器的核心與表面溫差",
+        "最高能拉開將近 20°C",
         "這正是決定長時間剪片會不會卡頓的分水嶺"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
@@ -862,7 +846,8 @@
           "$1399"
         ]
       },
-      "source_badge": "資料來源：9to5Mac · 9to5mac.com"
+      "source_badge": "資料來源：9to5Mac · 9to5mac.com",
+      "secondary_metric": "連續滿載壓測"
     },
     {
       "visual_type": "ui_configurator_crawl",
@@ -874,7 +859,7 @@
       "chapter_en": "BANDWIDTH & THERMALS",
       "id": "L13",
       "accent_hex": "#B84A14",
-      "tts_text": "就像这份公开实测报告指出的，无风扇被动散热加上记忆体频宽分级，直接决定了高强度工作与本机人工智慧的持续表现。",
+      "tts_text": "就像这份公开实测报告指出的，无风扇被动散热加上记忆体频宽分级，直接决定了高强度工作与本机 A I 的持续表现。",
       "captions": [
         "就像這份公開實測報告指出的",
         "無風扇被動散熱加上記憶體頻寬分級",
@@ -917,7 +902,7 @@
       "chapter_num": "03",
       "chapter_title": "螢幕光學與外接體驗",
       "chapter_en": "DISPLAY & WORKFLOW",
-      "chapter_sub": "120Hz ProMotion Mini-L",
+      "chapter_sub": "120Hz ProMotion Mini-LED 與完整擴充體驗",
       "visual_type": "chapter_dark_card",
       "narration": "",
       "silent_duration": 1.85,
@@ -980,7 +965,7 @@
       "chapter_en": "DISPLAY & WORKFLOW",
       "id": "L15",
       "accent_hex": "#5B50D6",
-      "tts_text": "第三块最容易一用就回不去的，绝对是这块萤幕，一百二十赫兹 ProMotion在拉动剪辑时间轴时丝滑得非常有感，加上 Mini LED的超高亮度，在窗边或户外也看得一清二楚。",
+      "tts_text": "第三块最容易一用就回不去的，绝对是这块萤幕，一百二十赫兹 ProMotion 在拉动剪辑时间轴时丝滑得非常有感，加上 Mini L E D 的超高亮度，在窗边或户外也看得一清二楚。",
       "captions": [
         "第三塊最容易一用就回不去的",
         "絕對是這塊螢幕",
@@ -1056,19 +1041,19 @@
     {
       "visual_type": "webgl_memory_lanes",
       "narration": "機身側邊的擴充連接埠更是實用派的痛點，完整的 Thunderbolt 4 與原生插槽，讓你出門不用隨時拖著一條轉接器尾巴，工作流多了很多彈性。",
-      "hero_metric": "連接埠",
-      "hero_unit": "",
-      "secondary_metric": "擴充性",
+      "hero_metric": "3x",
+      "hero_unit": "Thunderbolt 4",
+      "secondary_metric": "+ HDMI · SDXC",
       "lanes": [
         {
           "label": "MacBook Air M5",
           "value": 2,
-          "display": "Thunderbolt 3"
+          "display": "2x TB4 連接埠"
         },
         {
-          "label": "MacBook Pro",
-          "value": 4,
-          "display": "Thunderbolt 4"
+          "label": "MacBook Pro 14",
+          "value": 5,
+          "display": "3x TB4 + HDMI + SD"
         }
       ],
       "chapter_num": "03",
@@ -1076,7 +1061,7 @@
       "chapter_en": "DISPLAY & WORKFLOW",
       "id": "L16",
       "accent_hex": "#0E6EB8",
-      "tts_text": "机身侧边的扩充连接部更是实用派的痛点，完整的雷电四与原生插槽，让你出门不用随时拖着一条转接器尾巴，工作流多了很多弹性。",
+      "tts_text": "机身侧边的扩充连接埠更是实用派的痛点，完整的 Thunderbolt 四与原生插槽，让你出门不用随时拖着一条转接器尾巴，工作流多了很多弹性。",
       "captions": [
         "機身側邊的擴充連接埠更是實用派的痛點",
         "完整的 Thunderbolt 4 與原生插槽",
@@ -1123,7 +1108,7 @@
       "chapter_en": "DISPLAY & WORKFLOW",
       "id": "L17",
       "accent_hex": "#B84A14",
-      "tts_text": "特别是这块 Mini LED萤幕带来的极致对比度，修图或调色时暗部细节层次非常干净，不会像一般液晶萤幕那样发灰。",
+      "tts_text": "特别是这块 Mini L E D 萤幕带来的极致对比度，修图或调色时暗部细节层次非常干净，不会像一般液晶萤幕那样发灰。",
       "captions": [
         "特別是這塊 Mini-LED 螢幕帶來的極致對比度",
         "修圖或調色時暗部細節層次非常乾淨",
@@ -1196,27 +1181,27 @@
     {
       "visual_type": "webgl_stacked_tco",
       "narration": "如果你未來兩三年會接高速硬碟、記憶卡或外接設備，一開始就選連接埠齊全的 MacBook Pro，省下的擴充底座費用長遠來看反而更划算。",
-      "hero_metric": "TCO",
-      "hero_unit": "美元",
-      "stack_left_label": "初期成本",
+      "hero_metric": "$200+",
+      "hero_unit": "省下擴充塢",
+      "stack_left_label": "Air + 外接擴充塢",
       "stack_left_layers": [
         {
-          "name": "MacBook Air M5",
-          "val": 1199
+          "name": "Air M5 加配機身",
+          "val": 1299
         },
         {
-          "name": "外接裝置費用",
-          "val": 200
+          "name": "TB4 擴充底座",
+          "val": 220
         }
       ],
-      "stack_right_label": "總持有成本",
-      "stack_right_val": 1499,
+      "stack_right_label": "MacBook Pro 原生滿配",
+      "stack_right_val": 1599,
       "chapter_num": "03",
       "chapter_title": "螢幕光學與外接體驗",
       "chapter_en": "DISPLAY & WORKFLOW",
       "id": "L18",
       "accent_hex": "#0E7C47",
-      "tts_text": "如果你未来两三年会接高速硬碟、记忆卡或外接设备，一开始就选连接部齐全的 MacBook Pro，省下的扩充底座费用长远来看反而更划算。",
+      "tts_text": "如果你未来两三年会接高速硬碟、记忆卡或外接设备，一开始就选连接埠齐全的 MacBook Pro，省下的扩充底座费用长远来看反而更划算。",
       "captions": [
         "如果你未來兩三年會接",
         "高速硬碟、記憶卡或外接設備",
@@ -1349,10 +1334,10 @@
     {
       "visual_type": "webgl_dual_laptop",
       "narration": "而在日常高頻切換視窗與滑動長網頁時，120Hz 高更新率帶來的跟手感，連續盯螢幕幾個小時下來眼睛也舒服非常多。",
-      "hero_metric": "多工處理",
-      "hero_unit": "秒",
-      "left_label": "MacBook Air M5",
-      "right_label": "MacBook Pro",
+      "hero_metric": "120",
+      "hero_unit": "Hz ProMotion",
+      "left_label": "MacBook Air（60Hz）",
+      "right_label": "MacBook Pro（120Hz）",
       "mode": "speed",
       "chapter_num": "03",
       "chapter_title": "螢幕光學與外接體驗",
@@ -1388,13 +1373,14 @@
           "$1399"
         ]
       },
-      "source_badge": "資料來源：9to5Mac · 9to5mac.com"
+      "source_badge": "資料來源：9to5Mac · 9to5mac.com",
+      "secondary_metric": "vs 60Hz 標準螢幕"
     },
     {
       "chapter_num": "04",
       "chapter_title": "三種預算終極買法",
       "chapter_en": "BUYING VERDICT",
-      "chapter_sub": "按真實使用情境切分，告訴誰買入門最香、誰直上",
+      "chapter_sub": "按真實使用情境切分，誰買基礎最香、誰直上 Pro",
       "visual_type": "chapter_dark_card",
       "narration": "",
       "silent_duration": 1.85,
@@ -1438,7 +1424,7 @@
     },
     {
       "visual_type": "cinema_broll_video",
-      "narration": "最後幫大家按真實情境做個總結：如果你的日常就是寫寫報告、回信跟開網頁，那輕薄安靜的 MacBook Air M5 絕對夠用又省心；但只要會碰到四 K 剪片或重度多工，直上 MacBook Pro 才不會後悔。",
+      "narration": "最後幫大家按真實情境做個總結：如果你的日常就是寫寫報告、回信跟開網頁，那輕薄安靜的 MacBook Air M5 絕對夠用又省心；但只要會碰到 4K 剪片或重度多工，直上 MacBook Pro 才不會後悔。",
       "source_id": "SRC-04",
       "broll_shots": [
         {
@@ -1457,12 +1443,12 @@
       "chapter_en": "BUYING VERDICT",
       "id": "L22",
       "accent_hex": "#0E7C47",
-      "tts_text": "最后帮大家按真实情境做个总结，如果你的日常就是写写报告、回信跟开网页，那轻薄安静的搭载 Em五晶片的 MacBook Air绝对够用又省心；但只要会碰到四K剪片或重度多工，直上 MacBook Pro才不会后悔。",
+      "tts_text": "最后帮大家按真实情境做个总结，如果你的日常就是写写报告、回信跟开网页，那轻薄安静的 MacBook Air M五绝对够用又省心；但只要会碰到四K剪片或重度多工，直上 MacBook Pro 才不会后悔。",
       "captions": [
         "最後幫大家按真實情境做個總結",
         "如果你的日常就是寫寫報告、回信跟開網頁",
         "那輕薄安靜的 MacBook Air M5 絕對夠用又省心",
-        "但只要會碰到四 K 剪片或重度多工",
+        "但只要會碰到 4K 剪片或重度多工",
         "直上 MacBook Pro 才不會後悔"
       ],
       "image_prompt": "Photorealistic commercial studio shot of sleek aluminum laptops and glowing silicon chip on walnut slat desk, 35mm cinema lens, no text",
@@ -1532,18 +1518,18 @@
     {
       "visual_type": "webgl_memory_lanes",
       "narration": "千萬別掉進只看起步價的陷阱，因為入門配置一旦遇到高負荷運算，記憶體頻寬與散熱限制馬上就會浮現，升級上去的性價比遠不如高階款。",
-      "hero_metric": "頻寬",
+      "hero_metric": "153",
       "hero_unit": "GB/s",
       "lanes": [
         {
           "label": "16GB 版本",
           "value": 153,
-          "display": "153GB/s"
+          "display": "153 GB/s"
         },
         {
-          "label": "32GB 版本",
+          "label": "高階版本",
           "value": 170,
-          "display": "170GB/s"
+          "display": "170+ GB/s"
         }
       ],
       "chapter_num": "04",
@@ -1576,7 +1562,8 @@
           "8TB"
         ]
       },
-      "source_badge": "資料來源：9to5Mac · 9to5mac.com"
+      "source_badge": "資料來源：9to5Mac · 9to5mac.com",
+      "secondary_metric": "高負載頻寬門檻"
     },
     {
       "visual_type": "cinema_broll_video",
@@ -1599,7 +1586,7 @@
       "chapter_en": "BUYING VERDICT",
       "id": "L24",
       "accent_hex": "#0E6EB8",
-      "tts_text": "如果你常常需要带着笔电跑咖啡厅或户外工作， Mini LED萤幕的峰值亮度与抗反光表现，更是拉开日常体验差距的关键胜出点。",
+      "tts_text": "如果你常常需要带着笔电跑咖啡厅或户外工作， Mini L E D 萤幕的峰值亮度与抗反光表现，更是拉开日常体验差距的关键胜出点。",
       "captions": [
         "如果你常常需要帶著筆電跑咖啡廳或戶外工作",
         "Mini-LED 螢幕的峰值亮度與抗反光表現",
@@ -1672,21 +1659,21 @@
     {
       "visual_type": "webgl_stacked_tco",
       "narration": "買主力生產力工具看的永遠是三到四年的總擁有成本，與其為了省一點預算買回來天天嫌空間不夠，一次到位反而最省錢。",
-      "hero_metric": "總擁有成本",
-      "hero_unit": "$",
-      "stack_left_label": "MacBook Air M5 16GB",
+      "hero_metric": "3-4",
+      "hero_unit": "年總持有成本",
+      "stack_left_label": "Air M5 升規總價",
       "stack_left_layers": [
         {
-          "name": "購買",
+          "name": "Air M5 起售價",
           "val": 1099
         },
         {
-          "name": "升級",
-          "val": 300
+          "name": "記憶體與硬碟加價",
+          "val": 400
         }
       ],
-      "stack_right_label": "MacBook Pro 16GB",
-      "stack_right_val": 1399,
+      "stack_right_label": "MacBook Pro 一步到位",
+      "stack_right_val": 1599,
       "chapter_num": "04",
       "chapter_title": "三種預算終極買法",
       "chapter_en": "BUYING VERDICT",
@@ -1754,7 +1741,7 @@
       "chapter_en": "BUYING VERDICT",
       "id": "L26",
       "accent_hex": "#0E7C47",
-      "tts_text": "尤其对经常在外奔波拍摄或接案的朋友来说，机身自带多个雷电四连接部与记忆卡槽，关键时刻真的能省下超多麻烦。",
+      "tts_text": "尤其对经常在外奔波拍摄或接案的朋友来说，机身自带多个 Thunderbolt 四连接埠与记忆卡槽，关键时刻真的能省下超多麻烦。",
       "captions": [
         "尤其對經常在外奔波拍攝或接案的朋友來說",
         "機身自帶多個 Thunderbolt 4 連接埠與記憶卡槽",
@@ -1834,7 +1821,7 @@
       "chapter_en": "BUYING VERDICT",
       "id": "L27",
       "accent_hex": "#5B50D6",
-      "tts_text": "总结一句话，买轻薄款就坚守基础配置最香，只要你的选配单开始往上加记忆体和硬碟，果断直上 MacBook Pro才是真正不踩雷的聪明买法！",
+      "tts_text": "总结一句话，买轻薄款就坚守基础配置最香，只要你的选配单开始往上加记忆体和硬碟，果断直上 MacBook Pro 才是真正不踩雷的聪明买法！",
       "captions": [
         "總結一句話：買輕薄款就堅守基礎配置最香",
         "只要你的選配單開始往上加記憶體和硬碟",
@@ -1883,7 +1870,7 @@
           "style": "yellow"
         },
         {
-          "text": "3 個隱藏刀法",
+          "text": "5 個關鍵刀法",
           "style": "green"
         },
         {
@@ -1892,10 +1879,10 @@
         }
       ],
       "narration": "帳面差價四百美元，今年該買 MacBook Air M5 還是直上 MacBook Pro？別只看表面跑分，一旦升級容量價格馬上貼近，這五個硬體刀法先看懂再下單！",
-      "source_id": "SRC-01",
+      "source_id": "SRC-04",
       "image_prompt": "Vertical overhead studio shot of hands opening sleek space black aluminum MacBook laptop on wooden desk, moody rim lighting, no text",
       "id": "S01",
-      "tts_text": "帐面差价四百美元，今年该买搭载 Em五晶片的 MacBook Air还是直上 MacBook Pro？别只看表面跑分，一旦升级容量价格马上贴近，这五个硬体刀法先看懂再下单！",
+      "tts_text": "帐面差价四百美元，今年该买 MacBook Air M五还是直上 MacBook Pro？别只看表面跑分，一旦升级容量价格马上贴近，这五个硬体刀法先看懂再下单！",
       "captions": [
         "帳面差價四百美元",
         "今年該買 MacBook Air M5",
@@ -1905,33 +1892,24 @@
         "這五個硬體刀法先看懂再下單"
       ],
       "source_detail": {
-        "source_id": "SRC-01",
+        "source_id": "SRC-04",
         "publisher": "9to5Mac",
         "domain": "9to5mac.com",
-        "title": "MacBook Neo vs MacBook Air: Every difference between Apple’s 13-inch laptops",
-        "url": "https://9to5mac.com/2026/03/04/macbook-neo-vs-macbook-air/",
-        "published": "Wed, 04 Mar 2026",
-        "summary": "The new MacBook Neo is officially here, and it gives MacBook Air a run for its money when it comes to casual usage. So what exactly is the $500 difference between Apple’s two 13-inch laptops? Let’s dig in to every difference. more… The new MacBook Neo is officially here, and it gives MacBook Air a run for its money when it comes to casual usage. So what exactly is the $500 difference between Apple’s two 13-inch laptops? Let’s dig in to every difference. Every difference between MacBook Neo and MacBook Air Battery life + charging method Same weight, different dimensions Key tradeoffs for keyboard and trackpad Every difference between MacBook Neo and MacBook Air Let’s start with the big stuff: price and main specs. MacBook Neo is a 13-inch laptop that costs $599 for 256GB storage and 8GB RAM . It runs on a version of Apple’s A18 Pro chip that was first introduced in the iPhone 16 Pro. $100 more doubles the storage to 512GB and adds a Touch ID fingerprint sensor to the keyboard, but memory is limited to just 8GB RAM. MacBook Air is a 13.6-inch laptop that costs $1099 for 512GB storage and 16GB RAM . It runs on Apple’s latest M5 chip that is also used in the latest iPad Pro and 14-inch MacBook Pro. MacBook Air storage upgrades include 1TB, 2TB, and 4TB options. RAM can be configured to 24GB or 32GB. Every MacBook Air comes with Touch ID. Equally as important: color options. The new MacBook Neo comes in silver , blush (pink), citrus (yellow), and indigo . MacBook Air continues to come in silver , sky blue (bluish silver), starlight (light gold), and midnight (dark blue). MacBook Neo wins the saturation competition. The A18 Pro chip inside MacBook Neo has a 6-core CPU and a 5-core GPU . The M5 chip inside the MacBook Air has a 10-core CPU and starts with an 8-core GPU . Apple A18 Pro chip 6-core CPU with 2 performance cores and 4 efficiency cores 5-core GPU Hardware-accelerated ray tracing 16-core Neural Engine 60GB/s memory bandwidth 10-core CPU with 4 super cores and 6 efficiency cores Up to 10-core GPU Neural Accelerators Hardware-accelerated ray tracing 16-core Neural Engine 153GB/s memory bandwidth Battery life + charging method Battery life and how you can charge are also different between MacBook Neo and MacBook Air. MacBook Neo advertises up to 11 hours of wireless web browsing and up to 16 hours of video streaming per charge. It features a 36.5-watt-hour lithium-ion battery. MacBook Air promises up to 15 hours of wireless web browsing and up to 18 hours of video streaming per charge. It uses a 53.8-watt-hour lithium ion battery. In practice, MacBook A",
-        "char_Depth": 3432,
+        "title": "M5 MacBook Pro vs M4 MacBook Air: Which should you buy this holiday season?",
+        "url": "https://9to5mac.com/2025/11/26/m5-macbook-pro-vs-m4-macbook-air-black-friday-holiday-comparison/",
+        "published": "Wed, 26 Nov 2025",
+        "summary": "Apple offers two entry level MacBook models: the MacBook Air, and the base model MacBook Pro. There’s a couple hundred dollars in difference between the two, which begs the question – is the MacBook Pro worth the premium, or should you save money and stick to the MacBook Air? more… Apple offers two entry level MacBook models: the MacBook Air , and the base model MacBook Pro . There’s a couple hundred dollars in difference between the two, which begs the question – is the MacBook Pro worth the premium, or should you save money and stick to the MacBook Air ? The biggest debate to be had is going to revolve around the chipset. Do you need an M5 chip for your workflow? I’m not gonna delve into all of the details, you can read our M5 roundup here if you’d like. But, in short, this is what’s new with M5: 15% faster multithreaded CPU performance vs M4 45% faster GPU performance vs M4 30% increase in unified memory bandwidth 4x peak GPU compute performance for AI Overall, M5 is a great leap in GPU performance, and with Apple betting so heavily on local models for AI, that could be important in the future. However, M4 is still plenty fast, and I wouldn’t make any purchasing decisions based on what Apple might do in AI in the future. It’s also worth noting that Apple still does most of its Apple silicon comparisons to the M1 rather than newer chips like M2 or M3. I’ll let that speak for itself. Air vs Pro: Worth the premium? With the 14-inch MacBook Pro , you’re paying for a couple nice-to-have features. Those features are additional ports, a proper active cooling system, and a nice miniLED display with HDR support, better colors, and more. Also, you’ll get a larger display. MacBook Pro is 14.2-inch, vs 13.6-inch on the MacBook Air. The MacBook Air only comes with MagSafe and two Thunderbolt/USB-C ports, both of which are located on the left side. MacBook Pro comes with MagSafe, three Thunderbolt/USB-C ports (two left, one right), as well as an HDMI port and SD card slot. Thermals are also a big differentiator for the MacBook Pro . Simply put, MacBook Air doesn’t have a fan, and relies entirely on passive cooling. If your workflow is CPU/GPU intensive, you’ll likely run into thermal throttling on the MacBook Air if you’re pushing it for a while. Plus, to be completely honest: macOS Tahoe isn’t perfectly optimized quite yet, and I’ve heard from a number of MacBook Air users that their Macs are consistently running hot. Lastly, MacBook Pro has a fantastic display. Unless you’re constantly working with colors, this probably doesn’t matter as much. It’s not like the M",
+        "char_Depth": 3483,
         "extracted_metrics": [
-          "$500",
-          "$599",
+          "1000 nits",
+          "500 nits",
+          "$400",
           "256GB",
-          "8GB",
-          "$100",
           "512GB",
-          "$1099",
-          "16GB",
-          "1TB",
-          "2TB",
-          "4TB",
-          "24GB",
-          "32GB",
-          "60GB/s",
-          "153GB/s",
-          "20W",
-          "40W",
-          "60W"
+          "$1199,",
+          "$1599",
+          "$949",
+          "$1399"
         ]
       },
       "matched_broll_mp4": "/Users/alan_dingchaoliao/Downloads/Hey Digital/hey-digital-gemini-4-carbon/runs/ep03_v3_precision_broll/broll/candidates/CAND_120.mp4",
@@ -1974,10 +1952,10 @@
         }
       ],
       "narration": "第一步先算真實總價：入門款不加配最划算，可是一旦把記憶體和硬碟往上加，價格幾乎瞬間摸到 MacBook Pro 門檻，這時候直上反而換來全套高階規格。",
-      "source_id": "SRC-01",
+      "source_id": "SRC-04",
       "image_prompt": "Vertical close up of sleek laptop keyboard and trackpad, studio lighting, no text",
       "id": "S02",
-      "tts_text": "第一步先算真实总价，入门款不加配最划算，可是一旦把记忆体和硬碟往上加，价格几乎瞬间摸到 MacBook Pro门槛，这时候直上反而换来全套高阶规格。",
+      "tts_text": "第一步先算真实总价，入门款不加配最划算，可是一旦把记忆体和硬碟往上加，价格几乎瞬间摸到 MacBook Pro 门槛，这时候直上反而换来全套高阶规格。",
       "captions": [
         "第一步先算真實總價",
         "入門款不加配最划算",
@@ -1986,33 +1964,24 @@
         "這時候直上反而換來全套高階規格"
       ],
       "source_detail": {
-        "source_id": "SRC-01",
+        "source_id": "SRC-04",
         "publisher": "9to5Mac",
         "domain": "9to5mac.com",
-        "title": "MacBook Neo vs MacBook Air: Every difference between Apple’s 13-inch laptops",
-        "url": "https://9to5mac.com/2026/03/04/macbook-neo-vs-macbook-air/",
-        "published": "Wed, 04 Mar 2026",
-        "summary": "The new MacBook Neo is officially here, and it gives MacBook Air a run for its money when it comes to casual usage. So what exactly is the $500 difference between Apple’s two 13-inch laptops? Let’s dig in to every difference. more… The new MacBook Neo is officially here, and it gives MacBook Air a run for its money when it comes to casual usage. So what exactly is the $500 difference between Apple’s two 13-inch laptops? Let’s dig in to every difference. Every difference between MacBook Neo and MacBook Air Battery life + charging method Same weight, different dimensions Key tradeoffs for keyboard and trackpad Every difference between MacBook Neo and MacBook Air Let’s start with the big stuff: price and main specs. MacBook Neo is a 13-inch laptop that costs $599 for 256GB storage and 8GB RAM . It runs on a version of Apple’s A18 Pro chip that was first introduced in the iPhone 16 Pro. $100 more doubles the storage to 512GB and adds a Touch ID fingerprint sensor to the keyboard, but memory is limited to just 8GB RAM. MacBook Air is a 13.6-inch laptop that costs $1099 for 512GB storage and 16GB RAM . It runs on Apple’s latest M5 chip that is also used in the latest iPad Pro and 14-inch MacBook Pro. MacBook Air storage upgrades include 1TB, 2TB, and 4TB options. RAM can be configured to 24GB or 32GB. Every MacBook Air comes with Touch ID. Equally as important: color options. The new MacBook Neo comes in silver , blush (pink), citrus (yellow), and indigo . MacBook Air continues to come in silver , sky blue (bluish silver), starlight (light gold), and midnight (dark blue). MacBook Neo wins the saturation competition. The A18 Pro chip inside MacBook Neo has a 6-core CPU and a 5-core GPU . The M5 chip inside the MacBook Air has a 10-core CPU and starts with an 8-core GPU . Apple A18 Pro chip 6-core CPU with 2 performance cores and 4 efficiency cores 5-core GPU Hardware-accelerated ray tracing 16-core Neural Engine 60GB/s memory bandwidth 10-core CPU with 4 super cores and 6 efficiency cores Up to 10-core GPU Neural Accelerators Hardware-accelerated ray tracing 16-core Neural Engine 153GB/s memory bandwidth Battery life + charging method Battery life and how you can charge are also different between MacBook Neo and MacBook Air. MacBook Neo advertises up to 11 hours of wireless web browsing and up to 16 hours of video streaming per charge. It features a 36.5-watt-hour lithium-ion battery. MacBook Air promises up to 15 hours of wireless web browsing and up to 18 hours of video streaming per charge. It uses a 53.8-watt-hour lithium ion battery. In practice, MacBook A",
-        "char_Depth": 3432,
+        "title": "M5 MacBook Pro vs M4 MacBook Air: Which should you buy this holiday season?",
+        "url": "https://9to5mac.com/2025/11/26/m5-macbook-pro-vs-m4-macbook-air-black-friday-holiday-comparison/",
+        "published": "Wed, 26 Nov 2025",
+        "summary": "Apple offers two entry level MacBook models: the MacBook Air, and the base model MacBook Pro. There’s a couple hundred dollars in difference between the two, which begs the question – is the MacBook Pro worth the premium, or should you save money and stick to the MacBook Air? more… Apple offers two entry level MacBook models: the MacBook Air , and the base model MacBook Pro . There’s a couple hundred dollars in difference between the two, which begs the question – is the MacBook Pro worth the premium, or should you save money and stick to the MacBook Air ? The biggest debate to be had is going to revolve around the chipset. Do you need an M5 chip for your workflow? I’m not gonna delve into all of the details, you can read our M5 roundup here if you’d like. But, in short, this is what’s new with M5: 15% faster multithreaded CPU performance vs M4 45% faster GPU performance vs M4 30% increase in unified memory bandwidth 4x peak GPU compute performance for AI Overall, M5 is a great leap in GPU performance, and with Apple betting so heavily on local models for AI, that could be important in the future. However, M4 is still plenty fast, and I wouldn’t make any purchasing decisions based on what Apple might do in AI in the future. It’s also worth noting that Apple still does most of its Apple silicon comparisons to the M1 rather than newer chips like M2 or M3. I’ll let that speak for itself. Air vs Pro: Worth the premium? With the 14-inch MacBook Pro , you’re paying for a couple nice-to-have features. Those features are additional ports, a proper active cooling system, and a nice miniLED display with HDR support, better colors, and more. Also, you’ll get a larger display. MacBook Pro is 14.2-inch, vs 13.6-inch on the MacBook Air. The MacBook Air only comes with MagSafe and two Thunderbolt/USB-C ports, both of which are located on the left side. MacBook Pro comes with MagSafe, three Thunderbolt/USB-C ports (two left, one right), as well as an HDMI port and SD card slot. Thermals are also a big differentiator for the MacBook Pro . Simply put, MacBook Air doesn’t have a fan, and relies entirely on passive cooling. If your workflow is CPU/GPU intensive, you’ll likely run into thermal throttling on the MacBook Air if you’re pushing it for a while. Plus, to be completely honest: macOS Tahoe isn’t perfectly optimized quite yet, and I’ve heard from a number of MacBook Air users that their Macs are consistently running hot. Lastly, MacBook Pro has a fantastic display. Unless you’re constantly working with colors, this probably doesn’t matter as much. It’s not like the M",
+        "char_Depth": 3483,
         "extracted_metrics": [
-          "$500",
-          "$599",
+          "1000 nits",
+          "500 nits",
+          "$400",
           "256GB",
-          "8GB",
-          "$100",
           "512GB",
-          "$1099",
-          "16GB",
-          "1TB",
-          "2TB",
-          "4TB",
-          "24GB",
-          "32GB",
-          "60GB/s",
-          "153GB/s",
-          "20W",
-          "40W",
-          "60W"
+          "$1199,",
+          "$1599",
+          "$949",
+          "$1399"
         ]
       },
       "matched_broll_mp4": "/Users/alan_dingchaoliao/Downloads/Hey Digital/hey-digital-gemini-4-carbon/runs/ep03_v3_precision_broll/broll/candidates/CAND_060.mp4",
@@ -2055,10 +2024,10 @@
         }
       ],
       "narration": "第二步看散熱表現：Air 採用無風扇被動散熱，日常極致安靜但長時間滿載容易降頻；MacBook Pro 配備主動風扇散熱，連續剪片或跑模型依然穩如泰山。",
-      "source_id": "SRC-01",
+      "source_id": "SRC-04",
       "image_prompt": "Vertical close up of laptop fan blowing air, studio lighting, no text",
       "id": "S03",
-      "tts_text": "第二步看散热表现，Air采用无风扇被动散热，日常极致安静但长时间满载容易降频；MacBook Pro配备主动风扇散热，连续剪片或跑模型依然稳如泰山。",
+      "tts_text": "第二步看散热表现，Air 采用无风扇被动散热，日常极致安静但长时间满载容易降频；MacBook Pro 配备主动风扇散热，连续剪片或跑模型依然稳如泰山。",
       "captions": [
         "第二步看散熱表現",
         "Air 採用無風扇被動散熱",
@@ -2067,33 +2036,24 @@
         "連續剪片或跑模型依然穩如泰山"
       ],
       "source_detail": {
-        "source_id": "SRC-01",
+        "source_id": "SRC-04",
         "publisher": "9to5Mac",
         "domain": "9to5mac.com",
-        "title": "MacBook Neo vs MacBook Air: Every difference between Apple’s 13-inch laptops",
-        "url": "https://9to5mac.com/2026/03/04/macbook-neo-vs-macbook-air/",
-        "published": "Wed, 04 Mar 2026",
-        "summary": "The new MacBook Neo is officially here, and it gives MacBook Air a run for its money when it comes to casual usage. So what exactly is the $500 difference between Apple’s two 13-inch laptops? Let’s dig in to every difference. more… The new MacBook Neo is officially here, and it gives MacBook Air a run for its money when it comes to casual usage. So what exactly is the $500 difference between Apple’s two 13-inch laptops? Let’s dig in to every difference. Every difference between MacBook Neo and MacBook Air Battery life + charging method Same weight, different dimensions Key tradeoffs for keyboard and trackpad Every difference between MacBook Neo and MacBook Air Let’s start with the big stuff: price and main specs. MacBook Neo is a 13-inch laptop that costs $599 for 256GB storage and 8GB RAM . It runs on a version of Apple’s A18 Pro chip that was first introduced in the iPhone 16 Pro. $100 more doubles the storage to 512GB and adds a Touch ID fingerprint sensor to the keyboard, but memory is limited to just 8GB RAM. MacBook Air is a 13.6-inch laptop that costs $1099 for 512GB storage and 16GB RAM . It runs on Apple’s latest M5 chip that is also used in the latest iPad Pro and 14-inch MacBook Pro. MacBook Air storage upgrades include 1TB, 2TB, and 4TB options. RAM can be configured to 24GB or 32GB. Every MacBook Air comes with Touch ID. Equally as important: color options. The new MacBook Neo comes in silver , blush (pink), citrus (yellow), and indigo . MacBook Air continues to come in silver , sky blue (bluish silver), starlight (light gold), and midnight (dark blue). MacBook Neo wins the saturation competition. The A18 Pro chip inside MacBook Neo has a 6-core CPU and a 5-core GPU . The M5 chip inside the MacBook Air has a 10-core CPU and starts with an 8-core GPU . Apple A18 Pro chip 6-core CPU with 2 performance cores and 4 efficiency cores 5-core GPU Hardware-accelerated ray tracing 16-core Neural Engine 60GB/s memory bandwidth 10-core CPU with 4 super cores and 6 efficiency cores Up to 10-core GPU Neural Accelerators Hardware-accelerated ray tracing 16-core Neural Engine 153GB/s memory bandwidth Battery life + charging method Battery life and how you can charge are also different between MacBook Neo and MacBook Air. MacBook Neo advertises up to 11 hours of wireless web browsing and up to 16 hours of video streaming per charge. It features a 36.5-watt-hour lithium-ion battery. MacBook Air promises up to 15 hours of wireless web browsing and up to 18 hours of video streaming per charge. It uses a 53.8-watt-hour lithium ion battery. In practice, MacBook A",
-        "char_Depth": 3432,
+        "title": "M5 MacBook Pro vs M4 MacBook Air: Which should you buy this holiday season?",
+        "url": "https://9to5mac.com/2025/11/26/m5-macbook-pro-vs-m4-macbook-air-black-friday-holiday-comparison/",
+        "published": "Wed, 26 Nov 2025",
+        "summary": "Apple offers two entry level MacBook models: the MacBook Air, and the base model MacBook Pro. There’s a couple hundred dollars in difference between the two, which begs the question – is the MacBook Pro worth the premium, or should you save money and stick to the MacBook Air? more… Apple offers two entry level MacBook models: the MacBook Air , and the base model MacBook Pro . There’s a couple hundred dollars in difference between the two, which begs the question – is the MacBook Pro worth the premium, or should you save money and stick to the MacBook Air ? The biggest debate to be had is going to revolve around the chipset. Do you need an M5 chip for your workflow? I’m not gonna delve into all of the details, you can read our M5 roundup here if you’d like. But, in short, this is what’s new with M5: 15% faster multithreaded CPU performance vs M4 45% faster GPU performance vs M4 30% increase in unified memory bandwidth 4x peak GPU compute performance for AI Overall, M5 is a great leap in GPU performance, and with Apple betting so heavily on local models for AI, that could be important in the future. However, M4 is still plenty fast, and I wouldn’t make any purchasing decisions based on what Apple might do in AI in the future. It’s also worth noting that Apple still does most of its Apple silicon comparisons to the M1 rather than newer chips like M2 or M3. I’ll let that speak for itself. Air vs Pro: Worth the premium? With the 14-inch MacBook Pro , you’re paying for a couple nice-to-have features. Those features are additional ports, a proper active cooling system, and a nice miniLED display with HDR support, better colors, and more. Also, you’ll get a larger display. MacBook Pro is 14.2-inch, vs 13.6-inch on the MacBook Air. The MacBook Air only comes with MagSafe and two Thunderbolt/USB-C ports, both of which are located on the left side. MacBook Pro comes with MagSafe, three Thunderbolt/USB-C ports (two left, one right), as well as an HDMI port and SD card slot. Thermals are also a big differentiator for the MacBook Pro . Simply put, MacBook Air doesn’t have a fan, and relies entirely on passive cooling. If your workflow is CPU/GPU intensive, you’ll likely run into thermal throttling on the MacBook Air if you’re pushing it for a while. Plus, to be completely honest: macOS Tahoe isn’t perfectly optimized quite yet, and I’ve heard from a number of MacBook Air users that their Macs are consistently running hot. Lastly, MacBook Pro has a fantastic display. Unless you’re constantly working with colors, this probably doesn’t matter as much. It’s not like the M",
+        "char_Depth": 3483,
         "extracted_metrics": [
-          "$500",
-          "$599",
+          "1000 nits",
+          "500 nits",
+          "$400",
           "256GB",
-          "8GB",
-          "$100",
           "512GB",
-          "$1099",
-          "16GB",
-          "1TB",
-          "2TB",
-          "4TB",
-          "24GB",
-          "32GB",
-          "60GB/s",
-          "153GB/s",
-          "20W",
-          "40W",
-          "60W"
+          "$1199,",
+          "$1599",
+          "$949",
+          "$1399"
         ]
       },
       "matched_broll_mp4": "/Users/alan_dingchaoliao/Downloads/Hey Digital/hey-digital-gemini-4-carbon/runs/ep03_v3_precision_broll/broll/candidates/CAND_004.mp4",
@@ -2136,10 +2096,10 @@
         }
       ],
       "narration": "第三步看螢幕素質：MacBook Pro 擁有 Mini-LED 超高峰值亮度與 120Hz 高更新率，不論戶外強光還是滑動時間軸，視覺流暢度都完勝標準螢幕。",
-      "source_id": "SRC-01",
+      "source_id": "SRC-04",
       "image_prompt": "Vertical close up of laptop screen displaying bright colors, studio lighting, no text",
       "id": "S04",
-      "tts_text": "第三步看萤幕素质，MacBook Pro拥有 Mini LED超高峰值亮度与一百二十赫兹高更新率，不论户外强光还是滑动时间轴，视觉流畅度都完胜标准萤幕。",
+      "tts_text": "第三步看萤幕素质，MacBook Pro 拥有 Mini L E D 超高峰值亮度与一百二十赫兹高更新率，不论户外强光还是滑动时间轴，视觉流畅度都完胜标准萤幕。",
       "captions": [
         "第三步看螢幕素質",
         "MacBook Pro 擁有 Mini-LED",
@@ -2148,33 +2108,24 @@
         "視覺流暢度都完勝標準螢幕"
       ],
       "source_detail": {
-        "source_id": "SRC-01",
+        "source_id": "SRC-04",
         "publisher": "9to5Mac",
         "domain": "9to5mac.com",
-        "title": "MacBook Neo vs MacBook Air: Every difference between Apple’s 13-inch laptops",
-        "url": "https://9to5mac.com/2026/03/04/macbook-neo-vs-macbook-air/",
-        "published": "Wed, 04 Mar 2026",
-        "summary": "The new MacBook Neo is officially here, and it gives MacBook Air a run for its money when it comes to casual usage. So what exactly is the $500 difference between Apple’s two 13-inch laptops? Let’s dig in to every difference. more… The new MacBook Neo is officially here, and it gives MacBook Air a run for its money when it comes to casual usage. So what exactly is the $500 difference between Apple’s two 13-inch laptops? Let’s dig in to every difference. Every difference between MacBook Neo and MacBook Air Battery life + charging method Same weight, different dimensions Key tradeoffs for keyboard and trackpad Every difference between MacBook Neo and MacBook Air Let’s start with the big stuff: price and main specs. MacBook Neo is a 13-inch laptop that costs $599 for 256GB storage and 8GB RAM . It runs on a version of Apple’s A18 Pro chip that was first introduced in the iPhone 16 Pro. $100 more doubles the storage to 512GB and adds a Touch ID fingerprint sensor to the keyboard, but memory is limited to just 8GB RAM. MacBook Air is a 13.6-inch laptop that costs $1099 for 512GB storage and 16GB RAM . It runs on Apple’s latest M5 chip that is also used in the latest iPad Pro and 14-inch MacBook Pro. MacBook Air storage upgrades include 1TB, 2TB, and 4TB options. RAM can be configured to 24GB or 32GB. Every MacBook Air comes with Touch ID. Equally as important: color options. The new MacBook Neo comes in silver , blush (pink), citrus (yellow), and indigo . MacBook Air continues to come in silver , sky blue (bluish silver), starlight (light gold), and midnight (dark blue). MacBook Neo wins the saturation competition. The A18 Pro chip inside MacBook Neo has a 6-core CPU and a 5-core GPU . The M5 chip inside the MacBook Air has a 10-core CPU and starts with an 8-core GPU . Apple A18 Pro chip 6-core CPU with 2 performance cores and 4 efficiency cores 5-core GPU Hardware-accelerated ray tracing 16-core Neural Engine 60GB/s memory bandwidth 10-core CPU with 4 super cores and 6 efficiency cores Up to 10-core GPU Neural Accelerators Hardware-accelerated ray tracing 16-core Neural Engine 153GB/s memory bandwidth Battery life + charging method Battery life and how you can charge are also different between MacBook Neo and MacBook Air. MacBook Neo advertises up to 11 hours of wireless web browsing and up to 16 hours of video streaming per charge. It features a 36.5-watt-hour lithium-ion battery. MacBook Air promises up to 15 hours of wireless web browsing and up to 18 hours of video streaming per charge. It uses a 53.8-watt-hour lithium ion battery. In practice, MacBook A",
-        "char_Depth": 3432,
+        "title": "M5 MacBook Pro vs M4 MacBook Air: Which should you buy this holiday season?",
+        "url": "https://9to5mac.com/2025/11/26/m5-macbook-pro-vs-m4-macbook-air-black-friday-holiday-comparison/",
+        "published": "Wed, 26 Nov 2025",
+        "summary": "Apple offers two entry level MacBook models: the MacBook Air, and the base model MacBook Pro. There’s a couple hundred dollars in difference between the two, which begs the question – is the MacBook Pro worth the premium, or should you save money and stick to the MacBook Air? more… Apple offers two entry level MacBook models: the MacBook Air , and the base model MacBook Pro . There’s a couple hundred dollars in difference between the two, which begs the question – is the MacBook Pro worth the premium, or should you save money and stick to the MacBook Air ? The biggest debate to be had is going to revolve around the chipset. Do you need an M5 chip for your workflow? I’m not gonna delve into all of the details, you can read our M5 roundup here if you’d like. But, in short, this is what’s new with M5: 15% faster multithreaded CPU performance vs M4 45% faster GPU performance vs M4 30% increase in unified memory bandwidth 4x peak GPU compute performance for AI Overall, M5 is a great leap in GPU performance, and with Apple betting so heavily on local models for AI, that could be important in the future. However, M4 is still plenty fast, and I wouldn’t make any purchasing decisions based on what Apple might do in AI in the future. It’s also worth noting that Apple still does most of its Apple silicon comparisons to the M1 rather than newer chips like M2 or M3. I’ll let that speak for itself. Air vs Pro: Worth the premium? With the 14-inch MacBook Pro , you’re paying for a couple nice-to-have features. Those features are additional ports, a proper active cooling system, and a nice miniLED display with HDR support, better colors, and more. Also, you’ll get a larger display. MacBook Pro is 14.2-inch, vs 13.6-inch on the MacBook Air. The MacBook Air only comes with MagSafe and two Thunderbolt/USB-C ports, both of which are located on the left side. MacBook Pro comes with MagSafe, three Thunderbolt/USB-C ports (two left, one right), as well as an HDMI port and SD card slot. Thermals are also a big differentiator for the MacBook Pro . Simply put, MacBook Air doesn’t have a fan, and relies entirely on passive cooling. If your workflow is CPU/GPU intensive, you’ll likely run into thermal throttling on the MacBook Air if you’re pushing it for a while. Plus, to be completely honest: macOS Tahoe isn’t perfectly optimized quite yet, and I’ve heard from a number of MacBook Air users that their Macs are consistently running hot. Lastly, MacBook Pro has a fantastic display. Unless you’re constantly working with colors, this probably doesn’t matter as much. It’s not like the M",
+        "char_Depth": 3483,
         "extracted_metrics": [
-          "$500",
-          "$599",
+          "1000 nits",
+          "500 nits",
+          "$400",
           "256GB",
-          "8GB",
-          "$100",
           "512GB",
-          "$1099",
-          "16GB",
-          "1TB",
-          "2TB",
-          "4TB",
-          "24GB",
-          "32GB",
-          "60GB/s",
-          "153GB/s",
-          "20W",
-          "40W",
-          "60W"
+          "$1199,",
+          "$1599",
+          "$949",
+          "$1399"
         ]
       },
       "matched_broll_mp4": "/Users/alan_dingchaoliao/Downloads/Hey Digital/hey-digital-gemini-4-carbon/runs/ep03_v3_precision_broll/broll/candidates/CAND_038.mp4",
@@ -2192,35 +2143,35 @@
       "callout_tag": "擴展性",
       "ui_rows": [
         {
-          "title": "Air 連接埠",
-          "subtitle": "基本配置，USB-C 4 個",
-          "badge": "基本",
+          "title": "Air 左側雙連接埠",
+          "subtitle": "2 個雷電 4 + MagSafe 充電",
+          "badge": "輕薄夠用",
+          "toggle_on": false
+        },
+        {
+          "title": "Pro 完整七合一擴充",
+          "subtitle": "3 個雷電 4 + HDMI + SD 卡槽",
+          "badge": "免轉接器",
           "toggle_on": true
         },
         {
-          "title": "Pro 連接埠",
-          "subtitle": "多一個雷電 4，擴展性更好",
-          "badge": "擴展性",
+          "title": "外接雙螢幕與高速碟",
+          "subtitle": "左右兩側皆可插線更順手",
+          "badge": "實測勝出",
           "toggle_on": true
         },
         {
-          "title": "連接埠測試",
-          "subtitle": "Pro 支持更多設備連接",
-          "badge": "實測數據",
-          "toggle_on": true
-        },
-        {
-          "title": "連接埠選擇",
-          "subtitle": "需要多連接埠推薦 Pro",
-          "badge": "擴展性首選",
+          "title": "攝影剪輯出門必備",
+          "subtitle": "相機記憶卡直插即讀超省心",
+          "badge": "擴充首選",
           "toggle_on": true
         }
       ],
       "narration": "第四步看連接埠擴充：MacBook Pro 多給了完整雷電四、HDMI 與記憶卡插槽，出門工作不用到處找轉接器，外接硬碟與雙螢幕一步到位。",
-      "source_id": "SRC-01",
+      "source_id": "SRC-04",
       "image_prompt": "Vertical close up of laptop ports, including USB-C and Thunderbolt, studio lighting, no text",
       "id": "S05",
-      "tts_text": "第四步看连接部扩充，MacBook Pro多给了完整雷电四、 HDMI与记忆卡插槽，出门工作不用到处找转接器，外接硬碟与双萤幕一步到位。",
+      "tts_text": "第四步看连接埠扩充，MacBook Pro 多给了完整雷电四、 H D M I 与记忆卡插槽，出门工作不用到处找转接器，外接硬碟与双萤幕一步到位。",
       "captions": [
         "第四步看連接埠擴充",
         "MacBook Pro 多給了",
@@ -2229,33 +2180,24 @@
         "外接硬碟與雙螢幕一步到位"
       ],
       "source_detail": {
-        "source_id": "SRC-01",
+        "source_id": "SRC-04",
         "publisher": "9to5Mac",
         "domain": "9to5mac.com",
-        "title": "MacBook Neo vs MacBook Air: Every difference between Apple’s 13-inch laptops",
-        "url": "https://9to5mac.com/2026/03/04/macbook-neo-vs-macbook-air/",
-        "published": "Wed, 04 Mar 2026",
-        "summary": "The new MacBook Neo is officially here, and it gives MacBook Air a run for its money when it comes to casual usage. So what exactly is the $500 difference between Apple’s two 13-inch laptops? Let’s dig in to every difference. more… The new MacBook Neo is officially here, and it gives MacBook Air a run for its money when it comes to casual usage. So what exactly is the $500 difference between Apple’s two 13-inch laptops? Let’s dig in to every difference. Every difference between MacBook Neo and MacBook Air Battery life + charging method Same weight, different dimensions Key tradeoffs for keyboard and trackpad Every difference between MacBook Neo and MacBook Air Let’s start with the big stuff: price and main specs. MacBook Neo is a 13-inch laptop that costs $599 for 256GB storage and 8GB RAM . It runs on a version of Apple’s A18 Pro chip that was first introduced in the iPhone 16 Pro. $100 more doubles the storage to 512GB and adds a Touch ID fingerprint sensor to the keyboard, but memory is limited to just 8GB RAM. MacBook Air is a 13.6-inch laptop that costs $1099 for 512GB storage and 16GB RAM . It runs on Apple’s latest M5 chip that is also used in the latest iPad Pro and 14-inch MacBook Pro. MacBook Air storage upgrades include 1TB, 2TB, and 4TB options. RAM can be configured to 24GB or 32GB. Every MacBook Air comes with Touch ID. Equally as important: color options. The new MacBook Neo comes in silver , blush (pink), citrus (yellow), and indigo . MacBook Air continues to come in silver , sky blue (bluish silver), starlight (light gold), and midnight (dark blue). MacBook Neo wins the saturation competition. The A18 Pro chip inside MacBook Neo has a 6-core CPU and a 5-core GPU . The M5 chip inside the MacBook Air has a 10-core CPU and starts with an 8-core GPU . Apple A18 Pro chip 6-core CPU with 2 performance cores and 4 efficiency cores 5-core GPU Hardware-accelerated ray tracing 16-core Neural Engine 60GB/s memory bandwidth 10-core CPU with 4 super cores and 6 efficiency cores Up to 10-core GPU Neural Accelerators Hardware-accelerated ray tracing 16-core Neural Engine 153GB/s memory bandwidth Battery life + charging method Battery life and how you can charge are also different between MacBook Neo and MacBook Air. MacBook Neo advertises up to 11 hours of wireless web browsing and up to 16 hours of video streaming per charge. It features a 36.5-watt-hour lithium-ion battery. MacBook Air promises up to 15 hours of wireless web browsing and up to 18 hours of video streaming per charge. It uses a 53.8-watt-hour lithium ion battery. In practice, MacBook A",
-        "char_Depth": 3432,
+        "title": "M5 MacBook Pro vs M4 MacBook Air: Which should you buy this holiday season?",
+        "url": "https://9to5mac.com/2025/11/26/m5-macbook-pro-vs-m4-macbook-air-black-friday-holiday-comparison/",
+        "published": "Wed, 26 Nov 2025",
+        "summary": "Apple offers two entry level MacBook models: the MacBook Air, and the base model MacBook Pro. There’s a couple hundred dollars in difference between the two, which begs the question – is the MacBook Pro worth the premium, or should you save money and stick to the MacBook Air? more… Apple offers two entry level MacBook models: the MacBook Air , and the base model MacBook Pro . There’s a couple hundred dollars in difference between the two, which begs the question – is the MacBook Pro worth the premium, or should you save money and stick to the MacBook Air ? The biggest debate to be had is going to revolve around the chipset. Do you need an M5 chip for your workflow? I’m not gonna delve into all of the details, you can read our M5 roundup here if you’d like. But, in short, this is what’s new with M5: 15% faster multithreaded CPU performance vs M4 45% faster GPU performance vs M4 30% increase in unified memory bandwidth 4x peak GPU compute performance for AI Overall, M5 is a great leap in GPU performance, and with Apple betting so heavily on local models for AI, that could be important in the future. However, M4 is still plenty fast, and I wouldn’t make any purchasing decisions based on what Apple might do in AI in the future. It’s also worth noting that Apple still does most of its Apple silicon comparisons to the M1 rather than newer chips like M2 or M3. I’ll let that speak for itself. Air vs Pro: Worth the premium? With the 14-inch MacBook Pro , you’re paying for a couple nice-to-have features. Those features are additional ports, a proper active cooling system, and a nice miniLED display with HDR support, better colors, and more. Also, you’ll get a larger display. MacBook Pro is 14.2-inch, vs 13.6-inch on the MacBook Air. The MacBook Air only comes with MagSafe and two Thunderbolt/USB-C ports, both of which are located on the left side. MacBook Pro comes with MagSafe, three Thunderbolt/USB-C ports (two left, one right), as well as an HDMI port and SD card slot. Thermals are also a big differentiator for the MacBook Pro . Simply put, MacBook Air doesn’t have a fan, and relies entirely on passive cooling. If your workflow is CPU/GPU intensive, you’ll likely run into thermal throttling on the MacBook Air if you’re pushing it for a while. Plus, to be completely honest: macOS Tahoe isn’t perfectly optimized quite yet, and I’ve heard from a number of MacBook Air users that their Macs are consistently running hot. Lastly, MacBook Pro has a fantastic display. Unless you’re constantly working with colors, this probably doesn’t matter as much. It’s not like the M",
+        "char_Depth": 3483,
         "extracted_metrics": [
-          "$500",
-          "$599",
+          "1000 nits",
+          "500 nits",
+          "$400",
           "256GB",
-          "8GB",
-          "$100",
           "512GB",
-          "$1099",
-          "16GB",
-          "1TB",
-          "2TB",
-          "4TB",
-          "24GB",
-          "32GB",
-          "60GB/s",
-          "153GB/s",
-          "20W",
-          "40W",
-          "60W"
+          "$1199,",
+          "$1599",
+          "$949",
+          "$1399"
         ]
       },
       "matched_broll_mp4": "/Users/alan_dingchaoliao/Downloads/Hey Digital/hey-digital-gemini-4-carbon/runs/ep03_v3_precision_broll/broll/candidates/CAND_079.mp4",
@@ -2264,7 +2206,7 @@
     {
       "visual_type": "short_phone_interactive",
       "topic_pill": "筆電選購避坑",
-      "step_title": "鍵盤與觸控板",
+      "step_title": "輸入與音場",
       "flow_steps": [
         "看鍵盤",
         "比觸控板",
@@ -2273,32 +2215,32 @@
       "callout_tag": "輸入體驗",
       "ui_rows": [
         {
-          "title": "剪刀腳巧控鍵盤",
-          "subtitle": "1mm 鍵程回饋清脆，長時打字舒適",
-          "badge": "一般",
-          "toggle_on": false
-        },
-        {
-          "title": "Pro 鍵盤",
-          "subtitle": "蝶式結構，手感更好",
-          "badge": "優質",
+          "title": "全尺寸剪刀腳巧控鍵盤",
+          "subtitle": "1mm 鍵程回饋清脆，打字不累",
+          "badge": "手感紮實",
           "toggle_on": true
         },
         {
-          "title": "觸控板比較",
-          "subtitle": "Pro 觸控板更大，反應更快",
-          "badge": "大觸控板",
+          "title": "Pro 全高獨立功能鍵列",
+          "subtitle": "整合 Touch ID 與深色鍵井設計",
+          "badge": "專業配置",
           "toggle_on": true
         },
         {
-          "title": "輸入選擇",
-          "subtitle": "追求舒適輸入推薦 Pro",
-          "badge": "輸入首選",
+          "title": "大面積力度觸控板",
+          "subtitle": "精準壓感回饋，剪輯縮放順暢",
+          "badge": "操控一流",
+          "toggle_on": true
+        },
+        {
+          "title": "六揚聲器空間音訊",
+          "subtitle": "重低音雙消振，外放音場飽滿",
+          "badge": "影音首選",
           "toggle_on": true
         }
       ],
       "narration": "第五步看輸入與外放體驗：全尺寸剪刀腳巧控鍵盤回饋紮實，搭配寬大的力度觸控板與六揚聲器音場，長時間打字剪輯的舒適度非常有感。",
-      "source_id": "SRC-01",
+      "source_id": "SRC-04",
       "image_prompt": "Vertical close up of laptop keyboard and trackpad, studio lighting, no text",
       "id": "S06",
       "tts_text": "第五步看输入与外放体验，全尺寸剪刀脚巧控键盘回馈扎实，搭配宽大的力度触控板与六扬声器音场，长时间打字剪辑的舒适度非常有感。",
@@ -2309,33 +2251,24 @@
         "長時間打字剪輯的舒適度非常有感"
       ],
       "source_detail": {
-        "source_id": "SRC-01",
+        "source_id": "SRC-04",
         "publisher": "9to5Mac",
         "domain": "9to5mac.com",
-        "title": "MacBook Neo vs MacBook Air: Every difference between Apple’s 13-inch laptops",
-        "url": "https://9to5mac.com/2026/03/04/macbook-neo-vs-macbook-air/",
-        "published": "Wed, 04 Mar 2026",
-        "summary": "The new MacBook Neo is officially here, and it gives MacBook Air a run for its money when it comes to casual usage. So what exactly is the $500 difference between Apple’s two 13-inch laptops? Let’s dig in to every difference. more… The new MacBook Neo is officially here, and it gives MacBook Air a run for its money when it comes to casual usage. So what exactly is the $500 difference between Apple’s two 13-inch laptops? Let’s dig in to every difference. Every difference between MacBook Neo and MacBook Air Battery life + charging method Same weight, different dimensions Key tradeoffs for keyboard and trackpad Every difference between MacBook Neo and MacBook Air Let’s start with the big stuff: price and main specs. MacBook Neo is a 13-inch laptop that costs $599 for 256GB storage and 8GB RAM . It runs on a version of Apple’s A18 Pro chip that was first introduced in the iPhone 16 Pro. $100 more doubles the storage to 512GB and adds a Touch ID fingerprint sensor to the keyboard, but memory is limited to just 8GB RAM. MacBook Air is a 13.6-inch laptop that costs $1099 for 512GB storage and 16GB RAM . It runs on Apple’s latest M5 chip that is also used in the latest iPad Pro and 14-inch MacBook Pro. MacBook Air storage upgrades include 1TB, 2TB, and 4TB options. RAM can be configured to 24GB or 32GB. Every MacBook Air comes with Touch ID. Equally as important: color options. The new MacBook Neo comes in silver , blush (pink), citrus (yellow), and indigo . MacBook Air continues to come in silver , sky blue (bluish silver), starlight (light gold), and midnight (dark blue). MacBook Neo wins the saturation competition. The A18 Pro chip inside MacBook Neo has a 6-core CPU and a 5-core GPU . The M5 chip inside the MacBook Air has a 10-core CPU and starts with an 8-core GPU . Apple A18 Pro chip 6-core CPU with 2 performance cores and 4 efficiency cores 5-core GPU Hardware-accelerated ray tracing 16-core Neural Engine 60GB/s memory bandwidth 10-core CPU with 4 super cores and 6 efficiency cores Up to 10-core GPU Neural Accelerators Hardware-accelerated ray tracing 16-core Neural Engine 153GB/s memory bandwidth Battery life + charging method Battery life and how you can charge are also different between MacBook Neo and MacBook Air. MacBook Neo advertises up to 11 hours of wireless web browsing and up to 16 hours of video streaming per charge. It features a 36.5-watt-hour lithium-ion battery. MacBook Air promises up to 15 hours of wireless web browsing and up to 18 hours of video streaming per charge. It uses a 53.8-watt-hour lithium ion battery. In practice, MacBook A",
-        "char_Depth": 3432,
+        "title": "M5 MacBook Pro vs M4 MacBook Air: Which should you buy this holiday season?",
+        "url": "https://9to5mac.com/2025/11/26/m5-macbook-pro-vs-m4-macbook-air-black-friday-holiday-comparison/",
+        "published": "Wed, 26 Nov 2025",
+        "summary": "Apple offers two entry level MacBook models: the MacBook Air, and the base model MacBook Pro. There’s a couple hundred dollars in difference between the two, which begs the question – is the MacBook Pro worth the premium, or should you save money and stick to the MacBook Air? more… Apple offers two entry level MacBook models: the MacBook Air , and the base model MacBook Pro . There’s a couple hundred dollars in difference between the two, which begs the question – is the MacBook Pro worth the premium, or should you save money and stick to the MacBook Air ? The biggest debate to be had is going to revolve around the chipset. Do you need an M5 chip for your workflow? I’m not gonna delve into all of the details, you can read our M5 roundup here if you’d like. But, in short, this is what’s new with M5: 15% faster multithreaded CPU performance vs M4 45% faster GPU performance vs M4 30% increase in unified memory bandwidth 4x peak GPU compute performance for AI Overall, M5 is a great leap in GPU performance, and with Apple betting so heavily on local models for AI, that could be important in the future. However, M4 is still plenty fast, and I wouldn’t make any purchasing decisions based on what Apple might do in AI in the future. It’s also worth noting that Apple still does most of its Apple silicon comparisons to the M1 rather than newer chips like M2 or M3. I’ll let that speak for itself. Air vs Pro: Worth the premium? With the 14-inch MacBook Pro , you’re paying for a couple nice-to-have features. Those features are additional ports, a proper active cooling system, and a nice miniLED display with HDR support, better colors, and more. Also, you’ll get a larger display. MacBook Pro is 14.2-inch, vs 13.6-inch on the MacBook Air. The MacBook Air only comes with MagSafe and two Thunderbolt/USB-C ports, both of which are located on the left side. MacBook Pro comes with MagSafe, three Thunderbolt/USB-C ports (two left, one right), as well as an HDMI port and SD card slot. Thermals are also a big differentiator for the MacBook Pro . Simply put, MacBook Air doesn’t have a fan, and relies entirely on passive cooling. If your workflow is CPU/GPU intensive, you’ll likely run into thermal throttling on the MacBook Air if you’re pushing it for a while. Plus, to be completely honest: macOS Tahoe isn’t perfectly optimized quite yet, and I’ve heard from a number of MacBook Air users that their Macs are consistently running hot. Lastly, MacBook Pro has a fantastic display. Unless you’re constantly working with colors, this probably doesn’t matter as much. It’s not like the M",
+        "char_Depth": 3483,
         "extracted_metrics": [
-          "$500",
-          "$599",
+          "1000 nits",
+          "500 nits",
+          "$400",
           "256GB",
-          "8GB",
-          "$100",
           "512GB",
-          "$1099",
-          "16GB",
-          "1TB",
-          "2TB",
-          "4TB",
-          "24GB",
-          "32GB",
-          "60GB/s",
-          "153GB/s",
-          "20W",
-          "40W",
-          "60W"
+          "$1199,",
+          "$1599",
+          "$949",
+          "$1399"
         ]
       },
       "matched_broll_mp4": "/Users/alan_dingchaoliao/Downloads/Hey Digital/hey-digital-gemini-4-carbon/runs/ep03_v3_precision_broll/broll/candidates/CAND_074.mp4",
@@ -2345,10 +2278,10 @@
       "visual_type": "short_broll_summary",
       "topic_pill": "筆電選購避坑",
       "narration": "記住這句選購口訣：買 Air 就買基礎版賺輕薄性價比，只要選配加價超過兩階，直接上 MacBook Pro 才不會後悔！",
-      "source_id": "SRC-01",
+      "source_id": "SRC-04",
       "image_prompt": "Vertical b-roll footage of MacBook Air and MacBook Pro side by side, studio lighting, no text",
       "id": "S07",
-      "tts_text": "记住这句选购口诀，买 Air就买基础版赚轻薄性价比，只要选配加价超过两阶，直接上 MacBook Pro才不会后悔！",
+      "tts_text": "记住这句选购口诀，买 Air 就买基础版赚轻薄性价比，只要选配加价超过两阶，直接上 MacBook Pro 才不会后悔！",
       "captions": [
         "記住這句選購口訣",
         "買 Air 就買基礎版賺輕薄性價比",
@@ -2356,43 +2289,34 @@
         "直接上 MacBook Pro 才不會後悔"
       ],
       "source_detail": {
-        "source_id": "SRC-01",
+        "source_id": "SRC-04",
         "publisher": "9to5Mac",
         "domain": "9to5mac.com",
-        "title": "MacBook Neo vs MacBook Air: Every difference between Apple’s 13-inch laptops",
-        "url": "https://9to5mac.com/2026/03/04/macbook-neo-vs-macbook-air/",
-        "published": "Wed, 04 Mar 2026",
-        "summary": "The new MacBook Neo is officially here, and it gives MacBook Air a run for its money when it comes to casual usage. So what exactly is the $500 difference between Apple’s two 13-inch laptops? Let’s dig in to every difference. more… The new MacBook Neo is officially here, and it gives MacBook Air a run for its money when it comes to casual usage. So what exactly is the $500 difference between Apple’s two 13-inch laptops? Let’s dig in to every difference. Every difference between MacBook Neo and MacBook Air Battery life + charging method Same weight, different dimensions Key tradeoffs for keyboard and trackpad Every difference between MacBook Neo and MacBook Air Let’s start with the big stuff: price and main specs. MacBook Neo is a 13-inch laptop that costs $599 for 256GB storage and 8GB RAM . It runs on a version of Apple’s A18 Pro chip that was first introduced in the iPhone 16 Pro. $100 more doubles the storage to 512GB and adds a Touch ID fingerprint sensor to the keyboard, but memory is limited to just 8GB RAM. MacBook Air is a 13.6-inch laptop that costs $1099 for 512GB storage and 16GB RAM . It runs on Apple’s latest M5 chip that is also used in the latest iPad Pro and 14-inch MacBook Pro. MacBook Air storage upgrades include 1TB, 2TB, and 4TB options. RAM can be configured to 24GB or 32GB. Every MacBook Air comes with Touch ID. Equally as important: color options. The new MacBook Neo comes in silver , blush (pink), citrus (yellow), and indigo . MacBook Air continues to come in silver , sky blue (bluish silver), starlight (light gold), and midnight (dark blue). MacBook Neo wins the saturation competition. The A18 Pro chip inside MacBook Neo has a 6-core CPU and a 5-core GPU . The M5 chip inside the MacBook Air has a 10-core CPU and starts with an 8-core GPU . Apple A18 Pro chip 6-core CPU with 2 performance cores and 4 efficiency cores 5-core GPU Hardware-accelerated ray tracing 16-core Neural Engine 60GB/s memory bandwidth 10-core CPU with 4 super cores and 6 efficiency cores Up to 10-core GPU Neural Accelerators Hardware-accelerated ray tracing 16-core Neural Engine 153GB/s memory bandwidth Battery life + charging method Battery life and how you can charge are also different between MacBook Neo and MacBook Air. MacBook Neo advertises up to 11 hours of wireless web browsing and up to 16 hours of video streaming per charge. It features a 36.5-watt-hour lithium-ion battery. MacBook Air promises up to 15 hours of wireless web browsing and up to 18 hours of video streaming per charge. It uses a 53.8-watt-hour lithium ion battery. In practice, MacBook A",
-        "char_Depth": 3432,
+        "title": "M5 MacBook Pro vs M4 MacBook Air: Which should you buy this holiday season?",
+        "url": "https://9to5mac.com/2025/11/26/m5-macbook-pro-vs-m4-macbook-air-black-friday-holiday-comparison/",
+        "published": "Wed, 26 Nov 2025",
+        "summary": "Apple offers two entry level MacBook models: the MacBook Air, and the base model MacBook Pro. There’s a couple hundred dollars in difference between the two, which begs the question – is the MacBook Pro worth the premium, or should you save money and stick to the MacBook Air? more… Apple offers two entry level MacBook models: the MacBook Air , and the base model MacBook Pro . There’s a couple hundred dollars in difference between the two, which begs the question – is the MacBook Pro worth the premium, or should you save money and stick to the MacBook Air ? The biggest debate to be had is going to revolve around the chipset. Do you need an M5 chip for your workflow? I’m not gonna delve into all of the details, you can read our M5 roundup here if you’d like. But, in short, this is what’s new with M5: 15% faster multithreaded CPU performance vs M4 45% faster GPU performance vs M4 30% increase in unified memory bandwidth 4x peak GPU compute performance for AI Overall, M5 is a great leap in GPU performance, and with Apple betting so heavily on local models for AI, that could be important in the future. However, M4 is still plenty fast, and I wouldn’t make any purchasing decisions based on what Apple might do in AI in the future. It’s also worth noting that Apple still does most of its Apple silicon comparisons to the M1 rather than newer chips like M2 or M3. I’ll let that speak for itself. Air vs Pro: Worth the premium? With the 14-inch MacBook Pro , you’re paying for a couple nice-to-have features. Those features are additional ports, a proper active cooling system, and a nice miniLED display with HDR support, better colors, and more. Also, you’ll get a larger display. MacBook Pro is 14.2-inch, vs 13.6-inch on the MacBook Air. The MacBook Air only comes with MagSafe and two Thunderbolt/USB-C ports, both of which are located on the left side. MacBook Pro comes with MagSafe, three Thunderbolt/USB-C ports (two left, one right), as well as an HDMI port and SD card slot. Thermals are also a big differentiator for the MacBook Pro . Simply put, MacBook Air doesn’t have a fan, and relies entirely on passive cooling. If your workflow is CPU/GPU intensive, you’ll likely run into thermal throttling on the MacBook Air if you’re pushing it for a while. Plus, to be completely honest: macOS Tahoe isn’t perfectly optimized quite yet, and I’ve heard from a number of MacBook Air users that their Macs are consistently running hot. Lastly, MacBook Pro has a fantastic display. Unless you’re constantly working with colors, this probably doesn’t matter as much. It’s not like the M",
+        "char_Depth": 3483,
         "extracted_metrics": [
-          "$500",
-          "$599",
+          "1000 nits",
+          "500 nits",
+          "$400",
           "256GB",
-          "8GB",
-          "$100",
           "512GB",
-          "$1099",
-          "16GB",
-          "1TB",
-          "2TB",
-          "4TB",
-          "24GB",
-          "32GB",
-          "60GB/s",
-          "153GB/s",
-          "20W",
-          "40W",
-          "60W"
+          "$1199,",
+          "$1599",
+          "$949",
+          "$1399"
         ]
       },
-      "matched_broll_mp4": "/Users/alan_dingchaoliao/Downloads/Hey Digital/hey-digital-gemini-4-carbon/runs/ep03_v3_precision_broll/broll/candidates/CAND_018.mp4",
-      "matched_broll_jpg": "/Users/alan_dingchaoliao/Downloads/Hey Digital/hey-digital-gemini-4-carbon/runs/ep03_v3_precision_broll/broll/candidates/CAND_018.jpg"
+      "matched_broll_mp4": "/Users/alan_dingchaoliao/Downloads/Hey Digital/hey-digital-gemini-4-carbon/runs/ep03_v3_precision_broll/broll/candidates/CAND_115.mp4",
+      "matched_broll_jpg": "/Users/alan_dingchaoliao/Downloads/Hey Digital/hey-digital-gemini-4-carbon/runs/ep03_v3_precision_broll/broll/candidates/CAND_115.jpg"
     },
     {
       "visual_type": "cta_funnel_endcard",
       "topic_pill": "筆電選購避坑",
       "narration": "這支短片只是精華濃縮，我們在完整長片裡實測了記憶體頻寬、溫控差距與全部公開數據來源，現在就點擊下方關聯影片收看完整解析！",
-      "source_id": "SRC-01",
+      "source_id": "SRC-04",
       "image_prompt": "Vertical endcard with call-to-action button and video thumbnail, studio lighting, no text",
       "id": "S08",
       "tts_text": "这支短片只是精华浓缩，我们在完整长片里实测了记忆体频宽、温控差距与全部公开数据来源，现在就点击下方关联影片收看完整解析！",
@@ -2404,33 +2328,24 @@
         "現在就點擊下方關聯影片收看完整解析"
       ],
       "source_detail": {
-        "source_id": "SRC-01",
+        "source_id": "SRC-04",
         "publisher": "9to5Mac",
         "domain": "9to5mac.com",
-        "title": "MacBook Neo vs MacBook Air: Every difference between Apple’s 13-inch laptops",
-        "url": "https://9to5mac.com/2026/03/04/macbook-neo-vs-macbook-air/",
-        "published": "Wed, 04 Mar 2026",
-        "summary": "The new MacBook Neo is officially here, and it gives MacBook Air a run for its money when it comes to casual usage. So what exactly is the $500 difference between Apple’s two 13-inch laptops? Let’s dig in to every difference. more… The new MacBook Neo is officially here, and it gives MacBook Air a run for its money when it comes to casual usage. So what exactly is the $500 difference between Apple’s two 13-inch laptops? Let’s dig in to every difference. Every difference between MacBook Neo and MacBook Air Battery life + charging method Same weight, different dimensions Key tradeoffs for keyboard and trackpad Every difference between MacBook Neo and MacBook Air Let’s start with the big stuff: price and main specs. MacBook Neo is a 13-inch laptop that costs $599 for 256GB storage and 8GB RAM . It runs on a version of Apple’s A18 Pro chip that was first introduced in the iPhone 16 Pro. $100 more doubles the storage to 512GB and adds a Touch ID fingerprint sensor to the keyboard, but memory is limited to just 8GB RAM. MacBook Air is a 13.6-inch laptop that costs $1099 for 512GB storage and 16GB RAM . It runs on Apple’s latest M5 chip that is also used in the latest iPad Pro and 14-inch MacBook Pro. MacBook Air storage upgrades include 1TB, 2TB, and 4TB options. RAM can be configured to 24GB or 32GB. Every MacBook Air comes with Touch ID. Equally as important: color options. The new MacBook Neo comes in silver , blush (pink), citrus (yellow), and indigo . MacBook Air continues to come in silver , sky blue (bluish silver), starlight (light gold), and midnight (dark blue). MacBook Neo wins the saturation competition. The A18 Pro chip inside MacBook Neo has a 6-core CPU and a 5-core GPU . The M5 chip inside the MacBook Air has a 10-core CPU and starts with an 8-core GPU . Apple A18 Pro chip 6-core CPU with 2 performance cores and 4 efficiency cores 5-core GPU Hardware-accelerated ray tracing 16-core Neural Engine 60GB/s memory bandwidth 10-core CPU with 4 super cores and 6 efficiency cores Up to 10-core GPU Neural Accelerators Hardware-accelerated ray tracing 16-core Neural Engine 153GB/s memory bandwidth Battery life + charging method Battery life and how you can charge are also different between MacBook Neo and MacBook Air. MacBook Neo advertises up to 11 hours of wireless web browsing and up to 16 hours of video streaming per charge. It features a 36.5-watt-hour lithium-ion battery. MacBook Air promises up to 15 hours of wireless web browsing and up to 18 hours of video streaming per charge. It uses a 53.8-watt-hour lithium ion battery. In practice, MacBook A",
-        "char_Depth": 3432,
+        "title": "M5 MacBook Pro vs M4 MacBook Air: Which should you buy this holiday season?",
+        "url": "https://9to5mac.com/2025/11/26/m5-macbook-pro-vs-m4-macbook-air-black-friday-holiday-comparison/",
+        "published": "Wed, 26 Nov 2025",
+        "summary": "Apple offers two entry level MacBook models: the MacBook Air, and the base model MacBook Pro. There’s a couple hundred dollars in difference between the two, which begs the question – is the MacBook Pro worth the premium, or should you save money and stick to the MacBook Air? more… Apple offers two entry level MacBook models: the MacBook Air , and the base model MacBook Pro . There’s a couple hundred dollars in difference between the two, which begs the question – is the MacBook Pro worth the premium, or should you save money and stick to the MacBook Air ? The biggest debate to be had is going to revolve around the chipset. Do you need an M5 chip for your workflow? I’m not gonna delve into all of the details, you can read our M5 roundup here if you’d like. But, in short, this is what’s new with M5: 15% faster multithreaded CPU performance vs M4 45% faster GPU performance vs M4 30% increase in unified memory bandwidth 4x peak GPU compute performance for AI Overall, M5 is a great leap in GPU performance, and with Apple betting so heavily on local models for AI, that could be important in the future. However, M4 is still plenty fast, and I wouldn’t make any purchasing decisions based on what Apple might do in AI in the future. It’s also worth noting that Apple still does most of its Apple silicon comparisons to the M1 rather than newer chips like M2 or M3. I’ll let that speak for itself. Air vs Pro: Worth the premium? With the 14-inch MacBook Pro , you’re paying for a couple nice-to-have features. Those features are additional ports, a proper active cooling system, and a nice miniLED display with HDR support, better colors, and more. Also, you’ll get a larger display. MacBook Pro is 14.2-inch, vs 13.6-inch on the MacBook Air. The MacBook Air only comes with MagSafe and two Thunderbolt/USB-C ports, both of which are located on the left side. MacBook Pro comes with MagSafe, three Thunderbolt/USB-C ports (two left, one right), as well as an HDMI port and SD card slot. Thermals are also a big differentiator for the MacBook Pro . Simply put, MacBook Air doesn’t have a fan, and relies entirely on passive cooling. If your workflow is CPU/GPU intensive, you’ll likely run into thermal throttling on the MacBook Air if you’re pushing it for a while. Plus, to be completely honest: macOS Tahoe isn’t perfectly optimized quite yet, and I’ve heard from a number of MacBook Air users that their Macs are consistently running hot. Lastly, MacBook Pro has a fantastic display. Unless you’re constantly working with colors, this probably doesn’t matter as much. It’s not like the M",
+        "char_Depth": 3483,
         "extracted_metrics": [
-          "$500",
-          "$599",
+          "1000 nits",
+          "500 nits",
+          "$400",
           "256GB",
-          "8GB",
-          "$100",
           "512GB",
-          "$1099",
-          "16GB",
-          "1TB",
-          "2TB",
-          "4TB",
-          "24GB",
-          "32GB",
-          "60GB/s",
-          "153GB/s",
-          "20W",
-          "40W",
-          "60W"
+          "$1199,",
+          "$1599",
+          "$949",
+          "$1399"
         ]
       }
     }

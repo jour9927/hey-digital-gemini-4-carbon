@@ -1,14 +1,14 @@
 {
-  "pipeline_version": "2.0-gemini-4-carbon-webgl-rhodes",
+  "pipeline_version": "6.0-qwen3-tts-bilingual-precision",
   "run_id": "ep03_v3_precision_broll",
   "topic": "差價四百美元，買 MacBook Air M5 還是直上 MacBook Pro？實測後發現三個隱藏刀法",
   "video_type": "versus_guide",
   "title_long": "差價四百美元，買 MacBook Air M5 還是直上 MacBook Pro？實測後發現三個隱藏刀法",
   "title_short": "差價四百美元，買 MacBook Air M5 還是直上 MacBook Pro？實測後發現三個隱藏刀法 #Shorts",
   "long_video": "/Users/alan_dingchaoliao/Downloads/Hey Digital/hey-digital-gemini-4-carbon/runs/ep03_v3_precision_broll/deliverables/hey_digital_long_1080p.mp4",
-  "long_duration_sec": 309.3,
+  "long_duration_sec": 259.87,
   "short_video": "/Users/alan_dingchaoliao/Downloads/Hey Digital/hey-digital-gemini-4-carbon/runs/ep03_v3_precision_broll/deliverables/hey_digital_short_funnel_1080x1920.mp4",
-  "short_duration_sec": 91.4,
+  "short_duration_sec": 80.3,
   "thumbnail": "/Users/alan_dingchaoliao/Downloads/Hey Digital/hey-digital-gemini-4-carbon/runs/ep03_v3_precision_broll/deliverables/thumbnail_1080p.png",
   "cited_sources_count": 23,
   "cited_sources": [
