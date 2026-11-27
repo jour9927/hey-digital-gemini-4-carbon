@@ -139,13 +139,11 @@ COMMON_LONG_HTML_TEMPLATE = r"""<!DOCTYPE html>
   #hud { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
 
   .chapter-hud {
-    position: absolute; top: 54px; right: 78px;
-    font-size: 23px; font-weight: 500; color: #5C5A54; letter-spacing: 0.04em;
-    background: rgba(255,255,255,0.62); backdrop-filter: blur(8px);
-    padding: 8px 20px; border-radius: 999px; border: 1px solid rgba(160,155,145,0.28);
+    position: absolute; top: 56px; right: 76px;
+    font-size: 23px; font-weight: 500; color: #5C5A54; letter-spacing: 0.05em;
   }
   .hero-box {
-    position: absolute; top: 58px; left: 96px;
+    position: absolute; top: 64px; left: 96px;
     display: flex; flex-direction: column; gap: 4px;
   }
   .hero-row { display: flex; align-items: baseline; gap: 16px; }
@@ -157,40 +155,26 @@ COMMON_LONG_HTML_TEMPLATE = r"""<!DOCTYPE html>
     font-family: "Helvetica Neue", "SF Pro Display", "PingFang TC", sans-serif;
     font-weight: 300; font-size: 52px; color: #66635B;
   }
-  .hero-delta {
-    display: inline-flex; align-items: center; padding: 6px 18px; border-radius: 999px;
-    font-size: 28px; font-weight: 700; color: #FFF; background: #D95D1E;
-    box-shadow: 0 8px 20px rgba(217, 93, 30, 0.25);
-    transform-origin: left center;
-  }
-  .hero-sub {
-    font-size: 23px; font-weight: 500; color: #706D65; margin-top: 4px; max-width: 780px;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  }
+  .hero-delta { display: none !important; }
+  .hero-sub { display: none !important; }
 
   .tag-3d {
     position: absolute; transform: translate(-50%, -50%);
-    background: rgba(255, 255, 255, 0.90); border: 1px solid rgba(180, 175, 165, 0.55);
-    box-shadow: 0 8px 24px rgba(28, 26, 22, 0.09);
-    padding: 8px 18px; border-radius: 14px; font-size: 24px; font-weight: 600; color: #22211F;
+    background: rgba(255, 255, 255, 0.78); backdrop-filter: blur(6px);
+    box-shadow: 0 4px 14px rgba(28, 26, 22, 0.06);
+    padding: 6px 16px; border-radius: 999px; font-size: 23px; font-weight: 600; color: #22211F;
     white-space: nowrap;
   }
   .tag-3d .val { font-weight: 700; margin-left: 8px; }
 
-  .source-pill {
-    position: absolute; left: 96px; bottom: 136px;
-    display: inline-flex; align-items: center; gap: 10px;
-    background: rgba(255, 255, 255, 0.84); border: 1px solid rgba(196, 191, 180, 0.85);
-    box-shadow: 0 4px 14px rgba(0,0,0,0.04);
-    padding: 8px 20px; border-radius: 999px; font-size: 20px; color: #4A4843; font-weight: 500;
-  }
+  .source-pill { display: none !important; }
   .source-dot { width: 10px; height: 10px; border-radius: 50%; background: #14804A; }
 
   .caption-bar {
-    position: absolute; left: 50%; bottom: 48px; transform: translateX(-50%);
-    font-size: 40px; font-weight: 600; color: #171719;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.75), 0 4px 16px rgba(255,255,255,0.45);
-    letter-spacing: 0.02em; text-align: center; white-space: nowrap;
+    position: absolute; left: 50%; bottom: 54px; transform: translateX(-50%);
+    font-size: 46px; font-weight: 600; color: #121214;
+    text-shadow: 0 2px 10px rgba(255,255,255,0.45);
+    letter-spacing: 0.015em; text-align: center; white-space: nowrap;
   }
 
   /* UI Configurator + Crawled Article Spotlight */
@@ -699,15 +683,15 @@ function initWebGL() {
         cores.push({ tile, mat, r, c });
       }
     }
-    chip.position.set(0.35, 0, 0.35);
+    chip.position.set(0.35, 0.45, -0.35);
     scene.add(chip);
 
-    add3DLabel(`<span>晶片架構</span><span class="val" style="color:${accentStr}">${B.chip_label || "SoC 旗艦核心"}</span>`, new THREE.Vector3(0.35, 1.35, 0.35));
+    add3DLabel(`<span>晶片架構</span><span class="val" style="color:${accentStr}">${B.chip_label || "SoC 旗艦核心"}</span>`, new THREE.Vector3(0.35, 1.85, -0.35));
 
     updateSceneFn = (t, dur) => {
       const ang = -0.52 + 1.04 * easeInOutCubic(t / Math.max(4, dur));
-      camera.position.set(0.35 + Math.sin(ang) * 6.8, 4.55 - 0.55 * Math.sin(t * 0.5), 0.35 + Math.cos(ang) * 6.8);
-      camera.lookAt(0.35, 0.32, 0.35);
+      camera.position.set(0.35 + Math.sin(ang) * 7.8, 5.15 - 0.45 * Math.sin(t * 0.5), -0.35 + Math.cos(ang) * 7.8);
+      camera.lookAt(0.35, 0.05, -0.25);
       cores.forEach(({ tile, mat, r, c }) => {
         const w = 0.5 + 0.5 * Math.sin(t * 5.0 - (r + c) * 0.55);
         tile.scale.y = 0.7 + 0.9 * w;
@@ -719,41 +703,33 @@ function initWebGL() {
     const isThermal = (B.mode || "thermal") === "thermal";
     const lapL = buildLaptop3D(THREE, 0xD9DCE0, isThermal ? 0xEA580C : 0x64748B);
     const lapR = buildLaptop3D(THREE, 0x2B2F37, 0x0E6EB8);
-    lapL.position.set(-2.35, 0, 0.35); lapL.rotation.y = 0.20;
-    lapR.position.set(2.35, 0, 0.35);  lapR.rotation.y = -0.20;
+    lapL.position.set(-2.35, 0, 0.15); lapL.rotation.y = 0.18;
+    lapR.position.set(2.35, 0, 0.15);  lapR.rotation.y = -0.18;
     scene.add(lapL); scene.add(lapR);
 
     const ringGeo = new THREE.RingGeometry(1.35, 1.55, 48);
-    const ringMatL = new THREE.MeshBasicMaterial({ color: 0xEA580C, side: THREE.DoubleSide, transparent: true, opacity: 0.45 });
-    const ringMatR = new THREE.MeshBasicMaterial({ color: 0x0EA5E9, side: THREE.DoubleSide, transparent: true, opacity: 0.45 });
+    const ringMatL = new THREE.MeshBasicMaterial({ color: 0xEA580C, side: THREE.DoubleSide, transparent: true, opacity: 0.42 });
+    const ringMatR = new THREE.MeshBasicMaterial({ color: 0x0EA5E9, side: THREE.DoubleSide, transparent: true, opacity: 0.42 });
     const ringL = new THREE.Mesh(ringGeo, ringMatL);
     const ringR = new THREE.Mesh(ringGeo, ringMatR);
-    ringL.rotation.x = -Math.PI / 2; ringL.position.set(-2.35, 0.03, 0.35);
-    ringR.rotation.x = -Math.PI / 2; ringR.position.set(2.35, 0.03, 0.35);
+    ringL.rotation.x = -Math.PI / 2; ringL.position.set(-2.35, 0.03, 0.15);
+    ringR.rotation.x = -Math.PI / 2; ringR.position.set(2.35, 0.03, 0.15);
     scene.add(ringL); scene.add(ringR);
 
-    const barL = new THREE.Mesh(new THREE.BoxGeometry(2.2, 0.22, 0.22), new THREE.MeshStandardMaterial({ color: isThermal ? 0xEA580C : 0x8A8F99, roughness: 0.3 }));
-    const barR = new THREE.Mesh(new THREE.BoxGeometry(2.2, 0.22, 0.22), new THREE.MeshStandardMaterial({ color: 0x0E6EB8, roughness: 0.25 }));
-    scene.add(barL); scene.add(barR);
-
-    add3DLabel(`<span>${B.left_label || B.product_a || "無風扇輕薄款"}</span>`, new THREE.Vector3(-2.35, 2.28, 0.35));
-    add3DLabel(`<span>${B.right_label || B.product_b || "主動散熱 Pro 款"}</span>`, new THREE.Vector3(2.35, 2.28, 0.35));
+    // Place labels cleanly below laptops on the studio floor (matching ref1_b_132s.jpg)
+    add3DLabel(`<span>${B.left_label || B.product_a || "無風扇輕薄款"}</span>`, new THREE.Vector3(-2.35, -0.06, 1.68));
+    add3DLabel(`<span>${B.right_label || B.product_b || "主動散熱 Pro 款"}</span>`, new THREE.Vector3(2.35, -0.06, 1.68));
 
     updateSceneFn = (t, dur) => {
       const u = easeInOutCubic(t / Math.max(4, dur));
-      camera.position.set(-0.6 + 1.2 * u, 3.85, 8.2 - 0.5 * u);
-      camera.lookAt(0, 1.05, 0.2);
+      camera.position.set(-0.55 + 1.1 * u, 3.85, 8.35 - 0.45 * u);
+      camera.lookAt(0, 0.85, 0.2);
 
       const pulse = (t * 0.85) % 1.0;
       ringL.scale.setScalar(0.85 + 0.65 * pulse);
-      ringMatL.opacity = (1 - pulse) * 0.55;
+      ringMatL.opacity = (1 - pulse) * 0.48;
       ringR.scale.setScalar(0.85 + 0.55 * ((pulse + 0.5) % 1.0));
-      ringMatR.opacity = (1 - ((pulse + 0.5) % 1.0)) * 0.55;
-
-      const pL = clamp(easeOutCubic(t / 1.8) * 0.62, 0.05, 0.62);
-      const pR = clamp(easeOutCubic(t / 1.5) * 1.00, 0.05, 1.00);
-      barL.scale.x = pL; barL.position.set(-2.35 - 1.1 * (1 - pL), 1.96, 0.5);
-      barR.scale.x = pR; barR.position.set(2.35 - 1.1 * (1 - pR), 1.96, 0.5);
+      ringMatR.opacity = (1 - ((pulse + 0.5) % 1.0)) * 0.48;
     };
   }
 }
@@ -869,7 +845,17 @@ window.renderAt = function(t, dur, captionText) {
     renderer.render(scene, camera);
     sync3DLabels();
   }
-  document.getElementById("cap-bar").textContent = captionText || "";
+  const cb = document.getElementById("cap-bar");
+  const cStr = captionText || "";
+  cb.textContent = cStr;
+  if (cStr) {
+    let fs = 46;
+    cb.style.fontSize = fs + "px";
+    while (cb.offsetWidth > 1690 && fs > 30) {
+      fs -= 2;
+      cb.style.fontSize = fs + "px";
+    }
+  }
 };
 
 window.renderAt(0, 8, "");
@@ -1032,13 +1018,16 @@ SHORT_INTERACTIVE_HTML_TEMPLATE = r"""<!DOCTYPE html>
   .seg-fill { height: 100%; background: #17884C; border-radius: 999px; width: 0%; }
 
   .short-caption {
-    position: absolute; left: 32px; right: 32px; top: 1628px; z-index: 25;
-    text-align: center; font-size: 44px; font-weight: 800; line-height: 1.25;
-    white-space: nowrap;
-    color: #FFFFFF;
-    -webkit-text-stroke: 6px #101318;
-    paint-order: stroke fill;
-    filter: drop-shadow(0 6px 14px rgba(0,0,0,0.36));
+    position: absolute; left: 0; right: 0; top: 1596px; height: 120px; z-index: 25;
+    display: flex; align-items: center; justify-content: center; pointer-events: none;
+    filter: drop-shadow(0 4px 11px rgba(0,0,0,0.28));
+  }
+  .short-caption svg { width: 1080px; height: 120px; overflow: visible; }
+  .short-caption text {
+    font-family: "PingFang TC", "SF Pro Display", "Helvetica Neue", sans-serif;
+    font-size: 46px; font-weight: 600; letter-spacing: 0.01em;
+    fill: #111315; stroke: #FFFFFF; stroke-width: 10px;
+    stroke-linejoin: round; stroke-linecap: round; paint-order: stroke fill;
   }
 </style>
 </head>
@@ -1078,7 +1067,7 @@ SHORT_INTERACTIVE_HTML_TEMPLATE = r"""<!DOCTYPE html>
   <div class="seg-bar" id="seg-bar"></div>
 </div>
 
-<div class="short-caption" id="s-cap"></div>
+  <div class="short-caption" id="s-cap"><svg viewBox="0 0 1080 120"><text id="s-cap-txt" x="540" y="76" text-anchor="middle"></text></svg></div>
 
 <script>
 window.BEAT = __BEAT_JSON__;
@@ -1215,8 +1204,8 @@ async function setup() {
       await new Promise(res => { phImg.onload = res; phImg.onerror = res; setTimeout(res, 1000); });
     }
     const src = B.source_detail || {};
-    document.getElementById("ph-tag").textContent = `${src.publisher || "公開實測數據"} · ${B.source_id || "SRC-01"}`;
-    document.getElementById("ph-src").textContent = `公開驗證來源：${src.publisher || "Tech Spec"} — ${(src.title || "").slice(0, 26)}`;
+    document.getElementById("ph-tag").textContent = `${src.publisher || "公開實測數據"}`;
+    document.getElementById("ph-src").textContent = "";
 
     const rows = (B.ui_rows && B.ui_rows.length) ? B.ui_rows.slice(0, 4) : [
       { title: "標準起步規格", subtitle: "輕量文書與串流影音夠用", badge: "省預算", toggle_on: true },
@@ -1308,7 +1297,17 @@ async function setup() {
 
 window.renderAt = async function(t, dur, captionText) {
   await updateShortFn(t, dur);
-  document.getElementById("s-cap").textContent = captionText || "";
+  const txtEl = document.getElementById("s-cap-txt");
+  const str = captionText || "";
+  txtEl.textContent = str;
+  if (str) {
+    let fs = 46;
+    txtEl.style.fontSize = fs + "px";
+    while (txtEl.getComputedTextLength() > 972 && fs > 30) {
+      fs -= 2;
+      txtEl.style.fontSize = fs + "px";
+    }
+  }
 };
 
 setup();

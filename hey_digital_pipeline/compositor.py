@@ -107,42 +107,107 @@ def cover_resize(img: Image.Image, target_w: int, target_h: int) -> Image.Image:
     return resized.crop((left, top, left + target_w, top + target_h))
 
 
+@functools.lru_cache(maxsize=256)
+def _render_caption_strip(text: str, canvas_w: int, is_light_bg: bool, is_vertical: bool) -> tuple[Image.Image, int]:
+    """
+    Build a cached, broadcast-grade single-line caption RGBA strip matching `@hey_digitall`:
+    - Long B-roll (`is_vertical=False, is_light_bg=False`): Pure `#FFFFFF` PingFang TC Semibold 46px
+      with ZERO black outline (`stroke_width=0`) over a smooth dual-radius Gaussian drop shadow.
+    - Long Light Studio (`is_vertical=False, is_light_bg=True`): Crisp `#121214` PingFang TC Semibold 46px.
+    - Short (`is_vertical=True`): 2x-supersampled solid `#111315` fill + smooth round `#FFFFFF` die-cut
+      outer border + soft Gaussian drop shadow (1:1 match to `QrBoNy0wse8`).
+    """
+    font_size = 46
+    max_px = int(canvas_w * (0.90 if is_vertical else 0.88))
+    dummy = ImageDraw.Draw(Image.new("RGBA", (8, 8), (0, 0, 0, 0)))
+
+    font = get_cjk_font(font_size, bold=True)
+    bbox = dummy.textbbox((0, 0), text, font=font)
+    tw, th_txt = bbox[2] - bbox[0], bbox[3] - bbox[1]
+    while tw > max_px and font_size > 28:
+        font_size -= 2
+        font = get_cjk_font(font_size, bold=True)
+        bbox = dummy.textbbox((0, 0), text, font=font)
+        tw, th_txt = bbox[2] - bbox[0], bbox[3] - bbox[1]
+
+    pad = 28
+    sw = tw + pad * 2
+    sh = th_txt + pad * 2 + 12
+    ox = pad - bbox[0]
+    oy = pad - bbox[1]
+
+    if is_vertical:
+        # 1x soft ambient drop shadow under 2x-supersampled round white die-cut stroke + solid dark fill
+        shadow = Image.new("RGBA", (sw, sh), (0, 0, 0, 0))
+        sd = ImageDraw.Draw(shadow, "RGBA")
+        sd.text((ox, oy + 4), text, font=font, fill=(0, 0, 0, 105), stroke_width=5, stroke_fill=(0, 0, 0, 105))
+        shadow = shadow.filter(ImageFilter.GaussianBlur(radius=6.5))
+
+        hi = Image.new("RGBA", (sw * 2, sh * 2), (0, 0, 0, 0))
+        hd = ImageDraw.Draw(hi, "RGBA")
+        font_2x = get_cjk_font(font_size * 2, bold=True)
+        bb2 = hd.textbbox((0, 0), text, font=font_2x)
+        hd.text(
+            (pad * 2 - bb2[0], pad * 2 - bb2[1]),
+            text,
+            font=font_2x,
+            fill=(17, 19, 21, 255),
+            stroke_width=10,
+            stroke_fill=(255, 255, 255, 255),
+        )
+        fg = hi.resize((sw, sh), Image.Resampling.LANCZOS)
+        strip = Image.alpha_composite(shadow, fg)
+        return strip, pad
+
+    if is_light_bg:
+        strip = Image.new("RGBA", (sw, sh), (0, 0, 0, 0))
+        d = ImageDraw.Draw(strip, "RGBA")
+        d.text((ox, oy), text, font=font, fill=(18, 18, 20, 255))
+        return strip, pad
+
+    # Long B-Roll / Dark Card: pure white glyph + soft Gaussian drop shadow (ZERO outline eating strokes)
+    sh_wide = Image.new("RGBA", (sw, sh), (0, 0, 0, 0))
+    ImageDraw.Draw(sh_wide, "RGBA").text((ox, oy + 3), text, font=font, fill=(0, 0, 0, 190))
+    sh_wide = sh_wide.filter(ImageFilter.GaussianBlur(radius=7.5))
+
+    sh_tight = Image.new("RGBA", (sw, sh), (0, 0, 0, 0))
+    ImageDraw.Draw(sh_tight, "RGBA").text((ox, oy + 2), text, font=font, fill=(0, 0, 0, 135))
+    sh_tight = sh_tight.filter(ImageFilter.GaussianBlur(radius=2.4))
+
+    strip = Image.alpha_composite(sh_wide, sh_tight)
+    ImageDraw.Draw(strip, "RGBA").text((ox, oy), text, font=font, fill=(255, 255, 255, 255))
+    return strip, pad
+
+
 def draw_adaptive_caption(canvas: Image.Image, text: str, is_light_bg: bool, is_vertical: bool = False):
     """
-    Render strictly SINGLE-LINE `@hey_digitall` caption (NEVER wraps to 2 lines or chops mid-word;
-    dynamically scales font down slightly only if an unusually dense line approaches screen edges).
+    Render strictly SINGLE-LINE `@hey_digitall` caption with cached Gaussian shadow / 2x smooth die-cut border.
     """
     if not text:
         return
     w, h = canvas.size
-    font_size = 44 if is_vertical else 40
-    max_px = int(w * (0.90 if is_vertical else 0.88))
-    draw = ImageDraw.Draw(canvas, "RGBA")
+    strip, pad = _render_caption_strip(text, w, is_light_bg, is_vertical)
+    tw = strip.width - pad * 2
+    x = (w - tw) // 2 - pad
+    y = (1628 if is_vertical else 966) - pad
+    canvas.paste(strip, (x, y), strip)
 
-    font = get_cjk_font(font_size, bold=True)
-    bbox = draw.textbbox((0, 0), text, font=font)
-    tw = bbox[2] - bbox[0]
-    while tw > max_px and font_size > 28:
-        font_size -= 2
-        font = get_cjk_font(font_size, bold=True)
-        bbox = draw.textbbox((0, 0), text, font=font)
-        tw = bbox[2] - bbox[0]
 
-    x = (w - tw) // 2
-    y = int(h * (0.848 if is_vertical else 0.908))
-    if is_light_bg and not is_vertical:
-        draw.text((x, y + 1), text, font=font, fill=(255, 255, 255, 135))
-        draw.text((x, y), text, font=font, fill=(22, 22, 24, 255))
-    else:
-        draw.text((x + 2, y + 4), text, font=font, fill=(0, 0, 0, 195))
-        draw.text(
-            (x, y),
-            text,
-            font=font,
-            fill=(255, 255, 255, 255),
-            stroke_width=4 if is_vertical else 2,
-            stroke_fill=(10, 12, 16, 245),
-        )
+@functools.lru_cache(maxsize=64)
+def _render_hud_label(hud_txt: str) -> Image.Image:
+    """Render clean borderless `@hey_digitall` top-right chapter text (`01 · 章節標題`) with soft shadow."""
+    font = get_cjk_font(23, bold=False)
+    dummy = ImageDraw.Draw(Image.new("RGBA", (8, 8), (0, 0, 0, 0)))
+    bb = dummy.textbbox((0, 0), hud_txt, font=font)
+    tw, th_t = bb[2] - bb[0], bb[3] - bb[1]
+    pad = 14
+    sw, sh = tw + pad * 2, th_t + pad * 2
+    ox, oy = pad - bb[0], pad - bb[1]
+    sh_img = Image.new("RGBA", (sw, sh), (0, 0, 0, 0))
+    ImageDraw.Draw(sh_img, "RGBA").text((ox, oy + 2), hud_txt, font=font, fill=(0, 0, 0, 145))
+    sh_img = sh_img.filter(ImageFilter.GaussianBlur(radius=4.5))
+    ImageDraw.Draw(sh_img, "RGBA").text((ox, oy), hud_txt, font=font, fill=(244, 246, 250, 220))
+    return sh_img
 
 
 def draw_source_badge(draw: ImageDraw.ImageDraw, badge_text: str, x: int, y: int, light_theme: bool):
@@ -270,27 +335,22 @@ def render_sources_slate(cited_sources: list[dict]) -> Image.Image:
 
 def render_thumbnail(plan: dict, hero_img: Optional[Image.Image], out_path: Path) -> Path:
     w, h = 1920, 1080
-    yy, xx = np.mgrid[0:h, 0:w]
-    dist = np.sqrt(((xx - w * 0.5) / (w * 0.62)) ** 2 + ((yy - h * 0.68) / (h * 0.58)) ** 2)
-    dist = np.clip(dist, 0.0, 1.0)
-    c_r = (34 * (1 - dist) + 8 * dist).astype(np.uint8)
-    c_g = (38 * (1 - dist) + 9 * dist).astype(np.uint8)
-    c_b = (46 * (1 - dist) + 12 * dist).astype(np.uint8)
-    canvas = Image.fromarray(np.dstack([c_r, c_g, c_b]), mode="RGB")
+    canvas = Image.new("RGB", (w, h), (9, 10, 13))
 
     if hero_img is not None:
-        prod = cover_resize(hero_img, 1340, 670)
-        mask = Image.new("L", (1340, 670), 0)
-        ImageDraw.Draw(mask).rounded_rectangle([30, 20, 1310, 650], radius=48, fill=255)
-        mask = mask.filter(ImageFilter.GaussianBlur(24))
-        canvas.paste(prod, ((w - 1340) // 2, 410), mask)
-
-    grad = Image.new("RGBA", (w, 470), (0, 0, 0, 0))
-    gd = ImageDraw.Draw(grad, "RGBA")
-    for gy in range(470):
-        alpha = int(218 * max(0.0, 1.0 - (gy / 460.0) ** 1.4))
-        gd.line([(0, gy), (w, gy)], fill=(8, 9, 12, alpha))
-    canvas.paste(grad, (0, 0), grad)
+        # Full-bleed seamless radial spotlight blend — ZERO rectangular grey box edges!
+        prod = cover_resize(hero_img, w, 760)
+        prod = ImageEnhance.Contrast(prod).enhance(1.12)
+        yy, xx = np.mgrid[0:760, 0:w]
+        rx = (xx - w * 0.5) / (w * 0.46)
+        ry = (yy - 760 * 0.58) / (760 * 0.52)
+        rad = np.sqrt(rx * rx + ry * ry)
+        alpha_arr = np.clip((1.08 - rad) / 0.52, 0.0, 1.0) ** 1.45
+        # Smooth top fade into headline zone
+        top_fade = np.clip(yy / 185.0, 0.0, 1.0) ** 1.35
+        mask_arr = (alpha_arr * top_fade * 255.0).astype(np.uint8)
+        mask = Image.fromarray(mask_arr, mode="L")
+        canvas.paste(prod, (0, 320), mask)
 
     th = plan.get("thumbnail") or {}
     line1 = th.get("line1") or plan.get("title_long", "")[:10]
@@ -301,19 +361,22 @@ def render_thumbnail(plan: dict, hero_img: Optional[Image.Image], out_path: Path
     for li, ln in enumerate([line1, line2]):
         if not ln:
             continue
-        f_big = get_cjk_font(126 if len(ln) <= 11 else 104, bold=True)
+        f_big = get_cjk_font(154 if len(ln) <= 11 else 128, bold=True)
         bb = draw.textbbox((0, 0), ln, font=f_big)
         tw = bb[2] - bb[0]
-        x = (w - tw) // 2
-        y = 62 + li * 156
-        draw.text((x + 4, y + 7), ln, font=f_big, fill=(0, 0, 0, 220), stroke_width=3, stroke_fill=(0, 0, 0, 220))
+        while tw > 1720 and f_big.size > 96:
+            f_big = get_cjk_font(f_big.size - 6, bold=True)
+            bb = draw.textbbox((0, 0), ln, font=f_big)
+            tw = bb[2] - bb[0]
+        x = (w - tw) // 2 - bb[0]
+        y = 58 + li * 184 - bb[1]
         if gold and gold in ln:
             pre, post = ln.split(gold, 1)
             cx = x
             if pre:
                 draw.text((cx, y), pre, font=f_big, fill=(255, 255, 255, 255), stroke_width=2, stroke_fill=(255, 255, 255, 255))
                 cx = draw.textbbox((cx, y), pre, font=f_big)[2]
-            draw.text((cx, y), gold, font=f_big, fill=(240, 202, 134, 255), stroke_width=2, stroke_fill=(240, 202, 134, 255))
+            draw.text((cx, y), gold, font=f_big, fill=(238, 203, 142, 255), stroke_width=2, stroke_fill=(238, 203, 142, 255))
             cx = draw.textbbox((cx, y), gold, font=f_big)[2]
             if post:
                 draw.text((cx, y), post, font=f_big, fill=(255, 255, 255, 255), stroke_width=2, stroke_fill=(255, 255, 255, 255))
@@ -440,22 +503,15 @@ def _render_broll_video_beat(
             oy = (hi_h - ch) // 2
             frame = src_hi.crop((ox, oy, ox + cw, oy + ch)).resize((tw, th), Image.Resampling.BILINEAR)
 
-        draw = ImageDraw.Draw(frame, "RGBA")
         if not is_vertical:
-            draw.rectangle([0, th - 210, tw, th], fill=(8, 10, 14, 92))
-            hb = draw.textbbox((0, 0), hud_txt, font=f_hud)
-            hx = tw - (hb[2] - hb[0]) - 84
-            draw.rounded_rectangle([hx - 18, 52, tw - 64, 96], radius=22, fill=(12, 14, 18, 150), outline=(255, 255, 255, 50), width=1)
-            draw.text((hx, 58), hud_txt, font=f_hud, fill=(238, 242, 248, 245))
-            if show_news_card and t_loc >= 0.45:
-                overlay_crawled_news_card(frame, beat)
-            draw_source_badge(draw, active_badge, x=96, y=858, light_theme=False)
+            hud_strip = _render_hud_label(hud_txt)
+            frame.paste(hud_strip, (tw - hud_strip.width - 64, 46), hud_strip)
         else:
-            draw.rectangle([0, th - 480, tw, th], fill=(8, 10, 14, 110))
+            draw = ImageDraw.Draw(frame, "RGBA")
             pill_txt = (beat.get("topic_pill") or "Hey Digital 選購結論")[:14]
             f_pill = get_cjk_font(26, bold=True)
             pb = draw.textbbox((0, 0), pill_txt, font=f_pill)
-            draw.rounded_rectangle([62, 86, 62 + (pb[2] - pb[0]) + 64, 142], radius=28, fill=(14, 20, 16, 235))
+            draw.rounded_rectangle([62, 86, 62 + (pb[2] - pb[0]) + 64, 142], radius=28, fill=(16, 24, 18, 245))
             draw.ellipse([82, 106, 98, 122], fill=(46, 204, 113, 255))
             draw.text((110, 96), pill_txt, font=f_pill, fill=(255, 255, 255, 255))
 
@@ -684,27 +740,25 @@ def _render_cta_endcard_animated(
 
     for fi in range(n_frames):
         t_loc = fi / fps
-        canvas = Image.new("RGB", (w, h), (12, 15, 20))
+        canvas = Image.new("RGB", (w, h), (14, 17, 23))
         draw = ImageDraw.Draw(canvas, "RGBA")
-        draw.rounded_rectangle([58, 130, 1022, 1760], radius=46, fill=(20, 25, 34, 255), outline=(240, 202, 134, 150), width=3)
-        draw.rounded_rectangle([106, 200, 476, 262], radius=30, fill=(22, 136, 76, 255))
-        draw.text((136, 212), "● Hey Digital 完整長片已上線", font=get_cjk_font(24, True), fill=(255, 255, 255, 255))
+        draw.rounded_rectangle([96, 178, 466, 240], radius=31, fill=(22, 136, 76, 255))
+        draw.text((126, 190), "● Hey Digital 完整長片已上線", font=get_cjk_font(24, True), fill=(255, 255, 255, 255))
 
-        draw.text((106, 305), "想看完整實測曲線與", font=get_cjk_font(58, True), fill=(255, 255, 255, 255))
-        draw.text((106, 388), "全部公開數據來源？", font=get_cjk_font(62, True), fill=(240, 202, 134, 255))
+        draw.text((96, 286), "想看完整實測曲線與", font=get_cjk_font(60, True), fill=(255, 255, 255, 255))
+        draw.text((96, 372), "全部公開數據來源？", font=get_cjk_font(64, True), fill=(240, 202, 134, 255))
 
         if thumb_img is not None:
             zoom = 1.0 + 0.045 * min(1.0, t_loc / max(2.0, real_dur))
-            tw_z, th_z = int(868 * zoom), int(488 * zoom)
+            tw_z, th_z = int(888 * zoom), int(500 * zoom)
             th_hi = cover_resize(thumb_img, tw_z, th_z)
-            th_crop = th_hi.crop(((tw_z - 868) // 2, (th_z - 488) // 2, (tw_z - 868) // 2 + 868, (th_z - 488) // 2 + 488))
-            mask = Image.new("L", (868, 488), 0)
-            ImageDraw.Draw(mask).rounded_rectangle([0, 0, 868, 488], radius=28, fill=255)
-            canvas.paste(th_crop, (106, 515), mask)
-            draw.rounded_rectangle([106, 515, 974, 1003], radius=28, outline=(255, 255, 255, 95), width=3)
+            th_crop = th_hi.crop(((tw_z - 888) // 2, (th_z - 500) // 2, (tw_z - 888) // 2 + 888, (th_z - 500) // 2 + 500))
+            mask = Image.new("L", (888, 500), 0)
+            ImageDraw.Draw(mask).rounded_rectangle([0, 0, 888, 500], radius=32, fill=255)
+            canvas.paste(th_crop, (96, 510), mask)
 
         pulse = int(8 * math.sin(t_loc * 5.0))
-        draw.rounded_rectangle([106 - pulse, 1085 - pulse // 2, 974 + pulse, 1215 + pulse // 2], radius=32, fill=(240, 202, 134, 255))
+        draw.rounded_rectangle([96 - pulse, 1085 - pulse // 2, 984 + pulse, 1215 + pulse // 2], radius=34, fill=(240, 202, 134, 255))
         draw.text((178, 1122), "▶ 點擊下方關聯影片看完整解析", font=get_cjk_font(44, True), fill=(15, 17, 22, 255))
 
         cap = caption_for_timestamp(beat, caption_timings, t_loc, real_dur)
